@@ -24,4 +24,10 @@ public class CiaoTest {
         assertEquals(5, ciao.add(3, 2));
     }
     
+    @Test
+    public void testSub() {
+        Ciao ciao = new Ciao();
+        assertEquals(1, ciao.sub(3, 2));
+    }
+    
 }
