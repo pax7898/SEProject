@@ -29,5 +29,9 @@ public class CiaoTest {
         Ciao ciao = new Ciao();
         assertEquals(1, ciao.sub(3, 2));
     }
+      public void testMol2() {
+        Ciao ciao = new Ciao();
+        assertEquals(1, ciao.sub(3, 2));
+    }
     
 }
