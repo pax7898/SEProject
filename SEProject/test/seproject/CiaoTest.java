@@ -30,4 +30,10 @@ public class CiaoTest {
         assertEquals(1, ciao.sub(3, 2));
     }
     
+    @Test
+    public void testMul() {
+        Ciao ciao = new Ciao();
+        assertEquals(6, ciao.mul(3, 2));
+    }
+    
 }
