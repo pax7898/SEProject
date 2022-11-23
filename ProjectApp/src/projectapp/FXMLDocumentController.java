@@ -20,6 +20,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -55,8 +56,6 @@ public class FXMLDocumentController implements Initializable {
     private Label borderLabel;
     @FXML
     private Label interiorLabel;
-    @FXML
-    private ListView<SerializableShape> drawnList;
     
     private EditorState currentState;
     
@@ -65,6 +64,14 @@ public class FXMLDocumentController implements Initializable {
     private ObservableList<SerializableShape> listItems;
     
     private CommandExecutor executor;
+    @FXML
+    private ListView<ObservableList> drawnView;
+    @FXML
+    private Pane pane;
+    
+    double startX;
+    double startY;
+    
     
   
     @Override
@@ -72,19 +79,39 @@ public class FXMLDocumentController implements Initializable {
         // TODO
         //drawnList= new ListView<SerializableShape>();
         listItems = FXCollections.observableArrayList();
-        drawnList.setItems(listItems);
+        shapeGroup = new Group();
+        //drawnList.setItems(listItems);
+        //pane.getChildren().
         executor = new CommandExecutor();
+        
    
     }    
 
     @FXML
     private void setLineState(ActionEvent event) {
-        currentState = new LineState(shapeGroup,scrollPane,listItems);
+        currentState = new LineState(shapeGroup,pane,listItems);
     }
 
     @FXML
     private void scrollClick(MouseEvent event) {
-        executor.execute(new DrawCommand(currentState,event.getX(),event.getY(),event.getX()+10.0,event.getY()+50.0,borderPicker.getValue(),interiorPicker.getValue()));
+        //executor.execute(new DrawCommand(currentState,event.getX(),event.getY(),event.getX()+10.0,event.getY()+50.0,borderPicker.getValue(),interiorPicker.getValue()));
+    }
+
+    /*private void clickPane(MouseEvent event) {
+        executor.execute(new DrawCommand(currentState,event.getX(),event.getY(),event.getX(),event.getY()+50.0,borderPicker.getValue(),interiorPicker.getValue()));
+    }*/
+
+    @FXML
+    private void releasedPane(MouseEvent event) {
+        executor.execute(new DrawCommand(currentState,startX,startY,event.getX(),event.getY(),borderPicker.getValue(),interiorPicker.getValue()));
+        
+        
+    }
+
+    @FXML
+    private void clickPene(MouseEvent event) {
+        startX = event.getX();
+        startY = event.getY();
     }
 
 }

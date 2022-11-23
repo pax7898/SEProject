@@ -47,7 +47,8 @@ public class SerializableLine extends SerializableShape{
         line.setEndY(y2);
         this.setShape(line); 
     }
-
+    
+    
     public final double getX1() {
         return this.x1;
     }
@@ -55,6 +56,7 @@ public class SerializableLine extends SerializableShape{
 
     public final void setX1(final double x1) {
         this.x1 = x1;
+        
     }
 
 
