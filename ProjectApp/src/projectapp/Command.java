@@ -4,7 +4,9 @@
  */
 package projectapp;
 
+import java.util.List;
 import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
 
 /**
  *
@@ -21,5 +23,5 @@ public abstract class Command {
         this.shape=shape;
     }
     
-    public abstract void execute(Group group);
+    public abstract void execute();
 }

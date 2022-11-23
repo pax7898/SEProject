@@ -26,7 +26,7 @@ public class DrawCommand extends Command{
     }
 
     @Override
-    public void execute(Group group, ScrollPane pane, List<SerializableShape> list) {
+    public void execute() {
         this.getShape().draw(group,pane,list);
     }
     
