@@ -5,6 +5,8 @@
 package projectapp;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,24 +21,19 @@ import static org.junit.Assert.*;
  */
 public class SerializableLineTest {
     
+    private SerializableLine line;
+    
     public SerializableLineTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+   
     
     @Before
     public void setUp() {
+        line = new SerializableLine(2,2,20,20,Color.BLACK);
     }
     
-    @After
-    public void tearDown() {
-    }
+    
 
     /**
      * Test of createView method, of class SerializableLine.
@@ -44,15 +41,25 @@ public class SerializableLineTest {
     @Test
     public void testCreateView() {
         System.out.println("createView");
-        SerializableLine instance = null;
-        instance.createView();
+        
+        line.createView();
+        
+        Line line2 = new Line();
+        line2.setStroke(line.getColor());
+        line2.setStartX(line.getX1());
+        line2.setStartY(line.getY1());
+        line2.setEndX(line.getX2());
+        line2.setEndY(line.getY2());
+        
+       
+        Shape s = line2;
+        //assertEquals(s.get)
+        
+
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getView method, of class SerializableLine.
-     */
+    /*
     @Test
     public void testGetView() {
         System.out.println("getView");
@@ -64,9 +71,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getX1 method, of class SerializableLine.
-     */
+    
     @Test
     public void testGetX1() {
         System.out.println("getX1");
@@ -78,9 +83,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setX1 method, of class SerializableLine.
-     */
+    
     @Test
     public void testSetX1() {
         System.out.println("setX1");
@@ -91,9 +94,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getY1 method, of class SerializableLine.
-     */
+    
     @Test
     public void testGetY1() {
         System.out.println("getY1");
@@ -105,9 +106,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setY1 method, of class SerializableLine.
-     */
+    
     @Test
     public void testSetY1() {
         System.out.println("setY1");
@@ -118,9 +117,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getX2 method, of class SerializableLine.
-     */
+    
     @Test
     public void testGetX2() {
         System.out.println("getX2");
@@ -132,9 +129,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setX2 method, of class SerializableLine.
-     */
+    
     @Test
     public void testSetX2() {
         System.out.println("setX2");
@@ -145,9 +140,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getY2 method, of class SerializableLine.
-     */
+    
     @Test
     public void testGetY2() {
         System.out.println("getY2");
@@ -159,9 +152,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setY2 method, of class SerializableLine.
-     */
+    
     @Test
     public void testSetY2() {
         System.out.println("setY2");
@@ -172,9 +163,7 @@ public class SerializableLineTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of draw method, of class SerializableLine.
-     */
+    
     @Test
     public void testDraw() {
         System.out.println("draw");
@@ -183,6 +172,6 @@ public class SerializableLineTest {
         instance.draw(group);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
     
 }

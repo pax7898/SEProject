@@ -12,7 +12,7 @@ import javafx.scene.shape.Shape;
  * @author Sabatino
  */
 public abstract class SerializableShape implements Serializable, IShape{
-    private transient Shape shape;
+    transient Shape shape;
 
     public Shape getShape() {
         return shape;
