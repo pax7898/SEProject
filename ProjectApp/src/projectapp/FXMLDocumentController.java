@@ -13,6 +13,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 
@@ -23,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 public class FXMLDocumentController implements Initializable {
 
     @FXML
-    private AnchorPane scrollPane;
+    private ScrollPane scrollPane;
     @FXML
     private ToggleButton lineBtn;
     @FXML
