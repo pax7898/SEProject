@@ -88,14 +88,6 @@ public class SerializableLine extends SerializableShape{
     public final void setY2(final double y2) {
         this.y2 = y2;
     }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
         
     
     private void writeObject(ObjectOutputStream s) throws IOException {

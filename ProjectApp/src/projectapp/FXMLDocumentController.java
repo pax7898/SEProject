@@ -84,6 +84,7 @@ public class FXMLDocumentController implements Initializable {
         //pane.getChildren().
         executor = new CommandExecutor();
         
+        
    
     }    
 

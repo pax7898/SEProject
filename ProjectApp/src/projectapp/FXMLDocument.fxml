@@ -88,7 +88,7 @@
       </VBox>
       <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" layoutX="107.0" layoutY="119.0" onMouseClicked="#scrollClick" prefHeight="588.0" prefWidth="841.0" scaleShape="false" vbarPolicy="ALWAYS">
          <content>
-            <Pane fx:id="pane" onMousePressed="#clickPene" onMouseReleased="#releasedPane" prefHeight="723.0" prefWidth="1155.0" />
+            <Pane fx:id="pane" onMousePressed="#clickPene" onMouseReleased="#releasedPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="8000.0" prefWidth="8000.0" />
          </content></ScrollPane>
    </children>
 </AnchorPane>
