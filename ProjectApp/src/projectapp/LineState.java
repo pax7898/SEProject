@@ -34,10 +34,6 @@ public class LineState extends EditorState{
         
     }
 
-    @Override
-    public void changeColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void draw(double d, double d1, double d2, double d3, Color strokeColor, Color fillColor) {
