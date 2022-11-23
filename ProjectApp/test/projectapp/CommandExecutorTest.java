@@ -42,7 +42,7 @@ public class CommandExecutorTest {
         //ScrollPane pane = new ScrollPane();
         //pane.setPrefSize(10, 10);
         ObservableList<SerializableShape> list = FXCollections.observableArrayList();
-        EditorState state = new LineState(group, pane, list);
+        EditorState state = new LineState(pane, list);
         assertEquals(null, executor.getStack().getLast());
         Command comm = new DrawCommand(state,20,20,50,50,Color.BLACK, Color.BLACK);
         executor.execute(comm);

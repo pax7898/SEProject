@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+
 /**
  *
  * @author pasqualecaggiano
@@ -17,7 +18,7 @@ public class LineState extends EditorState{
 
 
     private final Pane pane;
-    private final List<SerializableShape> list;
+    private final ObservableList<SerializableShape> list;
         
     public LineState(Pane pane, ObservableList<SerializableShape> list) {
         this.list = list;
