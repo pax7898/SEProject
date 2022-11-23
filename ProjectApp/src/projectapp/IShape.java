@@ -4,11 +4,13 @@
  */
 package projectapp;
 
+import javafx.scene.Group;
+
 /**
  *
  * @author acoon
  */
 public interface IShape {
     public void createView();
-    public void draw();
+    public void draw(Group group);
 }
