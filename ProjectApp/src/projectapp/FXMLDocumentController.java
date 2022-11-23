@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
@@ -38,6 +39,16 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem loadBtn;
     @FXML
     private Label drawnLabel;
+    @FXML
+    private Label colorLabel;
+    @FXML
+    private ColorPicker borderPicker;
+    @FXML
+    private ColorPicker interiorPicker;
+    @FXML
+    private Label borderLabel;
+    @FXML
+    private Label interiorLabel;
     
   
     @Override
