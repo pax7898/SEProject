@@ -59,13 +59,11 @@ public class FXMLDocumentController implements Initializable {
     
     private EditorState currentState;
     
-    private Group shapeGroup;
-    
     private ObservableList<SerializableShape> listItems;
     
     private CommandExecutor executor;
     @FXML
-    private ListView<ObservableList> drawnView;
+    private ListView<SerializableShape> drawnView;
     @FXML
     private Pane pane;
     
@@ -77,30 +75,22 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //drawnList= new ListView<SerializableShape>();
+        drawnView = new ListView<SerializableShape>();
         listItems = FXCollections.observableArrayList();
-        shapeGroup = new Group();
-        //drawnList.setItems(listItems);
-        //pane.getChildren().
+        drawnView.setItems(listItems);
         executor = new CommandExecutor();
         
-        
-   
     }    
 
     @FXML
     private void setLineState(ActionEvent event) {
-        currentState = new LineState(shapeGroup,pane,listItems);
+        currentState = new LineState(pane,listItems);
     }
 
     @FXML
     private void scrollClick(MouseEvent event) {
         //executor.execute(new DrawCommand(currentState,event.getX(),event.getY(),event.getX()+10.0,event.getY()+50.0,borderPicker.getValue(),interiorPicker.getValue()));
     }
-
-    /*private void clickPane(MouseEvent event) {
-        executor.execute(new DrawCommand(currentState,event.getX(),event.getY(),event.getX(),event.getY()+50.0,borderPicker.getValue(),interiorPicker.getValue()));
-    }*/
 
     @FXML
     private void releasedPane(MouseEvent event) {

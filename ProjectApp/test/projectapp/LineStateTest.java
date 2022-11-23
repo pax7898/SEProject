@@ -4,47 +4,52 @@
  */
 package projectapp;
 
-import javafx.scene.control.ScrollPane;
-import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author pasqualecaggiano
+ * @author acoon
  */
-public class DrawCommandTest {
-    private DrawCommand command;
-    private Pane pane;
+public class LineStateTest {
+    
+    @FXML
+    Pane pane;
+    
+    public LineStateTest() {
+    }
+    private LineState line;
     private ObservableList<SerializableShape> list;
-   
- 
     
     @Before
     public void setUp() {
         pane = new Pane();
         list = FXCollections.observableArrayList();
-        command = new DrawCommand(new LineState(pane,list),200,200,300,300,Color.RED,Color.RED);
+        line = new LineState(pane, list);
         
     }
-    
-    /**
-     * Test of execute method, of class DrawCommand.
-     */
+
     @Test
-    public void testExecute() {
-       command.execute();
-       assertEquals(1,list.size());
-       assertEquals(1,pane.getChildren().size());
-      
+    public void testDraw_5args() {
+        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
+        assertEquals(1, list.size());  
+        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
+        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
+        assertEquals(3, pane.getChildren().size());
+        Node node = pane.getChildren().remove(0);
+        list.remove(0);
+        assertEquals(2, list.size()); 
+        assertEquals(2, pane.getChildren().size());
     }
+
+   
     
 }
