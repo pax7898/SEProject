@@ -4,10 +4,12 @@
  */
 package projectapp;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.paint.Color;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,38 +19,25 @@ import static org.junit.Assert.*;
  */
 public class CommandExecutorTest {
     
-    public CommandExecutorTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-        CommandExecutor commExec = new CommandExecutor();
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private CommandExecutor executor;
     
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        executor = new CommandExecutor();
     }
 
     @Test
     public void testExecute() {
-        Command comm = new Command();
-        commExec.execute()
+        SerializableShape shape = new SerializableLine(20,20,50,50, Color.BLACK);
+        Group group = new Group();
+        ScrollPane pane = new ScrollPane();
+        List<SerializableShape> list = new ArrayList();
+        Command comm = new DrawCommand(shape, group, pane, list);
+        executor.execute(comm);
+        assertEquals(comm, executor.getStack().getLast());
+        
+        
     }
 
-    @Test
-    public void testUndo() {
-        System.out.println("undo");
-        CommandExecutor instance = new CommandExecutor();
-        instance.undo();
-        fail("The test case is a prototype.");
-    }
     
 }

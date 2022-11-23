@@ -16,6 +16,11 @@ public class CommandExecutor {
     public CommandExecutor(){
         stack = new ArrayDeque();
     }
+
+    public Deque<Command> getStack() {
+        return stack;
+    }
+    
     
     public void execute(Command command){
         stack.addLast(command);
