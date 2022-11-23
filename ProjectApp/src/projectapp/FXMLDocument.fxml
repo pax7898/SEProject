@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="3.0" prefHeight="100.0" prefWidth="789.0">
          <children>
@@ -64,7 +64,7 @@
                         <Color />
                      </value>
                   </ColorPicker>
-                  <Label fx:id="borderLabel" layoutX="20.0" layoutY="50.0" prefHeight="18.0" prefWidth="43.0" text="Border" />
+                  <Label fx:id="borderLabel" layoutX="5.0" layoutY="50.0" prefHeight="18.0" prefWidth="58.0" text="Border" />
                   <Label fx:id="interiorLabel" layoutX="126.0" layoutY="50.0" text="Interior" />
                </children>
             </AnchorPane>
