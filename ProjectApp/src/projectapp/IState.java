@@ -16,5 +16,4 @@ import javafx.scene.paint.Color;
 public interface IState {
     public void draw(double d, double d1, double d2, double d3, Color strokeColor);
     public void draw( double d, double d1, double d2, double d3, Color strokeColor, Color fillColor);
-    public void changeColor();
 }
