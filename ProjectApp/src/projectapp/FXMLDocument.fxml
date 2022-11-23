@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
@@ -78,6 +79,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <ListView fx:id="drawnView" prefHeight="478.0" prefWidth="106.0" />
          </children>
       </VBox>
       <ScrollPane hbarPolicy="ALWAYS" layoutX="110.0" layoutY="100.0" prefHeight="502.0" prefWidth="678.0" vbarPolicy="ALWAYS">

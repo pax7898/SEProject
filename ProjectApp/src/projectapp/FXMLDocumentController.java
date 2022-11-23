@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
@@ -49,6 +50,8 @@ public class FXMLDocumentController implements Initializable {
     private Label borderLabel;
     @FXML
     private Label interiorLabel;
+    @FXML
+    private ListView<?> drawnView;
     
   
     @Override
