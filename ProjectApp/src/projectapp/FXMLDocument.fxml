@@ -23,12 +23,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <AnchorPane prefHeight="100.0" prefWidth="234.0">
+            <AnchorPane prefHeight="102.0" prefWidth="253.0">
                <children>
-                  <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Line" textAlignment="CENTER" />
-                  <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="140.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Ellipse" textAlignment="CENTER" />
-                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Rectangle" textAlignment="CENTER" />
-                  <Separator layoutX="231.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="102.0" prefWidth="10.0" />
+                  <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Line" textAlignment="CENTER" />
+                  <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="140.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Ellipse" textAlignment="CENTER" />
+                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Rectangle" textAlignment="CENTER" />
+                  <Separator layoutX="244.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="102.0" prefWidth="10.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="102.0" prefWidth="123.0">
@@ -64,7 +64,7 @@
                         <Color />
                      </value>
                   </ColorPicker>
-                  <Label fx:id="borderLabel" layoutX="20.0" layoutY="50.0" prefHeight="18.0" prefWidth="43.0" text="Border" />
+                  <Label fx:id="borderLabel" layoutX="12.0" layoutY="50.0" prefHeight="18.0" prefWidth="51.0" text="Border" />
                   <Label fx:id="interiorLabel" layoutX="126.0" layoutY="50.0" text="Interior" />
                </children>
             </AnchorPane>

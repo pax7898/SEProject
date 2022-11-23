@@ -6,6 +6,8 @@ package projectapp;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,12 +54,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label interiorLabel;
     @FXML
-    private ListView<?> drawnView;
+    private ListView<String> drawnView;
     
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        drawnView= new ListView<String>();
+        ObservableList<String> viewItems=FXCollections.observableArrayList();
+        drawnView.setItems(viewItems);
     }    
-    
+
 }
