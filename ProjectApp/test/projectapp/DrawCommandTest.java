@@ -6,8 +6,11 @@ package projectapp;
 
 import javafx.scene.control.ScrollPane;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.junit.After;
 import org.junit.Before;
@@ -20,28 +23,27 @@ import static org.junit.Assert.*;
  */
 public class DrawCommandTest {
     private DrawCommand command;
-    
-    @FXML
-    private ScrollPane scrollPane;
-    
-    public DrawCommandTest() {
-    }
+    private Pane pane;
+    private ObservableList<SerializableShape> list;
+   
+ 
     
     @Before
     public void setUp() {
-        command = new DrawCommand(new SerializableLine(20,20,40,40,Color.RED),new Group(),scrollPane,new ArrayList<SerializableShape>());
+        pane = new Pane();
+        list = FXCollections.observableArrayList();
+        command = new DrawCommand(new LineState(pane,list),200,200,300,300,Color.RED,Color.RED);
+        
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of execute method, of class DrawCommand.
      */
     @Test
     public void testExecute() {
-       
+       command.execute();
+       assertEquals(1,list.size());
+       assertEquals(1,pane.getChildren().size());
       
     }
     
