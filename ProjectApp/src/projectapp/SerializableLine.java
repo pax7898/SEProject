@@ -119,10 +119,6 @@ public class SerializableLine extends SerializableShape{
         createView();
     }
     
-    
-    public void draw(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void draw(Group group, ScrollPane pane, List<SerializableShape> list) {
