@@ -6,8 +6,6 @@ package projectapp;
 
 import java.util.List;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -16,13 +14,12 @@ import javafx.scene.paint.Color;
  * @author pasqualecaggiano
  */
 public class LineState extends EditorState{
-    private final Group group;
-    //private final ScrollPane pane;
+
+
     private final Pane pane;
     private final List<SerializableShape> list;
         
-    public LineState(Group group, Pane pane, ObservableList<SerializableShape> list) {
-        this.group = group;
+    public LineState(Pane pane, ObservableList<SerializableShape> list) {
         this.list = list;
         this.pane = pane;
     }
@@ -30,9 +27,7 @@ public class LineState extends EditorState{
     @Override
     public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
         SerializableLine line = new SerializableLine(d,d1,d2,d3,strokeColor);
-        this.group.getChildren().add(line.getShape());
         this.list.add(line);
-        //this.pane.setContent(group);
         this.pane.getChildren().add(line.getShape());
     }
 
