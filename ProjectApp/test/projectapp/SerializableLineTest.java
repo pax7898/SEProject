@@ -5,6 +5,8 @@
 package projectapp;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,24 +21,19 @@ import static org.junit.Assert.*;
  */
 public class SerializableLineTest {
     
+    public SerializableLine line;
+    
     public SerializableLineTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
+        line = new SerializableLine(5,5,20,20,Color.BLACK);
     }
     
-    @After
-    public void tearDown() {
-    }
+    
 
     /**
      * Test of createView method, of class SerializableLine.
@@ -44,16 +41,21 @@ public class SerializableLineTest {
     @Test
     public void testCreateView() {
         System.out.println("createView");
-        SerializableLine instance = null;
-        instance.createView();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        
+        
+        line.createView();
+        Shape s = line.getShape();
+        assertEquals(line.getShape(), s);
+        
+        
     }
 
+    
     /**
      * Test of getView method, of class SerializableLine.
      */
-    @Test
+    /*@Test
     public void testGetView() {
         System.out.println("getView");
         SerializableLine instance = null;
@@ -62,20 +64,20 @@ public class SerializableLineTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
 
+    
     /**
      * Test of getX1 method, of class SerializableLine.
      */
     @Test
     public void testGetX1() {
         System.out.println("getX1");
-        SerializableLine instance = null;
-        double expResult = 0.0;
-        double result = instance.getX1();
+        double expResult = 5.0;
+        double result = line.getX1();
+
         assertEquals(expResult, result, 0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,11 +86,11 @@ public class SerializableLineTest {
     @Test
     public void testSetX1() {
         System.out.println("setX1");
-        double x1 = 0.0;
-        SerializableLine instance = null;
-        instance.setX1(x1);
+        double x1 = 22.0;
+        
+        line.setX1(x1);
+        assertEquals(x1, line.getX1(), 0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -97,12 +99,10 @@ public class SerializableLineTest {
     @Test
     public void testGetY1() {
         System.out.println("getY1");
-        SerializableLine instance = null;
-        double expResult = 0.0;
-        double result = instance.getY1();
+        double expResult = 5.0;
+        double result = line.getY1();
+
         assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -111,11 +111,10 @@ public class SerializableLineTest {
     @Test
     public void testSetY1() {
         System.out.println("setY1");
-        double y1 = 0.0;
-        SerializableLine instance = null;
-        instance.setY1(y1);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double y1 = 22.0;
+        
+        line.setY1(y1);
+        assertEquals(y1, line.getY1(), 0);
     }
 
     /**
@@ -124,12 +123,10 @@ public class SerializableLineTest {
     @Test
     public void testGetX2() {
         System.out.println("getX2");
-        SerializableLine instance = null;
-        double expResult = 0.0;
-        double result = instance.getX2();
+        double expResult = 20.0;
+        double result = line.getX2();
+
         assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -138,11 +135,10 @@ public class SerializableLineTest {
     @Test
     public void testSetX2() {
         System.out.println("setX2");
-        double x2 = 0.0;
-        SerializableLine instance = null;
-        instance.setX2(x2);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double x2 = 22.0;
+        
+        line.setX2(x2);
+        assertEquals(x2, line.getX2(), 0);
     }
 
     /**
@@ -151,12 +147,10 @@ public class SerializableLineTest {
     @Test
     public void testGetY2() {
         System.out.println("getY2");
-        SerializableLine instance = null;
-        double expResult = 0.0;
-        double result = instance.getY2();
+        double expResult = 20.0;
+        double result = line.getY2();
+
         assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -165,24 +159,22 @@ public class SerializableLineTest {
     @Test
     public void testSetY2() {
         System.out.println("setY2");
-        double y2 = 0.0;
-        SerializableLine instance = null;
-        instance.setY2(y2);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double y2 = 22.0;
+        
+        line.setY2(y2);
+        assertEquals(y2, line.getY2(), 0);
     }
 
-    /**
-     * Test of draw method, of class SerializableLine.
-     */
     @Test
-    public void testDraw() {
-        System.out.println("draw");
-        Group group = null;
-        SerializableLine instance = null;
-        instance.draw(group);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testWriteObject(){
+        System.out.println("writeObject");
+        
     }
+    
+    @Test
+    public void testReadObject(){
+        System.out.println("readObject");
+    }
+    
     
 }
