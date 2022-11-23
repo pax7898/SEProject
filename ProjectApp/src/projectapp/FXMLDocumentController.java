@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 
@@ -27,6 +28,16 @@ public class FXMLDocumentController implements Initializable {
     private ToggleButton ellipseBtn;
     @FXML
     private ToggleButton rectangleBtn;
+    @FXML
+    private Label shapeLabel;
+    @FXML
+    private Label actionLable;
+    @FXML
+    private MenuItem saveBtn;
+    @FXML
+    private MenuItem loadBtn;
+    @FXML
+    private Label drawnLabel;
     
   
     @Override
