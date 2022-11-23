@@ -11,7 +11,7 @@ import javafx.scene.shape.Shape;
  *
  * @author Sabatino
  */
-public class SerializableShape implements Serializable, IShape{
+public abstract class SerializableShape implements Serializable, IShape{
     private transient Shape shape;
 
     public Shape getShape() {
