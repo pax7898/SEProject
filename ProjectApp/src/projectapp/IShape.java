@@ -9,5 +9,6 @@ package projectapp;
  * @author acoon
  */
 public interface IShape {
-    
+    public void createView();
+    public void draw();
 }
