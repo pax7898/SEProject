@@ -7,11 +7,14 @@ package projectapp;
 import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.paint.Color;
 
 /**
  *
- * @author acoon
+ * @author pasqualecaggiano
  */
-public interface IShape {
-    public void createView();
+public interface IState {
+    public void draw(double d, double d1, double d2, double d3, Color strokeColor);
+    public void draw( double d, double d1, double d2, double d3, Color strokeColor, Color fillColor);
+    public void changeColor();
 }

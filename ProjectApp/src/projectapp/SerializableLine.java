@@ -47,11 +47,6 @@ public class SerializableLine extends SerializableShape{
         line.setEndY(y2);
         this.setShape(line); 
     }
-    
-    public Shape getView() {
-        return this.getShape() ;
-    }
-
 
     public final double getX1() {
         return this.x1;
@@ -118,11 +113,4 @@ public class SerializableLine extends SerializableShape{
         color = Color.color(red, green, blue, opacity) ;
         createView();
     }
-    
-
-    @Override
-    public void draw(Group group, ScrollPane pane, List<SerializableShape> list) {
-       System.out.println("Draw Command");
-    }
-    
 }

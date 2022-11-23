@@ -11,12 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -54,15 +56,35 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label interiorLabel;
     @FXML
-    private ListView<String> drawnView;
+    private ListView<SerializableShape> drawnList;
+    
+    private EditorState currentState;
+    
+    private Group shapeGroup;
+    
+    private ObservableList<SerializableShape> listItems;
+    
+    private CommandExecutor executor;
     
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        drawnView= new ListView<String>();
-        ObservableList<String> viewItems=FXCollections.observableArrayList();
-        drawnView.setItems(viewItems);
+        //drawnList= new ListView<SerializableShape>();
+        listItems = FXCollections.observableArrayList();
+        drawnList.setItems(listItems);
+        executor = new CommandExecutor();
+   
     }    
+
+    @FXML
+    private void setLineState(ActionEvent event) {
+        currentState = new LineState(shapeGroup,scrollPane,listItems);
+    }
+
+    @FXML
+    private void scrollClick(MouseEvent event) {
+        executor.execute(new DrawCommand(currentState,event.getX(),event.getY(),event.getX()+10.0,event.getY()+50.0,borderPicker.getValue(),interiorPicker.getValue()));
+    }
 
 }
