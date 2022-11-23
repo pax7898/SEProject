@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -20,6 +21,12 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private AnchorPane scrollPane;
+    @FXML
+    private ToggleButton lineBtn;
+    @FXML
+    private ToggleButton ellipseBtn;
+    @FXML
+    private ToggleButton rectangleBtn;
     
   
     @Override
