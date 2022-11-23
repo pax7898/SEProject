@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="601.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="3.0" prefHeight="100.0" prefWidth="789.0">
          <children>
@@ -20,14 +23,15 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <AnchorPane prefHeight="100.0" prefWidth="234.0" style="-fx-border-color: black;">
+            <AnchorPane prefHeight="100.0" prefWidth="234.0">
                <children>
                   <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Line" textAlignment="CENTER" />
                   <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="140.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Ellipse" textAlignment="CENTER" />
                   <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Rectangle" textAlignment="CENTER" />
+                  <Separator layoutX="231.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="102.0" prefWidth="10.0" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="100.0" prefWidth="130.0" style="-fx-border-color: black;">
+            <AnchorPane prefHeight="102.0" prefWidth="123.0">
                <children>
                   <Label fx:id="actionLable" alignment="TOP_CENTER" layoutX="10.0" layoutY="14.0" prefHeight="26.0" prefWidth="106.0" text="Action:">
                      <font>
@@ -42,20 +46,44 @@
                   </MenuButton>
                </children>
             </AnchorPane>
+            <Separator orientation="VERTICAL" prefHeight="102.0" prefWidth="9.0" />
+            <AnchorPane prefHeight="102.0" prefWidth="234.0">
+               <children>
+                  <Label fx:id="colorLabel" alignment="TOP_CENTER" layoutX="63.0" layoutY="14.0" prefHeight="26.0" prefWidth="106.0" text="Color:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ColorPicker fx:id="borderPicker" layoutX="63.0" layoutY="46.0" prefHeight="26.0" prefWidth="43.0">
+                     <value>
+                        <Color />
+                     </value>
+                  </ColorPicker>
+                  <ColorPicker fx:id="interiorPicker" layoutX="176.0" layoutY="46.0" prefHeight="26.0" prefWidth="43.0">
+                     <value>
+                        <Color />
+                     </value>
+                  </ColorPicker>
+                  <Label fx:id="borderLabel" layoutX="20.0" layoutY="50.0" prefHeight="18.0" prefWidth="43.0" text="Border" />
+                  <Label fx:id="interiorLabel" layoutX="126.0" layoutY="50.0" text="Interior" />
+               </children>
+            </AnchorPane>
+            <Separator orientation="VERTICAL" prefHeight="102.0" prefWidth="9.0" />
          </children>
       </HBox>
-      <VBox alignment="TOP_CENTER" layoutY="100.0" prefHeight="502.0" prefWidth="114.0" style="-fx-border-color: black;">
+      <VBox alignment="TOP_CENTER" layoutY="100.0" prefHeight="599.0" prefWidth="106.0">
          <children>
-            <Label fx:id="drawnLabel" alignment="TOP_CENTER" prefHeight="23.0" prefWidth="106.0" style="-fx-border-color: black;" text="Drawn shapes">
+            <Label fx:id="drawnLabel" alignment="TOP_CENTER" prefHeight="23.0" prefWidth="106.0" text="Drawn shapes">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <ListView fx:id="drawnView" prefHeight="582.0" prefWidth="106.0" />
          </children>
       </VBox>
-      <ScrollPane hbarPolicy="ALWAYS" layoutX="110.0" layoutY="100.0" prefHeight="502.0" prefWidth="678.0" vbarPolicy="ALWAYS">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" layoutX="107.0" layoutY="119.0" prefHeight="588.0" prefWidth="841.0" vbarPolicy="ALWAYS">
         <content>
-          <AnchorPane fx:id="scrollPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="759.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="1082.0" />
         </content>
       </ScrollPane>
    </children>

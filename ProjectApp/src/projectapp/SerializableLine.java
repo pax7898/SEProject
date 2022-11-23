@@ -31,7 +31,7 @@ public class SerializableLine extends SerializableShape{
         setX2(x2);
         setY2(y2);
         this.color = strokeColor ;
-        createView();
+        this.createView();
     }
 
     
@@ -90,12 +90,6 @@ public class SerializableLine extends SerializableShape{
         this.y2 = y2;
     }
         
-        
-
-    @Override
-    public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -109,6 +103,7 @@ public class SerializableLine extends SerializableShape{
         s.writeDouble(color.getOpacity());
     }
 
+    
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         x1 = s.readDouble();
         y1 = s.readDouble();
@@ -121,6 +116,7 @@ public class SerializableLine extends SerializableShape{
         color = Color.color(red, green, blue, opacity) ;
         createView();
     }
+    
     
     @Override
     public void draw(Group group) {

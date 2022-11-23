@@ -4,11 +4,15 @@
  */
 package projectapp;
 
+import java.util.List;
+import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
+
 /**
  *
  * @author acoon
  */
 public interface IShape {
     public void createView();
-    public void draw();
+    public void draw(Group group, ScrollPane pane, List<SerializableShape> list);
 }
