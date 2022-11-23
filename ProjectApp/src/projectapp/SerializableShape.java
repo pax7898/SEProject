@@ -4,10 +4,20 @@
  */
 package projectapp;
 
+import java.io.Serializable;
+import javafx.scene.shape.Shape;
+
 /**
  *
  * @author Sabatino
  */
-public class SerializableShape {
-    
+public class SerializableShape implements Serializable, IShape{
+    private transient Shape shape;
+
+    public Shape getShape() {
+        return shape;
+    }
+    public void setShape(Shape s) {
+        shape = s;
+    } 
 }
