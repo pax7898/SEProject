@@ -4,14 +4,11 @@
  */
 package projectapp;
 
-import javafx.scene.Group;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -40,11 +37,12 @@ public class SerializableLineTest {
      */
     @Test
     public void testCreateView() {
-        System.out.println("createView");
-         
-        line.createView();
+        Line myLine = line.getLine();
+        assertEquals(myLine, line.getShape());
+        /*System.out.println("createView");
+        Pane pane = new Pane();
         Shape s = line.getShape();
-        assertEquals(line.getShape(), s);
+        assertEquals(line.getShape(), s);*/
         
         
     }
@@ -110,7 +108,6 @@ public class SerializableLineTest {
     public void testSetY1() {
         System.out.println("setY1");
         double y1 = 22.0;
-        
         line.setY1(y1);
         assertEquals(y1, line.getY1(), 0);
     }

@@ -44,7 +44,8 @@ public class LineStateTest {
         line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
         line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
         assertEquals(3, pane.getChildren().size());
-        Node node = pane.getChildren().remove(0);
+        Node node = pane.getChildren().get(0);
+        assertTrue(pane.getChildren().remove(node));
         list.remove(0);
         assertEquals(2, list.size()); 
         assertEquals(2, pane.getChildren().size());
