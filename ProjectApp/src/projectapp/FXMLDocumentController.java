@@ -120,4 +120,9 @@ public class FXMLDocumentController implements Initializable {
         startY = event.getY();
     }
 
+    @FXML
+    private void setRectangleState(ActionEvent event) {
+        currentState = new RectangleState(pane, listItems);
+    }
+
 }
