@@ -84,7 +84,7 @@
                   </ColorPicker>
                   <ColorPicker fx:id="interiorPicker" layoutX="176.0" layoutY="46.0" prefHeight="26.0" prefWidth="43.0">
                      <value>
-                        <Color />
+                        <Color opacity="0.0" />
                      </value>
                   </ColorPicker>
                   <Label fx:id="borderLabel" layoutX="12.0" layoutY="50.0" prefHeight="18.0" prefWidth="51.0" text="Border" />
@@ -96,7 +96,7 @@
       </HBox>
       <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" layoutX="192.0" layoutY="131.0" onMouseClicked="#scrollClick" prefHeight="576.0" prefWidth="768.0" scaleShape="false" vbarPolicy="ALWAYS">
          <content>
-            <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#clickPene" onMouseReleased="#releasedPane" prefHeight="7987.0" prefWidth="8109.0" />
+            <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#initialize" onMousePressed="#clickPene" onMouseReleased="#releasedPane" prefHeight="7987.0" prefWidth="8109.0" />
          </content></ScrollPane>
       <ListView fx:id="drawnView" layoutY="131.0" prefHeight="576.0" prefWidth="193.0" />
    </children>
