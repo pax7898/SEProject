@@ -125,8 +125,5 @@ public class FXMLDocumentController implements Initializable {
         startY = event.getY();
     }
 
-    @FXML
-    private void initialize(MouseEvent event) {
-    }
-
+   
 }
