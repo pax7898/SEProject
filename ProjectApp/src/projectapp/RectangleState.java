@@ -31,7 +31,6 @@ public class RectangleState extends EditorState{
             d2 = -d2;
         }
         if(d3 < 0){
-            double appoggio = d1;
             d1 = d3 + d1;
             d3 = -d3;
         }
