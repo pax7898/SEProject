@@ -36,7 +36,6 @@ public class SerializableLine extends SerializableShape{
     
     @Override
     public void createView() {
-        //Line line = new Line();
         line.setStroke(color);
         line.setStartX(x1);
         line.setStartY(y1);

@@ -39,7 +39,7 @@ public class CommandExecutorTest {
         assertEquals(null, executor.getStack().getLast());
         Command comm = new DrawCommand(state,20,20,50,50,Color.BLACK, Color.BLACK);
         executor.execute(comm);
-        assertEquals(comm, executor.getStack().getLast());   
+        assertEquals(comm, executor.getStack().getLast());     
     }
 
     

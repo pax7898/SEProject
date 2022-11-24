@@ -39,10 +39,7 @@ public class SerializableLineTest {
     public void testCreateView() {
         Line myLine = line.getLine();
         assertEquals(myLine, line.getShape());
-        /*System.out.println("createView");
-        Pane pane = new Pane();
-        Shape s = line.getShape();
-        assertEquals(line.getShape(), s);*/
+        
         
         
     }
