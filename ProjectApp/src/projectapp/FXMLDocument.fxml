@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -22,7 +16,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="3.0" prefHeight="131.0" prefWidth="960.0">
          <children>
@@ -44,7 +38,7 @@
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
-                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="128.0" layoutY="31.0" mnemonicParsing="false" onAction="#setRectangleState" prefHeight="26.0" prefWidth="39.0" textAlignment="CENTER">
+                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="128.0" layoutY="31.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="39.0" textAlignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,7 +84,7 @@
                   </ColorPicker>
                   <ColorPicker fx:id="interiorPicker" layoutX="176.0" layoutY="46.0" prefHeight="26.0" prefWidth="43.0">
                      <value>
-                        <Color opacity="0.0" />
+                        <Color />
                      </value>
                   </ColorPicker>
                   <Label fx:id="borderLabel" layoutX="12.0" layoutY="50.0" prefHeight="18.0" prefWidth="51.0" text="Border" />
@@ -102,7 +96,7 @@
       </HBox>
       <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" layoutX="192.0" layoutY="131.0" onMouseClicked="#scrollClick" prefHeight="576.0" prefWidth="768.0" scaleShape="false" vbarPolicy="ALWAYS">
          <content>
-            <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#initialize" onMousePressed="#clickPene" onMouseReleased="#releasedPane" prefHeight="7987.0" prefWidth="8109.0" />
+            <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#clickPene" onMouseReleased="#releasedPane" prefHeight="7987.0" prefWidth="8109.0" />
          </content></ScrollPane>
       <ListView fx:id="drawnView" layoutY="131.0" prefHeight="576.0" prefWidth="193.0" />
    </children>

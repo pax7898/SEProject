@@ -4,8 +4,6 @@
  */
 package projectapp;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -84,7 +82,8 @@ public class FXMLDocumentController implements Initializable {
         listItems = FXCollections.observableArrayList();
         
         drawnView.setItems(getStringList());
-
+       
+ 
         executor = new CommandExecutor();
   
         
@@ -113,45 +112,12 @@ public class FXMLDocumentController implements Initializable {
     private void releasedPane(MouseEvent event) {
         executor.execute(new DrawCommand(currentState,startX,startY,event.getX(),event.getY(),borderPicker.getValue(),interiorPicker.getValue()));
         drawnView.setItems(getStringList());
-        
     }
 
     @FXML
     private void clickPene(MouseEvent event) {
-       
         startX = event.getX();
         startY = event.getY();
-    }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    private void setRectangleState(ActionEvent event) {
-        currentState = new RectangleState(pane, listItems);
     }
 
 }
