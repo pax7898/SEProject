@@ -41,9 +41,7 @@ public class SerializableLineTest {
     @Test
     public void testCreateView() {
         System.out.println("createView");
-        
-        
-        
+         
         line.createView();
         Shape s = line.getShape();
         assertEquals(line.getShape(), s);

@@ -5,7 +5,9 @@
 package projectapp;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -21,6 +24,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -37,15 +41,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ToggleButton rectangleBtn;
     @FXML
-    private Label shapeLabel;
-    @FXML
     private Label actionLable;
     @FXML
     private MenuItem saveBtn;
     @FXML
     private MenuItem loadBtn;
-    @FXML
-    private Label drawnLabel;
     @FXML
     private Label colorLabel;
     @FXML
@@ -56,32 +56,48 @@ public class FXMLDocumentController implements Initializable {
     private Label borderLabel;
     @FXML
     private Label interiorLabel;
+    @FXML
+    private ListView drawnView;
+    @FXML
+    private Pane pane;
     
     private EditorState currentState;
     
     private ObservableList<SerializableShape> listItems;
     
     private CommandExecutor executor;
-    @FXML
-    private ListView<SerializableShape> drawnView;
-    @FXML
-    private Pane pane;
+    
+    
+    
     
     double startX;
     double startY;
     
-    
+   
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        drawnView = new ListView<SerializableShape>();
+       
         listItems = FXCollections.observableArrayList();
-        drawnView.setItems(listItems);
+        
+        drawnView.setItems(getStringList());
+       
+ 
         executor = new CommandExecutor();
+  
         
     }    
-
+    
+    public ObservableList<String> getStringList(){
+        ObservableList<String> l = FXCollections.observableArrayList();
+        for(int i=0;i<listItems.size();i++){
+            String temp = listItems.get(i).getShape().toString();
+            l.add(temp);
+        }
+        return l;
+    }
+    
     @FXML
     private void setLineState(ActionEvent event) {
         currentState = new LineState(pane,listItems);
@@ -95,8 +111,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void releasedPane(MouseEvent event) {
         executor.execute(new DrawCommand(currentState,startX,startY,event.getX(),event.getY(),borderPicker.getValue(),interiorPicker.getValue()));
-        
-        
+        drawnView.setItems(getStringList());
     }
 
     @FXML
