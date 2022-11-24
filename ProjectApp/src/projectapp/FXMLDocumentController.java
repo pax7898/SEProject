@@ -123,7 +123,33 @@ public class FXMLDocumentController implements Initializable {
         startY = event.getY();
     }
 
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private void setRectangleState(ActionEvent event) {
         currentState = new RectangleState(pane, listItems);
     }
