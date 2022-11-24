@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -16,7 +22,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="3.0" prefHeight="131.0" prefWidth="960.0">
          <children>
@@ -38,7 +44,7 @@
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
-                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="128.0" layoutY="31.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="39.0" textAlignment="CENTER">
+                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="128.0" layoutY="31.0" mnemonicParsing="false" onAction="#setRectangleState" prefHeight="26.0" prefWidth="39.0" textAlignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -84,8 +84,6 @@ public class FXMLDocumentController implements Initializable {
         listItems = FXCollections.observableArrayList();
         
         drawnView.setItems(getStringList());
-       
-        
 
         executor = new CommandExecutor();
   
@@ -125,8 +123,9 @@ public class FXMLDocumentController implements Initializable {
         startY = event.getY();
     }
 
-    @FXML
-    private void initialize(MouseEvent event) {
+
+    private void setRectangleState(ActionEvent event) {
+        currentState = new RectangleState(pane, listItems);
     }
 
 }
