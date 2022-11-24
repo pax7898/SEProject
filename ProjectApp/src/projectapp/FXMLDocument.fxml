@@ -16,22 +16,36 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="3.0" prefHeight="131.0" prefWidth="960.0">
          <children>
             <AnchorPane prefHeight="102.0" prefWidth="253.0">
                <children>
-                  <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#setLineState" prefHeight="26.0" prefWidth="95.0" textAlignment="CENTER">
+                  <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="9.0" mnemonicParsing="false" onAction="#setLineState" prefHeight="42.0" prefWidth="50.0" textAlignment="CENTER">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Design%20&amp;%20Analysis%20of%20Algorithms/foto.png" />
+                              <Image url="@../image/Editing-Line-icon.png" />
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
-                  <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="140.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Ellipse" textAlignment="CENTER" />
-                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="15.0" layoutY="63.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Rectangle" textAlignment="CENTER" />
+                  <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="94.0" layoutY="11.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="51.0" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/33822.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="172.0" layoutY="9.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="43.0" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/2440859-200.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
                   <Separator layoutX="245.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="131.0" prefWidth="9.0" />
                </children>
             </AnchorPane>
