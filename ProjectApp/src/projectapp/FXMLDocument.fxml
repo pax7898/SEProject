@@ -36,7 +36,7 @@
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
-                  <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="22.0" layoutY="75.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" textAlignment="CENTER">
+                  <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#setEllipseState" prefHeight="34.0" prefWidth="43.0" textAlignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="22.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                            <image>

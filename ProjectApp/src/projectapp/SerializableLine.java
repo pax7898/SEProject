@@ -23,7 +23,7 @@ public class SerializableLine extends SerializableShape{
 
     private transient Color color ;
     private transient Line line;
-    public SerializableLine(double x1, double y1, double x2, double y2, Color strokeColor) {
+    public SerializableLine(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         setX1(x1);
         setY1(y1);
         setX2(x2);

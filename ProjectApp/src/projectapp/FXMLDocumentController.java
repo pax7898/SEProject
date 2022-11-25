@@ -125,4 +125,9 @@ public class FXMLDocumentController implements Initializable {
         currentState = new RectangleState(pane, listItems);
     }
 
+    @FXML
+    private void setEllipseState(ActionEvent event) {
+        currentState = new EllipseState(pane, listItems);
+    }
+
 }

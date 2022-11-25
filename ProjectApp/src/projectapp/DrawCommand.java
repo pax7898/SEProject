@@ -34,7 +34,11 @@ public class DrawCommand extends Command{
 
     @Override
     public void execute() {
-        state.draw(d,d1,d2,d3,strokeColor);
+        try{
+            state.draw(d,d1,d2,d3,strokeColor, fillColor);
+        }catch(NullPointerException e){
+            System.out.println("Devi selezionare una figura");
+        }
     }
     
 }

@@ -27,15 +27,16 @@ public class LineState extends EditorState{
 
     @Override
     public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
-        SerializableLine line = new SerializableLine(d,d1,d2,d3,strokeColor);
+        /*SerializableLine line = new SerializableLine(d,d1,d2,d3,strokeColor);
         this.list.add(line);
-        this.pane.getChildren().add(line.getShape());
+        this.pane.getChildren().add(line.getShape());*/
     }
 
 
     @Override
     public void draw(double d, double d1, double d2, double d3, Color strokeColor, Color fillColor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        SerializableLine line = new SerializableLine(d,d1,d2,d3,strokeColor, fillColor);
+        this.list.add(line);
+        this.pane.getChildren().add(line.getShape());    }
     
 }
