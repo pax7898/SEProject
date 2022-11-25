@@ -7,12 +7,8 @@ package projectapp;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
-import javafx.scene.Group;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 
 /**
  *
@@ -20,32 +16,33 @@ import javafx.scene.shape.Shape;
  */
 public class SerializableLine extends SerializableShape{
     
-    private transient double x1 ;
-    private transient double y1 ;
-    private transient double x2 ;
-    private transient double y2 ;
-
+    private transient double x1;
+    private transient double y1;
+    private transient double x2;
+    private transient double y2;
     private transient Color color ;
-
+    private transient Line line;
+    
+    
     public SerializableLine(double x1, double y1, double x2, double y2, Color strokeColor) {
         setX1(x1);
         setY1(y1);
         setX2(x2);
         setY2(y2);
         this.color = strokeColor ;
+        this.line = new Line();
         this.createView();
     }
 
     
     @Override
     public void createView() {
-        Line line = new Line();
         line.setStroke(color);
         line.setStartX(x1);
         line.setStartY(y1);
         line.setEndX(x2);
         line.setEndY(y2);
-        this.setShape(line); 
+        this.setShape(line);
     }
     
     
@@ -67,6 +64,15 @@ public class SerializableLine extends SerializableShape{
 
     public final void setY1(final double y1) {
         this.y1 = y1;
+    }
+
+    public Line getLine() {
+        return line;
+    }
+
+    
+    public void setLine(Line line) {
+        this.line = line;
     }
 
 
@@ -108,11 +114,11 @@ public class SerializableLine extends SerializableShape{
         y1 = s.readDouble();
         x2 = s.readDouble();
         y2 = s.readDouble();
-        double red = s.readDouble() ;
-        double green = s.readDouble() ;
-        double blue = s.readDouble() ;
-        double opacity = s.readDouble() ;
-        color = Color.color(red, green, blue, opacity) ;
+        double red = s.readDouble();
+        double green = s.readDouble();
+        double blue = s.readDouble();
+        double opacity = s.readDouble();
+        color = Color.color(red, green, blue, opacity);
         createView();
     }
 }
