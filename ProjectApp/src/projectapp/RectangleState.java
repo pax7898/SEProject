@@ -23,37 +23,41 @@ public class RectangleState extends EditorState{
     }
     
     @Override
-    public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
-        d2 = d2 - d;
-        d3 = d3 - d1;
-        if(d2 < 0 ){
-            d = d2 + d;
-            d2 = -d2;
+    public void draw(double x1, double y1, double x2, double y2, Color strokeColor) {
+        double width;
+        double height;
+        width = x2 - x1;    
+        height = y2 - y1;
+        if(width < 0 ){
+            x1 = width + x1;
+            width = -width;
         }
-        if(d3 < 0){
-            d1 = d3 + d1;
-            d3 = -d3;
+        if(height < 0){
+            y1 = height + y1;
+            height = -height;
         }
-        SerializableRectangle rect = new SerializableRectangle(d,d1,d2,d3,strokeColor);
+        SerializableRectangle rect = new SerializableRectangle(x1,y1,width,height,strokeColor);
         this.list.add(rect);
         this.pane.getChildren().add(rect.getShape());
     }
 
 
     @Override
-    public void draw(double d, double d1, double d2, double d3, Color strokeColor, Color fillColor) {
-        d2 = d2 - d;
-        d3 = d3 - d1;
-        if(d2 < 0 ){
-            d = d2 + d;
-            d2 = -d2;
+    public void draw(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
+        double width;
+        double height;
+        width = x2 - x1;    
+        height = y2 - y1;
+        if(width < 0 ){
+            x1 = width + x1;
+            width = -width;
         }
-        if(d3 < 0){
-            double appoggio = d1;
-            d1 = d3 + d1;
-            d3 = -d3;
+        if(height < 0){
+            y1 = height + y1;
+            height = -height;
         }
-        SerializableRectangle rect = new SerializableRectangle(d,d1,d2,d3,strokeColor,fillColor);
+
+        SerializableRectangle rect = new SerializableRectangle(x1,y1,width,height,strokeColor,fillColor);
         this.list.add(rect);
         this.pane.getChildren().add(rect.getShape());
     }
