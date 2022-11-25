@@ -12,19 +12,14 @@ import javafx.scene.shape.Shape;
  * @author Sabatino
  */
 public abstract class SerializableShape implements Serializable{
-    
     private transient Shape shape;
-    
     
     public Shape getShape() {
         return shape;
     }
-    
-    
     public void setShape(Shape s) {
         shape = s;
     } 
-    
     
     public abstract void createView();
     

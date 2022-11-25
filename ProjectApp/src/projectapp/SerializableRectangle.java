@@ -24,32 +24,33 @@ public class SerializableRectangle extends SerializableShape{
 
     private transient Color strokeColor ;
     private transient Color fillColor;
-    private transient Rectangle rectangle;
+    
         
-    public SerializableRectangle(double x1, double y1, double width, double height, Color strokeColor) {
+    public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor) {
         this.x =x1;
         this.y =y1;
-        this.width = width;
-        this.height = height;
+        this.width = x2;
+        this.height = y2;
         this.strokeColor = strokeColor ;
         this.fillColor = Color.TRANSPARENT;
-        rectangle = new Rectangle();
+        
         createView();
     }
 
-    public SerializableRectangle(double x1, double y1, double width, double height, Color strokeColor, Color fillColor) {
+    public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         this.x =x1;
         this.y =y1;
-        this.width = width;
-        this.height = height;
-        this.strokeColor = strokeColor;
+        this.width = x2;
+        this.height = y2;
+        this.strokeColor = strokeColor ;
         this.fillColor = fillColor;
-        rectangle = new Rectangle();
+        
         createView();
     }
 
     @Override
     public void createView() {
+        Rectangle rectangle = new Rectangle();
         rectangle.setStroke(strokeColor);
         rectangle.setFill(fillColor);
         rectangle.setX(x);
@@ -59,7 +60,9 @@ public class SerializableRectangle extends SerializableShape{
         this.setShape(rectangle); 
     }
 
-    
+    public Shape getView() {
+        return this.getShape() ;
+    }
 
     public final double getX() {
         return this.x;
@@ -93,16 +96,7 @@ public class SerializableRectangle extends SerializableShape{
 
     public void setFillColor(Color fillColor) {
         this.fillColor = fillColor;
-    }
-
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
-    }
-        
+    }   
 
     public final double getWidth() {
         return this.width;
@@ -119,7 +113,7 @@ public class SerializableRectangle extends SerializableShape{
     }
 
 
-    public final void setHeigth(final double y2) {
+    public final void getHeigth(final double y2) {
         this.height = y2;
     }
 

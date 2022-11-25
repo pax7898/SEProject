@@ -16,36 +16,35 @@ import javafx.scene.shape.Line;
  */
 public class SerializableLine extends SerializableShape{
     
-    private transient double x1;
-    private transient double y1;
-    private transient double x2;
-    private transient double y2;
+    private transient double x1 ;
+    private transient double y1 ;
+    private transient double x2 ;
+    private transient double y2 ;
+
     private transient Color color ;
-    private transient Line line;
     
-    
-    public SerializableLine(double x1, double y1, double x2, double y2, Color strokeColor) {
+    public SerializableLine(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         setX1(x1);
         setY1(y1);
         setX2(x2);
         setY2(y2);
-        this.color = strokeColor ;
-        this.line = new Line();
+        this.color = strokeColor;
         this.createView();
     }
 
     
     @Override
     public void createView() {
+        Line line = new Line();
         line.setStroke(color);
         line.setStartX(x1);
         line.setStartY(y1);
         line.setEndX(x2);
         line.setEndY(y2);
-        this.setShape(line);
+        this.setShape(line); 
+        
     }
-    
-    
+
     public final double getX1() {
         return this.x1;
     }
@@ -65,16 +64,6 @@ public class SerializableLine extends SerializableShape{
     public final void setY1(final double y1) {
         this.y1 = y1;
     }
-
-    public Line getLine() {
-        return line;
-    }
-
-    
-    public void setLine(Line line) {
-        this.line = line;
-    }
-
 
     public final double getX2() {
         return this.x2;
@@ -97,7 +86,7 @@ public class SerializableLine extends SerializableShape{
         
     
     private void writeObject(ObjectOutputStream s) throws IOException {
-        s.defaultWriteObject();
+        //s.defaultWriteObject();
         s.writeDouble(getX1());
         s.writeDouble(getY1());
         s.writeDouble(getX2());
@@ -114,11 +103,11 @@ public class SerializableLine extends SerializableShape{
         y1 = s.readDouble();
         x2 = s.readDouble();
         y2 = s.readDouble();
-        double red = s.readDouble();
-        double green = s.readDouble();
-        double blue = s.readDouble();
-        double opacity = s.readDouble();
-        color = Color.color(red, green, blue, opacity);
+        double red = s.readDouble() ;
+        double green = s.readDouble() ;
+        double blue = s.readDouble() ;
+        double opacity = s.readDouble() ;
+        color = Color.color(red, green, blue, opacity) ;
         createView();
     }
 }

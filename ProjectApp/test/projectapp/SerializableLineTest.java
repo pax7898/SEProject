@@ -4,16 +4,6 @@
  */
 package projectapp;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -28,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class SerializableLineTest {
     
-    private SerializableLine line;
+    public SerializableLine line;
     
     public SerializableLineTest() {
     }
@@ -47,11 +37,28 @@ public class SerializableLineTest {
      */
     @Test
     public void testCreateView() {
-        System.out.println("createView");
         Line myLine = line.getLine();
-        assertEquals(myLine, line.getShape()); 
+        assertEquals(myLine, line.getShape());
+        
+        
+        
     }
+
     
+    /**
+     * Test of getView method, of class SerializableLine.
+     */
+    /*@Test
+    public void testGetView() {
+        System.out.println("getView");
+        SerializableLine instance = null;
+        Shape expResult = null;
+        Shape result = instance.getView();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }*/
+
     
     /**
      * Test of getX1 method, of class SerializableLine.
@@ -66,7 +73,6 @@ public class SerializableLineTest {
         // TODO review the generated test code and remove the default call to fail.
     }
 
-    
     /**
      * Test of setX1 method, of class SerializableLine.
      */
@@ -153,32 +159,7 @@ public class SerializableLineTest {
 
     @Test
     public void testWriteObject(){
-        
         System.out.println("writeObject");
-        File file = new File("prova.dat");
-
-        try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))){
-            output.writeObject(line);
-            output.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))){
-            
-            SerializableLine line2 = (SerializableLine) input.readObject();
-            System.out.println(line2.getX1());
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }
     
