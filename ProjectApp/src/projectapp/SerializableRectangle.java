@@ -24,7 +24,7 @@ public class SerializableRectangle extends SerializableShape{
 
     private transient Color strokeColor ;
     private transient Color fillColor;
-    private transient Rectangle rectangle;
+    
         
     public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor) {
         this.x =x1;
@@ -33,7 +33,7 @@ public class SerializableRectangle extends SerializableShape{
         this.height = y2;
         this.strokeColor = strokeColor ;
         this.fillColor = Color.TRANSPARENT;
-        rectangle = new Rectangle();
+        
         createView();
     }
 
@@ -44,12 +44,13 @@ public class SerializableRectangle extends SerializableShape{
         this.height = y2;
         this.strokeColor = strokeColor ;
         this.fillColor = fillColor;
+        
         createView();
     }
 
     @Override
     public void createView() {
-
+        Rectangle rectangle = new Rectangle();
         rectangle.setStroke(strokeColor);
         rectangle.setFill(fillColor);
         rectangle.setX(x);
@@ -95,16 +96,7 @@ public class SerializableRectangle extends SerializableShape{
 
     public void setFillColor(Color fillColor) {
         this.fillColor = fillColor;
-    }
-
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
-    }
-        
+    }   
 
     public final double getWidth() {
         return this.width;

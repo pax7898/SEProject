@@ -22,20 +22,20 @@ public class SerializableLine extends SerializableShape{
     private transient double y2 ;
 
     private transient Color color ;
-    private transient Line line;
+    
     public SerializableLine(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         setX1(x1);
         setY1(y1);
         setX2(x2);
         setY2(y2);
-        this.color = strokeColor ;
-        this.line = new Line();
+        this.color = strokeColor;
         this.createView();
     }
 
     
     @Override
     public void createView() {
+        Line line = new Line();
         line.setStroke(color);
         line.setStartX(x1);
         line.setStartY(y1);
@@ -65,15 +65,6 @@ public class SerializableLine extends SerializableShape{
         this.y1 = y1;
     }
 
-    public Line getLine() {
-        return line;
-    }
-
-    public void setLine(Line line) {
-        this.line = line;
-    }
-
-
     public final double getX2() {
         return this.x2;
     }
@@ -95,7 +86,7 @@ public class SerializableLine extends SerializableShape{
         
     
     private void writeObject(ObjectOutputStream s) throws IOException {
-        s.defaultWriteObject();
+        //s.defaultWriteObject();
         s.writeDouble(getX1());
         s.writeDouble(getY1());
         s.writeDouble(getX2());
