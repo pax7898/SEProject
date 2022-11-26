@@ -6,7 +6,6 @@ package projectapp;
 
 import projectapp.state.LineState;
 import projectapp.shape.SerializableShape;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
