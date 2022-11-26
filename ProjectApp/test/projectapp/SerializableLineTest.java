@@ -151,8 +151,8 @@ public class SerializableLineTest {
             assertEquals(line.getColor(),line2.getColor());
             assertEquals(line.getX1(),line2.getX1(), 0);
             assertEquals(line.getX2(),line2.getX2(), 0);
-            assertEquals(line.getY1(),line.getY1(), 0);
-            assertEquals(line.getY2(),line.getY2(), 0);            
+            assertEquals(line.getY1(),line2.getY1(), 0);
+            assertEquals(line.getY2(),line2.getY2(), 0);            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
