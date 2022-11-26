@@ -22,16 +22,10 @@ public class LineState extends EditorState{
         super(pane,list);
     }
 
-    /*@Override
-    public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
-        /*SerializableLine line = new SerializableLine(d,d1,d2,d3,strokeColor);
-        this.list.add(line);
-        this.pane.getChildren().add(line.getShape());*/
-    
 
     @Override
-    public void draw(double d, double d1, double d2, double d3, Color strokeColor, Color fillColor) {
-        SerializableLine line = new SerializableLine(d,d1,d2,d3,strokeColor, fillColor);
+    public void draw(double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
+        SerializableLine line = new SerializableLine(startX,startY,endX,endY,strokeColor, fillColor);
         this.getList().add(line);
         this.getPane().getChildren().add(line.getShape());  
     }

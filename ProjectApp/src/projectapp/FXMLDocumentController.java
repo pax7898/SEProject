@@ -33,12 +33,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private ToggleButton lineBtn;
-    @FXML
-    private ToggleButton ellipseBtn;
-    @FXML
-    private ToggleButton rectangleBtn;
-    @FXML
     private MenuItem saveBtn;
     @FXML
     private MenuItem loadBtn;
@@ -58,7 +52,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        editor = new DrawingEditor(mainPane,pane,null,FXCollections.observableArrayList(),new CommandExecutor(),drawnView);  
+        editor = new DrawingEditor(pane,null,FXCollections.observableArrayList(),new CommandExecutor(),drawnView);  
     }    
     
     @FXML

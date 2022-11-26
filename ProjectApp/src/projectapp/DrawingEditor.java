@@ -33,23 +33,22 @@ import projectapp.state.RectangleState;
  */
 public class DrawingEditor {
     
-    private Pane mainPane;
     
-    private Pane drawingPane;
+    private final Pane drawingPane;
     
     private EditorState currentState;
     
-    private ObservableList<SerializableShape> listItems;
+    private final ObservableList<SerializableShape> listItems;
     
-    private CommandExecutor executor;
+    private final CommandExecutor executor;
     
-    private ListView drawnView;
+    private final ListView drawnView;
     
     private double startX;
     private double startY;
 
-    public DrawingEditor(Pane mainPane,Pane pane, EditorState currentState, ObservableList<SerializableShape> listItems, CommandExecutor executor, ListView drawnView) {
-        this.mainPane = mainPane;
+    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<SerializableShape> listItems, CommandExecutor executor, ListView drawnView) {
+        
         this.drawingPane = pane;
         this.currentState = currentState;
         this.listItems = listItems;
@@ -111,8 +110,7 @@ public class DrawingEditor {
     
     public void executeDrawCommand(double endX, double endY,Color strokeColor, Color fillColor){
         executor.execute(new DrawCommand(currentState,startX,startY,endX,endY,strokeColor,fillColor));
-        drawnView.setItems(getStringList());
-        
+        drawnView.setItems(getStringList());   
     }
     
     public void saveDrawing(File file){

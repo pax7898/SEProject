@@ -5,31 +5,21 @@
 package projectapp;
 
 import java.io.File;
-import java.net.URL;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.Scene;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 import projectapp.command.CommandExecutor;
 import projectapp.shape.SerializableEllipse;
 import projectapp.shape.SerializableLine;
 import projectapp.shape.SerializableRectangle;
 import projectapp.shape.SerializableShape;
 import projectapp.state.EditorState;
-import projectapp.state.EllipseState;
 import projectapp.state.LineState;
 import projectapp.state.RectangleState;
 
@@ -52,6 +42,7 @@ public class DrawingEditorTest {
     
     private CommandExecutor executor;
     
+    
     private ListView drawnView;
     
     private double startX;
@@ -59,14 +50,18 @@ public class DrawingEditorTest {
    
     @Before
     public void setUp() {
+        JFXPanel pn = new JFXPanel();
+        
+        drawnView = new ListView();
         mainPane = new Pane();
         drawingPane = new Pane();
         listItems = FXCollections.observableArrayList();
         currentState = new LineState(drawingPane,listItems);
         executor = new CommandExecutor();
-        drawnView = new ListView();
-        editor = new DrawingEditor(mainPane,drawingPane,currentState,listItems,executor,drawnView);
-        //drawnView.setItems(editor.getStringList());
+       
+        
+        editor = new DrawingEditor(drawingPane,currentState,listItems,executor,drawnView);
+        
     }
     
      
@@ -198,15 +193,13 @@ public class DrawingEditorTest {
     /**
      * Test of executeDrawCommand method, of class DrawingEditor.
      */
-    /*
+    
     @Test
     public void testExecuteDrawCommand() {
         System.out.println("executeDrawCommand");
-        
-        
+
         ObservableList<String> list = FXCollections.observableArrayList();
-        
-        
+       
         double endX = 5.0;
         double endY = 5.0;
         Color strokeColor = Color.RED;
@@ -218,13 +211,13 @@ public class DrawingEditorTest {
         
         assertEquals(list,drawnView.getItems());
         
-    }*/
+    }
     
     /**
      * Test of executeDrawCommand method, of class DrawingEditor.
      */
     
-    /*
+    
     @Test
     public void testSaveDrawing() {
          System.out.println("saveDrawing");
@@ -241,6 +234,6 @@ public class DrawingEditorTest {
          editor.loadDrawing(file);
 
          assertEquals(listSaved.toString(),listItems.toString());
-         
-    }*/
+     
+    }
 }
