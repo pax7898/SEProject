@@ -20,39 +20,20 @@ public class RectangleState extends EditorState{
     public RectangleState(Pane pane, ObservableList<SerializableShape> list) {
         super(pane,list);
     }
-    
-    /*@Override
-    public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
-        d2 = d2 - d;
-        d3 = d3 - d1;
-        if(d2 < 0 ){
-            d = d2 + d;
-            d2 = -d2;
-        }
-        if(d3 < 0){
-            d1 = d3 + d1;
-            d3 = -d3;
-        }
-        SerializableRectangle rect = new SerializableRectangle(d,d1,d2,d3,strokeColor);
-        this.getList().add(rect);
-        this.getPane().getChildren().add(rect.getShape());
-    }*/
-
 
     @Override
-    public void draw(double d, double d1, double d2, double d3, Color strokeColor, Color fillColor) {
-        d2 = d2 - d;
-        d3 = d3 - d1;
-        if(d2 < 0 ){
-            d = d2 + d;
-            d2 = -d2;
+    public void draw(double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
+        endX = endX - startX;
+        endY = endY - startY;
+        if(endX < 0 ){
+            startX = endX + startX;
+            endX = -endX;
         }
-        if(d3 < 0){
-            double appoggio = d1;
-            d1 = d3 + d1;
-            d3 = -d3;
+        if(endY < 0){
+            startY = endY + startY;
+            endY = -endY;
         }
-        SerializableRectangle rect = new SerializableRectangle(d,d1,d2,d3,strokeColor,fillColor);
+        SerializableRectangle rect = new SerializableRectangle(startX,startY,endX,endY,strokeColor,fillColor);
         this.getList().add(rect);
         this.getPane().getChildren().add(rect.getShape());
     }

@@ -29,9 +29,9 @@ public class SerializableRectangle extends SerializableShape{
     private transient Rectangle rectangle;
     
   
-    public SerializableRectangle(double x1, double y1, double width, double height, Color strokeColor, Color fillColor) {
-        this.x =x1;
-        this.y =y1;
+    public SerializableRectangle(double x, double y, double width, double height, Color strokeColor, Color fillColor) {
+        this.x =x;
+        this.y =y;
         this.width = width;
         this.height = height;
         this.strokeColor = strokeColor ;
@@ -51,40 +51,37 @@ public class SerializableRectangle extends SerializableShape{
         this.setShape(rectangle); 
     }
 
-    
 
     public final double getX() {
         return this.x;
     }
 
 
-
     public final double getY() {
         return this.y;
     }
-
-
 
     public Color getStrokeColor() {
         return strokeColor;
     }
 
 
-
     public Color getFillColor() {
         return fillColor;
     }
-
-
+  
 
     public final double getWidth() {
         return this.width;
     }
 
 
+
     public double getHeight() {
         return height;
     }
+
+    
     
 
     public Rectangle getRectangle() {
@@ -93,7 +90,7 @@ public class SerializableRectangle extends SerializableShape{
 
     
 
-    public void writeObject(ObjectOutputStream s) throws IOException {
+    private void writeObject(ObjectOutputStream s) throws IOException {
         //s.defaultWriteObject();
         s.writeDouble(getX());
         s.writeDouble(getY());
@@ -109,7 +106,7 @@ public class SerializableRectangle extends SerializableShape{
         s.writeDouble(fillColor.getOpacity());
     }
 
-    public void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         x = s.readDouble();
         y = s.readDouble();
         width = s.readDouble();

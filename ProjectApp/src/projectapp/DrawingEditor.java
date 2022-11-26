@@ -19,7 +19,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DrawCommand;
 import projectapp.shape.SerializableShape;
@@ -34,79 +33,38 @@ import projectapp.state.RectangleState;
  */
 public class DrawingEditor {
     
-    private Pane mainPane;
     
-    private Pane drawingPane;
+    private final Pane drawingPane;
     
     private EditorState currentState;
     
-    private ObservableList<SerializableShape> listItems;
+    private final ObservableList<SerializableShape> listItems;
     
-    private CommandExecutor executor;
+    private final CommandExecutor executor;
     
-    private ListView drawnView;
+    private final ListView drawnView;
     
     private double startX;
     private double startY;
 
-    public DrawingEditor(Pane mainPane,Pane pane, EditorState currentState, ObservableList<SerializableShape> listItems, CommandExecutor executor, ListView drawnView) {
-        this.mainPane = mainPane;
+    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<SerializableShape> listItems, CommandExecutor executor, ListView drawnView) {
+        
         this.drawingPane = pane;
         this.currentState = currentState;
         this.listItems = listItems;
         this.executor = executor;
         this.drawnView = drawnView;
-        this.drawnView.setItems(this.getStringList());
         this.startX = 0;
         this.startY = 0;
     }
 
-    public Pane getMainPane() {
-        return mainPane;
-    }
-
-    public void setMainPane(Pane mainPane) {
-        this.mainPane = mainPane;
-    }
-
-    public Pane getDrawingPane() {
-        return drawingPane;
-    }
-
-    public void setDrawingPane(Pane drawingPane) {
-        this.drawingPane = drawingPane;
-    }
-
+   
     public EditorState getCurrentState() {
         return currentState;
     }
 
     public void setCurrentState(EditorState currentState) {
         this.currentState = currentState;
-    }
-
-    public ObservableList<SerializableShape> getListItems() {
-        return listItems;
-    }
-
-    public void setListItems(ObservableList<SerializableShape> listItems) {
-        this.listItems = listItems;
-    }
-
-    public CommandExecutor getExecutor() {
-        return executor;
-    }
-
-    public void setExecutor(CommandExecutor executor) {
-        this.executor = executor;
-    }
-
-    public ListView getDrawnView() {
-        return drawnView;
-    }
-
-    public void setDrawnView(ListView drawnView) {
-        this.drawnView = drawnView;
     }
 
     public double getStartX() {
@@ -135,33 +93,27 @@ public class DrawingEditor {
         return l;
     }
     
-    public void setLineState(){
+    public EditorState setLineState(){
         currentState = new LineState(drawingPane,listItems);
+        return currentState;
     }
     
-    public void setRectangleState(){
+    public EditorState setRectangleState(){
         currentState = new RectangleState(drawingPane, listItems);
+        return currentState;
     }
     
-    public void setEllipseState(){
+    public EditorState setEllipseState(){
         currentState = new EllipseState(drawingPane, listItems);
+        return currentState;
     }
     
     public void executeDrawCommand(double endX, double endY,Color strokeColor, Color fillColor){
         executor.execute(new DrawCommand(currentState,startX,startY,endX,endY,strokeColor,fillColor));
-        drawnView.setItems(getStringList());
+        drawnView.setItems(getStringList());   
     }
     
-    public void saveDrawing(){
-        FileChooser fileChooser = new FileChooser();
- 
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Bin files (*.dat)", "*.dat");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        //Show save file dialog
-        File file = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
-        
+    public void saveDrawing(File file){
         try {
             
             ObjectOutputStream objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
@@ -184,17 +136,7 @@ public class DrawingEditor {
     }
     
     
-    public void loadDrawing(){
-        FileChooser fileChooser = new FileChooser();
- 
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Bin files (*.dat)", "*.dat");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        //Show open file dialog
-        File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
-        
-        
+    public void loadDrawing(File file){
         try {
             
             listItems.clear();

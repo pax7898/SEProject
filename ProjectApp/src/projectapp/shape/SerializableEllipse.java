@@ -41,7 +41,7 @@ public class SerializableEllipse extends SerializableShape{
 
     @Override
     public void createView() {
-        Ellipse ellipse = new Ellipse();
+        ellipse = new Ellipse();
         ellipse.setCenterX(centerX);
         ellipse.setCenterY(centerY);
         ellipse.setRadiusX(abs(radiusX-centerX));
@@ -49,64 +49,40 @@ public class SerializableEllipse extends SerializableShape{
         ellipse.setStroke(strokeColor);
         ellipse.setFill(fillColor);
         this.setShape(ellipse);
-        this.ellipse=ellipse;
     }
 
     public double getCenterX() {
         return centerX;
     }
 
-    public void setCenterX(double centerX) {
-        this.centerX = centerX;
-    }
-
     public double getCenterY() {
         return centerY;
-    }
-
-    public void setCenterY(double centerY) {
-        this.centerY = centerY;
     }
 
     public double getRadiusX() {
         return radiusX;
     }
 
-    public void setRadiusX(double radiusX) {
-        this.radiusX = radiusX;
-    }
 
     public double getRadiusY() {
         return radiusY;
     }
 
-    public void setRadiusY(double radiusY) {
-        this.radiusY = radiusY;
-    }
 
     public Color getStrokeColor() {
         return strokeColor;
-    }
-
-    public void setStrokeColor(Color strokeColor) {
-        this.strokeColor = strokeColor;
     }
 
     public Color getFillColor() {
         return fillColor;
     }
 
-    public void setFillColor(Color fillColor) {
-        this.fillColor = fillColor;
-    }
-    
     public Ellipse getEllipse() {
         return ellipse;
     }
 
     
     private void writeObject(ObjectOutputStream s) throws IOException {
-        s.defaultWriteObject();
         s.writeDouble(getCenterX());
         s.writeDouble(getCenterY());
         s.writeDouble(getRadiusX());
@@ -144,7 +120,5 @@ public class SerializableEllipse extends SerializableShape{
     public String toString() {
         return "Ellipse " + "(" + centerX + "," + centerY + ")";
     }
-    
-    
     
 }
