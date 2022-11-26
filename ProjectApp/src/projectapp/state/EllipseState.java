@@ -30,7 +30,7 @@ public class EllipseState extends EditorState {
 
     @Override
     public void draw(double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
-        SerializableEllipse ellipse = new SerializableEllipse(startX,startY, endX, endY, strokeColor, fillColor);
+        SerializableEllipse ellipse = new SerializableEllipse(startX, startY, endX, endY, strokeColor, fillColor);
         this.getList().add(ellipse);
         this.getPane().getChildren().add(ellipse.getShape()); 
     }
