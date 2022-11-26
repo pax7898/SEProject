@@ -14,10 +14,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -31,12 +33,6 @@ import projectapp.state.EditorState;
 public class FXMLDocumentController implements Initializable {
 
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private MenuItem saveBtn;
-    @FXML
-    private MenuItem loadBtn;
-    @FXML
     private ColorPicker borderPicker;
     @FXML
     private ColorPicker interiorPicker;
@@ -48,29 +44,42 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane mainPane;
     
     private DrawingEditor editor;
+    @FXML
+    private ToggleButton lineBtn;
+    @FXML
+    private ToggleButton recBtn;
+    @FXML
+    private ToggleButton elBtn;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        drawnView.setPlaceholder(new Label("No shapes drawn!"));
         editor = new DrawingEditor(pane,null,FXCollections.observableArrayList(),new CommandExecutor(),drawnView);  
     }    
     
     @FXML
     private void setLineState(ActionEvent event) {
          EditorState state = editor.setLineState();
-         state=null;
+         recBtn.selectedProperty().set(false);
+         elBtn.selectedProperty().set(false);
+         
     }
     
      @FXML
     private void setRectangleState(ActionEvent event) {
          EditorState state = editor.setRectangleState();
-         state=null;
+         elBtn.selectedProperty().set(false);
+         lineBtn.selectedProperty().set(false);
+         
     }
 
     @FXML
     private void setEllipseState(ActionEvent event) {
         EditorState state = editor.setEllipseState();
-        state=null;
+        recBtn.selectedProperty().set(false);
+        lineBtn.selectedProperty().set(false);
+        
     }
 
      @FXML
