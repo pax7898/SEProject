@@ -9,6 +9,7 @@ import projectapp.state.LineState;
 import projectapp.shape.SerializableShape;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.junit.Before;
@@ -42,6 +43,7 @@ public class DrawCommandTest {
        command.execute();
        assertEquals(1,list.size());
        assertEquals(1,pane.getChildren().size());
+       assertEquals((Node)list.get(0).getShape(),pane.getChildren().remove(0));
       
     }
     

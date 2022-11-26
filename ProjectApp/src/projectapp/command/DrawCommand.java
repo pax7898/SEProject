@@ -17,19 +17,19 @@ import javafx.scene.paint.Color;
  */
 public class DrawCommand extends Command{
     private final EditorState state;
-    private final double d;
-    private final double d1;
-    private final double d2;
-    private final double d3;
+    private final double startX;
+    private final double startY;
+    private final double endX;
+    private final double endY;
     private final Color strokeColor;
     private final Color fillColor;
  
-    public DrawCommand(EditorState state,double d, double d1,double d2, double d3, Color strokeColor, Color fillColor) {
+    public DrawCommand(EditorState state,double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
         this.state = state;
-        this.d = d;
-        this.d1 = d1;
-        this.d2 = d2;
-        this.d3 = d3;
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
         this.strokeColor = strokeColor;
         this.fillColor = fillColor;
     }
@@ -37,7 +37,7 @@ public class DrawCommand extends Command{
     @Override
     public void execute() {
         try{
-            state.draw(d,d1,d2,d3,strokeColor, fillColor);
+            state.draw(startX,startY,endX,endY,strokeColor, fillColor);
         }catch(NullPointerException e){
             Alert alert = new Alert(AlertType.WARNING, "You must select a shape!");
             alert.show();

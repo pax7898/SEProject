@@ -22,12 +22,6 @@ public class EllipseState extends EditorState {
         super(pane,list);
     }
     
-    /*
-    @Override
-    public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
-
     @Override
     public void draw(double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
         SerializableEllipse ellipse = new SerializableEllipse(startX, startY, endX, endY, strokeColor, fillColor);
