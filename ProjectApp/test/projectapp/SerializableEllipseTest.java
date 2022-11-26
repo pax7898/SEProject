@@ -83,21 +83,12 @@ public class SerializableEllipseTest {
 
     @Test
     public void testGetEllipse() {
-        //already tested in TestCreateView();
+        //already tested in testCreateView();
     }
     
     @Test 
     public void testReadObject(){
-        
-        /*try(ObjectInputStream in = new ObjectInputStream(new FileInputStream("testReadEllipse.dat"))){
-            int size = in.readInt();
-            assertEquals(1,size);
-            //FINIRE
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(SerializableEllipseTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SerializableEllipseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        //already tested in testWriteObject()
     }
     
     @Test
@@ -107,9 +98,9 @@ public class SerializableEllipseTest {
             o.writeInt(1);
             o.writeObject(serializableEllipse);
         } catch (FileNotFoundException ex) {
-          System.out.println("orcodio");
+           fail("File not found exception");
         } catch (IOException ex) {
-            Logger.getLogger(SerializableEllipseTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail("File not found exception");
         }
       
         try(ObjectInputStream in = new ObjectInputStream(new FileInputStream("testWriteEllipse.dat"))){

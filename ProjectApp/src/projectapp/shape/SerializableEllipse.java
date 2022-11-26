@@ -59,7 +59,6 @@ public class SerializableEllipse extends SerializableShape{
         return centerY;
     }
 
-
     public double getRadiusX() {
         return radiusX;
     }
@@ -83,8 +82,7 @@ public class SerializableEllipse extends SerializableShape{
     }
 
     
-    public void writeObject(ObjectOutputStream s) throws IOException {
-        s.defaultWriteObject();
+    private void writeObject(ObjectOutputStream s) throws IOException {
         s.writeDouble(getCenterX());
         s.writeDouble(getCenterY());
         s.writeDouble(getRadiusX());
@@ -100,7 +98,7 @@ public class SerializableEllipse extends SerializableShape{
     }
 
     
-    public void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         centerX = s.readDouble();
         centerY = s.readDouble();
         radiusX = s.readDouble();
@@ -122,7 +120,5 @@ public class SerializableEllipse extends SerializableShape{
     public String toString() {
         return "Ellipse " + "(" + centerX + "," + centerY + ")";
     }
-    
-    
     
 }

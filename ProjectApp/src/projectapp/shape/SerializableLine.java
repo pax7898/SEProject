@@ -35,7 +35,6 @@ public class SerializableLine extends SerializableShape{
         this.createView();
     }
 
-    
     @Override
     public void createView() {
         line = new Line();
@@ -79,7 +78,6 @@ public class SerializableLine extends SerializableShape{
     public Line getLine() {
         return line;
     }
-    
     
     private void writeObject(ObjectOutputStream s) throws IOException {
         //s.defaultWriteObject();

@@ -5,6 +5,8 @@
 package projectapp.command;
 
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import projectapp.command.Command;
 import projectapp.state.EditorState;
 import javafx.scene.paint.Color;
@@ -37,7 +39,8 @@ public class DrawCommand extends Command{
         try{
             state.draw(d,d1,d2,d3,strokeColor, fillColor);
         }catch(NullPointerException e){
-            System.out.println("Devi selezionare una figura");
+            Alert alert = new Alert(AlertType.WARNING, "You must select a shape!");
+            alert.show();
         }
     }
     
