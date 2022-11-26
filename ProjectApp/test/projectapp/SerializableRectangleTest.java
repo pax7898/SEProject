@@ -185,7 +185,7 @@ public class SerializableRectangleTest {
         }
         
         //ReadObject test has been done before this one
-        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("testWriteLine.dat"))){
+        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("testWriteRectangle.dat"))){
             input.readInt();
             SerializableRectangle rectangle2 = (SerializableRectangle) input.readObject();
             assertEquals(rectangle.getStrokeColor(),rectangle2.getStrokeColor());
