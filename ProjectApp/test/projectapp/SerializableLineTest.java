@@ -4,6 +4,14 @@
  */
 package projectapp;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import projectapp.shape.SerializableLine;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -12,6 +20,7 @@ import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import projectapp.shape.SerializableShape;
 
 /**
  *
@@ -24,43 +33,31 @@ public class SerializableLineTest {
     public SerializableLineTest() {
     }
     
-    
-    
     @Before
     public void setUp() {
         line = new SerializableLine(5,5,20,20,Color.BLACK,Color.WHITE);
     }
     
-    
-
     /**
      * Test of createView method, of class SerializableLine.
      */
     @Test
     public void testCreateView() {
-        Line myLine = line.getLine();
-        assertEquals(myLine, line.getShape());
+        assertEquals(line.getLine().getStartX(), line.getX1(), 0);
+        assertEquals(line.getLine().getStartY(), line.getY1(), 0);
+        assertEquals(line.getLine().getEndX(), line.getX2(), 0);
+        assertEquals(line.getLine().getEndY(), line.getY2(), 0);
+        assertEquals(line.getLine().getStroke(), line.getColor());
         
-        
-       
+        Line lineTest = (Line) line.getShape();
+        assertEquals(lineTest.getStartX(), line.getLine().getStartX(), 0);
+        assertEquals(lineTest.getStartY(), line.getLine().getStartY(), 0);
+        assertEquals(lineTest.getEndX(), line.getLine().getEndX(), 0);
+        assertEquals(lineTest.getEndY(), line.getLine().getEndY(), 0);
+        assertEquals(lineTest.getStroke(), line.getLine().getStroke());
+
     }
 
-    
-    /**
-     * Test of getView method, of class SerializableLine.
-     */
-    /*@Test
-    public void testGetView() {
-        System.out.println("getView");
-        SerializableLine instance = null;
-        Shape expResult = null;
-        Shape result = instance.getView();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    
     /**
      * Test of getX1 method, of class SerializableLine.
      */
@@ -71,21 +68,8 @@ public class SerializableLineTest {
         double result = line.getX1();
 
         assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
-    /**
-     * Test of setX1 method, of class SerializableLine.
-     */
-    @Test
-    public void testSetX1() {
-        System.out.println("setX1");
-        double x1 = 22.0;
-        
-        line.setX1(x1);
-        assertEquals(x1, line.getX1(), 0);
-        // TODO review the generated test code and remove the default call to fail.
-    }
 
     /**
      * Test of getY1 method, of class SerializableLine.
@@ -99,16 +83,6 @@ public class SerializableLineTest {
         assertEquals(expResult, result, 0);
     }
 
-    /**
-     * Test of setY1 method, of class SerializableLine.
-     */
-    @Test
-    public void testSetY1() {
-        System.out.println("setY1");
-        double y1 = 22.0;
-        line.setY1(y1);
-        assertEquals(y1, line.getY1(), 0);
-    }
 
     /**
      * Test of getX2 method, of class SerializableLine.
@@ -122,17 +96,7 @@ public class SerializableLineTest {
         assertEquals(expResult, result, 0);
     }
 
-    /**
-     * Test of setX2 method, of class SerializableLine.
-     */
-    @Test
-    public void testSetX2() {
-        System.out.println("setX2");
-        double x2 = 22.0;
-        
-        line.setX2(x2);
-        assertEquals(x2, line.getX2(), 0);
-    }
+
 
     /**
      * Test of getY2 method, of class SerializableLine.
@@ -146,27 +110,82 @@ public class SerializableLineTest {
         assertEquals(expResult, result, 0);
     }
 
-    /**
-     * Test of setY2 method, of class SerializableLine.
-     */
-    @Test
-    public void testSetY2() {
-        System.out.println("setY2");
-        double y2 = 22.0;
-        
-        line.setY2(y2);
-        assertEquals(y2, line.getY2(), 0);
-    }
 
+    
+   @Test
+   public void testGetColor(){
+       System.out.println("getColor");
+       Color expResult = Color.BLACK;
+       Color result = line.getColor();
+       
+       assertEquals(result, expResult);
+   }
+   
+   @Test
+   public void testGetLine(){
+       System.out.println("getLine");
+       
+       assertEquals(line.getLine().getStartX(), line.getX1(), 0);
+       assertEquals(line.getLine().getStartY(), line.getY1(), 0);
+       assertEquals(line.getLine().getEndX(), line.getX2(), 0);
+       assertEquals(line.getLine().getEndY(), line.getY2(), 0);
+       assertEquals(line.getLine().getStroke(), line.getColor());
+       
+   }
+    
     @Test
     public void testWriteObject(){
         System.out.println("writeObject");
+        
+        try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("testWriteLine.dat"))){
+            output.writeInt(1);
+            output.writeObject(line);
+        } catch (FileNotFoundException ex) {
+            fail("FileNotFoundException");
+        } catch (IOException ex) {
+            fail("IOException");
+        }
+        
+        //ReadObject test has been done before this one
+        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("testWriteLine.dat"))){
+            input.readInt();
+            SerializableLine line2 = (SerializableLine) input.readObject();
+            assertEquals(line.getColor(),line2.getColor());
+            assertEquals(line.getX1(),line2.getX1(), 0);
+            assertEquals(line.getX2(),line2.getX2(), 0);
+            assertEquals(line.getY1(),line.getY1(), 0);
+            assertEquals(line.getY2(),line.getY2(), 0);            
+        } catch (FileNotFoundException ex) {
+            fail("FileNotFoundException");
+        } catch (IOException ex) {
+            fail("IOException");
+        } catch (ClassNotFoundException ex) {
+            fail("ClassNotFoundException");
+        }
+        
         
     }
     
     @Test
     public void testReadObject(){
         System.out.println("readObject");
+        
+        //test file--> testReadLine.bin
+        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("testReadLine.dat"))){
+            input.readInt();
+            SerializableLine line2 = (SerializableLine) input.readObject();
+            if(!line2.getClass().equals(line.getClass())){
+                fail("Test Read Object failed");
+            }
+            
+        } catch (FileNotFoundException ex) {
+            fail("FileNotFoundException");
+        } catch (IOException ex) {
+            fail("IOException");
+        } catch (ClassNotFoundException ex) {
+            fail("ClassNotFoundException");
+        }
+        
     }
     
     
