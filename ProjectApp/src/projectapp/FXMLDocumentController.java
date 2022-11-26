@@ -5,6 +5,7 @@
 package projectapp;
 
 
+import java.io.File;
 import projectapp.command.CommandExecutor;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import projectapp.state.EditorState;
 
 /**
  *
@@ -60,17 +63,20 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void setLineState(ActionEvent event) {
-        editor.setLineState();
+         EditorState state = editor.setLineState();
+         state=null;
     }
     
      @FXML
     private void setRectangleState(ActionEvent event) {
-        editor.setRectangleState();
+         EditorState state = editor.setRectangleState();
+         state=null;
     }
 
     @FXML
     private void setEllipseState(ActionEvent event) {
-        editor.setEllipseState();
+        EditorState state = editor.setEllipseState();
+        state=null;
     }
 
      @FXML
@@ -86,12 +92,29 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     public void saveAction(ActionEvent event) {
-       editor.saveDrawing();
+        FileChooser fileChooser = new FileChooser();
+ 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Bin files (*.dat)", "*.dat");
+        fileChooser.getExtensionFilters().add(extFilter);
+        
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
+        editor.saveDrawing(file);
     }
 
     @FXML
     public void loadAction(ActionEvent event) {
-        editor.loadDrawing();
+        FileChooser fileChooser = new FileChooser();
+ 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Bin files (*.dat)", "*.dat");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show open file dialog
+        File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
+        
+        editor.loadDrawing(file);
     }
    
 }
