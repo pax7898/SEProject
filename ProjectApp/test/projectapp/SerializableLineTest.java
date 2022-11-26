@@ -4,6 +4,7 @@
  */
 package projectapp;
 
+import projectapp.shape.SerializableLine;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -27,7 +28,7 @@ public class SerializableLineTest {
     
     @Before
     public void setUp() {
-        line = new SerializableLine(5,5,20,20,Color.BLACK);
+        line = new SerializableLine(5,5,20,20,Color.BLACK,Color.WHITE);
     }
     
     
@@ -41,7 +42,7 @@ public class SerializableLineTest {
         assertEquals(myLine, line.getShape());
         
         
-        
+       
     }
 
     

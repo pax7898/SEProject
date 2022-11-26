@@ -4,11 +4,17 @@
  */
 package projectapp;
 
+import projectapp.command.DrawCommand;
+import projectapp.command.CommandExecutor;
+import projectapp.command.Command;
+import projectapp.state.EditorState;
+import projectapp.state.LineState;
+import projectapp.shape.SerializableLine;
+import projectapp.shape.SerializableShape;
 import javafx.fxml.FXML;
 import java.util.NoSuchElementException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.junit.Before;
@@ -33,7 +39,7 @@ public class CommandExecutorTest {
 
     @Test(expected=NoSuchElementException.class)
     public void testExecute() {
-        SerializableShape shape = new SerializableLine(20,20,50,50, Color.BLACK);
+        SerializableShape shape = new SerializableLine(20,20,50,50,Color.BLACK,Color.WHITE);
         ObservableList<SerializableShape> list = FXCollections.observableArrayList();
         EditorState state = new LineState(pane, list);
         assertEquals(null, executor.getStack().getLast());

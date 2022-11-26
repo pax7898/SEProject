@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projectapp;
+package projectapp.shape;
 
+import projectapp.shape.SerializableShape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,6 +23,8 @@ public class SerializableLine extends SerializableShape{
     private transient double y2 ;
 
     private transient Color color ;
+    
+    private transient Line line;
     
     public SerializableLine(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         setX1(x1);
@@ -42,6 +45,7 @@ public class SerializableLine extends SerializableShape{
         line.setEndX(x2);
         line.setEndY(y2);
         this.setShape(line); 
+        this.line = line;
         
     }
 
@@ -83,7 +87,15 @@ public class SerializableLine extends SerializableShape{
     public final void setY2(final double y2) {
         this.y2 = y2;
     }
-        
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Line getLine() {
+        return line;
+    }
+    
     
     private void writeObject(ObjectOutputStream s) throws IOException {
         //s.defaultWriteObject();
@@ -110,4 +122,11 @@ public class SerializableLine extends SerializableShape{
         color = Color.color(red, green, blue, opacity) ;
         createView();
     }
+
+    @Override
+    public String toString() {
+        return "Line " + "(" + x1 + "," + y1 + ')';
+    }
+    
+    
 }

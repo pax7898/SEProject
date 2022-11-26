@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="698.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="3.0" prefHeight="51.0" prefWidth="960.0">
+         <children>
+            <AnchorPane prefHeight="130.0" prefWidth="222.0">
+               <children>
+                  <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#setLineState" prefHeight="34.0" prefWidth="43.0" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/Editing-Line-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                  <ToggleButton fx:id="ellipseBtn" contentDisplay="CENTER" layoutX="157.0" layoutY="14.0" mnemonicParsing="false" onAction="#setEllipseState" prefHeight="34.0" prefWidth="43.0" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="22.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/33822.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                  <ToggleButton fx:id="rectangleBtn" contentDisplay="CENTER" layoutX="89.0" layoutY="13.0" mnemonicParsing="false" onAction="#setRectangleState" prefHeight="26.0" prefWidth="39.0" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../image/2440859-200.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="64.0" prefWidth="123.0">
+               <children>
+                  <MenuButton alignment="CENTER" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-border-color: black;" text="File">
+                    <items>
+                      <MenuItem fx:id="saveBtn" mnemonicParsing="false" onAction="#saveAction" text="Save Project" />
+                      <MenuItem fx:id="loadBtn" mnemonicParsing="false" onAction="#loadAction" text="Load Project" />
+                    </items>
+                  </MenuButton>
+                  <Separator layoutX="-3.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="131.0" prefWidth="6.0" />
+               </children>
+            </AnchorPane>
+            <Separator orientation="VERTICAL" prefHeight="102.0" prefWidth="9.0" />
+            <AnchorPane prefHeight="58.0" prefWidth="234.0">
+               <children>
+                  <ColorPicker fx:id="borderPicker" layoutX="63.0" layoutY="14.0" prefHeight="26.0" prefWidth="43.0">
+                     <value>
+                        <Color />
+                     </value>
+                  </ColorPicker>
+                  <ColorPicker fx:id="interiorPicker" layoutX="177.0" layoutY="15.0" prefHeight="26.0" prefWidth="43.0" />
+                  <Label layoutX="14.0" layoutY="18.0" prefHeight="18.0" prefWidth="51.0" text="Border" />
+                  <Label layoutX="126.0" layoutY="19.0" text="Interior" />
+               </children>
+            </AnchorPane>
+            <Separator orientation="VERTICAL" prefHeight="99.0" prefWidth="4.0" />
+         </children>
+      </HBox>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" layoutX="225.0" layoutY="131.0" prefHeight="576.0" prefWidth="735.0" scaleShape="false" vbarPolicy="ALWAYS">
+         <content>
+            <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#pressPane" onMouseReleased="#releasedPane" prefHeight="7981.0" prefWidth="8069.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Pane>
+         </content></ScrollPane>
+      <ListView fx:id="drawnView" layoutY="131.0" prefHeight="576.0" prefWidth="226.0" />
+   </children>
+</AnchorPane>

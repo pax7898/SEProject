@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectapp;
+package projectapp.shape;
 
+import projectapp.shape.SerializableShape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,6 +26,8 @@ public class SerializableRectangle extends SerializableShape{
     private transient Color strokeColor ;
     private transient Color fillColor;
     
+    private transient Rectangle rectangle;
+    
         
     public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor) {
         this.x =x1;
@@ -33,7 +36,6 @@ public class SerializableRectangle extends SerializableShape{
         this.height = y2;
         this.strokeColor = strokeColor ;
         this.fillColor = Color.TRANSPARENT;
-        
         createView();
     }
 
@@ -44,7 +46,6 @@ public class SerializableRectangle extends SerializableShape{
         this.height = y2;
         this.strokeColor = strokeColor ;
         this.fillColor = fillColor;
-        
         createView();
     }
 
@@ -58,6 +59,7 @@ public class SerializableRectangle extends SerializableShape{
         rectangle.setWidth(width);
         rectangle.setHeight(height);
         this.setShape(rectangle); 
+        this.rectangle=rectangle;
     }
 
     public Shape getView() {
@@ -107,23 +109,28 @@ public class SerializableRectangle extends SerializableShape{
         this.width = x2;
     }
 
-
-    public final double getHeigth() {
-        return this.height;
+    public double getHeight() {
+        return height;
     }
 
+    public void setHeight(double height) {
+        this.height = height;
+    }
+    
+    
 
-    public final void getHeigth(final double y2) {
-        this.height = y2;
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
+    
 
     private void writeObject(ObjectOutputStream s) throws IOException {
         //s.defaultWriteObject();
         s.writeDouble(getX());
         s.writeDouble(getY());
         s.writeDouble(getWidth());
-        s.writeDouble(getHeigth());
+        s.writeDouble(getHeight());
         s.writeDouble(strokeColor.getRed());
         s.writeDouble(strokeColor.getGreen());
         s.writeDouble(strokeColor.getBlue());
@@ -151,5 +158,12 @@ public class SerializableRectangle extends SerializableShape{
         fillColor = Color.color(red, green, blue, opacity);
         createView();
     }
+
+    @Override
+    public String toString() {
+        return "Rectangle " + "(" + x + "," + y + ')';
+    }
+    
+    
 
 }

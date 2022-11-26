@@ -4,6 +4,9 @@
  */
 package projectapp;
 
+import projectapp.command.DrawCommand;
+import projectapp.state.LineState;
+import projectapp.shape.SerializableShape;
 import javafx.scene.control.ScrollPane;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;

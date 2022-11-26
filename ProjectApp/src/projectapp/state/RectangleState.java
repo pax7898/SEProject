@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectapp;
+package projectapp.state;
 
+import projectapp.shape.SerializableRectangle;
+import projectapp.shape.SerializableShape;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -14,12 +16,9 @@ import javafx.scene.paint.Color;
  * @author acoon
  */
 public class RectangleState extends EditorState{
-    private final Pane pane;
-    private final ObservableList<SerializableShape> list;
         
     public RectangleState(Pane pane, ObservableList<SerializableShape> list) {
-        this.list = list;
-        this.pane = pane;
+        super(pane,list);
     }
     
     @Override
@@ -35,8 +34,8 @@ public class RectangleState extends EditorState{
             d3 = -d3;
         }
         SerializableRectangle rect = new SerializableRectangle(d,d1,d2,d3,strokeColor);
-        this.list.add(rect);
-        this.pane.getChildren().add(rect.getShape());
+        this.getList().add(rect);
+        this.getPane().getChildren().add(rect.getShape());
     }
 
 
@@ -54,8 +53,8 @@ public class RectangleState extends EditorState{
             d3 = -d3;
         }
         SerializableRectangle rect = new SerializableRectangle(d,d1,d2,d3,strokeColor,fillColor);
-        this.list.add(rect);
-        this.pane.getChildren().add(rect.getShape());
+        this.getList().add(rect);
+        this.getPane().getChildren().add(rect.getShape());
     }
 
   

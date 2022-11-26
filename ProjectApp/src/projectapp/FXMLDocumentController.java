@@ -4,6 +4,13 @@
  */
 package projectapp;
 
+import projectapp.command.DrawCommand;
+import projectapp.command.CommandExecutor;
+import projectapp.state.EllipseState;
+import projectapp.state.EditorState;
+import projectapp.state.RectangleState;
+import projectapp.state.LineState;
+import projectapp.shape.SerializableShape;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -22,7 +29,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -30,7 +36,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 /**
@@ -48,25 +53,19 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ToggleButton rectangleBtn;
     @FXML
-    private Label actionLable;
-    @FXML
     private MenuItem saveBtn;
     @FXML
     private MenuItem loadBtn;
-    @FXML
-    private Label colorLabel;
     @FXML
     private ColorPicker borderPicker;
     @FXML
     private ColorPicker interiorPicker;
     @FXML
-    private Label borderLabel;
-    @FXML
-    private Label interiorLabel;
-    @FXML
     private ListView drawnView;
     @FXML
     private Pane pane;
+    @FXML
+    private AnchorPane mainPane;
     
     private EditorState currentState;
     
@@ -74,14 +73,8 @@ public class FXMLDocumentController implements Initializable {
     
     private CommandExecutor executor;
     
-    
-    
-    
     double startX;
     double startY;
-    @FXML
-    private AnchorPane mainPane;
-    
    
   
     @Override
@@ -101,7 +94,7 @@ public class FXMLDocumentController implements Initializable {
     public ObservableList<String> getStringList(){
         ObservableList<String> l = FXCollections.observableArrayList();
         for(int i=0;i<listItems.size();i++){
-            String temp = listItems.get(i).getShape().toString();
+            String temp = listItems.get(i).toString();
             l.add(temp);
         }
         return l;
@@ -111,25 +104,8 @@ public class FXMLDocumentController implements Initializable {
     private void setLineState(ActionEvent event) {
         currentState = new LineState(pane,listItems);
     }
-
-    @FXML
-    private void scrollClick(MouseEvent event) {
-        //executor.execute(new DrawCommand(currentState,event.getX(),event.getY(),event.getX()+10.0,event.getY()+50.0,borderPicker.getValue(),interiorPicker.getValue()));
-    }
-
-    @FXML
-    private void releasedPane(MouseEvent event) {
-        executor.execute(new DrawCommand(currentState,startX,startY,event.getX(),event.getY(),borderPicker.getValue(),interiorPicker.getValue()));
-        drawnView.setItems(getStringList());
-    }
-
-    @FXML
-    private void clickPene(MouseEvent event) {
-        startX = event.getX();
-        startY = event.getY();
-    }
-
-    @FXML
+    
+     @FXML
     private void setRectangleState(ActionEvent event) {
         currentState = new RectangleState(pane, listItems);
     }
@@ -137,6 +113,18 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void setEllipseState(ActionEvent event) {
         currentState = new EllipseState(pane, listItems);
+    }
+
+     @FXML
+    private void pressPane(MouseEvent event) {
+        startX = event.getX();
+        startY = event.getY();
+    }
+    
+    @FXML
+    private void releasedPane(MouseEvent event) {
+        executor.execute(new DrawCommand(currentState,startX,startY,event.getX(),event.getY(),borderPicker.getValue(),interiorPicker.getValue()));
+        drawnView.setItems(getStringList());
     }
 
     @FXML
@@ -154,14 +142,15 @@ public class FXMLDocumentController implements Initializable {
             
             ObjectOutputStream objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
             objectOut.writeInt(listItems.size());
-            //scrivo su file un oggetto
+            
             for (SerializableShape a : listItems) 
                 { 
+                    
                     System.out.print(a);
                     objectOut.writeObject(a);
                 }
             
-            //chiudo lo stream
+            //close stream
             objectOut.close();
                 
         } catch (IOException ex) {
@@ -178,24 +167,26 @@ public class FXMLDocumentController implements Initializable {
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Bin files (*.dat)", "*.dat");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        //Show save file dialog
+        //Show open file dialog
         File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
+        
         
         try {
             
+            listItems.clear();
+            pane.getChildren().clear();
             ObjectInputStream objectIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
         
-            //scrivo su file un oggetto
+            
             int size = objectIn.readInt();
             for (int i=0;i<size;i++){
                 SerializableShape a = (SerializableShape) objectIn.readObject();
                 listItems.add(a);
                 pane.getChildren().add(a.getShape());
-                System.out.print(a);
             }
             
             
-            //chiudo lo stream
+            //close stream
             objectIn.close();
                 
         } catch (IOException ex) {
@@ -205,5 +196,6 @@ public class FXMLDocumentController implements Initializable {
         }
         drawnView.setItems(getStringList());
     }
-    
+
+   
 }

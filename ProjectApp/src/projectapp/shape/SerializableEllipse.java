@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectapp;
+package projectapp.shape;
 
+import projectapp.shape.SerializableShape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,6 +26,7 @@ public class SerializableEllipse extends SerializableShape{
     
     private transient Color strokeColor;
     private transient Color fillColor;
+    
     private transient Ellipse ellipse;
     
     public SerializableEllipse(double centerX, double centerY, double radiusX, double radiusY, Color strokeColor, Color fillColor){
@@ -34,12 +36,12 @@ public class SerializableEllipse extends SerializableShape{
         this.radiusY = radiusY;
         this.strokeColor = strokeColor;
         this.fillColor = fillColor;
-        ellipse = new Ellipse();
         this.createView();
     }
 
     @Override
     public void createView() {
+        Ellipse ellipse = new Ellipse();
         ellipse.setCenterX(centerX);
         ellipse.setCenterY(centerY);
         ellipse.setRadiusX(abs(radiusX-centerX));
@@ -47,6 +49,7 @@ public class SerializableEllipse extends SerializableShape{
         ellipse.setStroke(strokeColor);
         ellipse.setFill(fillColor);
         this.setShape(ellipse);
+        this.ellipse=ellipse;
     }
 
     public double getCenterX() {
@@ -96,14 +99,11 @@ public class SerializableEllipse extends SerializableShape{
     public void setFillColor(Color fillColor) {
         this.fillColor = fillColor;
     }
-
+    
     public Ellipse getEllipse() {
         return ellipse;
     }
 
-    public void setEllipse(Ellipse ellipse) {
-        this.ellipse = ellipse;
-    }
     
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
@@ -139,5 +139,12 @@ public class SerializableEllipse extends SerializableShape{
         fillColor = Color.color(fillRed, fillGreen, fillBlue, fillOpacity) ;
         createView();
     }
+
+    @Override
+    public String toString() {
+        return "Ellipse " + "(" + centerX + "," + centerY + ")";
+    }
+    
+    
     
 }
