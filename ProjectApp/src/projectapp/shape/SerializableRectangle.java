@@ -28,17 +28,7 @@ public class SerializableRectangle extends SerializableShape{
     
     private transient Rectangle rectangle;
     
-        
-    public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor) {
-        this.x =x1;
-        this.y =y1;
-        this.width = x2;
-        this.height = y2;
-        this.strokeColor = strokeColor ;
-        this.fillColor = Color.TRANSPARENT;
-        createView();
-    }
-
+  
     public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
         this.x =x1;
         this.y =y1;
@@ -163,7 +153,6 @@ public class SerializableRectangle extends SerializableShape{
     public String toString() {
         return "Rectangle " + "(" + x + "," + y + ')';
     }
-    
     
 
 }

@@ -128,7 +128,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void saveAction(ActionEvent event) {
+    public void saveAction(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
  
         //Set extension filter for text files
@@ -160,7 +160,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void loadAction(ActionEvent event) {
+    public void loadAction(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
  
         //Set extension filter for text files
@@ -196,6 +196,8 @@ public class FXMLDocumentController implements Initializable {
         }
         drawnView.setItems(getStringList());
     }
+    
+    
 
    
 }

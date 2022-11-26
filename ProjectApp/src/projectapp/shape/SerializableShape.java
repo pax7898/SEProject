@@ -14,6 +14,7 @@ import javafx.scene.shape.Shape;
 public abstract class SerializableShape implements Serializable{
     private transient Shape shape;
     
+    
     public Shape getShape() {
         return shape;
     }
@@ -22,5 +23,5 @@ public abstract class SerializableShape implements Serializable{
     } 
     
     public abstract void createView();
- 
+    
 }
