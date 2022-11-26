@@ -29,11 +29,11 @@ public class SerializableRectangle extends SerializableShape{
     private transient Rectangle rectangle;
     
   
-    public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
-        this.x =x1;
-        this.y =y1;
-        this.width = x2;
-        this.height = y2;
+    public SerializableRectangle(double x, double y, double width, double height, Color strokeColor, Color fillColor) {
+        this.x =x;
+        this.y =y;
+        this.width = width;
+        this.height = height;
         this.strokeColor = strokeColor ;
         this.fillColor = fillColor;
         createView();
@@ -41,7 +41,7 @@ public class SerializableRectangle extends SerializableShape{
 
     @Override
     public void createView() {
-        Rectangle rectangle = new Rectangle();
+        rectangle = new Rectangle();
         rectangle.setStroke(strokeColor);
         rectangle.setFill(fillColor);
         rectangle.setX(x);
@@ -49,19 +49,11 @@ public class SerializableRectangle extends SerializableShape{
         rectangle.setWidth(width);
         rectangle.setHeight(height);
         this.setShape(rectangle); 
-        this.rectangle=rectangle;
     }
 
-    public Shape getView() {
-        return this.getShape() ;
-    }
 
     public final double getX() {
         return this.x;
-    }
-
-    public final void setX(final double x1) {
-        this.x = x1;
     }
 
 
@@ -69,43 +61,26 @@ public class SerializableRectangle extends SerializableShape{
         return this.y;
     }
 
-
-    public final void setY(final double y1) {
-       this.y=y1;
-    }
-
     public Color getStrokeColor() {
         return strokeColor;
     }
 
-    public void setStrokeColor(Color strokeColor) {
-        this.strokeColor = strokeColor;
-    }
 
     public Color getFillColor() {
         return fillColor;
     }
-
-    public void setFillColor(Color fillColor) {
-        this.fillColor = fillColor;
-    }   
+  
 
     public final double getWidth() {
         return this.width;
     }
 
 
-    public final void setWidth(final double x2) {
-        this.width = x2;
-    }
 
     public double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
     
     
 

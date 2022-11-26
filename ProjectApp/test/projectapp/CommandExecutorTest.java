@@ -46,6 +46,7 @@ public class CommandExecutorTest {
         Command comm = new DrawCommand(state,20,20,50,50,Color.BLACK, Color.BLACK);
         executor.execute(comm);
         assertEquals(comm, executor.getStack().getLast());     
+    
     }
 
     
