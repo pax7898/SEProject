@@ -40,9 +40,7 @@ public class SerializableLineTest {
     public void testCreateView() {
         Line myLine = line.getLine();
         assertEquals(myLine, line.getShape());
-        
-        
-       
+
     }
 
     
