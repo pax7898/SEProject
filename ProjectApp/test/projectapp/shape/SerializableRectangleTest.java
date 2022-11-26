@@ -108,7 +108,7 @@ public class SerializableRectangleTest {
     public void testGetFillColor() {
         System.out.println("getFillColor");
         
-        Color result = rectangle.getStrokeColor();
+        Color result = rectangle.getFillColor();
         Color expResult = Color.TRANSPARENT;
         
         assertEquals(result, expResult);
@@ -151,12 +151,14 @@ public class SerializableRectangleTest {
     @Test
     public void testGetRectangle() {
         System.out.println("getRectangle");
-        SerializableRectangle instance = null;
-        Rectangle expResult = null;
-        Rectangle result = instance.getRectangle();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(rectangle.getRectangle().getX(), rectangle.getX(), 0);
+        assertEquals(rectangle.getRectangle().getY(), rectangle.getY(), 0);
+        assertEquals(rectangle.getRectangle().getWidth(), rectangle.getWidth(), 0);
+        assertEquals(rectangle.getRectangle().getHeight(), rectangle.getHeight(), 0);
+        assertEquals(rectangle.getRectangle().getStroke(), rectangle.getStrokeColor());
+        assertEquals(rectangle.getRectangle().getFill(), rectangle.getFillColor());
+        
     }
     
     
@@ -169,6 +171,7 @@ public class SerializableRectangleTest {
     public void testReadObject(){
         System.out.println("readObject");
     }
+    
 
     /**
      * Test of toString method, of class SerializableRectangle.
@@ -176,12 +179,10 @@ public class SerializableRectangleTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        SerializableRectangle instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        String expResult = "Rectangle (" + rectangle.getX() + "," + rectangle.getY() + ")";
+        String result = rectangle.toString();
+        assertEquals(result, expResult);
     }
     
 }
