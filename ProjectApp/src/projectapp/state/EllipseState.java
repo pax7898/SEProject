@@ -22,10 +22,11 @@ public class EllipseState extends EditorState {
         super(pane,list);
     }
     
+    /*
     @Override
     public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 
     @Override
     public void draw(double d, double d1, double d2, double d3, Color strokeColor, Color fillColor) {
@@ -33,5 +34,6 @@ public class EllipseState extends EditorState {
         this.getList().add(ellipse);
         this.getPane().getChildren().add(ellipse.getShape()); 
     }
-    
+
+
 }

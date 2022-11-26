@@ -28,22 +28,12 @@ public class SerializableRectangle extends SerializableShape{
     
     private transient Rectangle rectangle;
     
-        
-    public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor) {
+  
+    public SerializableRectangle(double x1, double y1, double width, double height, Color strokeColor, Color fillColor) {
         this.x =x1;
         this.y =y1;
-        this.width = x2;
-        this.height = y2;
-        this.strokeColor = strokeColor ;
-        this.fillColor = Color.TRANSPARENT;
-        createView();
-    }
-
-    public SerializableRectangle(double x1, double y1, double x2, double y2, Color strokeColor, Color fillColor) {
-        this.x =x1;
-        this.y =y1;
-        this.width = x2;
-        this.height = y2;
+        this.width = width;
+        this.height = height;
         this.strokeColor = strokeColor ;
         this.fillColor = fillColor;
         createView();
@@ -51,7 +41,7 @@ public class SerializableRectangle extends SerializableShape{
 
     @Override
     public void createView() {
-        Rectangle rectangle = new Rectangle();
+        rectangle = new Rectangle();
         rectangle.setStroke(strokeColor);
         rectangle.setFill(fillColor);
         rectangle.setX(x);
@@ -59,20 +49,14 @@ public class SerializableRectangle extends SerializableShape{
         rectangle.setWidth(width);
         rectangle.setHeight(height);
         this.setShape(rectangle); 
-        this.rectangle=rectangle;
     }
 
-    public Shape getView() {
-        return this.getShape() ;
-    }
+    
 
     public final double getX() {
         return this.x;
     }
 
-    public final void setX(final double x1) {
-        this.x = x1;
-    }
 
 
     public final double getY() {
@@ -80,43 +64,27 @@ public class SerializableRectangle extends SerializableShape{
     }
 
 
-    public final void setY(final double y1) {
-       this.y=y1;
-    }
 
     public Color getStrokeColor() {
         return strokeColor;
     }
 
-    public void setStrokeColor(Color strokeColor) {
-        this.strokeColor = strokeColor;
-    }
+
 
     public Color getFillColor() {
         return fillColor;
     }
 
-    public void setFillColor(Color fillColor) {
-        this.fillColor = fillColor;
-    }   
+
 
     public final double getWidth() {
         return this.width;
     }
 
 
-    public final void setWidth(final double x2) {
-        this.width = x2;
-    }
-
     public double getHeight() {
         return height;
     }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-    
     
 
     public Rectangle getRectangle() {
@@ -125,7 +93,7 @@ public class SerializableRectangle extends SerializableShape{
 
     
 
-    private void writeObject(ObjectOutputStream s) throws IOException {
+    public void writeObject(ObjectOutputStream s) throws IOException {
         //s.defaultWriteObject();
         s.writeDouble(getX());
         s.writeDouble(getY());
@@ -141,7 +109,7 @@ public class SerializableRectangle extends SerializableShape{
         s.writeDouble(fillColor.getOpacity());
     }
 
-    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+    public void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         x = s.readDouble();
         y = s.readDouble();
         width = s.readDouble();
@@ -163,7 +131,6 @@ public class SerializableRectangle extends SerializableShape{
     public String toString() {
         return "Rectangle " + "(" + x + "," + y + ')';
     }
-    
     
 
 }

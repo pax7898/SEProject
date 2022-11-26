@@ -6,7 +6,6 @@ package projectapp;
 
 import projectapp.state.LineState;
 import projectapp.shape.SerializableShape;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,11 +39,11 @@ public class LineStateTest {
     }
 
     @Test
-    public void testDraw_5args() {
-        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
+    public void testDraw() {
+        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK,Color.BLACK);
         assertEquals(1, list.size());  
-        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
-        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK);
+        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK,Color.BLACK);
+        line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK,Color.BLACK);
         assertEquals(3, pane.getChildren().size());
         Node node = pane.getChildren().get(0);
         assertTrue(pane.getChildren().remove(node));

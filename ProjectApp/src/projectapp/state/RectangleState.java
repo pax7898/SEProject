@@ -21,7 +21,7 @@ public class RectangleState extends EditorState{
         super(pane,list);
     }
     
-    @Override
+    /*@Override
     public void draw(double d, double d1, double d2, double d3, Color strokeColor) {
         d2 = d2 - d;
         d3 = d3 - d1;
@@ -36,7 +36,7 @@ public class RectangleState extends EditorState{
         SerializableRectangle rect = new SerializableRectangle(d,d1,d2,d3,strokeColor);
         this.getList().add(rect);
         this.getPane().getChildren().add(rect.getShape());
-    }
+    }*/
 
 
     @Override
