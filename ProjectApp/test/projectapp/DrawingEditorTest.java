@@ -234,6 +234,12 @@ public class DrawingEditorTest {
          editor.loadDrawing(file);
 
          assertEquals(listSaved.toString(),listItems.toString());
+         file.delete();
      
+    }
+    
+    @Test 
+    public void testLoadDrawing(){
+        //Already tested in testLoadDrawing
     }
 }
