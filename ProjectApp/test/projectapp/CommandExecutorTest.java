@@ -31,23 +31,25 @@ public class CommandExecutorTest {
     
     @FXML
     Pane pane;
+    SerializableShape shape;
+    ObservableList<SerializableShape> list;
+    EditorState state;
     
     @Before
     public void setUp() {
         executor = new CommandExecutor();
+        shape = new SerializableLine(20,20,50,50,Color.BLACK,Color.WHITE);
+        list = FXCollections.observableArrayList();
+        state = new LineState(pane, list);
     }
 
-    @Test(expected=NoSuchElementException.class)
+    @Test
     public void testExecute() {
-        SerializableShape shape = new SerializableLine(20,20,50,50,Color.BLACK,Color.WHITE);
-        ObservableList<SerializableShape> list = FXCollections.observableArrayList();
-        EditorState state = new LineState(pane, list);
-        assertEquals(null, executor.getStack().getLast());
+        System.out.println("execute");
         Command comm = new DrawCommand(state,20,20,50,50,Color.BLACK, Color.BLACK);
         executor.execute(comm);
         assertEquals(comm, executor.getStack().getLast());     
     
     }
-
     
 }
