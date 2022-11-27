@@ -7,7 +7,6 @@ package projectapp.command;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import projectapp.command.Command;
 import projectapp.state.EditorState;
 import javafx.scene.paint.Color;
 

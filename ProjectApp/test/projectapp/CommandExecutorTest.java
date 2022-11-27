@@ -9,10 +9,7 @@ import projectapp.command.CommandExecutor;
 import projectapp.command.Command;
 import projectapp.state.EditorState;
 import projectapp.state.LineState;
-import projectapp.shape.SerializableLine;
 import projectapp.shape.SerializableShape;
-import javafx.fxml.FXML;
-import java.util.NoSuchElementException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
@@ -29,16 +26,15 @@ public class CommandExecutorTest {
     
     private CommandExecutor executor;
     
-    @FXML
+  
     Pane pane;
-    SerializableShape shape;
     ObservableList<SerializableShape> list;
     EditorState state;
     
     @Before
     public void setUp() {
+        pane = new Pane();
         executor = new CommandExecutor();
-        shape = new SerializableLine(20,20,50,50,Color.BLACK,Color.WHITE);
         list = FXCollections.observableArrayList();
         state = new LineState(pane, list);
     }
@@ -46,6 +42,7 @@ public class CommandExecutorTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
+        EditorState state = new LineState(pane, list);
         Command comm = new DrawCommand(state,20,20,50,50,Color.BLACK, Color.BLACK);
         executor.execute(comm);
         assertEquals(comm, executor.getStack().getLast());     

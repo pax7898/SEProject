@@ -9,14 +9,12 @@ import projectapp.state.LineState;
 import projectapp.shape.SerializableShape;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.state.EditorState;
 import projectapp.state.EllipseState;
 import projectapp.state.RectangleState;
 

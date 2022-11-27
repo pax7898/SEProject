@@ -5,7 +5,6 @@
  */
 package projectapp.state;
 
-import projectapp.state.EditorState;
 import projectapp.shape.SerializableEllipse;
 import projectapp.shape.SerializableShape;
 import javafx.collections.ObservableList;
