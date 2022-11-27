@@ -4,6 +4,7 @@
  */
 package projectapp;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,7 +19,7 @@ import javafx.scene.shape.Line;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.shape.SerializableShape;
+
 
 /**
  *
@@ -121,13 +122,7 @@ public class SerializableLineTest {
    
    @Test
    public void testGetLine(){
-       System.out.println("getLine");
-       
-       assertEquals(line.getLine().getStartX(), line.getX1(), 0);
-       assertEquals(line.getLine().getStartY(), line.getY1(), 0);
-       assertEquals(line.getLine().getEndX(), line.getX2(), 0);
-       assertEquals(line.getLine().getEndY(), line.getY2(), 0);
-       assertEquals(line.getLine().getStroke(), line.getColor());
+       //already tested in testCreateView();
        
    }
     
@@ -135,7 +130,9 @@ public class SerializableLineTest {
     public void testWriteObject(){
         System.out.println("writeObject");
         
-        try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("testWriteLine.dat"))){
+        File file = new File("testWriteLine.dat");
+        
+        try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))){
             output.writeInt(1);
             output.writeObject(line);
         } catch (FileNotFoundException ex) {
@@ -145,7 +142,7 @@ public class SerializableLineTest {
         }
         
         //ReadObject test has been done before this one
-        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("testWriteLine.dat"))){
+        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))){
             input.readInt();
             SerializableLine line2 = (SerializableLine) input.readObject();
             assertEquals(line.getColor(),line2.getColor());
@@ -161,29 +158,13 @@ public class SerializableLineTest {
             Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
+        file.delete();
         
     }
     
     @Test
     public void testReadObject(){
-        System.out.println("readObject");
-        
-        //test file--> testReadLine.bin
-        try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("testReadLine.dat"))){
-            input.readInt();
-            SerializableLine line2 = (SerializableLine) input.readObject();
-            if(!line2.getClass().equals(line.getClass())){
-                fail("Test Read Object failed");
-            }
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+       //Already tested in testWriteObject()
     }
     
     @Test

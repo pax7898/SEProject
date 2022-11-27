@@ -5,6 +5,7 @@
  */
 package projectapp;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -35,6 +36,8 @@ public class SerializableEllipseTest {
 
     @Test
     public void testCreateView() { 
+        System.out.println("createView");
+        
         assertEquals(serializableEllipse.getEllipse().getCenterX(), serializableEllipse.getCenterX(), 0);
         assertEquals(serializableEllipse.getEllipse().getCenterY(), serializableEllipse.getCenterY(), 0);
         assertEquals(serializableEllipse.getEllipse().getRadiusX(), abs(serializableEllipse.getRadiusX() - 
@@ -52,31 +55,37 @@ public class SerializableEllipseTest {
 
     @Test
     public void testGetCenterX() {
+        System.out.println("getCenterX");
         assertEquals(10, serializableEllipse.getCenterX(), 0);
     }
 
     @Test
     public void testGetCenterY() {
+        System.out.println("getCenterY");
         assertEquals(20, serializableEllipse.getCenterY(), 0);
     }
 
     @Test
     public void testGetRadiusX() {
+        System.out.println("getRadiusX");
         assertEquals(30, serializableEllipse.getRadiusX(), 0);
     }
 
     @Test
     public void testGetRadiusY() {
+        System.out.println("getRadiusY");
         assertEquals(40, serializableEllipse.getRadiusY(), 0);
     }
 
     @Test
     public void testGetStrokeColor() {
+        System.out.println("getStrokeColor");
         assertEquals(Color.BLACK, serializableEllipse.getStrokeColor());
     }
 
     @Test
     public void testGetFillColor() {
+        System.out.println("getFillColor");
         assertEquals(Color.TRANSPARENT, serializableEllipse.getFillColor());
     }
 
@@ -86,15 +95,14 @@ public class SerializableEllipseTest {
         //already tested in testCreateView();
     }
     
-    @Test 
-    public void testReadObject(){
-        //already tested in testWriteObject()
-    }
     
     @Test
     public void testWriteObject() {
+        System.out.println("writeObject");
+        
+        File file = new File("testWriteEllipse.dat");
        
-        try(ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("testWriteEllipse.dat"))){
+        try(ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(file))){
             o.writeInt(1);
             o.writeObject(serializableEllipse);
         } catch (FileNotFoundException ex) {
@@ -123,10 +131,18 @@ public class SerializableEllipseTest {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SerializableEllipseTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        file.delete();
+    }
+    
+     @Test 
+    public void testReadObject(){
+        //Already tested in testWriteObject()
     }
 
     @Test
     public void testToString() {
+        System.out.println("toString");
         String myString = "Ellipse (10.0,20.0)";
         String testString = serializableEllipse.toString();
         assertEquals(myString, testString);

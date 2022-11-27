@@ -23,6 +23,7 @@ public class DrawCommand extends Command{
     private final double endY;
     private final Color strokeColor;
     private final Color fillColor;
+   
  
     public DrawCommand(EditorState state,double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
         this.state = state;
@@ -39,7 +40,7 @@ public class DrawCommand extends Command{
         try{
             state.draw(startX,startY,endX,endY,strokeColor, fillColor);
         }catch(NullPointerException e){
-            Alert alert = new Alert(AlertType.WARNING, "You must select a shape!");
+            Alert alert = new Alert(AlertType.WARNING,"You must select a shape!");
             alert.show();
         }
     }
