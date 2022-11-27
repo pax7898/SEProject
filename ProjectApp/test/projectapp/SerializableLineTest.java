@@ -139,9 +139,9 @@ public class SerializableLineTest {
             output.writeInt(1);
             output.writeObject(line);
         } catch (FileNotFoundException ex) {
-            fail("FileNotFoundException");
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            fail("IOException");
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         //ReadObject test has been done before this one
@@ -151,15 +151,15 @@ public class SerializableLineTest {
             assertEquals(line.getColor(),line2.getColor());
             assertEquals(line.getX1(),line2.getX1(), 0);
             assertEquals(line.getX2(),line2.getX2(), 0);
-            assertEquals(line.getY1(),line.getY1(), 0);
-            assertEquals(line.getY2(),line.getY2(), 0);            
+            assertEquals(line.getY1(),line2.getY1(), 0);
+            assertEquals(line.getY2(),line2.getY2(), 0);            
         } catch (FileNotFoundException ex) {
-            fail("FileNotFoundException");
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            fail("IOException");
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            fail("ClassNotFoundException");
-        }
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         
         
     }
@@ -177,13 +177,22 @@ public class SerializableLineTest {
             }
             
         } catch (FileNotFoundException ex) {
-            fail("FileNotFoundException");
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            fail("IOException");
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            fail("ClassNotFoundException");
+            Logger.getLogger(SerializableLineTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    @Test
+    public void testToString(){
+        System.out.println("toString");
+        
+        String expResult = "Line (" + line.getX1() + "," + line.getY1() + ")";
+        String result = line.toString();
+        assertEquals(result,expResult);
     }
     
     

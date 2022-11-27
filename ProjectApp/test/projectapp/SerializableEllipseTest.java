@@ -117,7 +117,7 @@ public class SerializableEllipseTest {
 
 
         } catch (FileNotFoundException ex) {
-           System.out.println("orcodio");
+            Logger.getLogger(SerializableEllipseTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(SerializableEllipseTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
