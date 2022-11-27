@@ -39,6 +39,7 @@ public class EllipseStateTest {
 
     @Test
     public void testDraw() {
+        System.out.println("draw");
         ellipse.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK,Color.BLACK);
         assertEquals(1, list.size());  
         assertEquals(1, pane.getChildren().size());

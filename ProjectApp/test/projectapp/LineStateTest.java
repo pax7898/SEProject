@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -39,6 +38,7 @@ public class LineStateTest {
 
     @Test
     public void testDraw() {
+        System.out.println("draw");
         line.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK,Color.BLACK);
         assertEquals(1, list.size());  
         assertEquals(1, pane.getChildren().size());
