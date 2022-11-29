@@ -10,7 +10,6 @@ import projectapp.shape.SerializableShape;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-
 /**
  *
  * @author acoon

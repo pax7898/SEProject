@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DrawCommand;
 import projectapp.shape.SerializableShape;
@@ -38,7 +39,7 @@ public class DrawingEditor {
     
     private EditorState currentState;
     
-    private final ObservableList<SerializableShape> listItems;
+    private final ObservableList<Shape> listItems;
     
     private final CommandExecutor executor;
     
@@ -47,7 +48,7 @@ public class DrawingEditor {
     private double startX;
     private double startY;
 
-    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<SerializableShape> listItems, CommandExecutor executor, ListView drawnView) {
+    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<Shape> listItems, CommandExecutor executor, ListView drawnView) {
         
         this.drawingPane = pane;
         this.currentState = currentState;
@@ -119,7 +120,7 @@ public class DrawingEditor {
             ObjectOutputStream objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
             objectOut.writeInt(listItems.size());
             
-            for (SerializableShape a : listItems) 
+            for (Shape a : listItems) 
                 { 
                     
                     System.out.print(a);
@@ -146,7 +147,7 @@ public class DrawingEditor {
             
             int size = objectIn.readInt();
             for (int i=0;i<size;i++){
-                SerializableShape a = (SerializableShape) objectIn.readObject();
+                Shape a = (Shape) objectIn.readObject();
                 listItems.add(a);
                 this.drawingPane.getChildren().add(a.getShape());
             }
