@@ -17,12 +17,10 @@ import projectapp.shape.SerializableShape;
 public abstract class EditorState implements IState{
     private Shape shape;
     private final Pane pane;
-    private final ObservableList<Shape> list;
 
-    public EditorState(Pane pane, ObservableList<Shape> list) {
+    public EditorState(Pane pane) {
         this.shape = null;
         this.pane = pane;
-        this.list = list;
     }
     
     public Shape getShape() {
@@ -36,11 +34,5 @@ public abstract class EditorState implements IState{
     public Pane getPane() {
         return pane;
     }
-
-    public ObservableList<Shape> getList() {
-        return list;
-    }
-    
-    
-    
+   
 }
