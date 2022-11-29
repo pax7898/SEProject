@@ -20,8 +20,8 @@ import javafx.scene.shape.Shape;
  */
 public class LineState extends EditorStateOpen{
         
-    public LineState(Pane pane, ObservableList<Shape> list) {
-        super(pane,list);
+    public LineState(Pane pane) {
+        super(pane);
     }
 
 
@@ -34,7 +34,6 @@ public class LineState extends EditorStateOpen{
         line.setStartY(startY);
         line.setEndX(endX);
         line.setEndY(endY);
-        this.getList().add(line);
         this.getPane().getChildren().add(line);  
     }
     

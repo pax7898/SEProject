@@ -15,8 +15,8 @@ import projectapp.shape.SerializableShape;
  */
 public abstract class EditorStateOpen extends EditorState{
     
-    public EditorStateOpen(Pane pane, ObservableList<Shape> list) {
-        super(pane, list);
+    public EditorStateOpen(Pane pane) {
+        super(pane);
     }
     
 }

@@ -20,8 +20,8 @@ import javafx.scene.shape.Shape;
  */
 public class EllipseState extends EditorStateClosed {
 
-    public EllipseState(Pane pane, ObservableList<Shape> list) {
-        super(pane,list);
+    public EllipseState(Pane pane) {
+        super(pane);
     }
     
     @Override
@@ -34,7 +34,6 @@ public class EllipseState extends EditorStateClosed {
         ellipse.setRadiusY(abs(endY-startY));
         ellipse.setStroke(strokeColor);
         ellipse.setFill(fillColor);
-        this.getList().add(ellipse);
         this.getPane().getChildren().add(ellipse); 
     }
 

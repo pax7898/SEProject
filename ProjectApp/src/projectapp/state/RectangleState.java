@@ -5,13 +5,10 @@
  */
 package projectapp.state;
 
-import projectapp.shape.SerializableRectangle;
-import projectapp.shape.SerializableShape;
-import javafx.collections.ObservableList;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 /**
  *
@@ -19,8 +16,8 @@ import javafx.scene.shape.Shape;
  */
 public class RectangleState extends EditorStateClosed{
         
-    public RectangleState(Pane pane, ObservableList<Shape> list) {
-        super(pane,list);
+    public RectangleState(Pane pane) {
+        super(pane);
     }
 
     @Override
@@ -43,7 +40,6 @@ public class RectangleState extends EditorStateClosed{
         rectangle.setWidth(endX);
         rectangle.setHeight(endY);
         //SerializableRectangle rect = new SerializableRectangle(startX,startY,endX,endY,strokeColor,fillColor);
-        this.getList().add(rectangle);
         this.getPane().getChildren().add(rectangle);
     }
 
