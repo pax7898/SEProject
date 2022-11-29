@@ -10,14 +10,16 @@ import projectapp.shape.SerializableShape;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 /**
  *
  * @author acoon
  */
-public class RectangleState extends EditorState{
+public class RectangleState extends EditorStateClosed{
         
-    public RectangleState(Pane pane, ObservableList<SerializableShape> list) {
+    public RectangleState(Pane pane, ObservableList<Shape> list) {
         super(pane,list);
     }
 
@@ -33,9 +35,21 @@ public class RectangleState extends EditorState{
             startY = endY + startY;
             endY = -endY;
         }
-        SerializableRectangle rect = new SerializableRectangle(startX,startY,endX,endY,strokeColor,fillColor);
-        this.getList().add(rect);
-        this.getPane().getChildren().add(rect.getShape());
+        Rectangle rectangle = new Rectangle();
+        rectangle.setStroke(strokeColor);
+        rectangle.setFill(fillColor);
+        rectangle.setX(startX);
+        rectangle.setY(startY);
+        rectangle.setWidth(endX);
+        rectangle.setHeight(endY);
+        //SerializableRectangle rect = new SerializableRectangle(startX,startY,endX,endY,strokeColor,fillColor);
+        this.getList().add(rectangle);
+        this.getPane().getChildren().add(rectangle);
+    }
+
+    @Override
+    public void changeFillColor() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
   
