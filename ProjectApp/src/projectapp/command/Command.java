@@ -4,6 +4,7 @@
  */
 package projectapp.command;
 
+import javafx.scene.shape.Shape;
 import projectapp.shape.SerializableShape;
 
 
@@ -12,13 +13,13 @@ import projectapp.shape.SerializableShape;
  * @author pasqualecaggiano
  */
 public abstract class Command {
-    private SerializableShape shape;
+    private Shape shape;
     
-    public SerializableShape getShape(){
+    public Shape getShape(){
         return shape;
     }
     
-    public void setShape(SerializableShape shape){
+    public void setShape(Shape shape){
         this.shape=shape;
     }
     
