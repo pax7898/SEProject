@@ -149,7 +149,7 @@ public class DrawingEditor {
             for (int i=0;i<size;i++){
                 Shape a = (Shape) objectIn.readObject();
                 listItems.add(a);
-                this.drawingPane.getChildren().add(a.getShape());
+                this.drawingPane.getChildren().add(a);
             }
             
             
