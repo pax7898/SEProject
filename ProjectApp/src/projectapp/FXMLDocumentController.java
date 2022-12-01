@@ -52,7 +52,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         drawnView.setPlaceholder(new Label("No shapes drawn!"));
-        editor = new DrawingEditor(pane,null,FXCollections.observableArrayList(),new CommandExecutor(),drawnView);  
+        editor = new DrawingEditor(pane,null,FXCollections.observableArrayList(),new CommandExecutor());  
     }    
     
     @FXML
@@ -114,7 +114,7 @@ public class FXMLDocumentController implements Initializable {
         //Show open file dialog
         File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
         
-        editor.loadDrawing(file);
+        editor.loadDrawing(file);       
     }
-   
+       
 }

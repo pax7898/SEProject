@@ -15,8 +15,8 @@ import projectapp.shape.SerializableShape;
  */
 public abstract class EditorStateClosed extends EditorState {
     
-    public EditorStateClosed(Pane pane, ObservableList<Shape> list) {
-        super(pane, list);
+    public EditorStateClosed(Pane pane) {
+        super(pane);
     }
     
     public abstract void changeFillColor();

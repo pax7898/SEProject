@@ -42,19 +42,16 @@ public class DrawingEditor {
     private final ObservableList<Shape> listItems;
     
     private final CommandExecutor executor;
-    
-    private final ListView drawnView;
-    
+        
     private double startX;
     private double startY;
 
-    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<Shape> listItems, CommandExecutor executor, ListView drawnView) {
+    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<Shape> listItems, CommandExecutor executor) {
         
         this.drawingPane = pane;
         this.currentState = currentState;
         this.listItems = listItems;
         this.executor = executor;
-        this.drawnView = drawnView;
         this.startX = 0;
         this.startY = 0;
     }
@@ -95,23 +92,22 @@ public class DrawingEditor {
     }
     
     public EditorState setLineState(){
-        currentState = new LineState(drawingPane,listItems);
+        currentState = new LineState(drawingPane);
         return currentState;
     }
     
     public EditorState setRectangleState(){
-        currentState = new RectangleState(drawingPane, listItems);
+        currentState = new RectangleState(drawingPane);
         return currentState;
     }
     
     public EditorState setEllipseState(){
-        currentState = new EllipseState(drawingPane, listItems);
+        currentState = new EllipseState(drawingPane);
         return currentState;
     }
     
     public void executeDrawCommand(double endX, double endY,Color strokeColor, Color fillColor){
         executor.execute(new DrawCommand(currentState,startX,startY,endX,endY,strokeColor,fillColor));
-        drawnView.setItems(getStringList());   
     }
     
     public void saveDrawing(File file){
@@ -161,6 +157,5 @@ public class DrawingEditor {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        drawnView.setItems(getStringList());
     }
 }

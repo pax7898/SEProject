@@ -29,13 +29,11 @@ public class RectangleStateTest {
     Pane pane;
 
     private RectangleState rectangle;
-    private ObservableList<SerializableShape> list;
     
     @Before
     public void setUp() {
         pane = new Pane();
-        list = FXCollections.observableArrayList();
-        rectangle = new RectangleState(pane, list);
+        rectangle = new RectangleState(pane);
         
     }
 
@@ -43,10 +41,7 @@ public class RectangleStateTest {
     public void testDraw() {
         System.out.println("draw");
         rectangle.draw(2.0, 2.0, 2.0, 2.0, Color.BLACK,Color.BLACK);
-        assertEquals(1, list.size());  
         assertEquals(1, pane.getChildren().size());
-        Node node = (Node) list.remove(0).getShape();
-        assertTrue(pane.getChildren().contains(node));        
     }
 
     
