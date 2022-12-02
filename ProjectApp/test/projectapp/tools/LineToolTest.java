@@ -4,24 +4,30 @@
  */
 package projectapp.tools;
 
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import projectapp.command.CommandExecutor;
 
 /**
  *
  * @author pasqualecaggiano
  */
 public class LineToolTest {
+    private Tool lineTool;
     
-    public LineToolTest() {
-    }
     
     @Before
     public void setUp() {
+        lineTool = new LineTool(new Pane(),new CommandExecutor());
     }
 
     /**
@@ -29,13 +35,7 @@ public class LineToolTest {
      */
     @Test
     public void testGetShape() {
-        System.out.println("getShape");
-        LineTool instance = null;
-        Shape expResult = null;
-        Shape result = instance.getShape();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -44,13 +44,11 @@ public class LineToolTest {
     @Test
     public void testOnMousePressed() {
         System.out.println("onMousePressed");
-        MouseEvent event = new MouseEvent(new Pane(), 0, 0, 0, 100, 100, 1, false);
-        Color strokeColor = null;
-        Color fillColor = null;
-        LineTool instance = null;
-        instance.onMousePressed(event, strokeColor, fillColor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MouseEvent event = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        Color strokeColor = Color.RED;
+        Color fillColor = Color.BLUE;
+        lineTool.onMousePressed(event, strokeColor, fillColor);
+        
     }
 
     /**
