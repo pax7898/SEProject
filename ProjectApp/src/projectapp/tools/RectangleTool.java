@@ -19,6 +19,10 @@ import projectapp.command.DrawCommand;
  */
 public class RectangleTool extends Tool{
     private Rectangle rectangle;
+    private double initialPositionX;
+    private double initialPositionY;
+
+    
 
     public RectangleTool(Pane pane,CommandExecutor executor) {
         super(pane,executor);
@@ -39,6 +43,8 @@ public class RectangleTool extends Tool{
         rectangle.setY(event.getY());
         rectangle.setWidth(0);
         rectangle.setWidth(0);
+        this.initialPositionX = event.getX();
+        this.initialPositionY = event.getY();
         getExecutor().execute(new DrawCommand(rectangle,getPane()));
     }
 
@@ -46,16 +52,18 @@ public class RectangleTool extends Tool{
     public void onMouseDragged(MouseEvent event) {
         double startX = rectangle.getX();
         double startY = rectangle.getY();
-        double endX = event.getX() - startX;
-        double endY = event.getY() - startY;
+        double endX = event.getX() - initialPositionX;
+        double endY = event.getY() - initialPositionY;
+        
         if(endX < 0 ){
-            startX = endX + startX;
             endX = -endX;
+            rectangle.setX(event.getX());
         }
         if(endY < 0){
-            startY = endY + startY;
             endY = -endY;
+            rectangle.setY(event.getY());
         }
+        
         rectangle.setWidth(endX);
         rectangle.setHeight(endY);
     }
@@ -64,16 +72,17 @@ public class RectangleTool extends Tool{
     public void onMouseReleased(MouseEvent event) {
         double startX = rectangle.getX();
         double startY = rectangle.getY();
-        double endX = event.getX() - startX;
-        double endY = event.getY() - startY;
+        double endX = event.getX() - initialPositionX;
+        double endY = event.getY() - initialPositionY;
         if(endX < 0 ){
-            startX = endX + startX;
             endX = -endX;
+            rectangle.setX(event.getX());
         }
         if(endY < 0){
-            startY = endY + startY;
             endY = -endY;
+            rectangle.setY(event.getY());
         }
+        
         rectangle.setWidth(endX);
         rectangle.setHeight(endY);
     }
