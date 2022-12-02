@@ -2,21 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projectapp.state;
+package projectapp.tools;
 
-import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
-import projectapp.shape.SerializableShape;
+import javafx.scene.paint.Color;
 
 /**
  *
- * @author Sabatino
+ * @author pasqualecaggiano
  */
-public abstract class EditorStateOpen extends EditorState{
-    
-    public EditorStateOpen(Pane pane) {
+public abstract class DrawingState extends EditorState{
+
+    public DrawingState(Pane pane) {
         super(pane);
     }
-    
+ 
 }
+

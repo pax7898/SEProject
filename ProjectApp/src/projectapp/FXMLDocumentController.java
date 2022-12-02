@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import projectapp.state.EditorState;
+import projectapp.tools.EditorState;
 
 /**
  *
@@ -51,8 +51,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        drawnView.setPlaceholder(new Label("No shapes drawn!"));
-        editor = new DrawingEditor(pane,null,FXCollections.observableArrayList(),new CommandExecutor());  
+        editor = new DrawingEditor(pane,null,new CommandExecutor());  
     }    
     
     @FXML

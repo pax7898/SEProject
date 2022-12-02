@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectapp.state;
+package projectapp.tools;
 
 
 import javafx.scene.layout.Pane;
@@ -14,7 +14,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author acoon
  */
-public class RectangleState extends EditorStateClosed{
+public class RectangleState extends DrawingState{
         
     public RectangleState(Pane pane) {
         super(pane);
@@ -42,11 +42,5 @@ public class RectangleState extends EditorStateClosed{
         //SerializableRectangle rect = new SerializableRectangle(startX,startY,endX,endY,strokeColor,fillColor);
         this.getPane().getChildren().add(rectangle);
     }
-
-    @Override
-    public void changeFillColor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
   
 }

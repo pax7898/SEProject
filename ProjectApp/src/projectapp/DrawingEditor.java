@@ -25,13 +25,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DrawCommand;
 import projectapp.shape.SerializableShape;
-import projectapp.state.EditorState;
-import projectapp.state.EllipseState;
-import projectapp.state.LineState;
-import projectapp.state.RectangleState;
+import projectapp.tools.EditorState;
+import projectapp.tools.EllipseState;
+import projectapp.tools.LineState;
+import projectapp.tools.RectangleState;
 
 /**
  *
@@ -44,22 +45,18 @@ public class DrawingEditor {
     
     private EditorState currentState;
     
-    private final ObservableList<Shape> listItems;
-    
     private final CommandExecutor executor;
     
-    private final ListView drawnView;
+    private Command currentCommand;
     
     private double startX;
     private double startY;
 
-    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<Shape> listItems, CommandExecutor executor, ListView drawnView) {
+    public DrawingEditor(Pane pane, EditorState currentState, CommandExecutor executor) {
         
         this.drawingPane = pane;
         this.currentState = currentState;
-        this.listItems = listItems;
         this.executor = executor;
-        this.drawnView = drawnView;
         this.startX = 0;
         this.startY = 0;
     }
@@ -90,33 +87,24 @@ public class DrawingEditor {
     }
     
     
-    public ObservableList<String> getStringList(){
-        ObservableList<String> l = FXCollections.observableArrayList();
-        for(int i=0;i<listItems.size();i++){
-            String temp = listItems.get(i).toString();
-            l.add(temp);
-        }
-        return l;
-    }
-    
     public EditorState setLineState(){
-        currentState = new LineState(drawingPane,listItems);
+        currentState = new LineState(drawingPane);
+        currentCommand = new DrawCommand(currentState);
         return currentState;
     }
     
     public EditorState setRectangleState(){
-        currentState = new RectangleState(drawingPane, listItems);
+        currentState = new RectangleState(drawingPane);
         return currentState;
     }
     
     public EditorState setEllipseState(){
-        currentState = new EllipseState(drawingPane, listItems);
+        currentState = new EllipseState(drawingPane);
         return currentState;
     }
     
     public void executeDrawCommand(double endX, double endY,Color strokeColor, Color fillColor){
-        executor.execute(new DrawCommand(currentState,startX,startY,endX,endY,strokeColor,fillColor));
-        drawnView.setItems(getStringList());   
+        executor.execute(new DrawCommand(currentState,startX,startY,endX,endY,strokeColor,fillColor));  
     }
     
     public void saveDrawing(File file){

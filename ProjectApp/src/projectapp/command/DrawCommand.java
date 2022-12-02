@@ -5,10 +5,12 @@
 package projectapp.command;
 
 
+import javafx.event.Event;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import projectapp.state.EditorState;
+import projectapp.tools.EditorState;
 import javafx.scene.paint.Color;
+import projectapp.tools.DrawingState;
 
 /**
  *
@@ -22,9 +24,20 @@ public class DrawCommand extends Command{
     private final double endY;
     private final Color strokeColor;
     private final Color fillColor;
+    private Event event;
+
+    public DrawCommand(EditorState currentState) {
+        this.state = currentState;
+        this.startX = 0.0;
+        this.startY = 0.0;
+        this.endX = 0.0;
+        this.endY = 0.0;
+        this.strokeColor = null;
+        this.fillColor = null;
+    }
    
- 
-    public DrawCommand(EditorState state,double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
+   
+    public DrawCommand(DrawingState state,double startX, double startY, double endX, double endY, Color strokeColor, Color fillColor) {
         this.state = state;
         this.startX = startX;
         this.startY = startY;
@@ -33,6 +46,10 @@ public class DrawCommand extends Command{
         this.strokeColor = strokeColor;
         this.fillColor = fillColor;
     }
+    
+    
+    
+    
 
     @Override
     public void execute() {
