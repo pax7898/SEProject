@@ -22,7 +22,7 @@ import projectapp.tools.RectangleState;
  *
  * @author pasqualecaggiano
  */
-public class DrawCommandTest {
+public class DrawCommandTest1 {
     private DrawCommand command;
     private Pane pane;
     private ObservableList<SerializableShape> list;

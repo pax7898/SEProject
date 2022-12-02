@@ -25,12 +25,12 @@ public class ChangeInteriorColorCommand implements Command{
     
     @Override
     public void execute() {
-        shape.setStroke(newFillColor);    
+        shape.setFill(newFillColor);    
     }
 
     @Override
     public void undo() {
-        shape.setStroke(oldFillColor);  
+        shape.setFill(oldFillColor);  
     }
     
 }

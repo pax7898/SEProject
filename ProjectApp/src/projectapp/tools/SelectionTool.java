@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import projectapp.command.ChangeBorderColorCommand;
+import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DeleteCommand;
 
