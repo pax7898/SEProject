@@ -81,7 +81,6 @@ public class SelectionTool extends Tool{
         setSavedShape(getSelectedShape());
         deleteShape();
     }
-
     @Override
     public void pasteShape() {
         getPane().getChildren().add(savedShape);
@@ -89,7 +88,9 @@ public class SelectionTool extends Tool{
     }
 
     @Override
-    public void onMouseDragged(MouseEvent event) {}
+    public void onMouseDragged(MouseEvent event) {
+        
+    }
 
     @Override
     public void onMouseReleased(MouseEvent event) {}
