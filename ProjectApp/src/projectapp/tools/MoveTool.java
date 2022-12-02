@@ -14,7 +14,7 @@ import projectapp.command.CommandExecutor;
  *
  * @author pasqualecaggiano
  */
-public class MoveTool {
+
     
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -52,4 +52,4 @@ public class MoveTool extends SelectionTool{
     
     
 }
-}
+
