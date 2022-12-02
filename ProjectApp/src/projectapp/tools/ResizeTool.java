@@ -22,6 +22,7 @@ public class ResizeTool extends SelectionTool{
     
     private double x;
     private double y;
+    private boolean flag;
     
     public ResizeTool(Pane pane, Shape selectedShape, CommandExecutor executor) {
         super(pane, selectedShape, executor);
@@ -37,13 +38,19 @@ public class ResizeTool extends SelectionTool{
         if (event.getTarget().getClass()!= getPane().getClass()){
             super.setSelectedShape((Shape) event.getTarget());
             super.getSelectedShape().setStyle("-fx-stroke-dash-array:5px");
+            flag = true;
+        }
+        else{
+            flag = false;
         }
     }
     
     @Override
     public void onMouseDragged(MouseEvent event) {
-        super.getSelectedShape().setScaleX(event.getSceneX() / super.getSelectedShape().getLayoutBounds().getMaxX());
-        super.getSelectedShape().setScaleY(event.getSceneY() / super.getSelectedShape().getLayoutBounds().getMaxY());
+        if(flag == true){
+            super.getSelectedShape().setScaleX(event.getSceneX() / super.getSelectedShape().getLayoutBounds().getMaxX());
+            super.getSelectedShape().setScaleY(event.getSceneY() / super.getSelectedShape().getLayoutBounds().getMaxY());
+        }
     }
 
     @Override
@@ -53,5 +60,10 @@ public class ResizeTool extends SelectionTool{
     public void changeInteriorColor(Color strokeColor) {}
 
     @Override
-    public void onMouseReleased(MouseEvent event) {}
+    public void onMouseReleased(MouseEvent event) {
+        if(flag == true){
+            super.getSelectedShape().setScaleX(event.getSceneX() / super.getSelectedShape().getLayoutBounds().getMaxX());
+            super.getSelectedShape().setScaleY(event.getSceneY() / super.getSelectedShape().getLayoutBounds().getMaxY());
+        }
+    }
 }
