@@ -77,8 +77,7 @@ public class FXMLDocumentController implements Initializable {
     private void setLineTool(ActionEvent event) {
         editor.setLineTool();
         recBtn.selectedProperty().set(false);
-        elBtn.selectedProperty().set(false);
-         
+        elBtn.selectedProperty().set(false);   
     }
     
      @FXML
@@ -137,7 +136,6 @@ public class FXMLDocumentController implements Initializable {
 
         //Show open file dialog
         File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
-        
         editor.loadDrawing(file);       
     }
 
