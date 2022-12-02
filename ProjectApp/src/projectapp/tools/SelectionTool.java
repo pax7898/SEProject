@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
+import projectapp.command.DeleteCommand;
 
 /**
  *
@@ -57,17 +58,17 @@ public class SelectionTool extends Tool{
     
     @Override
     public void changeBorderColor(Color strokeColor) {
-        getSelectedShape().setStroke(strokeColor);
+        getExecutor().execute(new ChangeBorderColorCommand(selectedShape,strokeColor));
     }
     
     @Override
     public void changeInteriorColor(Color fillColor) {
-        getSelectedShape().setFill(fillColor);
+        getExecutor().execute(new ChangeInteriorColorCommand(selectedShape,fillColor));
     }
     
     @Override
     public void deleteShape() {
-        getPane().getChildren().remove(selectedShape);
+        getExecutor().execute(new DeleteCommand(selectedShape,getPane()));
     }
     
 
