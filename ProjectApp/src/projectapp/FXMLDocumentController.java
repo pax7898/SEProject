@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
- */
 package projectapp;
 
 
@@ -13,15 +9,17 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import projectapp.tools.EditorState;
+
 
 /**
  *
@@ -34,8 +32,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ColorPicker interiorPicker;
     @FXML
-    private ListView drawnView;
-    @FXML
     private Pane pane;
     @FXML
     private AnchorPane mainPane;
@@ -47,16 +43,24 @@ public class FXMLDocumentController implements Initializable {
     private ToggleButton recBtn;
     @FXML
     private ToggleButton elBtn;
+    @FXML
+    private ToggleButton selBtn;
+    @FXML
+    private ToggleButton moveBtn;
+    @FXML
+    private ToggleButton resizeBtn;
+    @FXML
+    private ToggleButton undoBtn;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        editor = new DrawingEditor(pane,null,new CommandExecutor());  
+        editor = new DrawingEditor(pane,null,new CommandExecutor(),null);  
+        
     }    
     
     @FXML
     private void setLineState(ActionEvent event) {
-         EditorState state = editor.setLineState();
          recBtn.selectedProperty().set(false);
          elBtn.selectedProperty().set(false);
          
@@ -64,7 +68,7 @@ public class FXMLDocumentController implements Initializable {
     
      @FXML
     private void setRectangleState(ActionEvent event) {
-         EditorState state = editor.setRectangleState();
+         editor.setRectangleState();
          elBtn.selectedProperty().set(false);
          lineBtn.selectedProperty().set(false);
          
@@ -72,7 +76,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void setEllipseState(ActionEvent event) {
-        EditorState state = editor.setEllipseState();
         recBtn.selectedProperty().set(false);
         lineBtn.selectedProperty().set(false);
         
@@ -80,13 +83,19 @@ public class FXMLDocumentController implements Initializable {
 
      @FXML
     private void pressPane(MouseEvent event) {
-        editor.setStartX(event.getX());
-        editor.setStartY(event.getY());
+        editor.onMousePressed(event, borderPicker.getValue(), interiorPicker.getValue());
     }
     
+     @FXML
+    private void dragPane(MouseEvent event) {
+        editor.onMouseDragged(event);
+    }
+       
     @FXML
     private void releasedPane(MouseEvent event) {
-        editor.executeDrawCommand(event.getX(), event.getY(),borderPicker.getValue(), interiorPicker.getValue());
+       
+        editor.onMouseReleased(event);
+         
     }
 
     @FXML
@@ -114,6 +123,44 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
         
         editor.loadDrawing(file);       
+    }
+
+    
+
+
+    @FXML
+    private void borderColorChange(ActionEvent event) {
+        editor.changeBorderColor(borderPicker.getValue());
+    }
+
+    @FXML
+    private void changeInteriorColor(ActionEvent event) {
+        editor.changeInteriorColor(interiorPicker.getValue());
+    }
+
+    @FXML
+    private void deleteShape(ActionEvent event) {
+        editor.deleteShape();
+    }
+
+    @FXML
+    private void copyShape(ActionEvent event) {
+        editor.copyShape();
+    }
+
+    @FXML
+    private void cutShape(ActionEvent event) {
+        editor.cutShape();
+    }
+
+    @FXML
+    private void pasteShape(ActionEvent event) {
+        editor.pasteShape();
+    }
+
+    @FXML
+    private void undo(ActionEvent event) {
+        editor.undo();
     }
        
 }
