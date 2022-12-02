@@ -4,9 +4,10 @@
  */
 package projectapp.command;
 
-
-
-import javafx.scene.layout.Pane;
+/**
+ *
+ * @author pasqualecaggiano
+ */
 
 import javafx.scene.shape.Shape;
 
@@ -14,28 +15,28 @@ import javafx.scene.shape.Shape;
  *
  * @author pasqualecaggiano
  */
-public class DrawCommand implements Command{
+public class MoveCommand implements Command{
     private Shape shape;
-    private Pane pane;
+    private double x;
+    private double y;
     
-    public DrawCommand(Shape shape,Pane pane) {
-        this.pane = pane;
+  
+    
+    public MoveCommand(Shape shape, double x, double y) {
         this.shape = shape;
+        this.x=x;
+        this.y=y;
+               
     }
 
- 
     @Override
     public void execute() {
-        System.out.println("Draw");
-        pane.getChildren().add(shape);
+        shape.relocate(x, y);
     }
 
     @Override
     public void undo() {
-        System.out.println("Undo draw");
-        pane.getChildren().remove(shape);
+        shape.relocate(-x, -y);
     }
-    
-    
     
 }

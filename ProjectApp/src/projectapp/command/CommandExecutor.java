@@ -26,5 +26,11 @@ public class CommandExecutor {
         stack.addLast(command);
         command.execute();
     }
+    
+    public void undo(){
+        Command command = stack.removeLast();
+        command.undo();
+    }
+   
    
 }

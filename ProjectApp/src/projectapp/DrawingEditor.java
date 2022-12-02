@@ -19,13 +19,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
-import tools.EllipseTool;
-import tools.LineTool;
-import tools.MoveTool;
-import tools.ResizeTool;
-import tools.RectangleTool;
-import tools.SelectionTool;
-import tools.Tool;
+import projectapp.tools.MoveTool;
+import projectapp.tools.SelectionTool;
+import projectapp.tools.Tool;
+
 
 /**
  *
