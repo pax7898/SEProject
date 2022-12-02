@@ -4,7 +4,7 @@
  */
 package projectapp;
 
-import projectapp.state.LineState;
+import projectapp.tools.LineState;
 import projectapp.shape.SerializableShape;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

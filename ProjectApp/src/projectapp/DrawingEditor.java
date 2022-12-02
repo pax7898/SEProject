@@ -4,29 +4,28 @@
  */
 package projectapp;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import java.beans.DefaultPersistenceDelegate;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
-import projectapp.command.DrawCommand;
-import projectapp.shape.SerializableShape;
-import projectapp.state.EditorState;
-import projectapp.state.EllipseState;
-import projectapp.state.LineState;
-import projectapp.state.RectangleState;
+import tools.EllipseTool;
+import tools.LineTool;
+import tools.MoveTool;
+import tools.ResizeTool;
+import tools.RectangleTool;
+import tools.SelectionTool;
+import tools.Tool;
 
 /**
  *
@@ -37,125 +36,126 @@ public class DrawingEditor {
     
     private final Pane drawingPane;
     
-    private EditorState currentState;
-    
-    private final ObservableList<Shape> listItems;
-    
     private final CommandExecutor executor;
-        
-    private double startX;
-    private double startY;
-
-    public DrawingEditor(Pane pane, EditorState currentState, ObservableList<Shape> listItems, CommandExecutor executor) {
-        
+   
+    private Tool currentTool;
+    private Shape selectedShape;
+    private Shape savedShape;
+    
+    public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) {
         this.drawingPane = pane;
-        this.currentState = currentState;
-        this.listItems = listItems;
         this.executor = executor;
-        this.startX = 0;
-        this.startY = 0;
+        this.currentTool=currentTool;
     }
 
    
-    public EditorState getCurrentState() {
-        return currentState;
-    }
-
-    public void setCurrentState(EditorState currentState) {
-        this.currentState = currentState;
-    }
-
-    public double getStartX() {
-        return startX;
-    }
-
-    public void setStartX(double startX) {
-        this.startX = startX;
-    }
-
-    public double getStartY() {
-        return startY;
-    }
-
-    public void setStartY(double startY) {
-        this.startY = startY;
-    }
-    
-    
-    public ObservableList<String> getStringList(){
-        ObservableList<String> l = FXCollections.observableArrayList();
-        for(int i=0;i<listItems.size();i++){
-            String temp = listItems.get(i).toString();
-            l.add(temp);
+    public void setLineTool(){
+        
+        if (selectedShape != null){
+           selectedShape.getStrokeDashArray().clear();
         }
-        return l;
+        currentTool = new LineTool(drawingPane,executor);
     }
     
-    public EditorState setLineState(){
-        currentState = new LineState(drawingPane);
-        return currentState;
+    public void setRectangleState(){
+        System.out.print(selectedShape);
+        if (selectedShape != null){
+            selectedShape.getStrokeDashArray().clear();
+        }
+        currentTool = new RectangleTool(drawingPane,executor);
     }
     
-    public EditorState setRectangleState(){
-        currentState = new RectangleState(drawingPane);
-        return currentState;
+    public void setEllipseTool(){
+        if (selectedShape != null){
+            selectedShape.getStrokeDashArray().clear();
+        }
+        currentTool = new EllipseTool(drawingPane,executor);
+    }
+    public void setSelectionTool(){
+        if (selectedShape != null){
+            selectedShape.getStrokeDashArray().clear();
+        }
+        currentTool = new SelectionTool(drawingPane,selectedShape,executor);
+    }  
+    
+    public void setMoveTool(){
+        if (selectedShape != null){
+            selectedShape.getStrokeDashArray().clear();
+        }
+        currentTool = new MoveTool(drawingPane,selectedShape,executor);
     }
     
-    public EditorState setEllipseState(){
-        currentState = new EllipseState(drawingPane);
-        return currentState;
+    public void setResizeTool(){
+        if (selectedShape != null){
+            selectedShape.getStrokeDashArray().clear();
+        }
+        currentTool = new ResizeTool(drawingPane,selectedShape,executor);
     }
     
-    public void executeDrawCommand(double endX, double endY,Color strokeColor, Color fillColor){
-        executor.execute(new DrawCommand(currentState,startX,startY,endX,endY,strokeColor,fillColor));
+    public void onMousePressed(MouseEvent event,Color strokeColor, Color fillColor){
+        currentTool.onMousePressed(event, strokeColor, fillColor);
+    }
+    public void onMouseDragged(MouseEvent event){
+        currentTool.onMouseDragged(event);
+    }
+    public void onMouseReleased(MouseEvent event){
+        currentTool.onMouseReleased(event);
+    }
+    
+    public void changeBorderColor(Color strokeColor){
+        currentTool.changeBorderColor(strokeColor);
+    }
+    
+    public void changeInteriorColor(Color fillColor){
+        currentTool.changeInteriorColor(fillColor);
+    }
+    
+    public void deleteShape(){
+        currentTool.deleteShape();
+    }
+    
+    public void copyShape(){
+        currentTool.copyShape();
+    }
+    
+    public void cutShape(){
+        currentTool.cutShape();
+    }
+    
+    public void pasteShape(){
+        currentTool.pasteShape();
     }
     
     public void saveDrawing(File file){
-        try {
-            
-            ObjectOutputStream objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-            objectOut.writeInt(listItems.size());
-            
-            for (Shape a : listItems) 
-                { 
+        
+        try (XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file))){
                     
-                    System.out.print(a);
-                    objectOut.writeObject(a);
-                }
-            
-            //close stream
-            objectOut.close();
-                
-        } catch (IOException ex) {
-                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                    encoder.setPersistenceDelegate(Color.class, new DefaultPersistenceDelegate(new String[]{"red","green","blue","opacity"}));
+                    
+                    encoder.writeObject(drawingPane.getChildren().toArray(new Node[0]));
+                   
+                    
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                } 
         
     }
     
     
     public void loadDrawing(File file){
-        try {
-            
-            listItems.clear();
-            this.drawingPane.getChildren().clear();
-            ObjectInputStream objectIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
         
-            
-            int size = objectIn.readInt();
-            for (int i=0;i<size;i++){
-                Shape a = (Shape) objectIn.readObject();
-                listItems.add(a);
-                this.drawingPane.getChildren().add(a);
-            }
-            
-            
-            //close stream
-            objectIn.close();
+        drawingPane.getChildren().clear();
                 
-        } catch (IOException ex) {
-                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        try (XMLDecoder decoder = new XMLDecoder(new FileInputStream(file))){
+            drawingPane.getChildren().addAll((Node[]) decoder.readObject());  
+
+        } catch (FileNotFoundException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void undo(){
+        executor.undo();
     }
 }

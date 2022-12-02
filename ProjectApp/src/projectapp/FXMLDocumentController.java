@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import projectapp.state.EditorState;
+import projectapp.tools.EditorState;
 
 /**
  *
@@ -51,8 +51,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        drawnView.setPlaceholder(new Label("No shapes drawn!"));
-        editor = new DrawingEditor(pane,null,FXCollections.observableArrayList(),new CommandExecutor());  
+        editor = new DrawingEditor(pane,null,new CommandExecutor());  
     }    
     
     @FXML
@@ -95,7 +94,7 @@ public class FXMLDocumentController implements Initializable {
         FileChooser fileChooser = new FileChooser();
  
         //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Bin files (*.dat)", "*.dat");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Xml files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
         
         //Show save file dialog
@@ -108,7 +107,7 @@ public class FXMLDocumentController implements Initializable {
         FileChooser fileChooser = new FileChooser();
  
         //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Bin files (*.dat)", "*.dat");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Xml files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show open file dialog
