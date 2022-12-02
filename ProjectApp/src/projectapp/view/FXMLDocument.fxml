@@ -56,7 +56,7 @@
                            <children>
                               <AnchorPane prefHeight="132.0" prefWidth="210.0">
                                  <children>
-                                    <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="26.0" layoutY="35.0" mnemonicParsing="false" onAction="#setLineState" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
+                                    <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="26.0" layoutY="35.0" mnemonicParsing="false" onAction="#setLineTool" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -65,7 +65,7 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="recBtn" contentDisplay="CENTER" layoutX="85.0" layoutY="35.0" mnemonicParsing="false" onAction="#setRectangleState" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
+                                    <ToggleButton fx:id="recBtn" contentDisplay="CENTER" layoutX="85.0" layoutY="35.0" mnemonicParsing="false" onAction="#setRectangleTool" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -74,7 +74,7 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="elBtn" contentDisplay="CENTER" layoutX="145.0" layoutY="35.0" mnemonicParsing="false" onAction="#setEllipseState" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
+                                    <ToggleButton fx:id="elBtn" contentDisplay="CENTER" layoutX="145.0" layoutY="35.0" mnemonicParsing="false" onAction="#setEllipseTool" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
                                        <graphic>
                                           <ImageView fitHeight="19.0" fitWidth="25.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -85,7 +85,7 @@
                                     </ToggleButton>
                                  </children>
                               </AnchorPane>
-                              <ToggleButton fx:id="selBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSelectionState" prefHeight="34.0" prefWidth="74.0" text="select" textAlignment="CENTER" />
+                              <ToggleButton fx:id="selBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSelectionTool" prefHeight="34.0" prefWidth="74.0" text="select" textAlignment="CENTER" />
                               <AnchorPane prefHeight="132.0" prefWidth="190.0">
                                  <children>
                                     <ColorPicker fx:id="borderPicker" layoutX="34.0" layoutY="39.0" onAction="#borderColorChange" prefHeight="26.0" prefWidth="43.0">
@@ -116,8 +116,8 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </AnchorPane>
-                              <ToggleButton fx:id="moveBtn" contentDisplay="CENTER" layoutX="220.0" layoutY="45.0" mnemonicParsing="false" onAction="#setMoveState" prefHeight="34.0" prefWidth="75.0" text="move" textAlignment="CENTER" />
-                              <ToggleButton fx:id="resizeBtn" contentDisplay="CENTER" layoutX="534.0" layoutY="45.0" mnemonicParsing="false" onAction="#setResizeState" prefHeight="34.0" prefWidth="75.0" text="resize" textAlignment="CENTER" />
+                              <ToggleButton fx:id="moveBtn" contentDisplay="CENTER" layoutX="220.0" layoutY="45.0" mnemonicParsing="false" onAction="#setMoveTool" prefHeight="34.0" prefWidth="75.0" text="move" textAlignment="CENTER" />
+                              <ToggleButton fx:id="resizeBtn" contentDisplay="CENTER" layoutX="534.0" layoutY="45.0" mnemonicParsing="false" onAction="#setResizeTool" prefHeight="34.0" prefWidth="75.0" text="resize" textAlignment="CENTER" />
                                <ToggleButton fx:id="undoBtn" contentDisplay="CENTER" layoutX="534.0" layoutY="45.0" mnemonicParsing="false" onAction="#undo" prefHeight="34.0" prefWidth="75.0" text="Undo" textAlignment="CENTER" />
                            </children>
                         </HBox>
@@ -129,7 +129,7 @@
                <children>
                   <ScrollPane hbarPolicy="ALWAYS" prefHeight="567.5" prefWidth="976.5" scaleShape="false" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#dragPane" onMousePressed="#pressPane" onMouseReleased="#releasedPane" prefHeight="8274.0" prefWidth="8830.0">
+                        <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" prefHeight="8274.0" prefWidth="8830.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -138,10 +138,10 @@
                      <contextMenu>
                         <ContextMenu>
                           <items>
-                            <MenuItem  mnemonicParsing="false" onAction="#deleteShape" text="Delete" />
-                            <MenuItem  mnemonicParsing="false" onAction="#copyShape" text="Copy" />
-                            <MenuItem  mnemonicParsing="false" onAction="#cutShape" text="Cut" />
-                            <MenuItem  mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
+                            <MenuItem mnemonicParsing="false" onAction="#deleteShape" text="Delete" />
+                            <MenuItem mnemonicParsing="false" onAction="#copyShape" text="Copy" />
+                            <MenuItem mnemonicParsing="false" onAction="#cutShape" text="Cut" />
+                            <MenuItem mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
                           </items>
                         </ContextMenu>
                      </contextMenu>

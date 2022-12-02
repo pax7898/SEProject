@@ -35,7 +35,5 @@ public class DrawCommand implements Command{
         System.out.println("Undo draw");
         pane.getChildren().remove(shape);
     }
-    
-    
-    
+     
 }

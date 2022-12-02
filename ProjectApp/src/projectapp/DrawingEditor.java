@@ -19,7 +19,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
+import projectapp.tools.EllipseTool;
+import projectapp.tools.LineTool;
 import projectapp.tools.MoveTool;
+import projectapp.tools.RectangleTool;
+import projectapp.tools.ResizeTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
 
@@ -54,7 +58,7 @@ public class DrawingEditor {
         currentTool = new LineTool(drawingPane,executor);
     }
     
-    public void setRectangleState(){
+    public void setRectangleTool(){
         System.out.print(selectedShape);
         if (selectedShape != null){
             selectedShape.getStrokeDashArray().clear();

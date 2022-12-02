@@ -8,13 +8,11 @@ package projectapp.tools;
  *
  * @author Sabatino
  */
-import javafx.event.Event;
-import javafx.geometry.Point2D;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
-import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 
 

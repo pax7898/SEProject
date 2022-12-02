@@ -55,44 +55,60 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        editor = new DrawingEditor(pane,null,new CommandExecutor(),null);  
+        editor = new DrawingEditor(pane,new CommandExecutor(),null);  
         
     }    
     
     @FXML
-    private void setLineState(ActionEvent event) {
-         recBtn.selectedProperty().set(false);
-         elBtn.selectedProperty().set(false);
+    private void setSelectionTool(ActionEvent event) {
+        editor.setSelectionTool();
+    }
+
+    @FXML
+    private void setMoveTool(ActionEvent event) {
+        editor.setMoveTool();
+    }
+    
+     @FXML
+    private void setResizeTool(ActionEvent event) {
+        editor.setResizeTool();
+    }
+    @FXML
+    private void setLineTool(ActionEvent event) {
+        editor.setLineTool();
+        recBtn.selectedProperty().set(false);
+        elBtn.selectedProperty().set(false);
          
     }
     
      @FXML
-    private void setRectangleState(ActionEvent event) {
-         editor.setRectangleState();
+    private void setRectangleTool(ActionEvent event) {
+         editor.setRectangleTool();
          elBtn.selectedProperty().set(false);
          lineBtn.selectedProperty().set(false);
          
     }
 
     @FXML
-    private void setEllipseState(ActionEvent event) {
+    private void setEllipseTool(ActionEvent event) {
+        editor.setEllipseTool();
         recBtn.selectedProperty().set(false);
         lineBtn.selectedProperty().set(false);
         
     }
 
      @FXML
-    private void pressPane(MouseEvent event) {
+    private void onMousePressed(MouseEvent event) {
         editor.onMousePressed(event, borderPicker.getValue(), interiorPicker.getValue());
     }
     
      @FXML
-    private void dragPane(MouseEvent event) {
+    private void onMouseDragged(MouseEvent event) {
         editor.onMouseDragged(event);
     }
        
     @FXML
-    private void releasedPane(MouseEvent event) {
+    private void onMouseReleased(MouseEvent event) {
        
         editor.onMouseReleased(event);
          
