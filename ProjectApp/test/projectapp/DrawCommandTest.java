@@ -5,7 +5,7 @@
 package projectapp;
 
 import projectapp.command.DrawCommand;
-import projectapp.state.LineState;
+import projectapp.tools.LineState;
 import projectapp.shape.SerializableShape;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,8 +15,8 @@ import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.state.EllipseState;
-import projectapp.state.RectangleState;
+import projectapp.tools.EllipseState;
+import projectapp.tools.RectangleState;
 
 /**
  *

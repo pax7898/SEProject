@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.state.EllipseState;
+import projectapp.tools.EllipseState;
 
 /**
  *

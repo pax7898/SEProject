@@ -19,9 +19,9 @@ import projectapp.shape.SerializableEllipse;
 import projectapp.shape.SerializableLine;
 import projectapp.shape.SerializableRectangle;
 import projectapp.shape.SerializableShape;
-import projectapp.state.EditorState;
-import projectapp.state.LineState;
-import projectapp.state.RectangleState;
+import projectapp.tools.EditorState;
+import projectapp.tools.LineState;
+import projectapp.tools.RectangleState;
 
 
 /**

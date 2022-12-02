@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projectapp.state;
+package projectapp.tools;
 
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
@@ -13,12 +13,10 @@ import projectapp.shape.SerializableShape;
  *
  * @author Sabatino
  */
-public abstract class EditorStateClosed extends EditorState {
+public abstract class EditorStateOpen extends EditorState{
     
-    public EditorStateClosed(Pane pane) {
+    public EditorStateOpen(Pane pane) {
         super(pane);
     }
-    
-    public abstract void changeFillColor();
     
 }

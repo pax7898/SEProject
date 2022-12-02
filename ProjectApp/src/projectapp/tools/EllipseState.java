@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectapp.state;
+package projectapp.tools;
 
 import static java.lang.Math.abs;
 import projectapp.shape.SerializableEllipse;
@@ -18,7 +18,7 @@ import javafx.scene.shape.Shape;
  *
  * @author acoon
  */
-public class EllipseState extends EditorStateClosed {
+public class EllipseState extends DrawingState {
 
     public EllipseState(Pane pane) {
         super(pane);
@@ -36,11 +36,4 @@ public class EllipseState extends EditorStateClosed {
         ellipse.setFill(fillColor);
         this.getPane().getChildren().add(ellipse); 
     }
-
-    @Override
-    public void changeFillColor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
 }
