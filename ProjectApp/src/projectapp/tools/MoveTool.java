@@ -4,6 +4,7 @@
  */
 package projectapp.tools;
 
+import static java.lang.Math.abs;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,18 +17,23 @@ import projectapp.command.CommandExecutor;
  */
 public class MoveTool extends SelectionTool{
     
+    private double initialPositionX;
+    private double initialPositionY;
     private boolean flag;
+    private double newX;
+    private double newY;
+    private double salvoX;
+    private double salvoY;
     
-    public MoveTool(Pane pane, Shape selectedShape, CommandExecutor executor) {
-        super(pane, selectedShape, executor);
+    public MoveTool(Pane pane, Shape selectedShape, CommandExecutor command) {
+        super(pane, selectedShape, command);
+        this.newX = 0;
+        this.newY = 0;
+        this.salvoX = 0;
+        this.salvoY = 0;
     }
 
-    @Override
-    public void changeBorderColor(Color strokeColor) {}
-
-    @Override
-    public void changeInteriorColor(Color strokeColor) {}
-    
+   
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
         if (super.getSelectedShape() != null){
@@ -38,6 +44,8 @@ public class MoveTool extends SelectionTool{
             super.setSelectedShape((Shape) event.getTarget());
             super.getSelectedShape().setStyle("-fx-stroke-dash-array:5px");
             flag = true;
+            this.initialPositionX = event.getX();
+            this.initialPositionY = event.getY();
         }
         else{
             flag = false;
@@ -48,16 +56,36 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
-            getSelectedShape().relocate(event.getX(),event.getY());
+            System.out.println("sono newX" + newX);
+            super.getSelectedShape().setTranslateX(this.newX);
+            super.getSelectedShape().setTranslateY(this.newY);
+            newX = salvoX + event.getX()-initialPositionX;
+            newY = salvoY + event.getY()-initialPositionY;
+            
         }
         
     }
 
     @Override
     public void onMouseReleased(MouseEvent event) {
-        
+        if(flag == true){
+            //super.getSelectedShape().setTranslateX(event.getX() - initialPositionX);
+            //super.getSelectedShape().setTranslateY(event.getY() - initialPositionY);
+            //this.initialPositionX = event.getX();
+            //this.initialPositionY = event.getY();
+            
+            salvoX  += event.getX()-initialPositionX;
+            salvoY  += event.getY()-initialPositionY;
+            System.out.println("Sono qui! " + newX);
+        }
     }
     
+     @Override
+    public void changeBorderColor(Color strokeColor) {}
+
+    @Override
+    public void changeInteriorColor(Color strokeColor) {}
     
+     
 }
 
