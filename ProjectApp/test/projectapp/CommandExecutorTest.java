@@ -28,21 +28,19 @@ public class CommandExecutorTest {
     
   
     Pane pane;
-    ObservableList<SerializableShape> list;
     EditorState state;
     
     @Before
     public void setUp() {
         pane = new Pane();
         executor = new CommandExecutor();
-        list = FXCollections.observableArrayList();
-        state = new LineState(pane, list);
+        state = new LineState(pane);
     }
 
     @Test
     public void testExecute() {
         System.out.println("execute");
-        EditorState state = new LineState(pane, list);
+        EditorState state = new LineState(pane);
         Command comm = new DrawCommand(state,20,20,50,50,Color.BLACK, Color.BLACK);
         executor.execute(comm);
         assertEquals(comm, executor.getStack().getLast());     
