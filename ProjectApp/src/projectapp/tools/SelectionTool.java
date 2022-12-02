@@ -46,12 +46,12 @@ public class SelectionTool extends Tool{
     
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
         if (selectedShape != null){
-           selectedShape.getStrokeDashArray().clear();
+           selectedShape.setStyle("-fx-stroke-dash-array:none");
         }
         
         if (event.getTarget().getClass()!= getPane().getClass()){
             selectedShape = (Shape) event.getTarget();
-            selectedShape.getStrokeDashArray().addAll(15d,10d);
+            selectedShape.setStyle("-fx-stroke-dash-array:5px");
         }
     }
     

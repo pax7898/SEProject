@@ -16,8 +16,6 @@ import projectapp.command.CommandExecutor;
  */
 public class MoveTool extends SelectionTool{
     
-    private double initialPositionX;
-    private double initialPositionY;
     private boolean flag;
     
     public MoveTool(Pane pane, Shape selectedShape, CommandExecutor executor) {
@@ -40,8 +38,6 @@ public class MoveTool extends SelectionTool{
             super.setSelectedShape((Shape) event.getTarget());
             super.getSelectedShape().setStyle("-fx-stroke-dash-array:5px");
             flag = true;
-            this.initialPositionX = event.getX();
-            this.initialPositionY = event.getY();
         }
         else{
             flag = false;
@@ -52,21 +48,14 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
-            System.out.println(event.getX() - initialPositionX);
-            //super.getSelectedShape().setTranslateX(event.getX() - initialPositionX);
-            //super.getSelectedShape().setTranslateY(event.getY() - initialPositionY);
-            getSelectedShape().relocate(event.getX() - initialPositionX,event.getY() - initialPositionY);
+            getSelectedShape().relocate(event.getX(),event.getY());
         }
         
     }
 
     @Override
     public void onMouseReleased(MouseEvent event) {
-        if(flag == true){
-            this.initialPositionX = event.getX();
-            this.initialPositionY = event.getY();
-            System.out.println("Sono qui!");
-        }
+        
     }
     
     
