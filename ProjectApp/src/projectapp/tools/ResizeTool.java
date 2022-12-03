@@ -21,8 +21,10 @@ import projectapp.command.ResizeCommand;
  */
 public class ResizeTool extends SelectionTool{
     
-    private double x;
-    private double y;
+    private double salvoX;
+    private double salvoY;
+    private double initialPositionX;
+    private double initialPositionY;
     private boolean flag;
     
     public ResizeTool(Pane pane, Shape selectedShape, CommandExecutor executor) {
@@ -38,9 +40,12 @@ public class ResizeTool extends SelectionTool{
         
         if (event.getTarget().getClass()!= getPane().getClass()){
             super.setSelectedShape((Shape) event.getTarget());
-            //super.getSelectedShape().setStyle("-fx-stroke-dash-array:5px");
             super.getExecutor().execute(new ResizeCommand(super.getSelectedShape(), event));
             flag = true;
+            salvoX = super.getSelectedShape().getLayoutBounds().getMaxX();
+            salvoY = super.getSelectedShape().getLayoutBounds().getMaxY();
+            initialPositionX = event.getX();
+            initialPositionY = event.getY();
         }
         else{
             flag = false;
@@ -51,7 +56,7 @@ public class ResizeTool extends SelectionTool{
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
             super.getSelectedShape().setScaleX(event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
-            super.getSelectedShape().setScaleY(event.getY() / super.getSelectedShape().getLayoutBounds().getMaxY());
+            super.getSelectedShape().setScaleY(event.getY() / super.getSelectedShape().getLayoutBounds().getMaxX());
         }
     }
     
@@ -59,12 +64,7 @@ public class ResizeTool extends SelectionTool{
     public void onMouseReleased(MouseEvent event) {
         if(flag == true){
             //super.getSelectedShape().setLayoutX(event.get);
-            super.getSelectedShape().setScaleX(event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
-            super.getSelectedShape().setScaleY(event.getY() / super.getSelectedShape().getLayoutBounds().getMaxY());
-            super.getSelectedShape().setStyle("");
-            System.out.println(super.getSelectedShape().getScaleX() + " " + event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
             
-
         }
     }
     
