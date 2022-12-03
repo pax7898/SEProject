@@ -28,8 +28,7 @@ public class ResizeCommand implements Command{
     @Override
     public void execute() {
         //da cambiare
-        this.shape.setScaleX(event.getX() / shape.getLayoutBounds().getMaxX());
-        this.shape.setScaleY(event.getY() / shape.getLayoutBounds().getMaxY());
+        shape.setStyle("-fx-stroke-dash-array:5px");
     }
 
     @Override
