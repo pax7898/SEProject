@@ -29,7 +29,15 @@ public class MoveCommand implements Command{
         this.oldX = oldX;
         this.oldY = oldY;
     }
- 
+
+    public Shape getShape() {
+        return shape;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
     @Override
     public void execute() {
         this.shape.setTranslateX(newX);
