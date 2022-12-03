@@ -5,16 +5,12 @@ import java.io.File;
 import projectapp.command.CommandExecutor;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -51,48 +47,58 @@ public class FXMLDocumentController implements Initializable {
     private ToggleButton resizeBtn;
     @FXML
     private ToggleButton undoBtn;
+    
+    private ToggleGroup toggles;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         editor = new DrawingEditor(pane,new CommandExecutor(),null);  
+        toggles = new ToggleGroup();
+        toggles.getToggles().addAll(lineBtn,recBtn,elBtn,selBtn,moveBtn);
         
     }    
     
     @FXML
     private void setSelectionTool(ActionEvent event) {
         editor.setSelectionTool();
+        toggles.getSelectedToggle().setSelected(false);
+        selBtn.selectedProperty().set(true);
     }
 
     @FXML
     private void setMoveTool(ActionEvent event) {
         editor.setMoveTool();
+        toggles.getSelectedToggle().setSelected(false);
+        moveBtn.selectedProperty().set(true);
     }
     
-     @FXML
+    @FXML
     private void setResizeTool(ActionEvent event) {
         editor.setResizeTool();
+        toggles.getSelectedToggle().setSelected(false);
+        resizeBtn.selectedProperty().set(true);
     }
     @FXML
     private void setLineTool(ActionEvent event) {
         editor.setLineTool();
-        recBtn.selectedProperty().set(false);
-        elBtn.selectedProperty().set(false);   
+        toggles.getSelectedToggle().setSelected(false);
+        lineBtn.selectedProperty().set(true);
     }
     
      @FXML
     private void setRectangleTool(ActionEvent event) {
-         editor.setRectangleTool();
-         elBtn.selectedProperty().set(false);
-         lineBtn.selectedProperty().set(false);
+        editor.setRectangleTool();
+        toggles.getSelectedToggle().setSelected(false);
+        recBtn.selectedProperty().set(true);
          
     }
 
     @FXML
     private void setEllipseTool(ActionEvent event) {
         editor.setEllipseTool();
-        recBtn.selectedProperty().set(false);
-        lineBtn.selectedProperty().set(false);
+        toggles.getSelectedToggle().setSelected(false);
+        elBtn.selectedProperty().set(true);
         
     }
 
@@ -139,9 +145,6 @@ public class FXMLDocumentController implements Initializable {
         editor.loadDrawing(file);       
     }
 
-    
-
-
     @FXML
     private void borderColorChange(ActionEvent event) {
         editor.changeBorderColor(borderPicker.getValue());
@@ -158,30 +161,8 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void copyShape(ActionEvent event) {
-        editor.copyShape();
-    }
-
-    @FXML
-    private void cutShape(ActionEvent event) {
-        editor.cutShape();
-    }
-
-    @FXML
-    private void pasteShape(ActionEvent event) {
-        editor.pasteShape();
-    }
-    
-    @FXML
-    private void moveShape(ActionEvent event) {
-        editor.setMoveTool();
-    }
-       
-
-    @FXML
     private void undo(ActionEvent event) {
         editor.undo();
     }
 
-    
 }
