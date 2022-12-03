@@ -23,6 +23,7 @@ public class MoveCommandTest {
     private EllipseTool ellipse;
     private MoveCommand moveCommand;
     private MouseEvent pressEvent;
+    private MouseEvent dragEvent;
     
     
     @Before
