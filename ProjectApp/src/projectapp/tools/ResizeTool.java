@@ -55,8 +55,25 @@ public class ResizeTool extends SelectionTool{
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
-            super.getSelectedShape().setScaleX(event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
-            super.getSelectedShape().setScaleY(event.getY() / super.getSelectedShape().getLayoutBounds().getMaxX());
+            
+            
+            
+            double lengthShapeX = super.getSelectedShape().getLayoutBounds().getMaxX() - super.getSelectedShape().getLayoutBounds().getMinX();
+            double lengthShapeY = super.getSelectedShape().getLayoutBounds().getMaxY() - super.getSelectedShape().getLayoutBounds().getMinY();
+            
+            double initialPercX = (initialPositionX - super.getSelectedShape().getLayoutBounds().getMinX()) / lengthShapeX;
+            double initialPercY = (initialPositionY - super.getSelectedShape().getLayoutBounds().getMaxY()) / lengthShapeY;
+                
+            double diffClickX = (event.getX() - initialPositionX) + (initialPositionX - super.getSelectedShape().getLayoutBounds().getMinX());
+            double diffClickY = (event.getY() - initialPositionY) + (initialPositionY - super.getSelectedShape().getLayoutBounds().getMaxY());
+            
+            double provX = diffClickX / initialPercX;
+            double provY = diffClickY / initialPercY;
+            double risX = provX / lengthShapeX;
+            double risY = provY / lengthShapeY;
+            System.out.println(risX + " " + risY);
+            super.getSelectedShape().setScaleX(risX);
+            super.getSelectedShape().setScaleY(risY);
         }
     }
     
