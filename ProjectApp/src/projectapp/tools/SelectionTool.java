@@ -29,6 +29,7 @@ public class SelectionTool extends Tool{
 
     public SelectionTool(Pane pane,Shape selectedShape,CommandExecutor executor) {
         super(pane,executor); 
+        this.selectedShape = selectedShape;
     }
     
     public Shape getSelectedShape() {
@@ -47,6 +48,7 @@ public class SelectionTool extends Tool{
         this.savedShape = savedShape;
     }
     
+    @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
         if (selectedShape != null){
            selectedShape.setStyle("-fx-stroke-dash-array:none");
@@ -73,7 +75,7 @@ public class SelectionTool extends Tool{
         getExecutor().execute(new DeleteCommand(selectedShape,getPane()));
     }
     
-
+    
     @Override
     public void copyShape() {
         setSavedShape(getSelectedShape());
@@ -89,18 +91,14 @@ public class SelectionTool extends Tool{
         getPane().getChildren().add(savedShape);
         
     }
-
+    
     @Override
-    public void onMouseDragged(MouseEvent event) {
-        
-    }
+    public void onMouseDragged(MouseEvent event) {}
 
     @Override
     public void onMouseReleased(MouseEvent event) {}
 
     @Override
-    public Shape getShape() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Shape getShape() {return null;}
 
 }

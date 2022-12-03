@@ -46,49 +46,55 @@ public class DrawingEditor {
     public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) {
         this.drawingPane = pane;
         this.executor = executor;
-        this.currentTool=currentTool;
+        this.currentTool = currentTool;
+        this.selectedShape = null;   
     }
 
-   
     public void setLineTool(){
-        
+        System.out.println(selectedShape);
         if (selectedShape != null){
-           selectedShape.getStrokeDashArray().clear();
+           selectedShape.setStyle("-fx-stroke-dash-array:none");
         }
         currentTool = new LineTool(drawingPane,executor);
     }
     
     public void setRectangleTool(){
-        System.out.print(selectedShape);
+        System.out.println(selectedShape);
         if (selectedShape != null){
-            selectedShape.getStrokeDashArray().clear();
+            selectedShape.setStyle("-fx-stroke-dash-array:none");
         }
         currentTool = new RectangleTool(drawingPane,executor);
     }
     
     public void setEllipseTool(){
+        System.out.println(selectedShape);
         if (selectedShape != null){
-            selectedShape.getStrokeDashArray().clear();
+            selectedShape.setStyle("-fx-stroke-dash-array:none");
+
         }
         currentTool = new EllipseTool(drawingPane,executor);
     }
     public void setSelectionTool(){
+        System.out.println(selectedShape);
         if (selectedShape != null){
-            selectedShape.getStrokeDashArray().clear();
+            selectedShape.setStyle("-fx-stroke-dash-array:none");
+
         }
         currentTool = new SelectionTool(drawingPane,selectedShape,executor);
     }  
     
     public void setMoveTool(){
+        System.out.println(selectedShape);
         if (selectedShape != null){
-            selectedShape.getStrokeDashArray().clear();
+            selectedShape.setStyle("-fx-stroke-dash-array:none");
         }
         currentTool = new MoveTool(drawingPane,selectedShape,executor);
     }
     
     public void setResizeTool(){
+        System.out.println(selectedShape);
         if (selectedShape != null){
-            selectedShape.getStrokeDashArray().clear();
+            selectedShape.setStyle("-fx-stroke-dash-array:none");
         }
         currentTool = new ResizeTool(drawingPane,selectedShape,executor);
     }
@@ -135,12 +141,9 @@ public class DrawingEditor {
                     
                     encoder.writeObject(drawingPane.getChildren().toArray(new Node[0]));
                    
-                    
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                    
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);    
                 } 
-        
     }
     
     
