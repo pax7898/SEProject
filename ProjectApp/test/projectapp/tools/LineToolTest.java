@@ -27,6 +27,9 @@ public class LineToolTest {
     private Pane pane;
     private CommandExecutor executor;
     private Line line ;
+    private MouseEvent press;
+    private MouseEvent drag;
+    private MouseEvent release;
     
     
     @Before
@@ -34,7 +37,11 @@ public class LineToolTest {
         pane = new Pane();
         executor = new CommandExecutor();
         lineTool = new LineTool(pane,executor);
-        line = new Line(20,20,30,30);
+        line = new Line(20,20,50,50);
+        press = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        drag =  new MouseEvent(MouseEvent.MOUSE_DRAGGED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        release = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+
     }
 
    
@@ -45,10 +52,9 @@ public class LineToolTest {
     public void testOnMousePressed() {
         System.out.println("onMousePressed");
         
-        MouseEvent event = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        lineTool.onMousePressed(event, strokeColor, fillColor);
+        lineTool.onMousePressed(press, strokeColor, fillColor);
         
         assertEquals(1,pane.getChildren().size());
         
@@ -60,32 +66,27 @@ public class LineToolTest {
     @Test
     public void testOnMouseDragged() {
         System.out.println("onMouseDragged");
-        MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        lineTool.onMousePressed(event1, strokeColor, fillColor);
+        lineTool.onMousePressed(press, strokeColor, fillColor);
         
-        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         
-        lineTool.onMouseDragged(event2);
-        assertEquals(line.getEndX(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(line.getEndY(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);
+        lineTool.onMouseDragged(drag);
+        assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);
     }
     
     @Test
     public void testOnMouseReleased() {
         System.out.println("onMouseReleased");
-        MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        lineTool.onMousePressed(event1, strokeColor, fillColor);
+        lineTool.onMousePressed(press, strokeColor, fillColor);
         
-        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         
-        lineTool.onMouseReleased(event2);
-        System.out.println(lineTool.getShape());
-        assertEquals(line.getEndX(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(line.getEndY(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);   
+        lineTool.onMouseReleased(release);
+        assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);   
     }
 
     /**
@@ -97,12 +98,11 @@ public class LineToolTest {
        
        assertEquals(null,lineTool.getShape());
        
-       MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
        Color strokeColor = Color.RED;
        Color fillColor = Color.BLUE;
-       lineTool.onMousePressed(event1, strokeColor, fillColor);
+       lineTool.onMousePressed(press, strokeColor, fillColor);
        
-        assertEquals(line.getClass(),lineTool.getShape().getClass());
+       assertEquals(line.getClass(),lineTool.getShape().getClass());
        
     }
 
