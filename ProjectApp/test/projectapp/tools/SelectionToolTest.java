@@ -15,6 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import projectapp.SelectedShape;
+import projectapp.command.ChangeBorderColorCommand;
+import projectapp.command.ChangeInteriorColorCommand;
+import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DeleteCommand;
 
@@ -35,9 +38,13 @@ public class SelectionToolTest {
     @Before
     public void setUp() {
         shape = new Rectangle(20,20,30,30);
+        shape.setFill(Color.BLUE);
+        shape.setStroke(Color.BLUE);
         pane = new Pane();
         pane.getChildren().add(shape);
         selectedShape = new SelectedShape(shape);
+        
+
         executor = new CommandExecutor();
         tool = new SelectionTool(pane,selectedShape,executor);
         
@@ -88,6 +95,12 @@ public class SelectionToolTest {
     @Test
     public void testChangeBorderColor() {
         System.out.println("changeBorderColor");
+        Command border= new ChangeBorderColorCommand(shape, Color.RED);
+        tool.changeBorderColor(Color.RED);
+        assertEquals(shape.getStroke(),Color.RED);
+        assertEquals(border.getClass(),executor.getStack().getLast().getClass());
+        
+        
         
     }
 
@@ -97,6 +110,10 @@ public class SelectionToolTest {
     @Test
     public void testChangeInteriorColor() {
         System.out.println("changeInteriorColor");
+        Command interior= new ChangeInteriorColorCommand(shape, Color.RED);
+        tool.changeInteriorColor(Color.RED);
+        assertEquals(shape.getFill(),Color.RED);
+        assertEquals(interior.getClass(),executor.getStack().getLast().getClass());
         
     }
 
