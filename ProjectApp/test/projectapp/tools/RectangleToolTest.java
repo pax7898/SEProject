@@ -49,12 +49,15 @@ public class RectangleToolTest {
     @Test
     public void testGetShape() {
         System.out.println("getShape");
-        RectangleTool instance = null;
-        Shape expResult = null;
-        Shape result = instance.getShape();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
+        assertEquals(null,rectangleTool.getShape());
+       
+       MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+       Color strokeColor = Color.RED;
+       Color fillColor = Color.BLUE;
+       rectangleTool.onMousePressed(event1, strokeColor, fillColor);
+       
+        assertEquals(rectangle.getClass(),rectangleTool.getShape().getClass());
     }
 
     /**
@@ -87,12 +90,14 @@ public class RectangleToolTest {
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
         rectangleTool.onMousePressed(event1, strokeColor, fillColor);
-        
-        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
-        
+
+        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 40, 40, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+
         rectangleTool.onMouseDragged(event2);
-        assertEquals(rectangle.getX() + rectangle.getWidth(),30 + Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(rectangle.getY() + rectangle.getHeight(),30 + Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxY()),1);
+        assertEquals(rectangle.getX(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinX()), 1);
+        assertEquals(rectangle.getY(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinY()), 1);
+        assertEquals(rectangle.getX() + rectangle.getWidth(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(rectangle.getY() + rectangle.getHeight(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxY()),1);
     }
 
     /**
@@ -101,11 +106,19 @@ public class RectangleToolTest {
     @Test
     public void testOnMouseReleased() {
         System.out.println("onMouseReleased");
-        MouseEvent event = null;
-        RectangleTool instance = null;
-        instance.onMouseReleased(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        Color strokeColor = Color.RED;
+        Color fillColor = Color.BLUE;
+        rectangleTool.onMousePressed(event1, strokeColor, fillColor);
+        
+        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 40, 40, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        
+        rectangleTool.onMouseReleased(event2);
+        assertEquals(rectangle.getX(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinX()), 1);
+        assertEquals(rectangle.getY(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinY()), 1);
+        assertEquals(rectangle.getX() + rectangle.getWidth(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(rectangle.getY() + rectangle.getHeight(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxY()),1);  
     }
 
 
