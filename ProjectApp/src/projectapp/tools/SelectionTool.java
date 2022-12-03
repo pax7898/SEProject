@@ -24,7 +24,7 @@ import projectapp.command.DeleteCommand;
  * @author pasqualecaggiano
  */
 public class SelectionTool extends Tool{
-    private SelectedShape selectedShape;
+    private final SelectedShape selectedShape;
     private Shape savedShape;
    
 
@@ -71,23 +71,6 @@ public class SelectionTool extends Tool{
     @Override
     public void deleteShape() {
         getExecutor().execute(new DeleteCommand(selectedShape.getShape(),getPane()));
-    }
-    
-    
-    @Override
-    public void copyShape() {
-        setSavedShape(getSelectedShape().getShape());
-    }
-
-    @Override
-    public void cutShape() {
-        setSavedShape(getSelectedShape().getShape());
-        deleteShape();
-    }
-    @Override
-    public void pasteShape() {
-        getPane().getChildren().add(savedShape);
-        
     }
     
     @Override

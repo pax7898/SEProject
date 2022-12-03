@@ -17,10 +17,10 @@ import javafx.scene.shape.Shape;
  */
 public class MoveCommand implements Command{
     private Shape shape;
-    private double newX;
-    private double newY;
-    private double oldX;
-    private double oldY;
+    private final double newX;
+    private final double newY;
+    private final double oldX;
+    private final double oldY;
 
     public MoveCommand(Shape shape, double newX, double newY, double oldX, double oldY) {
         this.shape = shape;
@@ -44,10 +44,5 @@ public class MoveCommand implements Command{
         this.shape.setTranslateY(newY);
     }
 
-    @Override
-    public void undo() {
-        this.shape.setTranslateX(oldX);
-        this.shape.setTranslateY(oldY);
-    }
-    
+  
 }

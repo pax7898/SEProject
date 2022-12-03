@@ -33,9 +33,6 @@ public abstract class Tool {
     }
     
     public abstract Shape getShape();
-    public abstract void copyShape();
-    public abstract void cutShape();
-    public abstract void pasteShape();
     public abstract void deleteShape();
     public abstract void changeBorderColor(Color strokeColor);
     public abstract void changeInteriorColor(Color strokeColor);

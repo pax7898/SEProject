@@ -12,8 +12,8 @@ import javafx.scene.shape.Shape;
  * @author pasqualecaggiano
  */
 public class DeleteCommand  implements Command{
-    private Shape shape;
-    private Pane pane;
+    private final Shape shape;
+    private final Pane pane;
     
     public DeleteCommand(Shape shape,Pane pane) {
         this.pane = pane;
@@ -26,8 +26,5 @@ public class DeleteCommand  implements Command{
         pane.getChildren().remove(shape);
     }
 
-    @Override
-    public void undo() {
-        pane.getChildren().add(shape);
-    }
+    
 }

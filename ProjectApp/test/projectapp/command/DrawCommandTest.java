@@ -4,7 +4,7 @@
  */
 package projectapp.command;
 
-import javafx.scene.Node;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -61,17 +61,5 @@ public class DrawCommandTest {
        
     }
 
-    /**
-     * Test of undo method, of class DrawCommand.
-     */
-   
-    /*
-    @Test
-    public void testUndo() {
-        System.out.println("undo");
-        CommandExecutor instance = new CommandExecutor();
-        instance.undo();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
+
 }

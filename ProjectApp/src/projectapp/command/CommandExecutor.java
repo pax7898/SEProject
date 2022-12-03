@@ -11,7 +11,7 @@ import java.util.*;
  * @author acoon
  */
 public class CommandExecutor {
-    private Deque<Command> stack;
+    private final Deque<Command> stack;
     
     public CommandExecutor(){
         stack = new ArrayDeque();
@@ -26,11 +26,5 @@ public class CommandExecutor {
         stack.addLast(command);
         command.execute();
     }
-    
-    public void undo(){
-        Command command = stack.removeLast();
-        command.undo();
-    }
-   
    
 }

@@ -61,13 +61,5 @@ public class LineTool extends Tool{
     @Override
     public void deleteShape(){}
 
-    @Override
-    public void copyShape(){}
-
-    @Override
-    public void cutShape(){}
-
-    @Override
-    public void pasteShape(){}
 
 }

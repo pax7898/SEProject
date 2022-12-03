@@ -13,9 +13,9 @@ import javafx.scene.shape.Shape;
  * @author 39320
  */
 public class ChangeInteriorColorCommand implements Command{
-    private Shape shape;
-    private Color oldFillColor;
-    private Color newFillColor;
+    private final Shape shape;
+    private final Color oldFillColor;
+    private final Color newFillColor;
 
     public ChangeInteriorColorCommand(Shape shape, Color newFillColor) {
         this.shape = shape;
@@ -28,9 +28,5 @@ public class ChangeInteriorColorCommand implements Command{
         shape.setFill(newFillColor);    
     }
 
-    @Override
-    public void undo() {
-        shape.setFill(oldFillColor);  
-    }
     
 }

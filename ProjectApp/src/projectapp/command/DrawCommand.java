@@ -15,8 +15,8 @@ import javafx.scene.shape.Shape;
  * @author pasqualecaggiano
  */
 public class DrawCommand implements Command{
-    private Shape shape;
-    private Pane pane;
+    private final Shape shape;
+    private final Pane pane;
     
     public DrawCommand(Shape shape,Pane pane) {
         this.pane = pane;
@@ -29,9 +29,5 @@ public class DrawCommand implements Command{
         pane.getChildren().add(shape);
     }
 
-    @Override
-    public void undo() {
-        pane.getChildren().remove(shape);
-    }
-     
+  
 }

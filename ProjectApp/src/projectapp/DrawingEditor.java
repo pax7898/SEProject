@@ -17,13 +17,11 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
 import projectapp.tools.EllipseTool;
 import projectapp.tools.LineTool;
 import projectapp.tools.MoveTool;
 import projectapp.tools.RectangleTool;
-import projectapp.tools.ResizeTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
 
@@ -40,10 +38,7 @@ public class DrawingEditor {
     private final CommandExecutor executor;
    
     private Tool currentTool;
-    private SelectedShape selectedShape;
-    
-    
-    private Shape savedShape;
+    private final SelectedShape selectedShape;
     
     public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) {
         this.drawingPane = pane;
@@ -91,13 +86,6 @@ public class DrawingEditor {
         currentTool = new MoveTool(drawingPane,selectedShape,executor);
     }
     
-    public void setResizeTool(){
-        System.out.println(selectedShape.getShape());
-        if (selectedShape.getShape() != null){
-            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
-        }
-        currentTool = new ResizeTool(drawingPane,selectedShape,executor);
-    }
     
     public void onMousePressed(MouseEvent event,Color strokeColor, Color fillColor){
         currentTool.onMousePressed(event, strokeColor, fillColor);
@@ -121,17 +109,6 @@ public class DrawingEditor {
         currentTool.deleteShape();
     }
     
-    public void copyShape(){
-        currentTool.copyShape();
-    }
-    
-    public void cutShape(){
-        currentTool.cutShape();
-    }
-    
-    public void pasteShape(){
-        currentTool.pasteShape();
-    }
     
     public void saveDrawing(File file){
         
@@ -158,8 +135,5 @@ public class DrawingEditor {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void undo(){
-        executor.undo();
-    }
+
 }

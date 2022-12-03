@@ -10,13 +10,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.tools.RectangleTool;
+
 
 /**
  *
@@ -55,20 +52,8 @@ public class ChangeBorderColorCommandTest {
         command = new ChangeBorderColorCommand(ellipse,Color.BLUE);
         command.execute();
         assertEquals(ellipse.getStroke(),Color.BLUE);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
     }
 
-    /**
-     * Test of undo method, of class ChangeBorderColorCommand.
-     
-    @Test
-    /*public void testUndo() {
-        System.out.println("undo");
-        ChangeBorderColorCommand instance = null;
-        instance.undo();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
     
 }

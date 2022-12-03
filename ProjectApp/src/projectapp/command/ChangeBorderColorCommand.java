@@ -13,9 +13,9 @@ import javafx.scene.shape.Shape;
  * @author 39320
  */
 public class ChangeBorderColorCommand implements Command{
-    private Shape shape;
-    private Color oldStrokeColor;
-    private Color newStrokeColor;
+    private final Shape shape;
+    private final Color oldStrokeColor;
+    private final Color newStrokeColor;
 
     public ChangeBorderColorCommand(Shape shape, Color newStrokeColor) {
         this.shape = shape;
@@ -23,15 +23,8 @@ public class ChangeBorderColorCommand implements Command{
         this.newStrokeColor = newStrokeColor;
     }
     
-    
     @Override
     public void execute() {
         shape.setStroke(newStrokeColor);
     }
-
-    @Override
-    public void undo() {
-        shape.setStroke(oldStrokeColor);   
-    }
-    
 }

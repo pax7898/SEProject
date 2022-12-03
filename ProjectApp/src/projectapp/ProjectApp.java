@@ -21,7 +21,7 @@ public class ProjectApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("view/FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setTitle("MyDrawingEditor");
         stage.setScene(scene);
         stage.show();
     }

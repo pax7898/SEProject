@@ -105,13 +105,6 @@ public class DrawingEditorTest {
        
     }
 
-    /**
-     * Test of setResizeTool method, of class DrawingEditor.
-     */
-    @Test
-    public void testSetResizeTool() {
-        
-    }
 
     /**
      * Test of onMousePressed method, of class DrawingEditor.
@@ -161,27 +154,6 @@ public class DrawingEditorTest {
         
     }
 
-    /**
-     * Test of copyShape method, of class DrawingEditor.
-     */
-    @Test
-    public void testCopyShape() {
-    }
-
-    /**
-     * Test of cutShape method, of class DrawingEditor.
-     */
-    @Test
-    public void testCutShape() {
-    }
-
-    /**
-     * Test of pasteShape method, of class DrawingEditor.
-     */
-    @Test
-    public void testPasteShape() {
-    }
-    
     
     /**
      * Test of saveDrawing method, of class DrawingEditor.
@@ -219,12 +191,5 @@ public class DrawingEditorTest {
     public void testLoadDrawing() {
         //Alredy tested in testSaveDrawing
     }
-
-    /**
-     * Test of undo method, of class DrawingEditor.
-     */
-    @Test
-    public void testUndo() {
-    }
-    
+   
 }

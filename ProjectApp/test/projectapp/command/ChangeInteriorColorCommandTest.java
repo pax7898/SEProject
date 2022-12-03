@@ -10,10 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -55,18 +52,5 @@ public class ChangeInteriorColorCommandTest {
         command.execute();
         assertEquals(ellipse.getFill(),Color.BLUE);
     }
-
-    /**
-     * Test of undo method, of class ChangeInteriorColorCommand.
-     
-    @Test
-    public void testUndo() {
-        System.out.println("undo");
-        ChangeInteriorColorCommand instance = null;
-        instance.undo();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }     */
-
     
 }

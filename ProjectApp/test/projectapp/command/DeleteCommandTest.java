@@ -60,17 +60,5 @@ public class DeleteCommandTest {
        assertEquals(0,pane.getChildren().size());
     }
 
-    /**
-     * Test of undo method, of class DeleteCommand.
-     */
-    /*
-    @Test
-    public void testUndo() {
-        System.out.println("undo");
-        CommandExecutor instance = new CommandExecutor();
-        instance.undo();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
     
 }

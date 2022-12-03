@@ -117,8 +117,6 @@
                                  </HBox.margin>
                               </AnchorPane>
                               <ToggleButton fx:id="moveBtn" contentDisplay="CENTER" layoutX="220.0" layoutY="45.0" mnemonicParsing="false" onAction="#setMoveTool" prefHeight="34.0" prefWidth="75.0" text="move" textAlignment="CENTER" />
-                              <ToggleButton fx:id="resizeBtn" contentDisplay="CENTER" layoutX="534.0" layoutY="45.0" mnemonicParsing="false" onAction="#setResizeTool" prefHeight="34.0" prefWidth="75.0" text="resize" textAlignment="CENTER" />
-                               <ToggleButton fx:id="undoBtn" contentDisplay="CENTER" layoutX="534.0" layoutY="45.0" mnemonicParsing="false" onAction="#undo" prefHeight="34.0" prefWidth="75.0" text="Undo" textAlignment="CENTER" />
                            </children>
                         </HBox>
                      </children>

@@ -43,10 +43,6 @@ public class FXMLDocumentController implements Initializable {
     private ToggleButton selBtn;
     @FXML
     private ToggleButton moveBtn;
-    @FXML
-    private ToggleButton resizeBtn;
-    @FXML
-    private ToggleButton undoBtn;
     
     private ToggleGroup toggles;
   
@@ -73,12 +69,6 @@ public class FXMLDocumentController implements Initializable {
         moveBtn.selectedProperty().set(true);
     }
     
-    @FXML
-    private void setResizeTool(ActionEvent event) {
-        editor.setResizeTool();
-        toggles.getSelectedToggle().setSelected(false);
-        resizeBtn.selectedProperty().set(true);
-    }
     @FXML
     private void setLineTool(ActionEvent event) {
         editor.setLineTool();
@@ -118,6 +108,22 @@ public class FXMLDocumentController implements Initializable {
         editor.onMouseReleased(event);
          
     }
+    
+    @FXML
+    private void borderColorChange(ActionEvent event) {
+        editor.changeBorderColor(borderPicker.getValue());
+    }
+
+    @FXML
+    private void changeInteriorColor(ActionEvent event) {
+        editor.changeInteriorColor(interiorPicker.getValue());
+    }
+
+    @FXML
+    private void deleteShape(ActionEvent event) {
+        editor.deleteShape();
+    }
+
 
     @FXML
     public void saveAction(ActionEvent event) {
@@ -143,26 +149,6 @@ public class FXMLDocumentController implements Initializable {
         //Show open file dialog
         File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
         editor.loadDrawing(file);       
-    }
-
-    @FXML
-    private void borderColorChange(ActionEvent event) {
-        editor.changeBorderColor(borderPicker.getValue());
-    }
-
-    @FXML
-    private void changeInteriorColor(ActionEvent event) {
-        editor.changeInteriorColor(interiorPicker.getValue());
-    }
-
-    @FXML
-    private void deleteShape(ActionEvent event) {
-        editor.deleteShape();
-    }
-
-    @FXML
-    private void undo(ActionEvent event) {
-        editor.undo();
     }
 
 }

@@ -62,22 +62,6 @@ public class SelectionToolTest {
     }
 
     /**
-     * Test of getSavedShape method, of class SelectionTool.
-     */
-    @Test
-    public void testGetSavedShape() {
-        
-    }
-
-    /**
-     * Test of setSavedShape method, of class SelectionTool.
-     */
-    @Test
-    public void testSetSavedShape() {
-        
-    }
-
-    /**
      * Test of onMousePressed method, of class SelectionTool.
      */
     @Test
@@ -129,52 +113,4 @@ public class SelectionToolTest {
         assertEquals(command.getClass(),executor.getStack().getLast().getClass());
     }
 
-    /**
-     * Test of copyShape method, of class SelectionTool.
-     */
-    @Test
-    public void testCopyShape() {
-        
-    }
-
-    /**
-     * Test of cutShape method, of class SelectionTool.
-     */
-    @Test
-    public void testCutShape() {
-        
-    }
-
-    /**
-     * Test of pasteShape method, of class SelectionTool.
-     */
-    @Test
-    public void testPasteShape() {
-        
-    }
-
-    /**
-     * Test of onMouseDragged method, of class SelectionTool.
-     */
-    @Test
-    public void testOnMouseDragged() {
-        
-    }
-
-    /**
-     * Test of onMouseReleased method, of class SelectionTool.
-     */
-    @Test
-    public void testOnMouseReleased() {
-        
-    }
-
-    /**
-     * Test of getShape method, of class SelectionTool.
-     */
-    @Test
-    public void testGetShape() {
-        
-    }
-    
 }
