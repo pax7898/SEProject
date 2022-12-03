@@ -4,24 +4,43 @@
  */
 package projectapp.tools;
 
+import javafx.event.EventType;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import projectapp.SelectedShape;
+import projectapp.command.CommandExecutor;
+import projectapp.command.DeleteCommand;
 
 /**
  *
  * @author pasqualecaggiano
  */
 public class SelectionToolTest {
+    private SelectionTool tool;
+    private SelectedShape selectedShape;
+    private Pane pane;
+    private CommandExecutor executor;
+    private Shape shape;
     
     public SelectionToolTest() {
     }
     
     @Before
     public void setUp() {
+        shape = new Rectangle(20,20,30,30);
+        pane = new Pane();
+        pane.getChildren().add(shape);
+        selectedShape = new SelectedShape(shape);
+        executor = new CommandExecutor();
+        tool = new SelectionTool(pane,selectedShape,executor);
+        
     }
 
     /**
@@ -30,25 +49,9 @@ public class SelectionToolTest {
     @Test
     public void testGetSelectedShape() {
         System.out.println("getSelectedShape");
-        SelectionTool instance = null;
-        Shape expResult = null;
-        Shape result = instance.getSelectedShape();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setSelectedShape method, of class SelectionTool.
-     */
-    @Test
-    public void testSetSelectedShape() {
-        System.out.println("setSelectedShape");
-        Shape selectedShape = null;
-        SelectionTool instance = null;
-        instance.setSelectedShape(selectedShape);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(selectedShape,tool.getSelectedShape());
+        
     }
 
     /**
@@ -56,7 +59,7 @@ public class SelectionToolTest {
      */
     @Test
     public void testGetSavedShape() {
-  
+        
     }
 
     /**
@@ -73,13 +76,10 @@ public class SelectionToolTest {
     @Test
     public void testOnMousePressed() {
         System.out.println("onMousePressed");
-        MouseEvent event = null;
-        Color strokeColor = null;
-        Color fillColor = null;
-        SelectionTool instance = null;
-        instance.onMousePressed(event, strokeColor, fillColor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MouseEvent event = new MouseEvent(null, shape, new EventType(), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+        SelectionTool test = new SelectionTool(pane, selectedShape, executor);
+        test.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        assertEquals(shape.getStyle(),"-fx-stroke-dash-array:5px");
     }
 
     /**
@@ -88,11 +88,7 @@ public class SelectionToolTest {
     @Test
     public void testChangeBorderColor() {
         System.out.println("changeBorderColor");
-        Color strokeColor = null;
-        SelectionTool instance = null;
-        instance.changeBorderColor(strokeColor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -101,11 +97,7 @@ public class SelectionToolTest {
     @Test
     public void testChangeInteriorColor() {
         System.out.println("changeInteriorColor");
-        Color fillColor = null;
-        SelectionTool instance = null;
-        instance.changeInteriorColor(fillColor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -114,10 +106,10 @@ public class SelectionToolTest {
     @Test
     public void testDeleteShape() {
         System.out.println("deleteShape");
-        SelectionTool instance = null;
-        instance.deleteShape();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        DeleteCommand command = new DeleteCommand(shape,pane);
+        tool.deleteShape();
+        assertTrue(!pane.getChildren().contains(shape));
+        assertEquals(command.getClass(),executor.getStack().getLast().getClass());
     }
 
     /**
@@ -141,7 +133,7 @@ public class SelectionToolTest {
      */
     @Test
     public void testPasteShape() {
-       
+        
     }
 
     /**
@@ -149,7 +141,7 @@ public class SelectionToolTest {
      */
     @Test
     public void testOnMouseDragged() {
-      
+        
     }
 
     /**

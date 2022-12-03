@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import projectapp.SelectedShape;
 import projectapp.command.CommandExecutor;
 import projectapp.command.MoveCommand;
 
@@ -26,24 +27,24 @@ public class MoveTool extends SelectionTool{
     private double oldX;
     private double oldY;
     
-    public MoveTool(Pane pane, Shape selectedShape, CommandExecutor command) {
+    public MoveTool(Pane pane, SelectedShape selectedShape, CommandExecutor command) {
         super(pane, selectedShape, command);
     }
 
    
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
-        if (super.getSelectedShape() != null){
-           super.getSelectedShape().setStyle("-fx-stroke-dash-array:none");
+        if (super.getSelectedShape().getShape() != null){
+           super.getSelectedShape().getShape().setStyle("-fx-stroke-dash-array:none");
         } 
         if (event.getTarget().getClass()!= getPane().getClass()){
-            super.setSelectedShape((Shape) event.getTarget());
-            super.getSelectedShape().setStyle("-fx-stroke-dash-array:5px");
+            super.getSelectedShape().setShape((Shape) event.getTarget());
+            super.getSelectedShape().getShape().setStyle("-fx-stroke-dash-array:5px");
             flag = true;
             this.initialPositionX = event.getX();
             this.initialPositionY = event.getY();
-            newX = oldX = super.getSelectedShape().getTranslateX();
-            newY = oldY = super.getSelectedShape().getTranslateY();
+            newX = oldX = super.getSelectedShape().getShape().getTranslateX();
+            newY = oldY = super.getSelectedShape().getShape().getTranslateY();
         }
         else{
             flag = false;
@@ -55,8 +56,8 @@ public class MoveTool extends SelectionTool{
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
             System.out.println("Faccio la translate di: " + newX);
-            super.getSelectedShape().setTranslateX(newX);
-            super.getSelectedShape().setTranslateY(newY);
+            super.getSelectedShape().getShape().setTranslateX(newX);
+            super.getSelectedShape().getShape().setTranslateY(newY);
             newX = oldX + event.getX() - initialPositionX;
             newY = oldY + event.getY() - initialPositionY;
 
@@ -66,9 +67,9 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseReleased(MouseEvent event) {
         if(flag == true){
-            super.getExecutor().execute(new MoveCommand(super.getSelectedShape(),super.getSelectedShape().getTranslateX(), super.getSelectedShape().getTranslateY(), oldX, oldY));
-            oldX  = super.getSelectedShape().getTranslateX();
-            oldY  = super.getSelectedShape().getTranslateY();
+            super.getExecutor().execute(new MoveCommand(super.getSelectedShape().getShape(),super.getSelectedShape().getShape().getTranslateX(), super.getSelectedShape().getShape().getTranslateY(), oldX, oldY));
+            oldX  = super.getSelectedShape().getShape().getTranslateX();
+            oldY  = super.getSelectedShape().getShape().getTranslateY();
             System.out.println("Sono qui! " + newX);
         }
     }

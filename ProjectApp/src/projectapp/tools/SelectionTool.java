@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import projectapp.SelectedShape;
 import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.CommandExecutor;
@@ -23,21 +24,17 @@ import projectapp.command.DeleteCommand;
  * @author pasqualecaggiano
  */
 public class SelectionTool extends Tool{
-    private Shape selectedShape;
+    private SelectedShape selectedShape;
     private Shape savedShape;
    
 
-    public SelectionTool(Pane pane,Shape selectedShape,CommandExecutor executor) {
+    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor) {
         super(pane,executor); 
         this.selectedShape = selectedShape;
     }
     
-    public Shape getSelectedShape() {
+    public SelectedShape getSelectedShape() {
         return selectedShape;
-    }
-
-    public void setSelectedShape(Shape selectedShape) {
-        this.selectedShape = selectedShape;
     }
 
     public Shape getSavedShape() {
@@ -50,40 +47,41 @@ public class SelectionTool extends Tool{
     
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
-        if (selectedShape != null){
-           selectedShape.setStyle("-fx-stroke-dash-array:none");
+        
+        if (selectedShape.getShape() != null){
+            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
         
         if (event.getTarget().getClass()!= getPane().getClass()){
-            selectedShape = (Shape) event.getTarget();
-            selectedShape.setStyle("-fx-stroke-dash-array:5px");
+            selectedShape.setShape((Shape) event.getTarget()); 
+            selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
         }
     }
     
     @Override
     public void changeBorderColor(Color strokeColor) {
-        getExecutor().execute(new ChangeBorderColorCommand(selectedShape,strokeColor));
+        getExecutor().execute(new ChangeBorderColorCommand(selectedShape.getShape(),strokeColor));
     }
     
     @Override
     public void changeInteriorColor(Color fillColor) {
-        getExecutor().execute(new ChangeInteriorColorCommand(selectedShape,fillColor));
+        getExecutor().execute(new ChangeInteriorColorCommand(selectedShape.getShape(),fillColor));
     }
     
     @Override
     public void deleteShape() {
-        getExecutor().execute(new DeleteCommand(selectedShape,getPane()));
+        getExecutor().execute(new DeleteCommand(selectedShape.getShape(),getPane()));
     }
     
     
     @Override
     public void copyShape() {
-        setSavedShape(getSelectedShape());
+        setSavedShape(getSelectedShape().getShape());
     }
 
     @Override
     public void cutShape() {
-        setSavedShape(getSelectedShape());
+        setSavedShape(getSelectedShape().getShape());
         deleteShape();
     }
     @Override
