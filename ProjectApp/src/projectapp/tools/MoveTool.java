@@ -27,6 +27,7 @@ public class MoveTool extends SelectionTool{
     
     public MoveTool(Pane pane, Shape selectedShape, CommandExecutor command) {
         super(pane, selectedShape, command);
+        
         this.newX = 0;
         this.newY = 0;
         this.salvoX = 0;
@@ -78,6 +79,7 @@ public class MoveTool extends SelectionTool{
             salvoY  += event.getY()-initialPositionY;
             System.out.println("Sono qui! " + newX);
         }
+        super.getSelectedShape().setStyle("-fx-stroke-dash-array:none");
     }
     
      @Override
