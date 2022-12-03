@@ -34,7 +34,7 @@ public class MoveTool extends SelectionTool{
    
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
-        if (super.getSelectedShape() != null){
+        if (super.getSelectedShape().getShape() != null){
            super.getSelectedShape().getShape().setStyle("-fx-stroke-dash-array:none");
         } 
         if (event.getTarget().getClass()!= getPane().getClass()){
