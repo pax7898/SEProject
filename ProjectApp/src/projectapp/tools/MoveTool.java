@@ -14,7 +14,7 @@ import projectapp.command.MoveCommand;
 
 /**
  *
- * @author pasqualecaggiano
+ * @author acoon
  */
 public class MoveTool extends SelectionTool{
     
@@ -42,7 +42,7 @@ public class MoveTool extends SelectionTool{
             flag = true;
             this.initialPositionX = event.getX();
             this.initialPositionY = event.getY();
-            newX = oldX =super.getSelectedShape().getTranslateX();
+            newX = oldX = super.getSelectedShape().getTranslateX();
             newY = oldY = super.getSelectedShape().getTranslateY();
         }
         else{
@@ -69,7 +69,6 @@ public class MoveTool extends SelectionTool{
             super.getExecutor().execute(new MoveCommand(super.getSelectedShape(),super.getSelectedShape().getTranslateX(), super.getSelectedShape().getTranslateY(), oldX, oldY));
             oldX  = super.getSelectedShape().getTranslateX();
             oldY  = super.getSelectedShape().getTranslateY();
-
             System.out.println("Sono qui! " + newX);
         }
     }

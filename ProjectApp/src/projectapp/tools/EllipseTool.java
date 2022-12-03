@@ -15,22 +15,18 @@ import projectapp.command.DrawCommand;
 
 /**
  *
- * @author pasqualecaggiano
+ * @author acoon
  */
 public class EllipseTool extends Tool{
     private Ellipse ellipse;
 
-
-   
-    
     public EllipseTool(Pane pane,CommandExecutor executor) {
         super(pane,executor);
     }
-
-    
+ 
     @Override
     public Shape getShape() {
-        return new Ellipse();
+        return ellipse;
     }
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
@@ -39,7 +35,6 @@ public class EllipseTool extends Tool{
         ellipse.setFill(fillColor);
         ellipse.setCenterX(event.getX());
         ellipse.setCenterY(event.getY());
-        
         ellipse.setRadiusX(0);
         ellipse.setRadiusY(0);
         getExecutor().execute(new DrawCommand(ellipse,getPane()));

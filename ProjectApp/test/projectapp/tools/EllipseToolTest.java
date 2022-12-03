@@ -31,8 +31,8 @@ public class EllipseToolTest {
         pane = new Pane();
         executor = new CommandExecutor();
         ellipseTool = new EllipseTool(pane,executor);
-        ellipse = new Ellipse(0,0,10,10);
-        pressEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0,MouseButton.PRIMARY, 1,  
+        ellipse = new Ellipse(0,0,30,30);
+        pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0,MouseButton.PRIMARY, 1,  
                                 false, false,false,false,false,false,false,false,false,false,null);
         
     }
@@ -42,7 +42,7 @@ public class EllipseToolTest {
         System.out.println("getShape");
         ellipseTool.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);        
         assertEquals(ellipse.getClass(), ellipseTool.getShape().getClass());
-        assertEquals(ellipse.getCenterX(), ellipseTool.getShape().getLayoutBounds().getMinX(), 0);  
+        assertEquals(ellipse.getCenterX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()), 0);  
     }
 
     @Test
@@ -56,13 +56,15 @@ public class EllipseToolTest {
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
-        MouseEvent draggedEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 0, 0, 10, 10,MouseButton.PRIMARY, 1,
+        MouseEvent draggedEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10,MouseButton.PRIMARY, 1,
                                            false, false,false,false,false,false,false,false,false,false,null);
         assertEquals(ellipse.getCenterX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
         assertEquals(ellipse.getCenterY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
         ellipseTool.onMouseDragged(draggedEvent);
-        assertEquals(ellipse.getRadiusX(),10 + Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(ellipse.getRadiusY(),10 + Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
+        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        ellipseTool.onMouseReleased(event2);
+        assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
     }
 
     @Test
@@ -72,12 +74,12 @@ public class EllipseToolTest {
         Color fillColor = Color.BLUE;
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
 
-        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10,MouseButton.PRIMARY, 1, 
+        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, 
                                            false, false,false,false,false,false,false,false,false,false,null);
 
         ellipseTool.onMouseReleased(event2);
-        assertEquals(ellipse.getRadiusX(),10 + Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(ellipse.getRadiusY(),10 + Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);   
+        assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);   
     }
 
     @Test
