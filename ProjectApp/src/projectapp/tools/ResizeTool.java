@@ -35,7 +35,7 @@ public class ResizeTool extends SelectionTool{
 
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
-        if (super.getSelectedShape() != null){
+        if (super.getSelectedShape().getShape() != null){
            super.getSelectedShape().getShape().setStyle("");
         }
         
