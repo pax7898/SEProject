@@ -62,6 +62,8 @@ public class ResizeTool extends SelectionTool{
             super.getSelectedShape().setScaleX(event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
             super.getSelectedShape().setScaleY(event.getY() / super.getSelectedShape().getLayoutBounds().getMaxY());
             super.getSelectedShape().setStyle("");
+            System.out.println(super.getSelectedShape().getScaleX() + " " + event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
+            
 
         }
     }
