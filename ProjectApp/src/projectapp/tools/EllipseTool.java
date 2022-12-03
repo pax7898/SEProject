@@ -20,9 +20,6 @@ import projectapp.command.DrawCommand;
 public class EllipseTool extends Tool{
     private Ellipse ellipse;
 
-
-   
-    
     public EllipseTool(Pane pane,CommandExecutor executor) {
         super(pane,executor);
     }
