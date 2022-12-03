@@ -24,7 +24,7 @@ public class EllipseToolTest {
     private Tool ellipseTool;
     private Ellipse ellipse;
     private MouseEvent pressEvent;
-    private MouseEvent draggedEvent;
+    private MouseEvent dragEvent;
     
     @Before
     public void setUp() {
@@ -35,7 +35,7 @@ public class EllipseToolTest {
         ellipse = new Ellipse(0,0,0,0);
         pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, MouseButton.PRIMARY, 1,  
                                 false, false,false,false,false,false,false,false,false,false,null);
-        draggedEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 60, 60, 60, 60,MouseButton.PRIMARY, 1,
+        dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 60, 60, 60, 60,MouseButton.PRIMARY, 1,
                                            false, false,false,false,false,false,false,false,false,false,null);
         
     }
@@ -77,7 +77,7 @@ public class EllipseToolTest {
         System.out.println("Prima" + ellipseTool.getShape());
         assertEquals(ellipse.getRadiusX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
         assertEquals(ellipse.getRadiusY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
-        ellipseTool.onMouseDragged(draggedEvent);
+        ellipseTool.onMouseDragged(dragEvent);
         System.out.println("Dopo" + ellipseTool.getShape());
         assertEquals(ellipse.getRadiusX()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1); //I do +60 given that I'm moving from 0 to 60 (I have a bigger ellipse)
         assertEquals(ellipse.getRadiusY()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
@@ -93,28 +93,10 @@ public class EllipseToolTest {
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
         MouseEvent releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 60, 60, 60, 60, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
                                            false, false,false,false,false,false,false,false,false,false,null);
-        ellipseTool.onMouseDragged(draggedEvent);
+        ellipseTool.onMouseDragged(dragEvent);
         ellipseTool.onMouseReleased(releasedEvent);
         assertEquals(ellipse.getRadiusX()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
         assertEquals(ellipse.getRadiusY()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);   
     }
 
-    @Test
-    public void testChangeBorderColor(){}
-
-    @Test
-    public void testChangeInteriorColor(){}
-
-    @Test
-    public void testDeleteShape(){}
-
-    @Test
-    public void testCopyShape(){}
-
-    @Test
-    public void testCutShape(){}
-
-    @Test
-    public void testPasteShape(){}
-    
 }

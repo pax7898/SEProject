@@ -86,7 +86,6 @@ public class MoveCommandTest {
         double oldValueX = line.getShape().getTranslateX();
         double oldValueY = line.getShape().getTranslateY();
         line.onMouseDragged(dragEvent);
-        //System.out.println(rectangleTest.getLayoutX() + " " + rectangle.getShape().getLayoutY());
         moveCommand = new MoveCommand(line.getShape(), 10,10,0,0);
         moveCommand.execute();
         assertNotEquals(oldValueX, line.getShape().getTranslateX());
@@ -96,9 +95,6 @@ public class MoveCommandTest {
         
     }
 
-    @Test
-    public void testUndo() {
-        System.out.println("undo");  
-    }
+
     
 }

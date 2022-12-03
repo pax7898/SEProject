@@ -50,12 +50,12 @@ public class MoveTool extends SelectionTool{
             flag = false;
         }
     }
-    
+
+   
     
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
-            System.out.println("Faccio la translate di: " + newX);
             super.getSelectedShape().getShape().setTranslateX(newX);
             super.getSelectedShape().getShape().setTranslateY(newY);
             newX = oldX + event.getX() - initialPositionX;
@@ -67,10 +67,10 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseReleased(MouseEvent event) {
         if(flag == true){
-            super.getExecutor().execute(new MoveCommand(super.getSelectedShape().getShape(),super.getSelectedShape().getShape().getTranslateX(), super.getSelectedShape().getShape().getTranslateY(), oldX, oldY));
+            super.getExecutor().execute(new MoveCommand(super.getSelectedShape().getShape(),super.getSelectedShape().getShape().getTranslateX(), 
+                                        super.getSelectedShape().getShape().getTranslateY(), oldX, oldY));
             oldX  = super.getSelectedShape().getShape().getTranslateX();
             oldY  = super.getSelectedShape().getShape().getTranslateY();
-            System.out.println("Sono qui! " + newX);
         }
     }
     
@@ -80,6 +80,25 @@ public class MoveTool extends SelectionTool{
     @Override
     public void changeInteriorColor(Color strokeColor) {}
     
-     
+    /*I need get method only for tests*/
+    public double getNewX() {
+        return newX;
+    }
+
+    public double getNewY() {
+        return newY;
+    }
+
+
+    public double getOldX() {
+        return oldX;
+    }
+
+
+    public double getOldY() {
+        return oldY;
+    }
+
+    
 }
 
