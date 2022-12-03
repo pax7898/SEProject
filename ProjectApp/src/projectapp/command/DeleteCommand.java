@@ -23,13 +23,11 @@ public class DeleteCommand  implements Command{
  
     @Override
     public void execute() {
-        System.out.println("Delete");
         pane.getChildren().remove(shape);
     }
 
     @Override
     public void undo() {
-        System.out.println("Undo delete");
         pane.getChildren().add(shape);
     }
 }
