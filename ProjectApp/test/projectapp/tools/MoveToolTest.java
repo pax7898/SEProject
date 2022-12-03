@@ -25,49 +25,23 @@ public class MoveToolTest {
 
     @Test
     public void testOnMousePressed() {
-        System.out.println("onMousePressed");
-        MouseEvent event = null;
-        Color strokeColor = null;
-        Color fillColor = null;
-        MoveTool instance = null;
-        instance.onMousePressed(event, strokeColor, fillColor);
-        fail("The test case is a prototype.");
+        //to do
     }
 
     @Test
     public void testOnMouseDragged() {
-        System.out.println("onMouseDragged");
-        MouseEvent event = null;
-        MoveTool instance = null;
-        instance.onMouseDragged(event);
-        fail("The test case is a prototype.");
+        //to do
     }
 
     @Test
     public void testOnMouseReleased() {
-        System.out.println("onMouseReleased");
-        MouseEvent event = null;
-        MoveTool instance = null;
-        instance.onMouseReleased(event);
-        fail("The test case is a prototype.");
+        //to do
     }
 
     @Test
-    public void testChangeBorderColor() {
-        System.out.println("changeBorderColor");
-        Color strokeColor = null;
-        MoveTool instance = null;
-        instance.changeBorderColor(strokeColor);
-        fail("The test case is a prototype.");
-    }
+    public void testChangeBorderColor() {}
 
     @Test
-    public void testChangeInteriorColor() {
-        System.out.println("changeInteriorColor");
-        Color strokeColor = null;
-        MoveTool instance = null;
-        instance.changeInteriorColor(strokeColor);
-        fail("The test case is a prototype.");
-    }
+    public void testChangeInteriorColor() {}
     
 }

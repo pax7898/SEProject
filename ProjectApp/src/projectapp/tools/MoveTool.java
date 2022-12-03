@@ -54,12 +54,10 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
-            System.out.println("Faccio la translate di: " + newX);
             super.getSelectedShape().setTranslateX(newX);
             super.getSelectedShape().setTranslateY(newY);
             newX = oldX + event.getX() - initialPositionX;
             newY = oldY + event.getY() - initialPositionY;
-
         }      
     }
 
@@ -69,7 +67,6 @@ public class MoveTool extends SelectionTool{
             super.getExecutor().execute(new MoveCommand(super.getSelectedShape(),super.getSelectedShape().getTranslateX(), super.getSelectedShape().getTranslateY(), oldX, oldY));
             oldX  = super.getSelectedShape().getTranslateX();
             oldY  = super.getSelectedShape().getTranslateY();
-            System.out.println("Sono qui! " + newX);
         }
     }
     

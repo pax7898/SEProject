@@ -24,7 +24,8 @@ public class EllipseToolTest {
     private Tool ellipseTool;
     private Ellipse ellipse;
     private MouseEvent pressEvent;
-
+    private MouseEvent draggedEvent;
+    
     @Before
     public void setUp() {
         
@@ -32,8 +33,10 @@ public class EllipseToolTest {
         executor = new CommandExecutor();
         ellipseTool = new EllipseTool(pane,executor);
         ellipse = new Ellipse(0,0,30,30);
-        pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0,MouseButton.PRIMARY, 1,  
+        pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 30, 30, 30, 30, MouseButton.PRIMARY, 1,  
                                 false, false,false,false,false,false,false,false,false,false,null);
+        draggedEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10,MouseButton.PRIMARY, 1,
+                                           false, false,false,false,false,false,false,false,false,false,null);
         
     }
 
@@ -42,11 +45,25 @@ public class EllipseToolTest {
         System.out.println("getShape");
         ellipseTool.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);        
         assertEquals(ellipse.getClass(), ellipseTool.getShape().getClass());
-        assertEquals(ellipse.getCenterX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()), 0);  
+        assertEquals(ellipse.getRadiusX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()), 0);  
+        assertEquals(ellipse.getRadiusY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()), 0);  
+
     }
 
     @Test
-    public void testOnMousePressed() {
+    public void testOnMousePressed() { 
+        System.out.println("onMousePressed");
+        
+        
+        Color strokeColor = Color.RED;
+        Color fillColor = Color.BLUE;
+        ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
+        
+        assertEquals(1,pane.getChildren().size());
+        
+        assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
+        assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
+        
         
     }
 
@@ -56,14 +73,11 @@ public class EllipseToolTest {
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
-        MouseEvent draggedEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10,MouseButton.PRIMARY, 1,
-                                           false, false,false,false,false,false,false,false,false,false,null);
-        assertEquals(ellipse.getCenterX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
-        assertEquals(ellipse.getCenterY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
+        
+        assertEquals(ellipse.getRadiusX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
+        assertEquals(ellipse.getRadiusY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
         ellipseTool.onMouseDragged(draggedEvent);
-        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
-        ellipseTool.onMouseReleased(event2);
-        assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1); //I do +20 given that I'm moving from 10 to 30
         assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
     }
 
@@ -73,31 +87,30 @@ public class EllipseToolTest {
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
-
-        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, 
+        MouseEvent releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30, MouseButton.PRIMARY, 1, //I release at the end of drag
                                            false, false,false,false,false,false,false,false,false,false,null);
-
-        ellipseTool.onMouseReleased(event2);
+        ellipseTool.onMouseDragged(draggedEvent);
+        ellipseTool.onMouseReleased(releasedEvent);
         assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
         assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);   
     }
 
     @Test
-    public void testChangeBorderColor() {}
+    public void testChangeBorderColor(){}
 
     @Test
-    public void testChangeInteriorColor() {}
+    public void testChangeInteriorColor(){}
 
     @Test
-    public void testDeleteShape() {}
+    public void testDeleteShape(){}
 
     @Test
-    public void testCopyShape() {}
+    public void testCopyShape(){}
 
     @Test
-    public void testCutShape() {}
+    public void testCutShape(){}
 
     @Test
-    public void testPasteShape() {}
+    public void testPasteShape(){}
     
 }
