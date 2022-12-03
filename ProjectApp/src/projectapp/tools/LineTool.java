@@ -53,21 +53,21 @@ public class LineTool extends Tool{
     
 
     @Override
-    public void changeBorderColor(Color strokeColor) {}
+    public void changeBorderColor(Color strokeColor){}
 
     @Override
-    public void changeInteriorColor(Color strokeColor) {}
+    public void changeInteriorColor(Color strokeColor){}
 
     @Override
-    public void deleteShape() {}
+    public void deleteShape(){}
 
     @Override
-    public void copyShape() {}
+    public void copyShape(){}
 
     @Override
-    public void cutShape() {}
+    public void cutShape(){}
 
     @Override
-    public void pasteShape() {}
+    public void pasteShape(){}
 
 }
