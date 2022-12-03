@@ -37,14 +37,7 @@ public class LineToolTest {
         line = new Line(20,20,50,50);
     }
 
-    /**
-     * Test of getShape method, of class LineTool.
-     */
-    @Test
-    public void testGetShape() {
-       
-    }
-
+   
     /**
      * Test of onMousePressed method, of class LineTool.
      */
@@ -59,8 +52,57 @@ public class LineToolTest {
         
         assertEquals(1,pane.getChildren().size());
         
+        assertEquals(line.getStartX(),Math.rint(lineTool.getShape().getLayoutBounds().getMinX()),1);
+        assertEquals(line.getStartY(),Math.rint(lineTool.getShape().getLayoutBounds().getMinX()),1);
         
     }
+    
+    @Test
+    public void testOnMouseDragged() {
+        System.out.println("onMouseDragged");
+        MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        Color strokeColor = Color.RED;
+        Color fillColor = Color.BLUE;
+        lineTool.onMousePressed(event1, strokeColor, fillColor);
+        
+        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        
+        lineTool.onMouseDragged(event2);
+        assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+    }
+    
+    @Test
+    public void testOnMouseReleased() {
+        System.out.println("onMouseReleased");
+        MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        Color strokeColor = Color.RED;
+        Color fillColor = Color.BLUE;
+        lineTool.onMousePressed(event1, strokeColor, fillColor);
+        
+        MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        
+        lineTool.onMouseReleased(event2);
+        assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);   
+    }
 
-   
+    /**
+     * Test of getShape method, of class LineTool.
+     */
+    @Test
+    public void testGetShape() {
+       System.out.println("getShape");
+       
+       assertEquals(null,lineTool.getShape());
+       
+       MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+       Color strokeColor = Color.RED;
+       Color fillColor = Color.BLUE;
+       lineTool.onMousePressed(event1, strokeColor, fillColor);
+       
+        assertEquals(line.getClass(),lineTool.getShape().getClass());
+       
+    }
+
 }

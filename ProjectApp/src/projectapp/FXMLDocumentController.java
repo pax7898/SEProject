@@ -171,10 +171,17 @@ public class FXMLDocumentController implements Initializable {
     private void pasteShape(ActionEvent event) {
         editor.pasteShape();
     }
+    
+    @FXML
+    private void moveShape(ActionEvent event) {
+        editor.setMoveTool();
+    }
+       
 
     @FXML
     private void undo(ActionEvent event) {
         editor.undo();
     }
-       
+
+    
 }

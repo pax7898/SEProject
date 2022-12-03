@@ -26,13 +26,11 @@ public class DrawCommand implements Command{
  
     @Override
     public void execute() {
-        System.out.println("Draw");
         pane.getChildren().add(shape);
     }
 
     @Override
     public void undo() {
-        System.out.println("Undo draw");
         pane.getChildren().remove(shape);
     }
      
