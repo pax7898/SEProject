@@ -139,11 +139,6 @@
                         <ContextMenu>
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#deleteShape" text="Delete" />
-                            <MenuItem mnemonicParsing="false" onAction="#copyShape" text="Copy" />
-                            <MenuItem mnemonicParsing="false" onAction="#cutShape" text="Cut" />
-                            <MenuItem mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
-                            <MenuItem mnemonicParsing="false" onAction="#moveShape" text="Move" />
-                            
                           </items>
                         </ContextMenu>
                      </contextMenu>
