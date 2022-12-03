@@ -32,10 +32,10 @@ public class EllipseToolTest {
         pane = new Pane();
         executor = new CommandExecutor();
         ellipseTool = new EllipseTool(pane,executor);
-        ellipse = new Ellipse(0,0,30,30);
-        pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 30, 30, 30, 30, MouseButton.PRIMARY, 1,  
+        ellipse = new Ellipse(0,0,0,0);
+        pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, MouseButton.PRIMARY, 1,  
                                 false, false,false,false,false,false,false,false,false,false,null);
-        draggedEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10,MouseButton.PRIMARY, 1,
+        draggedEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 60, 60, 60, 60,MouseButton.PRIMARY, 1,
                                            false, false,false,false,false,false,false,false,false,false,null);
         
     }
@@ -57,8 +57,8 @@ public class EllipseToolTest {
         
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
         
+        ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
         assertEquals(1,pane.getChildren().size());
         
         assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
@@ -72,13 +72,17 @@ public class EllipseToolTest {
         System.out.println("onMouseDragged");
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
         
+        ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
+        System.out.println("Prima" + ellipseTool.getShape());
         assertEquals(ellipse.getRadiusX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
         assertEquals(ellipse.getRadiusY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
         ellipseTool.onMouseDragged(draggedEvent);
-        assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1); //I do +20 given that I'm moving from 10 to 30
-        assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
+        System.out.println("Dopo" + ellipseTool.getShape());
+        assertEquals(ellipse.getRadiusX()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1); //I do +60 given that I'm moving from 0 to 60 (I have a bigger ellipse)
+        assertEquals(ellipse.getRadiusY()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
+        assertEquals(ellipse.getRadiusX()+60,Math.rint(-ellipseTool.getShape().getLayoutBounds().getMinX()),1); //I put the - since I'm moving into the negative region
+        assertEquals(ellipse.getRadiusY()+60,Math.rint(-ellipseTool.getShape().getLayoutBounds().getMinY()),1);
     }
 
     @Test
@@ -87,12 +91,12 @@ public class EllipseToolTest {
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
-        MouseEvent releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30, MouseButton.PRIMARY, 1, //I release at the end of drag
+        MouseEvent releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 60, 60, 60, 60, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
                                            false, false,false,false,false,false,false,false,false,false,null);
         ellipseTool.onMouseDragged(draggedEvent);
         ellipseTool.onMouseReleased(releasedEvent);
-        assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);   
+        assertEquals(ellipse.getRadiusX()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(ellipse.getRadiusY()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1);   
     }
 
     @Test
