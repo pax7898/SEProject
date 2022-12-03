@@ -34,7 +34,7 @@ public class LineToolTest {
         pane = new Pane();
         executor = new CommandExecutor();
         lineTool = new LineTool(pane,executor);
-        line = new Line(20,20,50,50);
+        line = new Line(20,20,30,30);
     }
 
    
@@ -68,8 +68,8 @@ public class LineToolTest {
         MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         
         lineTool.onMouseDragged(event2);
-        assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);
+        assertEquals(line.getEndX(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(line.getEndY(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);
     }
     
     @Test
@@ -83,8 +83,9 @@ public class LineToolTest {
         MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         
         lineTool.onMouseReleased(event2);
-        assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);   
+        System.out.println(lineTool.getShape());
+        assertEquals(line.getEndX(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(line.getEndY(),Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);   
     }
 
     /**

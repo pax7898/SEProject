@@ -8,10 +8,14 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import projectapp.tools.EllipseTool;
+import projectapp.tools.LineTool;
+import projectapp.tools.RectangleTool;
 
 /**
  *
@@ -21,6 +25,8 @@ public class MoveCommandTest {
     private Pane pane;
     private CommandExecutor executor;
     private EllipseTool ellipse;
+    private RectangleTool rectangle;
+    private LineTool line;
     private MoveCommand moveCommand;
     private MouseEvent pressEvent;
     private MouseEvent dragEvent;
@@ -30,29 +36,69 @@ public class MoveCommandTest {
     public void setUp() {
         pane = new Pane();
         executor = new CommandExecutor();
-        pressEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0,MouseButton.PRIMARY, 1,  
-                                false, false,false,false,false,false,false,false,false,false,null);
-        ellipse = new EllipseTool(pane, executor);
-        ellipse.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER); //creo la figura e le mie vecchie coordinate sono centerX = 0,centerY = 0, radiusX = 0, radiusY = 0
+        pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, MouseButton.PRIMARY, 1,  
+                                    false, false,false,false,false,false,false,false,false,false,null);
+        dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 0, 0, MouseButton.PRIMARY, 1,
+                                    false, false,false,false,false,false,false,false,false,false,null);
         
         
         
     }
 
     @Test
-    public void testExecute() {
-        System.out.println("execute");
-        MoveCommand instance = null;
-        instance.execute();
-        fail("The test case is a prototype.");
+    public void testExecuteEllipse() {
+        System.out.println("executeEllipse");
+        ellipse = new EllipseTool(pane, executor);
+        ellipse.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
+        double oldValueX = ellipse.getShape().getTranslateX();
+        double oldValueY = ellipse.getShape().getTranslateY();
+        ellipse.onMouseDragged(dragEvent);
+        moveCommand = new MoveCommand(ellipse.getShape(), 10,10,0,0);
+        moveCommand.execute();
+        assertNotEquals(oldValueX, ellipse.getShape().getTranslateX());
+        assertNotEquals(oldValueY, ellipse.getShape().getTranslateY());
+        assertEquals(10, ellipse.getShape().getTranslateX(), 0);
+        assertEquals(10, ellipse.getShape().getTranslateY(), 0);
+        
+    }
+    
+    @Test
+    public void testExecuteRectangle() {
+        System.out.println("executeRectangle");
+        rectangle = new RectangleTool(pane, executor);
+        rectangle.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
+        double oldValueX = rectangle.getShape().getTranslateX();
+        double oldValueY = rectangle.getShape().getTranslateY();
+        rectangle.onMouseDragged(dragEvent);
+        moveCommand = new MoveCommand(rectangle.getShape(),10,10,0,0);
+        moveCommand.execute();
+        assertNotEquals(oldValueX, rectangle.getShape().getTranslateX());
+        assertNotEquals(oldValueY, rectangle.getShape().getTranslateY());
+        assertEquals(10, rectangle.getShape().getTranslateX(), 0);
+        assertEquals(10, rectangle.getShape().getTranslateY(), 0);      
+    } 
+    
+    @Test
+    public void testExecuteLine() {
+        System.out.println("executeLine");
+        line = new LineTool(pane, executor);
+        line.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
+        double oldValueX = line.getShape().getTranslateX();
+        double oldValueY = line.getShape().getTranslateY();
+        line.onMouseDragged(dragEvent);
+        //System.out.println(rectangleTest.getLayoutX() + " " + rectangle.getShape().getLayoutY());
+        moveCommand = new MoveCommand(line.getShape(), 10,10,0,0);
+        moveCommand.execute();
+        assertNotEquals(oldValueX, line.getShape().getTranslateX());
+        assertNotEquals(oldValueY, line.getShape().getTranslateY());
+        assertEquals(10, line.getShape().getTranslateX(), 0);
+        assertEquals(10, line.getShape().getTranslateY(), 0);
+        
     }
 
     @Test
     public void testUndo() {
-        System.out.println("undo");
-        MoveCommand instance = null;
-        instance.undo();
-        fail("The test case is a prototype.");
+        System.out.println("undo");  
     }
     
 }

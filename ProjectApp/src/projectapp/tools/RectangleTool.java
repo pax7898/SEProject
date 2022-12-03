@@ -22,8 +22,6 @@ public class RectangleTool extends Tool{
     private double initialPositionX;
     private double initialPositionY;
 
-    
-
     public RectangleTool(Pane pane,CommandExecutor executor) {
         super(pane,executor);
     }
@@ -33,7 +31,6 @@ public class RectangleTool extends Tool{
         return rectangle;
     }
 
-    
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
         rectangle = new Rectangle();
@@ -62,8 +59,7 @@ public class RectangleTool extends Tool{
         if(endY < 0){
             endY = -endY;
             rectangle.setY(event.getY());
-        }
-        
+        }    
         rectangle.setWidth(endX);
         rectangle.setHeight(endY);
     }
