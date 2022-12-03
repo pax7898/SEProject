@@ -53,7 +53,7 @@ public class LineToolTest {
         assertEquals(1,pane.getChildren().size());
         
         assertEquals(line.getStartX(),Math.rint(lineTool.getShape().getLayoutBounds().getMinX()),1);
-        assertEquals(line.getStartY(),Math.rint(lineTool.getShape().getLayoutBounds().getMinX()),1);
+        assertEquals(line.getStartY(),Math.rint(lineTool.getShape().getLayoutBounds().getMinY()),1);
         
     }
     
@@ -69,7 +69,7 @@ public class LineToolTest {
         
         lineTool.onMouseDragged(event2);
         assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
+        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);
     }
     
     @Test
@@ -84,7 +84,7 @@ public class LineToolTest {
         
         lineTool.onMouseReleased(event2);
         assertEquals(line.getEndX(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);
-        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxX()),1);   
+        assertEquals(line.getEndY(),20 + Math.rint(lineTool.getShape().getLayoutBounds().getMaxY()),1);   
     }
 
     /**
