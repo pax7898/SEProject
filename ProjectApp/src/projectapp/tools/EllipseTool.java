@@ -19,8 +19,7 @@ import projectapp.command.DrawCommand;
  */
 public class EllipseTool extends Tool{
     private Ellipse ellipse;
-    private double x;
-    private double y;
+
 
    
     
@@ -43,39 +42,21 @@ public class EllipseTool extends Tool{
         
         ellipse.setRadiusX(0);
         ellipse.setRadiusY(0);
-        this.setX(event.getX());
-        this.setY(event.getY());
         getExecutor().execute(new DrawCommand(ellipse,getPane()));
     }
 
     @Override
     public void onMouseDragged(MouseEvent event) {
-        ellipse.setRadiusX(abs(event.getX()-this.getX()));
-        ellipse.setRadiusY(abs(event.getY()-this.getY()));
+        ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
+        ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
     }
 
     @Override
     public void onMouseReleased(MouseEvent event) {
-        ellipse.setRadiusX(abs(event.getX()-this.getX()));
-        ellipse.setRadiusY(abs(event.getY()-this.getY()));
+        ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
+        ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
     }
 
-    
-     public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
     @Override
     public void changeBorderColor(Color strokeColor) {}
 

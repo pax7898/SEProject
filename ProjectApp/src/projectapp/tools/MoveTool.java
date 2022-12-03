@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
+import projectapp.command.MoveCommand;
 
 /**
  *
@@ -22,8 +23,8 @@ public class MoveTool extends SelectionTool{
     private boolean flag;
     private double newX;
     private double newY;
-    private double salvoX;
-    private double salvoY;
+    private double oldX;
+    private double oldY;
     
     public MoveTool(Pane pane, Shape selectedShape, CommandExecutor command) {
         super(pane, selectedShape, command);
@@ -41,10 +42,8 @@ public class MoveTool extends SelectionTool{
             flag = true;
             this.initialPositionX = event.getX();
             this.initialPositionY = event.getY();
-            newX = super.getSelectedShape().getTranslateX();
-            newY = super.getSelectedShape().getTranslateY();
-            salvoX = super.getSelectedShape().getTranslateX();
-            salvoY = super.getSelectedShape().getTranslateY();
+            newX = oldX =super.getSelectedShape().getTranslateX();
+            newY = oldY = super.getSelectedShape().getTranslateY();
         }
         else{
             flag = false;
@@ -58,8 +57,8 @@ public class MoveTool extends SelectionTool{
             System.out.println("Faccio la translate di: " + newX);
             super.getSelectedShape().setTranslateX(newX);
             super.getSelectedShape().setTranslateY(newY);
-            newX = salvoX + event.getX() - initialPositionX;
-            newY = salvoY + event.getY() - initialPositionY;
+            newX = oldX + event.getX() - initialPositionX;
+            newY = oldY + event.getY() - initialPositionY;
 
         }      
     }
@@ -67,8 +66,10 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseReleased(MouseEvent event) {
         if(flag == true){
-            salvoX  = super.getSelectedShape().getTranslateX();
-            salvoY  = super.getSelectedShape().getTranslateY();
+            super.getExecutor().execute(new MoveCommand(super.getSelectedShape(),super.getSelectedShape().getTranslateX(), super.getSelectedShape().getTranslateY(), oldX, oldY));
+            oldX  = super.getSelectedShape().getTranslateX();
+            oldY  = super.getSelectedShape().getTranslateY();
+
             System.out.println("Sono qui! " + newX);
         }
     }

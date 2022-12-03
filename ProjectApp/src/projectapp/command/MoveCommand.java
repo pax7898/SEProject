@@ -17,26 +17,29 @@ import javafx.scene.shape.Shape;
  */
 public class MoveCommand implements Command{
     private Shape shape;
-    private double x;
-    private double y;
-    
-  
-    
-    public MoveCommand(Shape shape, double x, double y) {
-        this.shape = shape;
-        this.x=x;
-        this.y=y;
-               
-    }
+    private double newX;
+    private double newY;
+    private double oldX;
+    private double oldY;
 
+    public MoveCommand(Shape shape, double newX, double newY, double oldX, double oldY) {
+        this.shape = shape;
+        this.newX = newX;
+        this.newY = newY;
+        this.oldX = oldX;
+        this.oldY = oldY;
+    }
+ 
     @Override
     public void execute() {
-        shape.relocate(x, y);
+        this.shape.setTranslateX(newX);
+        this.shape.setTranslateY(newY);
     }
 
     @Override
     public void undo() {
-        shape.relocate(-x, -y);
+        this.shape.setTranslateX(oldX);
+        this.shape.setTranslateY(oldY);
     }
     
 }
