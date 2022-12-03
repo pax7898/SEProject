@@ -28,7 +28,7 @@ public class RectangleToolTest {
     private CommandExecutor executor;
     private Tool rectangleTool;
     private Rectangle rectangle;
-    
+    private MouseEvent pressEvent;
     
     
     public RectangleToolTest() {
@@ -41,6 +41,8 @@ public class RectangleToolTest {
         executor = new CommandExecutor();
         rectangleTool = new RectangleTool(pane,executor);
         rectangle = new Rectangle(10,10,30,30);
+        pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1,  
+                                false, false,false,false,false,false,false,false,false,false,null);
     }
 
     /**
@@ -52,10 +54,9 @@ public class RectangleToolTest {
        
         assertEquals(null,rectangleTool.getShape());
        
-       MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
        Color strokeColor = Color.RED;
        Color fillColor = Color.BLUE;
-       rectangleTool.onMousePressed(event1, strokeColor, fillColor);
+       rectangleTool.onMousePressed(pressEvent, strokeColor, fillColor);
        
         assertEquals(rectangle.getClass(),rectangleTool.getShape().getClass());
     }
@@ -67,10 +68,9 @@ public class RectangleToolTest {
     public void testOnMousePressed() {
         System.out.println("onMousePressed");
         
-        MouseEvent event = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        rectangleTool.onMousePressed(event, strokeColor, fillColor);
+        rectangleTool.onMousePressed(pressEvent, strokeColor, fillColor);
         
         assertEquals(1,pane.getChildren().size());
         
@@ -86,16 +86,13 @@ public class RectangleToolTest {
         System.out.println("onMouseDragged");
        
         
-        MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        rectangleTool.onMousePressed(event1, strokeColor, fillColor);
+        rectangleTool.onMousePressed(pressEvent, strokeColor, fillColor);
 
         MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 40, 40, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
 
         rectangleTool.onMouseDragged(event2);
-        assertEquals(rectangle.getX(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinX()), 1);
-        assertEquals(rectangle.getY(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinY()), 1);
         assertEquals(rectangle.getX() + rectangle.getWidth(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxX()),1);
         assertEquals(rectangle.getY() + rectangle.getHeight(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxY()),1);
     }
@@ -107,16 +104,13 @@ public class RectangleToolTest {
     public void testOnMouseReleased() {
         System.out.println("onMouseReleased");
         
-        MouseEvent event1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
-        rectangleTool.onMousePressed(event1, strokeColor, fillColor);
+        rectangleTool.onMousePressed(pressEvent, strokeColor, fillColor);
         
         MouseEvent event2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 40, 40, 10, 10,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         
         rectangleTool.onMouseReleased(event2);
-        assertEquals(rectangle.getX(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinX()), 1);
-        assertEquals(rectangle.getY(), Math.rint(rectangleTool.getShape().getLayoutBounds().getMinY()), 1);
         assertEquals(rectangle.getX() + rectangle.getWidth(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxX()),1);
         assertEquals(rectangle.getY() + rectangle.getHeight(),Math.rint(rectangleTool.getShape().getLayoutBounds().getMaxY()),1);  
     }
