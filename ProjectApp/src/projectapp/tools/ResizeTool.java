@@ -13,6 +13,7 @@ import javafx.scene.shape.Shape;
 import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 import projectapp.command.MoveCommand;
+import projectapp.command.ResizeCommand;
 
 /**
  *
@@ -38,6 +39,7 @@ public class ResizeTool extends SelectionTool{
         if (event.getTarget().getClass()!= getPane().getClass()){
             super.setSelectedShape((Shape) event.getTarget());
             super.getSelectedShape().setStyle("-fx-stroke-dash-array:5px");
+            super.getExecutor().execute(new ResizeCommand(super.getSelectedShape(), event));
             flag = true;
         }
         else{
@@ -48,8 +50,8 @@ public class ResizeTool extends SelectionTool{
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
-            super.getSelectedShape().setScaleX(event.getSceneX() / super.getSelectedShape().getLayoutBounds().getMaxX());
-            super.getSelectedShape().setScaleY(event.getSceneY() / super.getSelectedShape().getLayoutBounds().getMaxY());
+            super.getSelectedShape().setScaleX(event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
+            super.getSelectedShape().setScaleY(event.getY() / super.getSelectedShape().getLayoutBounds().getMaxY());
         }
     }
 
@@ -62,8 +64,11 @@ public class ResizeTool extends SelectionTool{
     @Override
     public void onMouseReleased(MouseEvent event) {
         if(flag == true){
-            super.getSelectedShape().setScaleX(event.getSceneX() / super.getSelectedShape().getLayoutBounds().getMaxX());
-            super.getSelectedShape().setScaleY(event.getSceneY() / super.getSelectedShape().getLayoutBounds().getMaxY());
+            //super.getSelectedShape().setLayoutX(event.get);
+            super.getSelectedShape().setScaleX(event.getX() / super.getSelectedShape().getLayoutBounds().getMaxX());
+            super.getSelectedShape().setScaleY(event.getY() / super.getSelectedShape().getLayoutBounds().getMaxY());
+            super.getSelectedShape().setStyle("");
+
         }
     }
 }

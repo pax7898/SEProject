@@ -27,8 +27,9 @@ public class ResizeCommand implements Command{
 
     @Override
     public void execute() {
-        this.shape.setScaleX(event.getSceneX() / shape.getLayoutBounds().getMaxX());
-        this.shape.setScaleY(event.getSceneY() / shape.getLayoutBounds().getMaxY());
+        //da cambiare
+        this.shape.setScaleX(event.getX() / shape.getLayoutBounds().getMaxX());
+        this.shape.setScaleY(event.getY() / shape.getLayoutBounds().getMaxY());
     }
 
     @Override
