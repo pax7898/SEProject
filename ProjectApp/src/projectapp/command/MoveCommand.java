@@ -4,23 +4,32 @@
  */
 package projectapp.command;
 
-/**
- *
- * @author pasqualecaggiano
- */
 
 import javafx.scene.shape.Shape;
 
 /**
- *
- * @author pasqualecaggiano
+ * This class allow us to create a command for the move operation
+ * @author acoon
  */
+
 public class MoveCommand implements Command{
     private Shape shape;
     private final double newX;
     private final double newY;
     private final double oldX;
     private final double oldY;
+    
+    /**
+     * 
+     * MoveCommand(Shape shape, double newX, double newY, double oldX, double oldY) is 
+     * the class costructor
+     * 
+     * @param shape is the reference to the shape
+     * @param newX tells how much move the shape on the x-axis from the initial coordinate
+     * @param newY tells how much move the shape on the y-axis from the initial coordinate
+     * @param oldX is the old x-axis position of the shape
+     * @param oldY is the old x-axis position of the shape
+     */
 
     public MoveCommand(Shape shape, double newX, double newY, double oldX, double oldY) {
         this.shape = shape;
@@ -29,15 +38,19 @@ public class MoveCommand implements Command{
         this.oldX = oldX;
         this.oldY = oldY;
     }
+    
+    /**
+     * This method returns the referenced figure
+     * @return the shape
+     */
 
     public Shape getShape() {
         return shape;
     }
 
-    public void setShape(Shape shape) {
-        this.shape = shape;
-    }
-
+    /**
+     * This method translate the shape according to the new x and y coordinate 
+     */
     @Override
     public void execute() {
         this.shape.setTranslateX(newX);

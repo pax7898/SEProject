@@ -14,7 +14,9 @@ import projectapp.command.CommandExecutor;
 import projectapp.command.MoveCommand;
 
 /**
- *
+ * This class is a state in the pattern state and
+ * allow us to move the shape on the pane
+ * 
  * @author acoon
  */
 public class MoveTool extends SelectionTool{
@@ -31,7 +33,15 @@ public class MoveTool extends SelectionTool{
         super(pane, selectedShape, command);
     }
 
-   
+   /**
+    * This method is called when the user select a shape on the pane. 
+    * When a shape is selected its style will be changed.
+    * In this method the parameters that allow us to move the figure correctly and linearly are set.   
+    * 
+    * @param event is the mouse click event on the pane
+    * @param strokeColor is unusued 
+    * @param fillColor is unusued 
+    */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
         if (super.getSelectedShape().getShape() != null){
@@ -51,8 +61,15 @@ public class MoveTool extends SelectionTool{
         }
     }
 
-   
-    
+    /**
+     * This method allow us to translate the shape simultaneously with the drag of the mouse.
+     * At the first iteraction the shape will be translated in place and in 
+     * At each iteration the variables newX and newY will be updated taking into account the old position in which the figure was.
+     * The operations (oldX + event.getX() - initialPositionX) and (oldY + event.getY() - initialPositionY) allow us to move the figure in linear way 
+     * following the mouse drag.
+     * 
+     * @param event is the mouse drag event on the pane
+     */
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
@@ -64,6 +81,13 @@ public class MoveTool extends SelectionTool{
         }      
     }
 
+    /**
+     * This method execute a MoveCommand that set the last position of the shape in the pane 
+     * indicated by the user with the mouse. Moreover,  we are going to save of what the figure has been translated. 
+     * 
+     * 
+     * @param event is the mouse release event on the pane
+     */
     @Override
     public void onMouseReleased(MouseEvent event) {
         if(flag == true){
@@ -80,7 +104,7 @@ public class MoveTool extends SelectionTool{
     @Override
     public void changeInteriorColor(Color strokeColor) {}
     
-    /*I need get method only for tests*/
+    /*I need getter method only for tests*/
     public double getNewX() {
         return newX;
     }

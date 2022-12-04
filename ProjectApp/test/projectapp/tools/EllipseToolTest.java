@@ -39,7 +39,8 @@ public class EllipseToolTest {
                                            false, false,false,false,false,false,false,false,false,false,null);
         
     }
-
+    
+  
     @Test
     public void testGetShape() {
         System.out.println("getShape");
@@ -50,35 +51,28 @@ public class EllipseToolTest {
 
     }
 
+   
     @Test
     public void testOnMousePressed() { 
         System.out.println("onMousePressed");
-        
-        
         Color strokeColor = Color.RED;
-        Color fillColor = Color.BLUE;
-        
+        Color fillColor = Color.BLUE;      
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
         assertEquals(1,pane.getChildren().size());
-        
         assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
         assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
-        
-        
+   
     }
 
     @Test
     public void testOnMouseDragged() {
         System.out.println("onMouseDragged");
         Color strokeColor = Color.RED;
-        Color fillColor = Color.BLUE;
-        
+        Color fillColor = Color.BLUE;  
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
-        System.out.println("Prima" + ellipseTool.getShape());
         assertEquals(ellipse.getRadiusX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
         assertEquals(ellipse.getRadiusY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
         ellipseTool.onMouseDragged(dragEvent);
-        System.out.println("Dopo" + ellipseTool.getShape());
         assertEquals(ellipse.getRadiusX()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxX()),1); //I do +60 given that I'm moving from 0 to 60 (I have a bigger ellipse)
         assertEquals(ellipse.getRadiusY()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
         assertEquals(ellipse.getRadiusX()+60,Math.rint(-ellipseTool.getShape().getLayoutBounds().getMinX()),1); //I put the - since I'm moving into the negative region

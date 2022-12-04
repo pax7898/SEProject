@@ -14,20 +14,42 @@ import projectapp.command.CommandExecutor;
 import projectapp.command.DrawCommand;
 
 /**
- *
+ * This class is a state in the pattern state and 
+ * create an ellipse in a specific position with specific size indicated 
+ * by the user with the mouse
+ * 
  * @author acoon
  */
 public class EllipseTool extends Tool{
     private Ellipse ellipse;
-
+    
+    /**
+     * The costructor calls the costructor of Tool class
+     * @param pane
+     * @param executor 
+     */
     public EllipseTool(Pane pane,CommandExecutor executor) {
         super(pane,executor);
+        this.ellipse = null;
     }
- 
+    
+    /**
+     * This method return the created ellipse
+     * @return 
+     */
     @Override
     public Shape getShape() {
         return ellipse;
     }
+    
+    /**
+     * This method create an ellipse and sets all of its property and at the end
+     * execute a draw command that recives the shape and add it to the pane
+     * 
+     * @param event is the mouse click event on the pane
+     * @param strokeColor is the stroke color of the shape selected with colorPicker
+     * @param fillColor  is the fill color of the shape selected with colorPicker
+     */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
         ellipse = new Ellipse();
@@ -40,12 +62,25 @@ public class EllipseTool extends Tool{
         getExecutor().execute(new DrawCommand(ellipse,getPane()));
     }
 
+    /**
+     * This method update the property of the shape while the user do the drag 
+     * operation on the pane with the mouse and allows us to show a preview of 
+     * the shape on the pane
+     * 
+     * @param event is the mouse drag event on the pane
+     */
     @Override
     public void onMouseDragged(MouseEvent event) {
         ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
         ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
     }
 
+    /**
+     * This method sets the last property of the shape when the user release the mouse
+     * on the pane
+     * 
+     * @param event is the mouse release event on the pane
+     */
     @Override
     public void onMouseReleased(MouseEvent event) {
         ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
