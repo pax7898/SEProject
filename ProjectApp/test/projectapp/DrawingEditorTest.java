@@ -6,6 +6,8 @@ package projectapp;
 
 import java.io.File;
 import javafx.collections.ObservableList;
+import javafx.event.EventTarget;
+import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -14,11 +16,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import projectapp.command.CommandExecutor;
 import projectapp.tools.LineTool;
+import projectapp.tools.MoveTool;
+import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
 
 /**
@@ -30,7 +35,10 @@ public class DrawingEditorTest {
     private Tool currentTool;
     private CommandExecutor executor;
     private DrawingEditor editor;
-    
+    private SelectedShape selectedShape;
+    private Shape shape;
+    private SelectionTool tool;
+    private MoveTool moveTool;
     
     @Before
     public void setUp() {
@@ -38,6 +46,12 @@ public class DrawingEditorTest {
         executor = new CommandExecutor();
         currentTool = new LineTool(drawingPane,executor);
         editor = new DrawingEditor(drawingPane,executor,currentTool);
+        shape = new Rectangle(20,20,30,30);
+        shape.setFill(Color.BLUE);
+        shape.setStroke(Color.BLUE);
+        
+        selectedShape = new SelectedShape(shape);
+        
     }
 
     /**
@@ -94,7 +108,12 @@ public class DrawingEditorTest {
      */
     @Test
     public void testSetSelectionTool() {
-        
+        System.out.println("setSelectionTool");
+        editor.setSelectionTool();
+        MouseEvent event = new MouseEvent(null, shape, new EventType("selection"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+        tool = new SelectionTool(drawingPane,selectedShape,executor);
+        tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        assertEquals(shape.getStyle(), "-fx-stroke-dash-array:5px");
     }
 
     /**
@@ -102,6 +121,15 @@ public class DrawingEditorTest {
      */
     @Test
     public void testSetMoveTool() {
+       System.out.println("setMoveTool"); 
+       editor.setMoveTool();
+       MouseEvent event = new MouseEvent(null, shape, new EventType("move"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+       moveTool=new MoveTool(drawingPane,selectedShape,executor);
+       moveTool.onMouseDragged(event);
+       assertEquals(moveTool.getNewX(), shape.getTranslateX(), 0);
+       assertEquals(moveTool.getNewY(), shape.getTranslateY(), 0);
+        
+       
        
     }
 
