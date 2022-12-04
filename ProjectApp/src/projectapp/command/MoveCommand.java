@@ -39,11 +39,6 @@ public class MoveCommand implements Command{
         this.oldY = oldY;
     }
     
-    /**
-     * This method returns the referenced figure
-     * @return the shape
-     */
-
     public Shape getShape() {
         return shape;
     }

@@ -32,11 +32,7 @@ public class EllipseTool extends Tool{
         super(pane,executor);
         this.ellipse = null;
     }
-    
-    /**
-     * This method return the created ellipse
-     * @return 
-     */
+   
     @Override
     public Shape getShape() {
         return ellipse;
@@ -86,7 +82,10 @@ public class EllipseTool extends Tool{
         ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
         ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
     }
-
+    
+    /*
+     *  Unimplemented methods of the abstract class Tool
+     */
     @Override
     public void changeBorderColor(Color strokeColor) {}
 

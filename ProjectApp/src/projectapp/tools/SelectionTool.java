@@ -28,9 +28,14 @@ import projectapp.command.DeleteCommand;
 
 public class SelectionTool extends Tool{
     private final SelectedShape selectedShape;
-    private Shape savedShape;
    
-
+    /**
+     * The costructor calls the costructor of Tool class
+     * @param pane
+     * @param executor
+     * Adds an other param that refers to the selectedShape
+     * @param selectedShape 
+     */
     public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor) {
         super(pane,executor); 
         this.selectedShape = selectedShape;
@@ -40,13 +45,6 @@ public class SelectionTool extends Tool{
         return selectedShape;
     }
 
-    public Shape getSavedShape() {
-        return savedShape;
-    }
-
-    public void setSavedShape(Shape savedShape) {
-        this.savedShape = savedShape;
-    }
     /***
      * This method ensures that when a figure is selected inside the work window, this shape is selected and illuminated.
      * When you then select another figure, the new figure is highlighted and the old figure deselected.
@@ -89,6 +87,10 @@ public class SelectionTool extends Tool{
     public void deleteShape() {
         getExecutor().execute(new DeleteCommand(selectedShape.getShape(),getPane()));
     }
+    
+    /*
+     * Unimplemented methods of the abstract class Tool
+     */
     
     @Override
     public void onMouseDragged(MouseEvent event) {}

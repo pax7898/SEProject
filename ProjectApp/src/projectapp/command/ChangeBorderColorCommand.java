@@ -18,12 +18,23 @@ public class ChangeBorderColorCommand implements Command{
     private final Color oldStrokeColor;
     private final Color newStrokeColor;
 
+    /**
+     * 
+     * ChangeBorderColorCommand(Shape shape, Color newStrokeColor) is the class costructor
+     * 
+     * @param shape is the reference to the shape
+     * @param newStrokeColor is the new color of the shape
+     */
+
     public ChangeBorderColorCommand(Shape shape, Color newStrokeColor) {
         this.shape = shape;
         this.oldStrokeColor = (Color) shape.getStroke();
         this.newStrokeColor = newStrokeColor;
     }
     
+    /**
+     * This method changhe the border color of the selected shape
+     */
     @Override
     public void execute() {
         shape.setStroke(newStrokeColor);

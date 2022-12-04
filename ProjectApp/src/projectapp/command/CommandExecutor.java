@@ -7,7 +7,7 @@ package projectapp.command;
 import java.util.*;
 
 /**
- *
+ * This class is the invoker of the command design pattern and executes the commands.
  * @author acoon
  */
 public class CommandExecutor {
@@ -20,7 +20,6 @@ public class CommandExecutor {
     public Deque<Command> getStack() {
         return stack;
     }
-    
     
     public void execute(Command command){
         stack.addLast(command);
