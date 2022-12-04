@@ -67,6 +67,10 @@ public class DrawingEditor {
         currentTool = new RectangleTool(drawingPane,executor);
     }
     
+    /**
+     * With this method I update the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the ellipse button in the application. This condition is necessary for draw an ellipse
+     */
     public void setEllipseTool(){
         System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
@@ -87,6 +91,10 @@ public class DrawingEditor {
         currentTool = new SelectionTool(drawingPane,selectedShape,executor);
     }  
     
+    /**
+     * With this method I update the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the move button in the application. This condition is necessary for move a shape
+     */
     public void setMoveTool(){
         System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
