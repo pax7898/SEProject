@@ -14,14 +14,23 @@ import projectapp.command.CommandExecutor;
 import projectapp.command.DrawCommand;
 
 /**
- *
- * @author pasqualecaggiano
+ * This class is a state in the pattern state and 
+ * create a rectangle in a specific position with specific size indicated 
+ * by the user with the mouse
+ * 
+ * @author Sabatino
  */
 public class RectangleTool extends Tool{
     private Rectangle rectangle;
     private double initialPositionX;
     private double initialPositionY;
-
+    
+    
+    /**
+     * The costructor calls the costructor of Tool class
+     * @param pane
+     * @param executor 
+     */
     public RectangleTool(Pane pane,CommandExecutor executor) {
         super(pane,executor);
     }
@@ -30,7 +39,16 @@ public class RectangleTool extends Tool{
     public Shape getShape() {
         return rectangle;
     }
-
+    
+    
+    /**
+     * This method creates a rectangle and sets all of its property and at the end
+     * execute a draw command that recives the line and add it to the pane
+     * 
+     * @param event is the mouse click event on the pane
+     * @param strokeColor is the stroke color of the shape selected with colorPicker
+     * @param fillColor  is the fill color of the shape selected with colorPicker
+     */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
         rectangle = new Rectangle();
@@ -44,7 +62,15 @@ public class RectangleTool extends Tool{
         this.initialPositionY = event.getY();
         getExecutor().execute(new DrawCommand(rectangle,getPane()));
     }
-
+    
+    
+    /**
+     * This method updates the property of the rectangle while the user is doing the drag 
+     * operation on the pane with the mouse and allows us to show a preview of 
+     * the shape on the pane
+     * 
+     * @param event is the mouse drag event on the pane
+     */
     @Override
     public void onMouseDragged(MouseEvent event) {
         double startX = rectangle.getX();
@@ -63,7 +89,13 @@ public class RectangleTool extends Tool{
         rectangle.setWidth(endX);
         rectangle.setHeight(endY);
     }
-
+    
+    /**
+     * This method sets the last property of the rectangle when the user release the mouse
+     * on the pane
+     * 
+     * @param event is the mouse release event on the pane
+     */
     @Override
     public void onMouseReleased(MouseEvent event) {
         double startX = rectangle.getX();
@@ -83,19 +115,15 @@ public class RectangleTool extends Tool{
         rectangle.setHeight(endY);
     }
 
+    /*
+     *  Unimplemented methods of the abstract class tool
+     */
+    @Override
+    public void changeBorderColor(Color strokeColor) {}
 
     @Override
-    public void changeBorderColor(Color strokeColor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void changeInteriorColor(Color strokeColor) {}
 
     @Override
-    public void changeInteriorColor(Color strokeColor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deleteShape() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    } 
+    public void deleteShape() {} 
 }
