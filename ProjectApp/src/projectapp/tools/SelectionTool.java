@@ -21,8 +21,11 @@ import projectapp.command.DeleteCommand;
 
 /**
  *
- * @author pasqualecaggiano
+ *This SelectionTool class represents the state that allows me to select a 
+ *specific figure on which operations will be performed.
+ * @author pancraziocirillo
  */
+
 public class SelectionTool extends Tool{
     private final SelectedShape selectedShape;
     private Shape savedShape;
@@ -44,7 +47,13 @@ public class SelectionTool extends Tool{
     public void setSavedShape(Shape savedShape) {
         this.savedShape = savedShape;
     }
-    
+    /***
+     * This method ensures that when a figure is selected inside the work window, this shape is selected and illuminated.
+     * When you then select another figure, the new figure is highlighted and the old figure deselected.
+     * @param event this event rappresent the pressed mouse event
+     * @param strokeColor is the color that is setted in border picker color
+     * @param fillColor is the color that is setted in interior picker color
+     */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
         
@@ -57,12 +66,20 @@ public class SelectionTool extends Tool{
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
         }
     }
-    
+    /***
+     * This method allows you to change the border color of a given figure
+     * after having selected it
+     * @param strokeColor is the color set inside the color border picker.
+     */
     @Override
     public void changeBorderColor(Color strokeColor) {
         getExecutor().execute(new ChangeBorderColorCommand(selectedShape.getShape(),strokeColor));
     }
-    
+    /***
+     * This method allows you to change the interior color of a given figure 
+     * after having selected it
+     * @param fillColor is the color set inside the color interior picker.
+     */
     @Override
     public void changeInteriorColor(Color fillColor) {
         getExecutor().execute(new ChangeInteriorColorCommand(selectedShape.getShape(),fillColor));

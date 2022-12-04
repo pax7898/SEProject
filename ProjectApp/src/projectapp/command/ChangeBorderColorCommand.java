@@ -9,8 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 /**
- *
- * @author 39320
+ *This class represents the command that allows you to change the border color 
+ * of a previously selected figure.
+ * @author pancraziocirillo
  */
 public class ChangeBorderColorCommand implements Command{
     private final Shape shape;

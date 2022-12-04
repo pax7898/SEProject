@@ -9,8 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 /**
- *
- * @author 39320
+ *This class represents the command that allows you to change the interior color 
+ * of a previously selected figure.
+ * @author pancraziocirillo
  */
 public class ChangeInteriorColorCommand implements Command{
     private final Shape shape;

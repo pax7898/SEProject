@@ -46,6 +46,10 @@ public class DrawingEditor {
         this.currentTool = currentTool;
         this.selectedShape = new SelectedShape(null);   
     }
+//create only for test
+    public Tool getCurrentTool() {
+        return currentTool;
+    }
 
     public void setLineTool(){
         System.out.println(selectedShape.getShape());
@@ -70,6 +74,11 @@ public class DrawingEditor {
         }
         currentTool = new EllipseTool(drawingPane,executor);
     }
+    /***
+     * This method allows me to change the current state of the application 
+     * based on which button is pressed, where each button represents a state.
+     * After pressing the button the controller will be updated.
+     */
     public void setSelectionTool(){
         System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
@@ -96,11 +105,19 @@ public class DrawingEditor {
     public void onMouseReleased(MouseEvent event){
         currentTool.onMouseReleased(event);
     }
-    
+    /***
+     * This method allows you to change the border color of a given figure. 
+     * After that the controller will be updated.
+     * @param strokeColor is the color set inside the color border picker.
+     */
     public void changeBorderColor(Color strokeColor){
         currentTool.changeBorderColor(strokeColor);
     }
-    
+    /***
+     * This method allows you to change the interior color of a given figure. 
+     * After that the controller will be updated.
+     * @param fillColor is the color set inside the color interior picker.
+     */
     public void changeInteriorColor(Color fillColor){
         currentTool.changeInteriorColor(fillColor);
     }
