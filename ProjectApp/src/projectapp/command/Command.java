@@ -5,7 +5,7 @@
 package projectapp.command;
 
 /**
- *
+ * This class is the command interface that is implemented by each concrete command.
  * @author pasqualecaggiano
  */
 public interface Command {

@@ -14,12 +14,20 @@ import javafx.scene.shape.Shape;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DrawCommand;
 /**
- *
- * @author acoon
+ * This class is a state in the pattern state and 
+ * create a line in a specific position with specific size indicated 
+ * by the user with the mouse
+ * 
+ * @author pasqualecaggiano
  */
 public class LineTool extends Tool{
     private Line line;
 
+    /**
+     * The costructor calls the costructor of Tool class
+     * @param pane
+     * @param executor 
+     */
     public LineTool(Pane pane,CommandExecutor executor) {
         super(pane,executor);
     }
@@ -28,6 +36,14 @@ public class LineTool extends Tool{
         return line;
     }
     
+    /**
+     * This method create a line and sets all of its property and at the end
+     * execute a draw command that recives the shape and add it to the pane
+     * 
+     * @param event is the mouse click event on the pane
+     * @param strokeColor is the stroke color of the shape selected with colorPicker
+     * @param fillColor  is the fill color of the shape selected with colorPicker
+     */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
         line = new Line();
@@ -38,20 +54,35 @@ public class LineTool extends Tool{
         line.setEndY(event.getY());
         getExecutor().execute(new DrawCommand(line,getPane()));
     }
-
+    
+    /**
+     * This method update the property of the shape while the user do the drag 
+     * operation on the pane with the mouse and allows us to show a preview of 
+     * the shape on the pane
+     * 
+     * @param event is the mouse drag event on the pane
+     */
     @Override
     public void onMouseDragged(MouseEvent event) {
         line.setEndX(event.getX());
         line.setEndY(event.getY());
     }
-
+    
+    /**
+     * This method sets the last property of the shape when the user release the mouse
+     * on the pane
+     * 
+     * @param event is the mouse release event on the pane
+     */
     @Override
     public void onMouseReleased(MouseEvent event) {
         line.setEndX(event.getX());
         line.setEndY(event.getY());
     } 
     
-
+    /*
+     * Unimplemented methods of the abstract class Tool
+     */
     @Override
     public void changeBorderColor(Color strokeColor){}
 

@@ -27,7 +27,8 @@ import projectapp.tools.Tool;
 
 
 /**
- *
+ * This method is the only entry point for the communication between the controller (FXMLDocumentController) and 
+ * the Model.
  * @author pasqualecaggiano
  */
 public class DrawingEditor {
@@ -36,21 +37,36 @@ public class DrawingEditor {
     private final Pane drawingPane;
     
     private final CommandExecutor executor;
-   
+
     private Tool currentTool;
+    
     private final SelectedShape selectedShape;
     
+    /**
+     * 
+     * DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) is the class costructor
+     * 
+     * @param pane is the reference to the drawing pane
+     * @param executor is the reference to the commands' invoker
+     * @param currentTool is the current state of the draing editor
+     */
+
     public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) {
         this.drawingPane = pane;
         this.executor = executor;
         this.currentTool = currentTool;
         this.selectedShape = new SelectedShape(null);   
     }
-//create only for test
+    
+    //create only for test
     public Tool getCurrentTool() {
         return currentTool;
     }
 
+    /**
+     * This method updates the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the line button in the application. This condition is necessary for draw a line.
+     */
     public void setLineTool(){
         System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
@@ -59,6 +75,10 @@ public class DrawingEditor {
         currentTool = new LineTool(drawingPane,executor);
     }
     
+    /**
+     * This method updates the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the rectangle button in the application. This condition is necessary for draw a rectangle.
+     */
     public void setRectangleTool(){
         System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
@@ -68,8 +88,8 @@ public class DrawingEditor {
     }
     
     /**
-     * With this method I update the currentTool (which corresponds to the state in tha pattern state)
-     * when the user press the ellipse button in the application. This condition is necessary for draw an ellipse
+     * This method updates the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the ellipse button in the application. This condition is necessary for draw an ellipse.
      */
     public void setEllipseTool(){
         System.out.println(selectedShape.getShape());
@@ -78,10 +98,10 @@ public class DrawingEditor {
         }
         currentTool = new EllipseTool(drawingPane,executor);
     }
-    /***
-     * This method allows me to change the current state of the application 
-     * based on which button is pressed, where each button represents a state.
-     * After pressing the button the controller will be updated.
+    
+    /**
+     * This method updates the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the selection button in the application. This condition is necessary for select a shape.
      */
     public void setSelectionTool(){
         System.out.println(selectedShape.getShape());
@@ -92,8 +112,8 @@ public class DrawingEditor {
     }  
     
     /**
-     * With this method I update the currentTool (which corresponds to the state in tha pattern state)
-     * when the user press the move button in the application. This condition is necessary for move a shape
+     * This method updates the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the move button in the application. This condition is necessary for move a shape.
      */
     public void setMoveTool(){
         System.out.println(selectedShape.getShape());
@@ -103,38 +123,61 @@ public class DrawingEditor {
         currentTool = new MoveTool(drawingPane,selectedShape,executor);
     }
     
-    
+    /**
+     * {@link projectapp.FXMLDocumentController#onMousePressed(javafx.scene.input.MouseEvent)}
+     * @param event is the mouse event detected from the FXMLController
+     * @param strokeColor is the border color of the borderPicker
+     * @param fillColor is the interior color of the interioPicker
+     */
     public void onMousePressed(MouseEvent event,Color strokeColor, Color fillColor){
         currentTool.onMousePressed(event, strokeColor, fillColor);
     }
+    
+    /**
+     * {@link projectapp.FXMLDocumentController#onMouseDragged(javafx.scene.input.MouseEvent)}
+     * @param event is the mouse event detected from the FXMLController
+     * 
+     */
     public void onMouseDragged(MouseEvent event){
         currentTool.onMouseDragged(event);
     }
+    
+    /**
+     * {@link projectapp.FXMLDocumentController#onMouseReleased(javafx.scene.input.MouseEvent)}
+     * @param event is the mouse event detected from the FXMLController
+     * 
+     */
     public void onMouseReleased(MouseEvent event){
         currentTool.onMouseReleased(event);
+        
     }
+    
     /***
-     * This method allows you to change the border color of a given figure. 
-     * After that the controller will be updated.
+     * This method allows the user to change the border color of a given figure. 
      * @param strokeColor is the color set inside the color border picker.
      */
     public void changeBorderColor(Color strokeColor){
         currentTool.changeBorderColor(strokeColor);
     }
     /***
-     * This method allows you to change the interior color of a given figure. 
-     * After that the controller will be updated.
+     * This method allows the user to change the interior color of a given figure.
      * @param fillColor is the color set inside the color interior picker.
      */
     public void changeInteriorColor(Color fillColor){
         currentTool.changeInteriorColor(fillColor);
     }
     
+    /***
+     * This method allows the user to delete the selected figure.
+     */
     public void deleteShape(){
         currentTool.deleteShape();
     }
     
-    
+    /**
+     * This method llow you to save the current drawing on an XML file.
+     * @param file is the location chosen by the user on his file system
+     */
     public void saveDrawing(File file){
         
         try (XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file))){
@@ -148,7 +191,10 @@ public class DrawingEditor {
                 } 
     }
     
-    
+    /**
+     * This method llow you to load a previous saved drawing from an XML file.
+     * @param file is the xml file chosen by the user to load
+     */
     public void loadDrawing(File file){
         
         drawingPane.getChildren().clear();

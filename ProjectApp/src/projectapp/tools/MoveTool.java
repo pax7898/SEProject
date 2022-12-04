@@ -32,6 +32,26 @@ public class MoveTool extends SelectionTool{
     public MoveTool(Pane pane, SelectedShape selectedShape, CommandExecutor command) {
         super(pane, selectedShape, command);
     }
+    
+       /*I need getter method only for tests*/
+    public double getNewX() {
+        return newX;
+    }
+
+    public double getNewY() {
+        return newY;
+    }
+
+
+    public double getOldX() {
+        return oldX;
+    }
+
+
+    public double getOldY() {
+        return oldY;
+    }
+
 
    /**
     * This method is called when the user select a shape on the pane. 
@@ -98,31 +118,14 @@ public class MoveTool extends SelectionTool{
         }
     }
     
+    /*
+     * Unimplemented methods of the abstract class Tool
+     */
      @Override
     public void changeBorderColor(Color strokeColor) {}
 
     @Override
     public void changeInteriorColor(Color strokeColor) {}
-    
-    /*I need getter method only for tests*/
-    public double getNewX() {
-        return newX;
-    }
-
-    public double getNewY() {
-        return newY;
-    }
-
-
-    public double getOldX() {
-        return oldX;
-    }
-
-
-    public double getOldY() {
-        return oldY;
-    }
-
     
 }
 
