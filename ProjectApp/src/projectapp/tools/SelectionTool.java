@@ -21,6 +21,7 @@ import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.CommandExecutor;
 import projectapp.command.CopyCommand;
+import projectapp.command.CutCommand;
 import projectapp.command.DeleteCommand;
 import projectapp.command.PasteCommand;
 
@@ -125,7 +126,11 @@ public class SelectionTool extends Tool{
 
     @Override
     public void cut() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (selectedShape.getShape()!= null){
+            getExecutor().execute(new CutCommand(clonator,selectedShape.getShape(), getPane()));
+        } else {
+            clonator.setByteCloned(null);
+        }
     }
     
     

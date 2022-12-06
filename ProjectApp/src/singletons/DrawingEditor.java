@@ -193,12 +193,18 @@ public class DrawingEditor {
     }
     
     /***
-     * This method allows the user to copy the selected figure.
+     * This method allows the user to paste the selected figure.
      */
     public void pasteShape(Point2D point){
         currentTool.paste(point);
     }
     
+    /***
+     * This method allows the user to cut the selected figure.
+     */
+    public void cutShape(){
+        currentTool.cut();
+    }
     
     public void undo(){
         executor.undo();
