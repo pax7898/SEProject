@@ -116,7 +116,7 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </AnchorPane>
-                              <ToggleButton fx:id="moveBtn" contentDisplay="CENTER" layoutX="220.0" layoutY="45.0" mnemonicParsing="false" onAction="#setMoveTool" prefHeight="34.0" prefWidth="75.0" text="move" textAlignment="CENTER" />
+                              <ToggleButton fx:id="undoBtn" contentDisplay="CENTER" layoutX="220.0" layoutY="45.0" mnemonicParsing="false" onAction="#undo" prefHeight="34.0" prefWidth="75.0" text="Undo" textAlignment="CENTER" />
                            </children>
                         </HBox>
                      </children>
@@ -137,6 +137,9 @@
                         <ContextMenu fx:id="menu">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#deleteShape" text="Delete" />
+                            <MenuItem mnemonicParsing="false" onAction="#copyShape" text="Copy" />
+                            <MenuItem mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
+                            <MenuItem mnemonicParsing="false" onAction="#setMoveTool" text="Move" />
                           </items>
                         </ContextMenu>
                      </contextMenu>

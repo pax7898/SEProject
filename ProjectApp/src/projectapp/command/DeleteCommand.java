@@ -35,5 +35,10 @@ public class DeleteCommand  implements Command{
         pane.getChildren().remove(shape);
     }
 
+    @Override
+    public void undo() {
+        pane.getChildren().add(shape);
+    }
+
     
 }

@@ -14,7 +14,7 @@ import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.SelectedShape;
+import singletons.SelectedShape;
 import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.Command;
@@ -42,8 +42,8 @@ public class SelectionToolTest {
         shape.setStroke(Color.BLUE);
         pane = new Pane();
         pane.getChildren().add(shape);
-        selectedShape = new SelectedShape(shape);
-        
+        selectedShape = SelectedShape.getIstance();
+        selectedShape.setShape(shape); 
 
         executor = new CommandExecutor();
         tool = new SelectionTool(pane,selectedShape,executor);

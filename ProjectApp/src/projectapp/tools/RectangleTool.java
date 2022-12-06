@@ -5,6 +5,7 @@
 package projectapp.tools;
 
 
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -126,4 +127,17 @@ public class RectangleTool extends Tool{
 
     @Override
     public void deleteShape() {} 
+
+    @Override
+    public void copy() {}
+
+    @Override
+    public void paste(Point2D point) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cut() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

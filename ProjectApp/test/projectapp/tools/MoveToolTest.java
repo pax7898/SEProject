@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.SelectedShape;
+import singletons.SelectedShape;
 import projectapp.command.CommandExecutor;
 
 /**
@@ -36,7 +36,7 @@ public class MoveToolTest {
     @Before
     public void setUpEllipse() {
         ellipse = new Ellipse(10,10,10,10);
-        selectedShape = new SelectedShape(ellipse);
+        selectedShape = SelectedShape.getIstance();
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
         moveTool = new MoveTool(pane, selectedShape, executor);
@@ -50,7 +50,8 @@ public class MoveToolTest {
     @Before
     public void setUpRectangle() {
         rectangle = new Rectangle(10,10,10,10);
-        selectedShape = new SelectedShape(rectangle);
+        selectedShape = SelectedShape.getIstance();
+        selectedShape.setShape(rectangle);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
         moveTool = new MoveTool(pane, selectedShape, executor);
@@ -64,7 +65,8 @@ public class MoveToolTest {
     @Before
     public void setUpLine() {
         line = new Line(10,10,10,10);
-        selectedShape = new SelectedShape(line);
+        selectedShape = SelectedShape.getIstance();
+        selectedShape.setShape(line);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
         moveTool = new MoveTool(pane, selectedShape, executor);

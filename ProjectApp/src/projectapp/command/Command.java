@@ -9,5 +9,6 @@ package projectapp.command;
  * @author pasqualecaggiano
  */
 public interface Command {
-    public void execute();   
+    public void execute(); 
+    public void undo();
 }

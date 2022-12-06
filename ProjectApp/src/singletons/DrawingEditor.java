@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projectapp;
+package singletons;
 
 import java.beans.DefaultPersistenceDelegate;
 import java.beans.XMLDecoder;
@@ -13,10 +13,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import projectapp.FXMLDocumentController;
 import projectapp.command.CommandExecutor;
 import projectapp.tools.EllipseTool;
 import projectapp.tools.LineTool;
@@ -42,6 +44,8 @@ public class DrawingEditor {
     
     private final SelectedShape selectedShape;
     
+    static private DrawingEditor instance = null;
+    
     /**
      * 
      * DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) is the class costructor
@@ -55,7 +59,13 @@ public class DrawingEditor {
         this.drawingPane = pane;
         this.executor = executor;
         this.currentTool = currentTool;
-        this.selectedShape = new SelectedShape(null);   
+        this.selectedShape = SelectedShape.getIstance();
+    }
+    
+    public static DrawingEditor getIstance(Pane pane, CommandExecutor executor,Tool currentTool){
+        if (instance==null)
+         instance=new DrawingEditor(pane,executor,currentTool);
+      return instance;
     }
     
     //create only for test
@@ -68,7 +78,6 @@ public class DrawingEditor {
      * when the user press the line button in the application. This condition is necessary for draw a line.
      */
     public void setLineTool(){
-        System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -80,7 +89,6 @@ public class DrawingEditor {
      * when the user press the rectangle button in the application. This condition is necessary for draw a rectangle.
      */
     public void setRectangleTool(){
-        System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -92,7 +100,6 @@ public class DrawingEditor {
      * when the user press the ellipse button in the application. This condition is necessary for draw an ellipse.
      */
     public void setEllipseTool(){
-        System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -104,7 +111,6 @@ public class DrawingEditor {
      * when the user press the selection button in the application. This condition is necessary for select a shape.
      */
     public void setSelectionTool(){
-        System.out.println(selectedShape.getShape());
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -116,7 +122,7 @@ public class DrawingEditor {
      * when the user press the move button in the application. This condition is necessary for move a shape.
      */
     public void setMoveTool(){
-        System.out.println(selectedShape.getShape());
+        
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -174,6 +180,24 @@ public class DrawingEditor {
         currentTool.deleteShape();
     }
     
+    /***
+     * This method allows the user to copy the selected figure.
+     */
+    public void copyShape(){
+        currentTool.copy();
+    }
+    
+    /***
+     * This method allows the user to copy the selected figure.
+     */
+    public void pasteShape(Point2D point){
+        currentTool.paste(point);
+    }
+    
+    
+    public void undo(){
+        executor.undo();
+    }
     /**
      * This method llow you to save the current drawing on an XML file.
      * @param file is the location chosen by the user on his file system

@@ -1,6 +1,7 @@
 package projectapp;
 
 
+import singletons.DrawingEditor;
 import java.io.File;
 import projectapp.command.CommandExecutor;
 import java.net.URL;
@@ -8,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -46,14 +48,17 @@ public class FXMLDocumentController implements Initializable {
     private ToggleButton elBtn;
     @FXML
     private ToggleButton selBtn;
-    @FXML
-    private ToggleButton moveBtn;
+    
     @FXML
     private ContextMenu menu;
     
     private ToggleGroup toggles;
     
     private DrawingEditor editor;
+    
+    private Point2D contextMenuPoint;
+    @FXML
+    private ToggleButton undoBtn;
     
   
     /**
@@ -65,10 +70,10 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        editor = new DrawingEditor(pane,new CommandExecutor(),null);
+        editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null);
         
         toggles = new ToggleGroup();
-        toggles.getToggles().addAll(lineBtn,recBtn,elBtn,selBtn,moveBtn);
+        toggles.getToggles().addAll(lineBtn,recBtn,elBtn,selBtn);
         
         editor.setLineTool();
         lineBtn.setSelected(true); 
@@ -101,7 +106,6 @@ public class FXMLDocumentController implements Initializable {
         if (toggles.getSelectedToggle()!=null){
         toggles.getSelectedToggle().setSelected(false);
         }
-        moveBtn.selectedProperty().set(true);
     }
     
     /**
@@ -221,6 +225,29 @@ public class FXMLDocumentController implements Initializable {
     private void deleteShape(ActionEvent event) {
         editor.deleteShape();
     }
+    
+    
+    /**
+    * This method will be activated when the user presses the copy menu item from the context menu. 
+    * If a shape is selected, all the operations to copy it will be executed.
+    * 
+    * @param event 
+    */
+    @FXML
+    private void copyShape(ActionEvent event) {
+        editor.copyShape();
+    }
+    
+    /**
+    * This method will be activated when the user presses the paste menu item from the context menu. 
+    * If a shape is selected, all the operations to paste it will be executed.
+    * 
+    * @param event 
+    */
+    @FXML
+    private void pasteShape(ActionEvent event) {
+        editor.pasteShape(contextMenuPoint);
+    }
 
     
     /**
@@ -271,6 +298,7 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     private void onMenuRequested(ContextMenuEvent event) {
+        contextMenuPoint = new Point2D(event.getX(),event.getY());
         if (!editor.getCurrentTool().getClass().equals(SelectionTool.class)){
             for (MenuItem item: menu.getItems()){
                 item.setDisable(true);
@@ -281,5 +309,12 @@ public class FXMLDocumentController implements Initializable {
               }
         } 
     }
+
+    @FXML
+    private void undo(ActionEvent event) {
+        editor.undo();
+    }
+
+    
 
 }

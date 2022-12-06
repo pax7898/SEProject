@@ -5,6 +5,7 @@
 package projectapp.tools;
 
 
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -52,7 +53,7 @@ public abstract class Tool {
     public abstract Shape getShape();
     
     /**
-     * This method will be implemented by the SelectionTool and it's dudy is to
+     * This method will be implemented by the SelectionTool and it's duty is to
      * delete the selected shape from the pane
      * 
      */
@@ -103,6 +104,11 @@ public abstract class Tool {
      * @param event 
      */
     public abstract void onMouseReleased(MouseEvent event);
+    
+    
+    public abstract void copy();
+    public abstract void paste(Point2D point);
+    public abstract void cut();
 }
 
  

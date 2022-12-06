@@ -9,15 +9,19 @@ package projectapp.tools;
  * @author pasqualecaggiano
  */
 
+import singletons.Clonator;
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
-import projectapp.SelectedShape;
+import singletons.SelectedShape;
 import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.CommandExecutor;
+import projectapp.command.CopyCommand;
 import projectapp.command.DeleteCommand;
+import projectapp.command.PasteCommand;
 
 /**
  *
@@ -28,6 +32,7 @@ import projectapp.command.DeleteCommand;
 
 public class SelectionTool extends Tool{
     private final SelectedShape selectedShape;
+    private final Clonator clonator;
    
     /**
      * The costructor calls the costructor of Tool class
@@ -39,6 +44,7 @@ public class SelectionTool extends Tool{
     public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor) {
         super(pane,executor); 
         this.selectedShape = selectedShape;
+        this.clonator = Clonator.getIstance();
     }
     
     public SelectedShape getSelectedShape() {
@@ -62,6 +68,8 @@ public class SelectionTool extends Tool{
         if (event.getTarget().getClass()!= getPane().getClass()){
             selectedShape.setShape((Shape) event.getTarget()); 
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
+        } else {
+            selectedShape.setShape(null);
         }
     }
     /***
@@ -87,6 +95,30 @@ public class SelectionTool extends Tool{
     public void deleteShape() {
         getExecutor().execute(new DeleteCommand(selectedShape.getShape(),getPane()));
     }
+    
+    
+    @Override
+    public void copy() {
+        if (selectedShape.getShape()!= null){
+        getExecutor().execute(new CopyCommand(clonator,selectedShape.getShape()));
+        } else {
+            clonator.setByteCloned(null);
+        }
+    }
+    
+    @Override
+    public void paste(Point2D point) {
+        if (clonator.getByteCloned()!=null){
+        getExecutor().execute(new PasteCommand(clonator,selectedShape.getShape(),getPane(),point));
+        }
+    }
+
+    @Override
+    public void cut() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
     /*
      * Unimplemented methods of the abstract class Tool

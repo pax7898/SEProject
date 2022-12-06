@@ -5,6 +5,7 @@
 package projectapp.tools;
 
 import static java.lang.Math.abs;
+import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -94,5 +95,18 @@ public class EllipseTool extends Tool{
 
     @Override
     public void deleteShape() {}
+
+    @Override
+    public void copy() {}
+
+    @Override
+    public void paste(Point2D point) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cut() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
  
 }

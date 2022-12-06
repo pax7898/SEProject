@@ -39,5 +39,10 @@ public class DrawCommand implements Command{
         pane.getChildren().add(shape);
     }
 
+    @Override
+    public void undo() {
+        pane.getChildren().remove(shape);
+    }
+
   
 }

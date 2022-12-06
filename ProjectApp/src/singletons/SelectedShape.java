@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projectapp;
+package singletons;
 
 import javafx.scene.shape.Shape;
 
@@ -15,8 +15,17 @@ import javafx.scene.shape.Shape;
 public class SelectedShape {
     private Shape shape;
 
-    public SelectedShape(Shape shape) {
-        this.shape = shape;
+    static private SelectedShape instance=null; 
+    
+    
+    public SelectedShape(){
+        shape = null;
+    }
+    
+    public static SelectedShape getIstance() {
+      if (instance==null)
+         instance=new SelectedShape();
+      return instance;
     }
 
     public Shape getShape() {

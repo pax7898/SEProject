@@ -4,6 +4,8 @@
  */
 package projectapp;
 
+import singletons.SelectedShape;
+import singletons.DrawingEditor;
 import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.event.EventTarget;
@@ -50,7 +52,7 @@ public class DrawingEditorTest {
         shape.setFill(Color.BLUE);
         shape.setStroke(Color.BLUE);
         
-        selectedShape = new SelectedShape(shape);
+        selectedShape = SelectedShape.getIstance();
         
     }
 
