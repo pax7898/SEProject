@@ -5,6 +5,8 @@
 package projectapp.tools;
 
 import javafx.event.EventType;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -31,6 +33,7 @@ public class SelectionToolTest {
     private Pane pane;
     private CommandExecutor executor;
     private Shape shape;
+    private ContextMenu menu;
     
     public SelectionToolTest() {
     }
@@ -44,9 +47,10 @@ public class SelectionToolTest {
         pane.getChildren().add(shape);
         selectedShape = SelectedShape.getIstance();
         selectedShape.setShape(shape); 
-
+        menu = new ContextMenu();
+        menu.getItems().add(new MenuItem());
         executor = new CommandExecutor();
-        tool = new SelectionTool(pane,selectedShape,executor);
+        tool = new SelectionTool(pane,selectedShape,executor,menu);
         
     }
 
@@ -68,7 +72,7 @@ public class SelectionToolTest {
     public void testOnMousePressed() {
         System.out.println("onMousePressed");
         MouseEvent event = new MouseEvent(null, shape, new EventType(), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        SelectionTool test = new SelectionTool(pane, selectedShape, executor);
+        SelectionTool test = new SelectionTool(pane, selectedShape, executor, menu);
         test.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(),"-fx-stroke-dash-array:5px");
     }

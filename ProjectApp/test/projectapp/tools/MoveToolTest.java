@@ -5,6 +5,8 @@
 package projectapp.tools;
 
 import javafx.event.EventType;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,6 +34,7 @@ public class MoveToolTest {
     Line line;
     Rectangle rectangle;
     MouseEvent releasedEvent;
+    ContextMenu menu;
     
     @Before
     public void setUpEllipse() {
@@ -39,7 +42,9 @@ public class MoveToolTest {
         selectedShape = SelectedShape.getIstance();
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
-        moveTool = new MoveTool(pane, selectedShape, executor);
+        menu = new ContextMenu();
+        menu.getItems().add(new MenuItem());
+        moveTool = new MoveTool(pane,executor,selectedShape ,menu);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
         releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
@@ -54,7 +59,7 @@ public class MoveToolTest {
         selectedShape.setShape(rectangle);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
-        moveTool = new MoveTool(pane, selectedShape, executor);
+        moveTool = new MoveTool(pane,executor, selectedShape,menu);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
         releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
@@ -69,7 +74,7 @@ public class MoveToolTest {
         selectedShape.setShape(line);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
-        moveTool = new MoveTool(pane, selectedShape, executor);
+        moveTool = new MoveTool(pane,executor, selectedShape,menu);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
         releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)

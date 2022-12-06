@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -41,13 +43,16 @@ public class DrawingEditorTest {
     private Shape shape;
     private SelectionTool tool;
     private MoveTool moveTool;
+    private ContextMenu menu;
     
     @Before
     public void setUp() {
         drawingPane = new Pane();
         executor = new CommandExecutor();
         currentTool = new LineTool(drawingPane,executor);
-        editor = new DrawingEditor(drawingPane,executor,currentTool);
+        menu = new ContextMenu();
+        menu.getItems().add(new MenuItem());
+        editor = new DrawingEditor(drawingPane,executor,currentTool,menu);
         shape = new Rectangle(20,20,30,30);
         shape.setFill(Color.BLUE);
         shape.setStroke(Color.BLUE);
@@ -113,7 +118,7 @@ public class DrawingEditorTest {
         System.out.println("setSelectionTool");
         editor.setSelectionTool();
         MouseEvent event = new MouseEvent(null, shape, new EventType("selection"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        tool = new SelectionTool(drawingPane,selectedShape,executor);
+        tool = new SelectionTool(drawingPane,selectedShape,executor,menu);
         tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(), "-fx-stroke-dash-array:5px");
     }
@@ -126,7 +131,7 @@ public class DrawingEditorTest {
        System.out.println("setMoveTool"); 
        editor.setMoveTool();
        MouseEvent event = new MouseEvent(null, shape, new EventType("move"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-       moveTool=new MoveTool(drawingPane,selectedShape,executor);
+       moveTool=new MoveTool(drawingPane,executor,selectedShape,menu);
        moveTool.onMouseDragged(event);
        assertEquals(moveTool.getNewX(), shape.getTranslateX(), 0);
        assertEquals(moveTool.getNewY(), shape.getTranslateY(), 0);

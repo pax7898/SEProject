@@ -22,7 +22,7 @@ public class Clonator {
     
     
     public Clonator(){
-        
+        byteCloned = null;
     }
     
     public static Clonator getIstance() {
