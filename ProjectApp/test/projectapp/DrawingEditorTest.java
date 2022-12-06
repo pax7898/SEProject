@@ -131,7 +131,7 @@ public class DrawingEditorTest {
        System.out.println("setMoveTool"); 
        editor.setMoveTool();
        MouseEvent event = new MouseEvent(null, shape, new EventType("move"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-       moveTool=new MoveTool(drawingPane,selectedShape,executor,menu);
+       moveTool=new MoveTool(drawingPane,executor,selectedShape,menu);
        moveTool.onMouseDragged(event);
        assertEquals(moveTool.getNewX(), shape.getTranslateX(), 0);
        assertEquals(moveTool.getNewY(), shape.getTranslateY(), 0);

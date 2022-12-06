@@ -44,7 +44,7 @@ public class MoveToolTest {
         Pane pane = new Pane();
         menu = new ContextMenu();
         menu.getItems().add(new MenuItem());
-        moveTool = new MoveTool(pane, selectedShape, executor,menu);
+        moveTool = new MoveTool(pane,executor,selectedShape ,menu);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
         releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
@@ -59,7 +59,7 @@ public class MoveToolTest {
         selectedShape.setShape(rectangle);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
-        moveTool = new MoveTool(pane, selectedShape, executor,menu);
+        moveTool = new MoveTool(pane,executor, selectedShape,menu);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
         releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
@@ -74,7 +74,7 @@ public class MoveToolTest {
         selectedShape.setShape(line);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
-        moveTool = new MoveTool(pane, selectedShape, executor,menu);
+        moveTool = new MoveTool(pane,executor, selectedShape,menu);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
         releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
