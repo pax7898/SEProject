@@ -10,7 +10,8 @@ import javafx.scene.shape.Shape;
 import singletons.Clonator;
 
 /**
- *
+ * This class allows us to create a command for the cut operation
+ * 
  * @author Sabatino
  */
 public class CutCommand implements Command{
@@ -19,7 +20,16 @@ public class CutCommand implements Command{
     private Shape shape;
     private Pane pane;
     private ContextMenu menu;
-
+    
+    
+    /**
+     * CutCommand(Clonator clonator, Shape shape, Pane pane, ContextMenu menu) is the class constructor
+     * 
+     * @param clonator
+     * @param shape
+     * @param pane
+     * @param menu 
+     */
     public CutCommand(Clonator clonator, Shape shape, Pane pane, ContextMenu menu){
         this.clonator = clonator;
         this.shape = shape;
@@ -27,14 +37,20 @@ public class CutCommand implements Command{
         this.menu = menu;
     }
     
-    
+    /**
+     * This method copy a selected shape and delete it from the pane
+     */
     @Override
     public void execute() {
         clonator.encodeToXml(shape);
         pane.getChildren().remove(shape);
         menu.getItems().get(3).setDisable(false);
     }
-
+    
+    /**
+     * This method restores the previous operation: it adds the eliminated shape
+     * on the pane
+     */
     @Override
     public void undo() {
         pane.getChildren().add(shape);
