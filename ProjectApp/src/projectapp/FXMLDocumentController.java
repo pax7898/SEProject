@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -57,8 +58,9 @@ public class FXMLDocumentController implements Initializable {
     private DrawingEditor editor;
     
     private Point2D contextMenuPoint;
-    @FXML
     private ToggleButton undoBtn;
+    @FXML
+    private Button UndoBtn;
     
   
     /**
@@ -316,6 +318,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void undo(ActionEvent event) {
         editor.undo();
+    }
+
+    @FXML
+    private void setToFrontTool(ActionEvent event) {
+        editor.toFront();
     }
 
     

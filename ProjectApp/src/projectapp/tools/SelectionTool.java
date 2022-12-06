@@ -24,6 +24,7 @@ import projectapp.command.CopyCommand;
 import projectapp.command.CutCommand;
 import projectapp.command.DeleteCommand;
 import projectapp.command.PasteCommand;
+import projectapp.command.ToFrontCommand;
 
 /**
  *
@@ -77,7 +78,6 @@ public class SelectionTool extends Tool{
             });
         } else {
             selectedShape.setShape(null);
-            System.out.println(menu.getItems());
                 menu.getItems().forEach(item -> {
                     item.setDisable(true);
                 });
@@ -137,7 +137,10 @@ public class SelectionTool extends Tool{
         }
     }
     
-    
+    @Override
+    public void toFront() {
+        getExecutor().execute(new ToFrontCommand(selectedShape.getShape(), getPane()));
+    }
     
     /*
      * Unimplemented methods of the abstract class Tool
@@ -151,5 +154,7 @@ public class SelectionTool extends Tool{
 
     @Override
     public Shape getShape() {return null;}
+
+    
 
 }

@@ -144,7 +144,8 @@ public class RectangleTool extends Tool{
     }
 
     @Override
-    public void cut() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void cut() {}
+
+    @Override
+    public void toFront() {}
 }

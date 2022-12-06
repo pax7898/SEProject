@@ -107,13 +107,12 @@ public class EllipseTool extends Tool{
     public void copy() {}
 
     @Override
-    public void paste(Point2D point) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void paste(Point2D point) {}
 
     @Override
-    public void cut() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void cut() {}
+
+    @Override
+    public void toFront() {}
  
 }
