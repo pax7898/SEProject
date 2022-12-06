@@ -5,6 +5,7 @@
 package projectapp.tools;
 
 
+import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -29,8 +30,8 @@ public class MoveTool extends SelectionTool{
     private double oldX;
     private double oldY;
     
-    public MoveTool(Pane pane, SelectedShape selectedShape, CommandExecutor command) {
-        super(pane, selectedShape, command);
+    public MoveTool(Pane pane, SelectedShape selectedShape, CommandExecutor command, ContextMenu menu) {
+        super(pane, selectedShape, command, menu);
     }
     
        /*I need getter method only for tests*/

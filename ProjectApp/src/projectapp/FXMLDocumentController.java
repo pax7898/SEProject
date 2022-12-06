@@ -70,11 +70,13 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null);
+        editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null, menu);
         
         toggles = new ToggleGroup();
         toggles.getToggles().addAll(lineBtn,recBtn,elBtn,selBtn);
-        
+        menu.getItems().forEach(item -> {
+            item.setDisable(true);
+        });
         editor.setLineTool();
         lineBtn.setSelected(true); 
     }    
@@ -309,15 +311,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void onMenuRequested(ContextMenuEvent event) {
         contextMenuPoint = new Point2D(event.getX(),event.getY());
-        if (!editor.getCurrentTool().getClass().equals(SelectionTool.class)){
-            for (MenuItem item: menu.getItems()){
-                item.setDisable(true);
-            }
-        }else{
-            for (MenuItem item: menu.getItems()){
-                  item.setDisable(false);
-              }
-        } 
     }
 
     @FXML

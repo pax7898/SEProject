@@ -11,6 +11,7 @@ package projectapp.tools;
 
 import singletons.Clonator;
 import javafx.geometry.Point2D;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -34,18 +35,20 @@ import projectapp.command.PasteCommand;
 public class SelectionTool extends Tool{
     private final SelectedShape selectedShape;
     private final Clonator clonator;
-   
+    private final ContextMenu menu;
     /**
      * The costructor calls the costructor of Tool class
      * @param pane
      * @param executor
      * Adds an other param that refers to the selectedShape
      * @param selectedShape 
+     * @param menu 
      */
-    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor) {
+    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu) {
         super(pane,executor); 
         this.selectedShape = selectedShape;
         this.clonator = Clonator.getIstance();
+        this.menu = menu;
     }
     
     public SelectedShape getSelectedShape() {
@@ -69,8 +72,15 @@ public class SelectionTool extends Tool{
         if (event.getTarget().getClass()!= getPane().getClass()){
             selectedShape.setShape((Shape) event.getTarget()); 
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
+            menu.getItems().forEach(item -> {
+                item.setDisable(false);
+            });
         } else {
             selectedShape.setShape(null);
+            System.out.println(menu.getItems());
+            menu.getItems().forEach(item -> {
+                item.setDisable(true);
+            });
         }
     }
     /***
