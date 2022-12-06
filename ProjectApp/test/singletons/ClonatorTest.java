@@ -4,6 +4,10 @@
  */
 package singletons;
 
+import java.beans.DefaultPersistenceDelegate;
+import java.beans.XMLEncoder;
+import java.io.ByteArrayOutputStream;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import org.junit.Before;
@@ -37,30 +41,34 @@ public class ClonatorTest {
         
     }
     
-    /**
-     * Test of getByteCloned method, of class Clonator.
-     */
-    @Test
-    public void testGetByteCloned() {
-        System.out.println("getByteCloned");
-        
-        
-    }
-
-    /**
+     /**
      * Test of setByteCloned method, of class Clonator.
      */
     @Test
     public void testSetByteCloned() {
         System.out.println("setByteCloned");
         
-        assertEquals(clonator.getByteCloned(),null);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        try(XMLEncoder encoder = new XMLEncoder(stream)){
+            encoder.setPersistenceDelegate(Color.class, new DefaultPersistenceDelegate(new String[]{"red","green","blue","opacity"}));
+            encoder.writeObject(shape);
+        }
+        byte[] expected = stream.toByteArray();
         
-        clonator.encodeToXml(shape);
+        clonator.setByteCloned(expected);
         
-        
-        
+        assertArrayEquals(expected,clonator.getByteCloned());  
     }
+    
+    /**
+     * Test of getByteCloned method, of class Clonator.
+     */
+    @Test
+    public void testGetByteCloned() {
+      // Alredy tested in the testSetGetByteCloned
+    }
+
+   
 
   
     /**
@@ -70,6 +78,12 @@ public class ClonatorTest {
     public void testEncodeToXml() {
         System.out.println("encodeToXml");
         
+        clonator.encodeToXml(shape);
+        
+        Shape newShape = clonator.decodeFromXml();
+        System.out.println(shape.toString() + " " + newShape.toString());
+        assertEquals(shape.toString(),newShape.toString());
+       
     }
 
     /**
@@ -77,7 +91,7 @@ public class ClonatorTest {
      */
     @Test
     public void testDecodeFromXml() {
-        System.out.println("decodeFromXml");
+        // Alredy tested in the testEncodeToXml
         
     }
     

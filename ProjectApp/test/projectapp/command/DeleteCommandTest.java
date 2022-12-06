@@ -60,5 +60,12 @@ public class DeleteCommandTest {
        assertEquals(0,pane.getChildren().size());
     }
 
+    /**
+     * Test of execute method, of class DeleteCommand.
+     */
+    @Test
+    public void testUndo() {
+        
+    }
     
 }
