@@ -20,10 +20,20 @@ import static org.junit.Assert.*;
 public class DeleteCommandTest {
     private Command command;
     private Pane pane;
-    
+    private Line line;
+    private Ellipse ellipse;
+    private Rectangle rectangle;
     
     @Before
     public void setUp() {
+        line = new Line(200,200,300,300);
+        line.setStroke(Color.RED);
+        ellipse = new Ellipse(200,200,300,300);
+        ellipse.setStroke(Color.RED);
+        ellipse.setStroke(Color.YELLOW);
+        rectangle = new Rectangle(200,200,300,300);
+        rectangle.setStroke(Color.RED);
+        rectangle.setStroke(Color.YELLOW);
         pane = new Pane();
     }
 
@@ -33,27 +43,19 @@ public class DeleteCommandTest {
     @Test
     public void testExecute() {
        System.out.println("execute");
-        
-       Line line = new Line(200,200,300,300);
-       line.setStroke(Color.RED);
+
        pane.getChildren().add(line);
        command = new DeleteCommand(line,pane);
        command.execute();
        assertEquals(0,pane.getChildren().size());
        
        
-       Ellipse ellipse = new Ellipse(200,200,300,300);
-       ellipse.setStroke(Color.RED);
-       ellipse.setStroke(Color.YELLOW);
        pane.getChildren().add(ellipse);
        command = new DeleteCommand(ellipse,pane);
        command.execute();
        assertEquals(0,pane.getChildren().size());
+      
        
-       
-       Rectangle rectangle = new Rectangle(200,200,300,300);
-       ellipse.setStroke(Color.RED);
-       ellipse.setStroke(Color.YELLOW);
        pane.getChildren().add(rectangle);
        command = new DeleteCommand(rectangle,pane);
        command.execute();
@@ -61,11 +63,29 @@ public class DeleteCommandTest {
     }
 
     /**
-     * Test of execute method, of class DeleteCommand.
+     * Test of undo method, of class DeleteCommand.
      */
     @Test
     public void testUndo() {
-        
-    }
-    
+       
+       pane.getChildren().add(line);
+       command = new DeleteCommand(line,pane);
+       command.execute();
+       command.undo();
+       assertEquals(1,pane.getChildren().size());
+       
+       pane.getChildren().add(rectangle);
+       command = new DeleteCommand(rectangle,pane);
+       command.execute();
+       command.undo();
+       assertEquals(2,pane.getChildren().size());
+       
+       
+       pane.getChildren().add(ellipse);
+       command = new DeleteCommand(ellipse,pane);
+       command.execute();
+       command.undo();
+       assertEquals(3,pane.getChildren().size());
+       
+    } 
 }

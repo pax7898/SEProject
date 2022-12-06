@@ -38,5 +38,28 @@ public class CommandExecutorTest {
         assertEquals(drawCommand2,executor.getStack().getLast());
         
     }
-
+    
+    /**
+     * Test of undo method, of class CommandExecutor.
+     */
+    @Test
+    public void testUndo() {
+        
+        Command drawCommand1 = new DrawCommand(new Line(),new Pane());
+        executor.execute(drawCommand1);
+        
+        Command drawCommand2 = new DrawCommand(new Rectangle(),new Pane());
+        executor.execute(drawCommand2);
+        
+        
+        assertEquals(drawCommand2,executor.getStack().getLast());
+        
+        executor.undo();
+        
+        assertEquals(drawCommand1,executor.getStack().getLast());  
+        
+        executor.undo();
+        
+        assertTrue(executor.getStack().isEmpty());
+    }
 }

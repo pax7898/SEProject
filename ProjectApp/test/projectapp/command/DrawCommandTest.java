@@ -21,11 +21,23 @@ import static org.junit.Assert.*;
 public class DrawCommandTest {
     private Command command;
     private Pane pane;
+    private Line line;
+    private Rectangle rectangle;
+    private Ellipse ellipse;
     
     
     @Before
     public void setUp() {
+        line = new Line(200,200,300,300);
+        line.setStroke(Color.RED);
+        ellipse = new Ellipse(200,200,300,300);
+        ellipse.setStroke(Color.RED);
+        ellipse.setStroke(Color.YELLOW);
+        rectangle = new Rectangle(200,200,300,300);
+        rectangle.setStroke(Color.RED);
+        rectangle.setStroke(Color.YELLOW);
         pane = new Pane();
+        
     }
 
     /**
@@ -35,31 +47,49 @@ public class DrawCommandTest {
     public void testExecute() {
        System.out.println("execute");
       
-       Line line = new Line(200,200,300,300);
-       line.setStroke(Color.RED);
+       
        command = new DrawCommand(line,pane);
        command.execute();
        assertEquals(1,pane.getChildren().size());
        assertEquals(pane.getChildren().get(0),line);
        
-       Ellipse ellipse = new Ellipse(200,200,300,300);
-       ellipse.setStroke(Color.RED);
-       ellipse.setStroke(Color.YELLOW);
+        
        command = new DrawCommand(ellipse,pane);
        command.execute();
        assertEquals(2,pane.getChildren().size());
        assertEquals(pane.getChildren().get(1),ellipse);
        
-       
-       Rectangle rectangle = new Rectangle(200,200,300,300);
-       ellipse.setStroke(Color.RED);
-       ellipse.setStroke(Color.YELLOW);
        command = new DrawCommand(rectangle,pane);
        command.execute();
        assertEquals(3,pane.getChildren().size());
        assertEquals(pane.getChildren().get(2),rectangle);
        
     }
+    
+     /**
+     * Test of undo method, of class DrawCommand.
+     */
+    @Test
+    public void testUndo() {
+       
+       command = new DrawCommand(line,pane);
+       command.execute();
+       command.undo();
+       assertEquals(0,pane.getChildren().size());
+       
+       
+       command = new DrawCommand(rectangle,pane);
+       command.execute();
+       command.undo();
+       assertEquals(0,pane.getChildren().size());
+       
+       
+       command = new DrawCommand(ellipse,pane);
+       command.execute();
+       command.undo();
+       assertEquals(0,pane.getChildren().size());
+       
+    } 
 
 
 }
