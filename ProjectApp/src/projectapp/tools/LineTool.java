@@ -7,6 +7,7 @@ package projectapp.tools;
 
 
 import javafx.geometry.Point2D;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -47,7 +48,7 @@ public class LineTool extends Tool{
      */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
-        if(event.isPrimaryButtonDown()){
+        if(event.getButton().equals(MouseButton.PRIMARY)){
             line = new Line();
             line.setStroke(strokeColor);
             line.setStartX(event.getX());
@@ -67,7 +68,7 @@ public class LineTool extends Tool{
      */
     @Override
     public void onMouseDragged(MouseEvent event) {
-        if(event.isPrimaryButtonDown()){
+        if(event.getButton().equals(MouseButton.PRIMARY)){
             line.setEndX(event.getX());
             line.setEndY(event.getY());
         }
@@ -81,7 +82,7 @@ public class LineTool extends Tool{
      */
     @Override
     public void onMouseReleased(MouseEvent event) {
-        if(event.isPrimaryButtonDown()){
+        if(event.getButton().equals(MouseButton.PRIMARY)){
             line.setEndX(event.getX());
             line.setEndY(event.getY());
         }
