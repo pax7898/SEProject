@@ -8,6 +8,7 @@ import singletons.SelectedShape;
 import singletons.DrawingEditor;
 import java.io.File;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
 import javafx.scene.Node;
@@ -44,9 +45,11 @@ public class DrawingEditorTest {
     private SelectionTool tool;
     private MoveTool moveTool;
     private ContextMenu menu;
+    private JFXPanel panel;
     
     @Before
     public void setUp() {
+        panel = new JFXPanel();
         drawingPane = new Pane();
         executor = new CommandExecutor();
         currentTool = new LineTool(drawingPane,executor);
@@ -138,6 +141,14 @@ public class DrawingEditorTest {
         
        
        
+    }
+    
+    @Test
+    public void testCutShape() {
+        System.out.println("setCutTool");
+        //(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu)
+        System.out.println(drawingPane.getChildren().contains(shape));
+        
     }
 
 
