@@ -4,6 +4,7 @@
  */
 package projectapp.command;
 
+import javafx.scene.control.ContextMenu;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import singletons.Clonator;
@@ -17,11 +18,13 @@ public class CutCommand implements Command{
     private Clonator clonator;
     private Shape shape;
     private Pane pane;
+    private ContextMenu menu;
 
-    public CutCommand(Clonator clonator, Shape shape, Pane pane){
+    public CutCommand(Clonator clonator, Shape shape, Pane pane, ContextMenu menu){
         this.clonator = clonator;
         this.shape = shape;
         this.pane = pane;
+        this.menu = menu;
     }
     
     
@@ -29,6 +32,7 @@ public class CutCommand implements Command{
     public void execute() {
         clonator.encodeToXml(shape);
         pane.getChildren().remove(shape);
+        menu.getItems().get(3).setDisable(false);
     }
 
     @Override

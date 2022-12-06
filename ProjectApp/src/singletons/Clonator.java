@@ -18,7 +18,7 @@ import javafx.scene.shape.Shape;
  */
 public class Clonator {
     private byte[] byteCloned;  
-    static private Clonator instance=null; 
+    static private Clonator instance = null; 
     
     
     public Clonator(){
@@ -26,8 +26,8 @@ public class Clonator {
     }
     
     public static Clonator getIstance() {
-      if (instance==null)
-         instance=new Clonator();
+      if (instance == null)
+         instance = new Clonator();
       return instance;
 	}
 
