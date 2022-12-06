@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ColorPicker?>
@@ -18,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <SplitPane dividerPositions="0.19019274376417228" orientation="VERTICAL" prefHeight="707.2" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -116,7 +123,7 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </AnchorPane>
-                              <ToggleButton fx:id="undoBtn" contentDisplay="CENTER" layoutX="220.0" layoutY="45.0" mnemonicParsing="false" onAction="#undo" prefHeight="34.0" prefWidth="75.0" text="Undo" textAlignment="CENTER" />
+                              <Button fx:id="UndoBtn" mnemonicParsing="false" onAction="#undo" prefHeight="34.0" prefWidth="74.0" text="Undo" />
                            </children>
                         </HBox>
                      </children>
@@ -141,6 +148,7 @@
                             <MenuItem mnemonicParsing="false" onAction="#cutShape" text="Cut" />
                             <MenuItem mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
                             <MenuItem mnemonicParsing="false" onAction="#setMoveTool" text="Move" />
+                              <MenuItem mnemonicParsing="false" onAction="#setToFrontTool" text="ToFront" />
                           </items>
                         </ContextMenu>
                      </contextMenu>

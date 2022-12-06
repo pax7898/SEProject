@@ -68,7 +68,7 @@ public class DrawingEditor {
     }
     
     public static DrawingEditor getIstance(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu){
-        if (instance==null)
+        if (instance == null)
          instance = new DrawingEditor(pane,executor,currentTool, menu);
       return instance;
     }
@@ -186,6 +186,13 @@ public class DrawingEditor {
     }
     
     /***
+     * This method allows the user to bring the shape in foreground.
+     */
+    public void toFront(){
+        currentTool.toFront();
+    }
+    
+    /***
      * This method allows the user to copy the selected figure.
      */
     public void copyShape(){
@@ -207,7 +214,11 @@ public class DrawingEditor {
     }
     
     public void undo(){
+        try{
         executor.undo();
+        }catch (Exception e){
+            
+        }
     }
     /**
      * This method llow you to save the current drawing on an XML file.

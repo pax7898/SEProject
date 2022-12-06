@@ -81,6 +81,8 @@ public class EllipseToolTest {
         assertEquals(ellipse.getRadiusY()+60,Math.rint(ellipseTool.getShape().getLayoutBounds().getMaxY()),1);
         assertEquals(ellipse.getRadiusX()+60,Math.rint(-ellipseTool.getShape().getLayoutBounds().getMinX()),1); //I put the - since I'm moving into the negative region
         assertEquals(ellipse.getRadiusY()+60,Math.rint(-ellipseTool.getShape().getLayoutBounds().getMinY()),1);
+        assertEquals(ellipseTool.getShape().getStroke(), Color.RED);
+        assertEquals(ellipseTool.getShape().getFill(), Color.BLUE);
     }
 
     @Test
@@ -89,6 +91,8 @@ public class EllipseToolTest {
         Color strokeColor = Color.RED;
         Color fillColor = Color.BLUE;
         ellipseTool.onMousePressed(pressEvent, strokeColor, fillColor);
+        assertEquals(ellipseTool.getShape().getStroke(), Color.RED);
+        assertEquals(ellipseTool.getShape().getFill(), Color.BLUE);
         MouseEvent releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 60, 60, 60, 60, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
                                            false, false,false,false,false,false,false,false,false,false,null);
         ellipseTool.onMouseDragged(dragEvent);
