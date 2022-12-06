@@ -78,9 +78,13 @@ public class SelectionTool extends Tool{
         } else {
             selectedShape.setShape(null);
             System.out.println(menu.getItems());
-            menu.getItems().forEach(item -> {
-                item.setDisable(true);
-            });
+                menu.getItems().forEach(item -> {
+                    item.setDisable(true);
+                });
+            if(clonator.getByteCloned() != null){ 
+                menu.getItems().get(3).setDisable(false);
+            }
+            
         }
     }
     /***
@@ -127,7 +131,7 @@ public class SelectionTool extends Tool{
     @Override
     public void cut() {
         if (selectedShape.getShape()!= null){
-            getExecutor().execute(new CutCommand(clonator,selectedShape.getShape(), getPane()));
+            getExecutor().execute(new CutCommand(clonator,selectedShape.getShape(), getPane(), menu));
         } else {
             clonator.setByteCloned(null);
         }

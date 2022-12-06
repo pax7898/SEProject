@@ -52,16 +52,18 @@ public class RectangleTool extends Tool{
      */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
-        rectangle = new Rectangle();
-        rectangle.setStroke(strokeColor);
-        rectangle.setFill(fillColor);
-        rectangle.setX(event.getX());
-        rectangle.setY(event.getY());
-        rectangle.setWidth(0);
-        rectangle.setWidth(0);
-        this.initialPositionX = event.getX();
-        this.initialPositionY = event.getY();
-        getExecutor().execute(new DrawCommand(rectangle,getPane()));
+        if(event.isPrimaryButtonDown()){
+            rectangle = new Rectangle();
+            rectangle.setStroke(strokeColor);
+            rectangle.setFill(fillColor);
+            rectangle.setX(event.getX());
+            rectangle.setY(event.getY());
+            rectangle.setWidth(0);
+            rectangle.setWidth(0);
+            this.initialPositionX = event.getX();
+            this.initialPositionY = event.getY();
+            getExecutor().execute(new DrawCommand(rectangle,getPane()));
+        }
     }
     
     
@@ -74,21 +76,23 @@ public class RectangleTool extends Tool{
      */
     @Override
     public void onMouseDragged(MouseEvent event) {
-        double startX = rectangle.getX();
-        double startY = rectangle.getY();
-        double endX = event.getX() - initialPositionX;
-        double endY = event.getY() - initialPositionY;
-        
-        if(endX < 0 ){
-            endX = -endX;
-            rectangle.setX(event.getX());
+        if(event.isPrimaryButtonDown()){
+            double startX = rectangle.getX();
+            double startY = rectangle.getY();
+            double endX = event.getX() - initialPositionX;
+            double endY = event.getY() - initialPositionY;
+
+            if(endX < 0 ){
+                endX = -endX;
+                rectangle.setX(event.getX());
+            }
+            if(endY < 0){
+                endY = -endY;
+                rectangle.setY(event.getY());
+            }    
+            rectangle.setWidth(endX);
+            rectangle.setHeight(endY);
         }
-        if(endY < 0){
-            endY = -endY;
-            rectangle.setY(event.getY());
-        }    
-        rectangle.setWidth(endX);
-        rectangle.setHeight(endY);
     }
     
     /**
@@ -99,21 +103,23 @@ public class RectangleTool extends Tool{
      */
     @Override
     public void onMouseReleased(MouseEvent event) {
-        double startX = rectangle.getX();
-        double startY = rectangle.getY();
-        double endX = event.getX() - initialPositionX;
-        double endY = event.getY() - initialPositionY;
-        if(endX < 0 ){
-            endX = -endX;
-            rectangle.setX(event.getX());
+        if(event.isPrimaryButtonDown()){
+            double startX = rectangle.getX();
+            double startY = rectangle.getY();
+            double endX = event.getX() - initialPositionX;
+            double endY = event.getY() - initialPositionY;
+            if(endX < 0 ){
+                endX = -endX;
+                rectangle.setX(event.getX());
+            }
+            if(endY < 0){
+                endY = -endY;
+                rectangle.setY(event.getY());
+            }
+
+            rectangle.setWidth(endX);
+            rectangle.setHeight(endY);
         }
-        if(endY < 0){
-            endY = -endY;
-            rectangle.setY(event.getY());
-        }
-        
-        rectangle.setWidth(endX);
-        rectangle.setHeight(endY);
     }
 
     /*

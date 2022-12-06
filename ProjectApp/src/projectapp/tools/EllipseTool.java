@@ -49,14 +49,16 @@ public class EllipseTool extends Tool{
      */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
-        ellipse = new Ellipse();
-        ellipse.setStroke(strokeColor);
-        ellipse.setFill(fillColor);
-        ellipse.setCenterX(event.getX());
-        ellipse.setCenterY(event.getY());
-        ellipse.setRadiusX(0);
-        ellipse.setRadiusY(0);
-        getExecutor().execute(new DrawCommand(ellipse,getPane()));
+        if(event.isPrimaryButtonDown()){
+            ellipse = new Ellipse();
+            ellipse.setStroke(strokeColor);
+            ellipse.setFill(fillColor);
+            ellipse.setCenterX(event.getX());
+            ellipse.setCenterY(event.getY());
+            ellipse.setRadiusX(0);
+            ellipse.setRadiusY(0);
+            getExecutor().execute(new DrawCommand(ellipse,getPane()));
+        }
     }
 
     /**
@@ -68,8 +70,10 @@ public class EllipseTool extends Tool{
      */
     @Override
     public void onMouseDragged(MouseEvent event) {
-        ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
-        ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
+        if(event.isPrimaryButtonDown()){
+            ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
+            ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
+        }
     }
 
     /**
@@ -80,8 +84,10 @@ public class EllipseTool extends Tool{
      */
     @Override
     public void onMouseReleased(MouseEvent event) {
-        ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
-        ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
+        if(event.isPrimaryButtonDown()){
+            ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
+            ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
+        }
     }
     
     /*

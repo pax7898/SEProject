@@ -50,11 +50,13 @@ public class MoveCommand implements Command{
     public void execute() {
         this.shape.setTranslateX(newX);
         this.shape.setTranslateY(newY);
+        
     }
 
     @Override
     public void undo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.shape.setTranslateX(oldX);
+        this.shape.setTranslateY(oldY);
     }
 
   

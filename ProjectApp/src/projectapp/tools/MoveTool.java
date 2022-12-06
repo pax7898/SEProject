@@ -5,6 +5,7 @@
 package projectapp.tools;
 
 
+import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -20,7 +21,7 @@ import projectapp.command.MoveCommand;
  * 
  * @author acoon
  */
-public class MoveTool extends SelectionTool{
+public class MoveTool extends Tool{
     
     private double initialPositionX;
     private double initialPositionY;
@@ -29,9 +30,17 @@ public class MoveTool extends SelectionTool{
     private double newY;
     private double oldX;
     private double oldY;
+    private SelectedShape selectedShape;
+    private ContextMenu menu;
     
-    public MoveTool(Pane pane, SelectedShape selectedShape, CommandExecutor command, ContextMenu menu) {
-        super(pane, selectedShape, command, menu);
+    public MoveTool(Pane pane, CommandExecutor command, SelectedShape selectedShape, ContextMenu menu) {
+        super(pane,command);
+        this.selectedShape = selectedShape;
+        this.menu = menu;
+        menu.getItems().forEach(item -> {
+            item.setDisable(true);
+        });
+        selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
     }
     
        /*I need getter method only for tests*/
@@ -40,6 +49,7 @@ public class MoveTool extends SelectionTool{
     }
 
     public double getNewY() {
+        
         return newY;
     }
 
@@ -65,17 +75,17 @@ public class MoveTool extends SelectionTool{
     */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor){
-        if (super.getSelectedShape().getShape() != null){
-           super.getSelectedShape().getShape().setStyle("-fx-stroke-dash-array:none");
+        if (selectedShape.getShape() != null){
+           selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         } 
         if (event.getTarget().getClass()!= getPane().getClass()){
-            super.getSelectedShape().setShape((Shape) event.getTarget());
-            super.getSelectedShape().getShape().setStyle("-fx-stroke-dash-array:5px");
+            selectedShape.setShape((Shape) event.getTarget());
+            selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
             flag = true;
             this.initialPositionX = event.getX();
             this.initialPositionY = event.getY();
-            newX = oldX = super.getSelectedShape().getShape().getTranslateX();
-            newY = oldY = super.getSelectedShape().getShape().getTranslateY();
+            newX = oldX = selectedShape.getShape().getTranslateX();
+            newY = oldY = selectedShape.getShape().getTranslateY();
         }
         else{
             flag = false;
@@ -94,14 +104,14 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseDragged(MouseEvent event) {
         if(flag == true){
-            super.getSelectedShape().getShape().setTranslateX(newX);
-            super.getSelectedShape().getShape().setTranslateY(newY);
+            selectedShape.getShape().setTranslateX(newX);
+            selectedShape.getShape().setTranslateY(newY);
             newX = oldX + event.getX() - initialPositionX;
             newY = oldY + event.getY() - initialPositionY;
 
         }      
     }
-
+    
     /**
      * This method execute a MoveCommand that set the last position of the shape in the pane 
      * indicated by the user with the mouse. Moreover,  we are going to save of what the figure has been translated. 
@@ -112,10 +122,11 @@ public class MoveTool extends SelectionTool{
     @Override
     public void onMouseReleased(MouseEvent event) {
         if(flag == true){
-            super.getExecutor().execute(new MoveCommand(super.getSelectedShape().getShape(),super.getSelectedShape().getShape().getTranslateX(), 
-                                        super.getSelectedShape().getShape().getTranslateY(), oldX, oldY));
-            oldX  = super.getSelectedShape().getShape().getTranslateX();
-            oldY  = super.getSelectedShape().getShape().getTranslateY();
+            super.getExecutor().execute(new MoveCommand(selectedShape.getShape(),selectedShape.getShape().getTranslateX(), 
+                                        selectedShape.getShape().getTranslateY(), oldX, oldY));
+            oldX  = selectedShape.getShape().getTranslateX();
+            oldY  = selectedShape.getShape().getTranslateY();
+            
         }
     }
     
@@ -127,6 +138,23 @@ public class MoveTool extends SelectionTool{
 
     @Override
     public void changeInteriorColor(Color strokeColor) {}
+
+    @Override
+    public Shape getShape() {
+        return selectedShape.getShape();
+    }
+
+    @Override
+    public void deleteShape() {}
+
+    @Override
+    public void copy() {}
+
+    @Override
+    public void paste(Point2D point) {}
+
+    @Override
+    public void cut() {}
     
 }
 
