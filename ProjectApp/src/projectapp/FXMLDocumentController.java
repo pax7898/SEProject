@@ -248,7 +248,17 @@ public class FXMLDocumentController implements Initializable {
     private void pasteShape(ActionEvent event) {
         editor.pasteShape(contextMenuPoint);
     }
-
+    
+    /**
+    * This method will be activated when the user presses the cut menu item from the context menu. 
+    * If a shape is selected, all the operations to cut it will be executed.
+    * 
+    * @param event 
+    */
+    @FXML
+    private void cutShape(ActionEvent event) {
+        editor.cutShape();
+    }
     
     /**
     * This method will be activated when the user selects the save item from the menu. 
@@ -314,6 +324,8 @@ public class FXMLDocumentController implements Initializable {
     private void undo(ActionEvent event) {
         editor.undo();
     }
+
+    
 
     
 
