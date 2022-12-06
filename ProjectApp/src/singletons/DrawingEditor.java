@@ -131,7 +131,7 @@ public class DrawingEditor {
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
-        currentTool = new MoveTool(drawingPane,selectedShape,executor, menu);
+        currentTool = new MoveTool(drawingPane,executor, selectedShape, menu);
     }
     
     /**

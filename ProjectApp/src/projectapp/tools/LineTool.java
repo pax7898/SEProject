@@ -47,13 +47,15 @@ public class LineTool extends Tool{
      */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
-        line = new Line();
-        line.setStroke(strokeColor);
-        line.setStartX(event.getX());
-        line.setStartY(event.getY());
-        line.setEndX(event.getX());
-        line.setEndY(event.getY());
-        getExecutor().execute(new DrawCommand(line,getPane()));
+        if(event.isPrimaryButtonDown()){
+            line = new Line();
+            line.setStroke(strokeColor);
+            line.setStartX(event.getX());
+            line.setStartY(event.getY());
+            line.setEndX(event.getX());
+            line.setEndY(event.getY());
+            getExecutor().execute(new DrawCommand(line,getPane()));
+        }
     }
     
     /**
@@ -65,8 +67,10 @@ public class LineTool extends Tool{
      */
     @Override
     public void onMouseDragged(MouseEvent event) {
-        line.setEndX(event.getX());
-        line.setEndY(event.getY());
+        if(event.isPrimaryButtonDown()){
+            line.setEndX(event.getX());
+            line.setEndY(event.getY());
+        }
     }
     
     /**
@@ -77,8 +81,10 @@ public class LineTool extends Tool{
      */
     @Override
     public void onMouseReleased(MouseEvent event) {
-        line.setEndX(event.getX());
-        line.setEndY(event.getY());
+        if(event.isPrimaryButtonDown()){
+            line.setEndX(event.getX());
+            line.setEndY(event.getY());
+        }
     } 
     
     /*

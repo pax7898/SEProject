@@ -50,6 +50,7 @@ public class MoveCommand implements Command{
     public void execute() {
         this.shape.setTranslateX(newX);
         this.shape.setTranslateY(newY);
+        
     }
 
     @Override
