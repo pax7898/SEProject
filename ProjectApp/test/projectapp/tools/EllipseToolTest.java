@@ -47,7 +47,8 @@ public class EllipseToolTest {
         ellipseTool.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);        
         assertEquals(ellipse.getClass(), ellipseTool.getShape().getClass());
         assertEquals(ellipse.getRadiusX(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()), 0);  
-        assertEquals(ellipse.getRadiusY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()), 0);  
+        assertEquals(ellipse.getRadiusY(), Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()), 0);
+        
 
     }
 
@@ -61,6 +62,9 @@ public class EllipseToolTest {
         assertEquals(1,pane.getChildren().size());
         assertEquals(ellipse.getRadiusX(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMinX()),1);
         assertEquals(ellipse.getRadiusY(),Math.rint(ellipseTool.getShape().getLayoutBounds().getMinY()),1);
+        System.out.println("I colori sono : " + ellipse.getStroke() + " " + ellipse.getFill());
+        assertEquals(ellipseTool.getShape().getStroke(), Color.RED);
+        assertEquals(ellipseTool.getShape().getFill(), Color.BLUE);
    
     }
 

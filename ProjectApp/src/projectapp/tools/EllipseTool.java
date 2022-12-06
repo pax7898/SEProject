@@ -6,6 +6,7 @@ package projectapp.tools;
 
 import static java.lang.Math.abs;
 import javafx.geometry.Point2D;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -49,14 +50,14 @@ public class EllipseTool extends Tool{
      */
     @Override
     public void onMousePressed(MouseEvent event, Color strokeColor, Color fillColor) {
-        if(event.isPrimaryButtonDown()){
-            ellipse = new Ellipse();
-            ellipse.setStroke(strokeColor);
-            ellipse.setFill(fillColor);
+        if(event.getButton().equals(MouseButton.PRIMARY)){
+            ellipse = new Ellipse(); 
             ellipse.setCenterX(event.getX());
             ellipse.setCenterY(event.getY());
             ellipse.setRadiusX(0);
             ellipse.setRadiusY(0);
+            ellipse.setStroke(strokeColor);
+            ellipse.setFill(fillColor);
             getExecutor().execute(new DrawCommand(ellipse,getPane()));
         }
     }
@@ -70,7 +71,7 @@ public class EllipseTool extends Tool{
      */
     @Override
     public void onMouseDragged(MouseEvent event) {
-        if(event.isPrimaryButtonDown()){
+        if(event.getButton().equals(MouseButton.PRIMARY)){
             ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
             ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
         }
@@ -84,7 +85,7 @@ public class EllipseTool extends Tool{
      */
     @Override
     public void onMouseReleased(MouseEvent event) {
-        if(event.isPrimaryButtonDown()){
+        if(event.getButton().equals(MouseButton.PRIMARY)){
             ellipse.setRadiusX(abs(event.getX()-ellipse.getCenterX()));
             ellipse.setRadiusY(abs(event.getY()-ellipse.getCenterY()));
         }

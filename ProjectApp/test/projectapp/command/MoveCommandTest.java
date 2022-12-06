@@ -38,15 +38,15 @@ public class MoveCommandTest {
                                     false, false,false,false,false,false,false,false,false,false,null);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 0, 0, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
-        
-        
-        
+        ellipse = new EllipseTool(pane, executor);
+        rectangle = new RectangleTool(pane, executor);
+        line = new LineTool(pane, executor);
     }
 
     @Test
     public void testExecuteEllipse() {
         System.out.println("executeEllipse");
-        ellipse = new EllipseTool(pane, executor);
+        
         ellipse.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
         double oldValueX = ellipse.getShape().getTranslateX();
         double oldValueY = ellipse.getShape().getTranslateY();
@@ -63,7 +63,7 @@ public class MoveCommandTest {
     @Test
     public void testExecuteRectangle() {
         System.out.println("executeRectangle");
-        rectangle = new RectangleTool(pane, executor);
+        
         rectangle.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
         double oldValueX = rectangle.getShape().getTranslateX();
         double oldValueY = rectangle.getShape().getTranslateY();
@@ -79,7 +79,7 @@ public class MoveCommandTest {
     @Test
     public void testExecuteLine() {
         System.out.println("executeLine");
-        line = new LineTool(pane, executor);
+        
         line.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
         double oldValueX = line.getShape().getTranslateX();
         double oldValueY = line.getShape().getTranslateY();
@@ -92,7 +92,49 @@ public class MoveCommandTest {
         assertEquals(10, line.getShape().getTranslateY(), 0);
         
     }
-
-
     
+    @Test
+    public void testUndoEllipse(){
+        System.out.println("undoEllipse");
+        
+        ellipse.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
+        double oldValueX = ellipse.getShape().getTranslateX();
+        double oldValueY = ellipse.getShape().getTranslateY();
+        ellipse.onMouseDragged(dragEvent);
+        moveCommand = new MoveCommand(ellipse.getShape(), 10,10,0,0);
+        moveCommand.execute();
+        moveCommand.undo();
+        assertEquals(oldValueX, ellipse.getShape().getTranslateX(), 0);
+        assertEquals(oldValueY, ellipse.getShape().getTranslateY(), 0);
+    }
+    
+    @Test
+    public void testUndoRectangle(){
+        System.out.println("undoRectangle");
+        
+        rectangle.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
+        double oldValueX = rectangle.getShape().getTranslateX();
+        double oldValueY = rectangle.getShape().getTranslateY();
+        rectangle.onMouseDragged(dragEvent);
+        moveCommand = new MoveCommand(rectangle.getShape(), 10,10,0,0);
+        moveCommand.execute();
+        moveCommand.undo();
+        assertEquals(oldValueX, rectangle.getShape().getTranslateX(), 0);
+        assertEquals(oldValueY, rectangle.getShape().getTranslateY(), 0);
+    }
+    
+    @Test
+    public void testUndoLine(){
+        System.out.println("undoLine");
+        
+        line.onMousePressed(pressEvent, Color.DARKVIOLET, Color.SILVER);
+        double oldValueX = line.getShape().getTranslateX();
+        double oldValueY = line.getShape().getTranslateY();
+        line.onMouseDragged(dragEvent);
+        moveCommand = new MoveCommand(line.getShape(), 10,10,0,0);
+        moveCommand.execute();
+        moveCommand.undo();
+        assertEquals(oldValueX, line.getShape().getTranslateX(), 0);
+        assertEquals(oldValueY, line.getShape().getTranslateY(), 0);
+    }
 }

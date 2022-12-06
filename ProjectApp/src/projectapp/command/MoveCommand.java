@@ -53,6 +53,9 @@ public class MoveCommand implements Command{
         
     }
 
+    /**
+     * This method translate the shape in the oldest coordinates
+     */
     @Override
     public void undo() {
         this.shape.setTranslateX(oldX);
