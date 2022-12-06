@@ -137,6 +137,9 @@ public class SelectionTool extends Tool{
         }
     }
     
+    /**
+     * This method allows you to change the z-axis level of a selected shape 
+     */
     @Override
     public void toFront() {
         getExecutor().execute(new ToFrontCommand(selectedShape.getShape(), getPane()));
