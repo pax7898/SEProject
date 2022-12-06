@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -44,7 +45,10 @@ public class DrawingEditor {
     
     private final SelectedShape selectedShape;
     
+    private final ContextMenu menu;
+    
     static private DrawingEditor instance = null;
+    
     
     /**
      * 
@@ -55,16 +59,17 @@ public class DrawingEditor {
      * @param currentTool is the current state of the draing editor
      */
 
-    public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) {
+    public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu) {
         this.drawingPane = pane;
         this.executor = executor;
         this.currentTool = currentTool;
         this.selectedShape = SelectedShape.getIstance();
+        this.menu = menu;
     }
     
-    public static DrawingEditor getIstance(Pane pane, CommandExecutor executor,Tool currentTool){
+    public static DrawingEditor getIstance(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu){
         if (instance==null)
-         instance=new DrawingEditor(pane,executor,currentTool);
+         instance = new DrawingEditor(pane,executor,currentTool, menu);
       return instance;
     }
     
@@ -112,9 +117,9 @@ public class DrawingEditor {
      */
     public void setSelectionTool(){
         if (selectedShape.getShape() != null){
-            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
+            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none"); 
         }
-        currentTool = new SelectionTool(drawingPane,selectedShape,executor);
+        currentTool = new SelectionTool(drawingPane,selectedShape,executor, menu);
     }  
     
     /**
@@ -126,7 +131,7 @@ public class DrawingEditor {
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
-        currentTool = new MoveTool(drawingPane,selectedShape,executor);
+        currentTool = new MoveTool(drawingPane,selectedShape,executor, menu);
     }
     
     /**
