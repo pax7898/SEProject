@@ -4,6 +4,7 @@
  */
 package projectapp.tools;
 
+import javafx.embed.swing.JFXPanel;
 import javafx.event.EventType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -22,6 +23,7 @@ import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DeleteCommand;
+import singletons.Clonator;
 
 /**
  *
@@ -34,12 +36,14 @@ public class SelectionToolTest {
     private CommandExecutor executor;
     private Shape shape;
     private ContextMenu menu;
+    private JFXPanel panel;
     
     public SelectionToolTest() {
     }
     
     @Before
     public void setUp() {
+        panel = new JFXPanel();
         shape = new Rectangle(20,20,30,30);
         shape.setFill(Color.BLUE);
         shape.setStroke(Color.BLUE);
@@ -48,7 +52,11 @@ public class SelectionToolTest {
         selectedShape = SelectedShape.getIstance();
         selectedShape.setShape(shape); 
         menu = new ContextMenu();
-        menu.getItems().add(new MenuItem());
+        menu.getItems().add(new MenuItem("delete"));
+        menu.getItems().add(new MenuItem("copy"));
+        menu.getItems().add(new MenuItem("cut"));
+        menu.getItems().add(new MenuItem("paste"));
+        menu.getItems().add(new MenuItem("move"));
         executor = new CommandExecutor();
         tool = new SelectionTool(pane,selectedShape,executor,menu);
         
@@ -116,5 +124,25 @@ public class SelectionToolTest {
         assertTrue(!pane.getChildren().contains(shape));
         assertEquals(command.getClass(),executor.getStack().getLast().getClass());
     }
-
+    
+    /**
+     * Test of cut method, of class SelectionTool.
+     */
+    @Test
+    public void testCut() {
+        System.out.println("cut");
+        
+        selectedShape.setShape(null);
+        tool.cut();
+        assertEquals(Clonator.getIstance().getByteCloned(), null);
+        
+        selectedShape.setShape(shape);
+        tool.cut();
+        assertFalse(executor.getStack().isEmpty());
+        assertFalse(pane.getChildren().contains(shape));
+        assertEquals(Clonator.getIstance().getByteCloned(), shape);
+    }
+    
+    
+   
 }

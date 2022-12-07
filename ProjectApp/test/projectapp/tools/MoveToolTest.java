@@ -4,6 +4,7 @@
  */
 package projectapp.tools;
 
+import javafx.embed.swing.JFXPanel;
 import javafx.event.EventType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -28,17 +29,20 @@ public class MoveToolTest {
     
     private MouseEvent pressEvent;
     private MouseEvent dragEvent;
-    MoveTool moveTool;
-    SelectedShape selectedShape;
-    Ellipse ellipse;
-    Line line;
-    Rectangle rectangle;
-    MouseEvent releasedEvent;
-    ContextMenu menu;
+    private MoveTool moveTool;
+    private SelectedShape selectedShape;
+    private Ellipse ellipse;
+    private Line line;
+    private Rectangle rectangle;
+    private MouseEvent releasedEvent;
+    private ContextMenu menu;
+    private JFXPanel panel;
+    
     
     @Before
     public void setUpEllipse() {
-        ellipse = new Ellipse(10,10,10,10);
+        panel = new JFXPanel();
+        
         selectedShape = SelectedShape.getIstance();
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
@@ -54,9 +58,11 @@ public class MoveToolTest {
     
     @Before
     public void setUpRectangle() {
-        rectangle = new Rectangle(10,10,10,10);
+        panel = new JFXPanel();
+        
         selectedShape = SelectedShape.getIstance();
-        selectedShape.setShape(rectangle);
+        
+        
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
         moveTool = new MoveTool(pane,executor, selectedShape,menu);
@@ -69,9 +75,10 @@ public class MoveToolTest {
     
     @Before
     public void setUpLine() {
-        line = new Line(10,10,10,10);
+        panel = new JFXPanel();
+        
         selectedShape = SelectedShape.getIstance();
-        selectedShape.setShape(line);
+        
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
         moveTool = new MoveTool(pane,executor, selectedShape,menu);

@@ -30,7 +30,7 @@ import projectapp.tools.LineTool;
 import projectapp.tools.MoveTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
-
+import singletons.Clonator;
 /**
  *
  * @author pasqualecaggiano
@@ -54,7 +54,11 @@ public class DrawingEditorTest {
         executor = new CommandExecutor();
         currentTool = new LineTool(drawingPane,executor);
         menu = new ContextMenu();
-        menu.getItems().add(new MenuItem());
+        menu.getItems().add(new MenuItem("delete"));
+        menu.getItems().add(new MenuItem("copy"));
+        menu.getItems().add(new MenuItem("cut"));
+        menu.getItems().add(new MenuItem("paste"));
+        menu.getItems().add(new MenuItem("move"));
         editor = new DrawingEditor(drawingPane,executor,currentTool,menu);
         shape = new Rectangle(20,20,30,30);
         shape.setFill(Color.BLUE);
@@ -218,8 +222,30 @@ public class DrawingEditorTest {
     @Test
     public void testCutShape() {
         System.out.println("setCutTool");
-        //(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu)
-        System.out.println(drawingPane.getChildren().contains(shape));
+
+        drawingPane.getChildren().add(shape);
+        MouseEvent event = new MouseEvent(null, shape, new EventType("cut"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+        
+        selectedShape.setShape(shape);
+        tool = new SelectionTool(drawingPane,selectedShape,executor,menu);
+        currentTool = tool;
+        editor.setSelectionTool();
+        
+        currentTool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        currentTool.cut();
+        
+        assertFalse(drawingPane.getChildren().contains(shape));
+        
+        Rectangle rectangle2 = (Rectangle) Clonator.getIstance().decodeFromXml();
+        Rectangle originalRectangle = (Rectangle) shape;
+        assertEquals(originalRectangle.getX(), rectangle2.getX(),0);
+        assertEquals(originalRectangle.getY(), rectangle2.getY(),0);
+        assertEquals(originalRectangle.getWidth(), rectangle2.getWidth(),0);
+        assertEquals(originalRectangle.getHeight(), rectangle2.getHeight(),0);
+        assertEquals(originalRectangle.getStroke(), rectangle2.getStroke());
+        assertEquals(originalRectangle.getFill(), rectangle2.getFill());
+        
+        assertFalse(menu.getItems().get(3).isDisable());
         
     }
 
