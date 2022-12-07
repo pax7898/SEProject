@@ -38,11 +38,27 @@ public class MoveToolTest {
     private ContextMenu menu;
     private JFXPanel panel;
     
-    
     @Before
-    public void setUpEllipse() {
+    public void setUp() {
         panel = new JFXPanel();
-        
+        selectedShape = SelectedShape.getIstance();
+        CommandExecutor executor = new CommandExecutor();
+        Pane pane = new Pane();
+        menu = new ContextMenu();
+        menu.getItems().add(new MenuItem("delete"));
+        menu.getItems().add(new MenuItem("copy"));
+        menu.getItems().add(new MenuItem("cut"));
+        menu.getItems().add(new MenuItem("paste"));
+        menu.getItems().add(new MenuItem("move"));
+        moveTool = new MoveTool(pane,executor,selectedShape ,menu);
+        dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
+                                    false, false,false,false,false,false,false,false,false,false,null);
+        releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
+                                           false, false,false,false,false,false,false,false,false,false,null); 
+    }
+    /*@Before
+    public void setUpEllipse() {
+        ellipse = new Ellipse(10,10,10,10);
         selectedShape = SelectedShape.getIstance();
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
@@ -58,11 +74,9 @@ public class MoveToolTest {
     
     @Before
     public void setUpRectangle() {
-        panel = new JFXPanel();
-        
+        rectangle = new Rectangle(10,10,10,10);
         selectedShape = SelectedShape.getIstance();
-        
-        
+        selectedShape.setShape(rectangle);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
         moveTool = new MoveTool(pane,executor, selectedShape,menu);
@@ -75,10 +89,9 @@ public class MoveToolTest {
     
     @Before
     public void setUpLine() {
-        panel = new JFXPanel();
-        
+        line = new Line(10,10,10,10);
         selectedShape = SelectedShape.getIstance();
-        
+        selectedShape.setShape(line);
         CommandExecutor executor = new CommandExecutor();
         Pane pane = new Pane();
         moveTool = new MoveTool(pane,executor, selectedShape,menu);
@@ -87,10 +100,12 @@ public class MoveToolTest {
         releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
                                            false, false,false,false,false,false,false,false,false,false,null);
         
-    }
+    }*/
 
     @Test
     public void testOnMousePressedEllipse() {
+        Ellipse ellipse = new Ellipse(10,10,10,10);
+        selectedShape.setShape(ellipse);
         MouseEvent event = new MouseEvent(null, line, new EventType("evento1Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(0, ellipse.getTranslateX(), 0);
@@ -98,7 +113,7 @@ public class MoveToolTest {
         
     }
 
-    @Test
+    /*@Test
     public void testOnMouseDraggedEllipse() {
         MouseEvent event1 = new MouseEvent(null, ellipse, new EventType("evento2Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 
                                            0, false, false, false, false, false, false, false, false, false, false, null);
@@ -189,6 +204,6 @@ public class MoveToolTest {
         moveTool.onMouseReleased(releasedEvent);
         assertEquals(moveTool.getOldX(), line.getTranslateX(), 0);
         assertEquals(moveTool.getOldY(), line.getTranslateY(), 0);
-    }
+    }*/
 
 }
