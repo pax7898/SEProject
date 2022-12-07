@@ -86,14 +86,15 @@
                                     </ToggleButton>
                                  </children>
                               </AnchorPane>
-                              <ToggleButton fx:id="selBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSelectionTool" prefHeight="34.0" prefWidth="37.0" textAlignment="CENTER">
+                              <ToggleButton fx:id="selBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSelectionTool" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
                                  <graphic>
-                                    <ImageView fitHeight="25.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../image/selection2.png" />
                                        </image>
                                     </ImageView>
-                                 </graphic></ToggleButton>
+                                 </graphic>
+                              </ToggleButton>
                               <AnchorPane prefHeight="132.0" prefWidth="190.0">
                                  <children>
                                     <ColorPicker fx:id="borderPicker" layoutX="34.0" layoutY="39.0" onAction="#borderColorChange" prefHeight="26.0" prefWidth="43.0">
