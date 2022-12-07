@@ -142,15 +142,6 @@ public class DrawingEditorTest {
        
        
     }
-    
-    @Test
-    public void testCutShape() {
-        System.out.println("setCutTool");
-        //(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu)
-        System.out.println(drawingPane.getChildren().contains(shape));
-        
-    }
-
 
     /**
      * Test of onMousePressed method, of class DrawingEditor.
@@ -197,6 +188,47 @@ public class DrawingEditorTest {
      */
     @Test
     public void testDeleteShape() {
+        
+    }
+    
+    /**
+     * Test of toFront method, of class DrawingEditor.
+     */
+    @Test
+    public void testToFront() {
+        
+    }
+    
+    /**
+     * Test of toFront method, of class DrawingEditor.
+     */
+    @Test
+    public void testCopyshape() {
+        
+    }
+    
+    /**
+     * Test of toFront method, of class DrawingEditor.
+     */
+    @Test
+    public void testPasteShape() {
+        
+    }
+    
+    @Test
+    public void testCutShape() {
+        System.out.println("setCutTool");
+        //(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu)
+        System.out.println(drawingPane.getChildren().contains(shape));
+        
+    }
+
+    
+    /**
+     * Test of toFront method, of class DrawingEditor.
+     */
+    @Test
+    public void testUndo() {
         
     }
 

@@ -20,6 +20,7 @@ public class CutCommand implements Command{
     private Shape shape;
     private Pane pane;
     private ContextMenu menu;
+    private static final int PASTE_ITEM_INDEX=3;
     
     
     /**
@@ -44,7 +45,7 @@ public class CutCommand implements Command{
     public void execute() {
         clonator.encodeToXml(shape);
         pane.getChildren().remove(shape);
-        menu.getItems().get(3).setDisable(false);
+        menu.getItems().get(PASTE_ITEM_INDEX).setDisable(false);
     }
     
     /**

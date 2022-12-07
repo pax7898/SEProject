@@ -8,7 +8,7 @@ package projectapp.command;
 import javafx.scene.shape.Shape;
 
 /**
- * This class allow us to create a command for the move operation
+ * This class allows us to create a command for the move operation
  * @author acoon
  */
 

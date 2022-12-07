@@ -44,21 +44,23 @@ public class DrawCommandTest {
      * Test of execute method, of class DrawCommand.
      */
     @Test
-    public void testExecute() {
+    public void testExecuteLine() {
        System.out.println("execute");
-      
-       
+         
        command = new DrawCommand(line,pane);
        command.execute();
        assertEquals(1,pane.getChildren().size());
        assertEquals(pane.getChildren().get(0),line);
-       
-        
-       command = new DrawCommand(ellipse,pane);
-       command.execute();
-       assertEquals(2,pane.getChildren().size());
-       assertEquals(pane.getChildren().get(1),ellipse);
-       
+ 
+    }
+    
+     /**
+     * Test of execute method, of class DrawCommand.
+     */
+    @Test
+    public void testExecuteRectangle() {
+       System.out.println("execute");
+      
        command = new DrawCommand(rectangle,pane);
        command.execute();
        assertEquals(3,pane.getChildren().size());
@@ -67,22 +69,50 @@ public class DrawCommandTest {
     }
     
      /**
+     * Test of execute method, of class DrawCommand.
+     */
+    @Test
+    public void testExecuteEllipse() {
+       System.out.println("execute");
+
+       command = new DrawCommand(ellipse,pane);
+       command.execute();
+       assertEquals(2,pane.getChildren().size());
+       assertEquals(pane.getChildren().get(1),ellipse);
+
+    }
+    
+     /**
      * Test of undo method, of class DrawCommand.
      */
     @Test
-    public void testUndo() {
+    public void testUndoLine() {
        
        command = new DrawCommand(line,pane);
        command.execute();
        command.undo();
        assertEquals(0,pane.getChildren().size());
-       
+
+    } 
+    
+    /**
+     * Test of undo method, of class DrawCommand.
+     */
+    @Test
+    public void testUndoRectangle() {
        
        command = new DrawCommand(rectangle,pane);
        command.execute();
        command.undo();
        assertEquals(0,pane.getChildren().size());
-       
+
+    } 
+    
+    /**
+     * Test of undo method, of class DrawCommand.
+     */
+    @Test
+    public void testUndoEllipse() {
        
        command = new DrawCommand(ellipse,pane);
        command.execute();
@@ -90,6 +120,4 @@ public class DrawCommandTest {
        assertEquals(0,pane.getChildren().size());
        
     } 
-
-
 }

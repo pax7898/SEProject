@@ -41,7 +41,7 @@ public class DeleteCommandTest {
      * Test of execute method, of class DeleteCommand.
      */
     @Test
-    public void testExecute() {
+    public void testExecuteLine() {
        System.out.println("execute");
 
        pane.getChildren().add(line);
@@ -50,36 +50,78 @@ public class DeleteCommandTest {
        assertEquals(0,pane.getChildren().size());
        
        
-       pane.getChildren().add(ellipse);
-       command = new DeleteCommand(ellipse,pane);
-       command.execute();
-       assertEquals(0,pane.getChildren().size());
-      
-       
+    }
+    
+    /**
+     * Test of execute method, of class DeleteCommand.
+     */
+    @Test
+    public void testExecuteRectangle() {
+       System.out.println("execute");
+
        pane.getChildren().add(rectangle);
        command = new DeleteCommand(rectangle,pane);
        command.execute();
        assertEquals(0,pane.getChildren().size());
     }
+    
+    /**
+     * Test of execute method, of class DeleteCommand.
+     */
+    @Test
+    public void testExecuteEllipse() {
+       System.out.println("execute");
+
+       pane.getChildren().add(ellipse);
+       command = new DeleteCommand(ellipse,pane);
+       command.execute();
+       assertEquals(0,pane.getChildren().size());
+      
+    }
+    
+    
+    
 
     /**
      * Test of undo method, of class DeleteCommand.
      */
     @Test
-    public void testUndo() {
-       
+    public void testUndoLine() {
+       System.out.println("undo");
+
        pane.getChildren().add(line);
        command = new DeleteCommand(line,pane);
        command.execute();
        command.undo();
        assertEquals(1,pane.getChildren().size());
-       
+     
+
+    } 
+    
+    
+    /**
+     * Test of undo method, of class DeleteCommand.
+     */
+    @Test
+    public void testUndoRectangle() {
+        System.out.println("undo");
+    
        pane.getChildren().add(rectangle);
        command = new DeleteCommand(rectangle,pane);
        command.execute();
        command.undo();
        assertEquals(2,pane.getChildren().size());
+     
        
+    } 
+    
+    
+    /**
+     * Test of undo method, of class DeleteCommand.
+     */
+    @Test
+    public void testUndoEllipse() {
+       System.out.println("undo");
        
        pane.getChildren().add(ellipse);
        command = new DeleteCommand(ellipse,pane);

@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 /**
- * This class allow us to create a command for the draw operation
+ * This class allows us to create a command for the draw operation
  * @author pasqualecaggiano
  */
 public class DrawCommand implements Command{
@@ -38,7 +38,10 @@ public class DrawCommand implements Command{
     public void execute() {
         pane.getChildren().add(shape);
     }
-
+    
+    /**
+     * This method removes the shape from the drawing pane
+     */
     @Override
     public void undo() {
         pane.getChildren().remove(shape);

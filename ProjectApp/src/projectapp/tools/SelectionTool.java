@@ -114,27 +114,27 @@ public class SelectionTool extends Tool{
     
     @Override
     public void copy() {
-        if (selectedShape.getShape()!= null){
-        getExecutor().execute(new CopyCommand(clonator,selectedShape.getShape()));
-        } else {
+        if (selectedShape.getShape()!= null)
+            getExecutor().execute(new CopyCommand(clonator,selectedShape.getShape()));
+        else 
             clonator.setByteCloned(null);
-        }
+        
     }
     
     @Override
     public void paste(Point2D point) {
-        if (clonator.getByteCloned()!=null){
-        getExecutor().execute(new PasteCommand(clonator,selectedShape.getShape(),getPane(),point));
-        }
+        if (clonator.getByteCloned()!=null)
+            getExecutor().execute(new PasteCommand(clonator,getPane(),point));
+        
     }
 
     @Override
     public void cut() {
-        if (selectedShape.getShape()!= null){
+        if (selectedShape.getShape()!= null)
             getExecutor().execute(new CutCommand(clonator,selectedShape.getShape(), getPane(), menu));
-        } else {
+        else 
             clonator.setByteCloned(null);
-        }
+        
     }
     
     /**

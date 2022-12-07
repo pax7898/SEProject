@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 /**
- * This class allow us to create a command for the delete operation
+ * This class allows us to create a command for the delete operation
  * @author pasqualecaggiano
  */
 public class DeleteCommand  implements Command{
@@ -28,13 +28,16 @@ public class DeleteCommand  implements Command{
     }
 
     /**
-     * This method add the shape to the drawing pane
+     * This method removes the shape from the drawing pane
      */
     @Override
     public void execute() {
         pane.getChildren().remove(shape);
     }
-
+    
+    /**
+     * This method adds the shape to the drawing pane
+     */
     @Override
     public void undo() {
         pane.getChildren().add(shape);

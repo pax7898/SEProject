@@ -10,7 +10,7 @@ import javafx.scene.shape.Shape;
 import singletons.Clonator;
 
 /**
- *
+ * This class allows us to create a command for the paste operation
  * @author pasqualecaggiano
  */
 public class PasteCommand implements Command{
@@ -18,28 +18,42 @@ public class PasteCommand implements Command{
     private Shape shape;
     private Pane pane;
     private Point2D point;
-
-    public PasteCommand(Clonator clonator, Shape shape, Pane pane, Point2D point) {
+    
+    /**
+     * 
+     * PasteCommand(Shape shape, Pane pane) is the class costructor
+     * 
+     * @param shape is the reference to the shape
+     * @param pane is the reference to the drawing pane
+     */
+    public PasteCommand(Clonator clonator, Pane pane, Point2D point) {
         this.clonator = clonator;
-        this.shape = shape;
+        this.shape = null;
         this.pane = pane;
         this.point = point;
     }
     
+    /**
+     * This method decodes the shape saved in the bytearray and adds it to the drawing pane in a position
+     * related to the point where happened the context menu request.
+     */
     @Override
     public void execute() {
         shape = clonator.decodeFromXml();
-        if (shape!= null){
-            shape.setTranslateX(point.getX());
-            shape.setTranslateY(point.getY());
-            pane.getChildren().add(shape);
-        }
+        
+        shape.setTranslateX(point.getX());
+        shape.setTranslateY(point.getY());
+        pane.getChildren().add(shape);
+        
     }
-
+    
+    /**
+     * This method remove the shape added to the drawing pane during the paste operation
+     */
     @Override
     public void undo() {
-        if (shape != null){
+        
         pane.getChildren().remove(shape);
-        }
+        
     }  
 }
