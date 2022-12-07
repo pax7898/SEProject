@@ -79,8 +79,6 @@ public class DeleteCommandTest {
       
     }
     
-    
-    
 
     /**
      * Test of undo method, of class DeleteCommand.
@@ -94,8 +92,6 @@ public class DeleteCommandTest {
        command.execute();
        command.undo();
        assertEquals(1,pane.getChildren().size());
-     
-
     } 
     
     
@@ -110,7 +106,7 @@ public class DeleteCommandTest {
        command = new DeleteCommand(rectangle,pane);
        command.execute();
        command.undo();
-       assertEquals(2,pane.getChildren().size());
+       assertEquals(1,pane.getChildren().size());
      
        
     } 
@@ -127,7 +123,7 @@ public class DeleteCommandTest {
        command = new DeleteCommand(ellipse,pane);
        command.execute();
        command.undo();
-       assertEquals(3,pane.getChildren().size());
+       assertEquals(1,pane.getChildren().size());
        
     } 
 }
