@@ -105,16 +105,18 @@ public class MoveToolTest {
     @Test
     public void testOnMousePressedEllipse() {
         Ellipse ellipse = new Ellipse(10,10,10,10);
-        selectedShape.setShape(ellipse);
-        MouseEvent event = new MouseEvent(null, line, new EventType("evento1Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+        
+        MouseEvent event = new MouseEvent(null, ellipse, new EventType("evento1Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(0, ellipse.getTranslateX(), 0);
         assertEquals(0, ellipse.getTranslateY(), 0);
         
     }
 
-    /*@Test
+    @Test
     public void testOnMouseDraggedEllipse() {
+        Ellipse ellipse = new Ellipse(10,10,10,10);
+        
         MouseEvent event1 = new MouseEvent(null, ellipse, new EventType("evento2Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 
                                            0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
@@ -127,6 +129,8 @@ public class MoveToolTest {
 
     @Test
     public void testOnMouseReleasedEllipse() {
+        
+        Ellipse ellipse = new Ellipse(10,10,10,10);
         MouseEvent event1 = new MouseEvent(null, ellipse, new EventType("evento3Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 
                                            0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
@@ -140,6 +144,7 @@ public class MoveToolTest {
     
     @Test
     public void testOnMousePressedRectangle() {
+        Rectangle rectangle = new Rectangle(10,10,10,10);
         MouseEvent event = new MouseEvent(null, rectangle, new EventType("evento1Rectangle"), 0, 0, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(0, rectangle.getTranslateX(), 0);
@@ -149,6 +154,9 @@ public class MoveToolTest {
 
     @Test
     public void testOnMouseDraggedRectangle() {
+        
+        Rectangle rectangle = new Rectangle(10,10,10,10);
+
         MouseEvent event1 = new MouseEvent(null, rectangle, new EventType("evento2Rectangle"), 0, 0, 0, 0, MouseButton.PRIMARY, 
                                            0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
@@ -161,6 +169,8 @@ public class MoveToolTest {
 
     @Test
     public void testOnMouseReleasedRectangle() {
+        Rectangle rectangle = new Rectangle(10,10,10,10);
+
         MouseEvent event1 = new MouseEvent(null, rectangle, new EventType("evento3Rectangle"), 0, 0, 0, 0, MouseButton.PRIMARY, 
                                            0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
@@ -174,6 +184,8 @@ public class MoveToolTest {
 
     @Test
     public void testOnMousePressedLine() {
+        Line line = new Line(10,10,10,10);
+        
         MouseEvent event = new MouseEvent(null, line, new EventType("evento1Line"), 0, 0, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(0, line.getTranslateX(), 0);
@@ -183,6 +195,7 @@ public class MoveToolTest {
 
     @Test
     public void testOnMouseDraggedLine() {
+        Line line = new Line(10,10,10,10);
         MouseEvent event1 = new MouseEvent(null, line, new EventType("evento2Line"), 0, 0, 0, 0, MouseButton.PRIMARY, 
                                            0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
@@ -195,6 +208,7 @@ public class MoveToolTest {
 
     @Test
     public void testOnMouseReleasedLine() {
+        Line line = new Line(10,10,10,10);
         MouseEvent event1 = new MouseEvent(null, line, new EventType("evento3Line"), 0, 0, 0, 0, MouseButton.PRIMARY, 
                                            0, false, false, false, false, false, false, false, false, false, false, null);
         moveTool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
@@ -204,6 +218,6 @@ public class MoveToolTest {
         moveTool.onMouseReleased(releasedEvent);
         assertEquals(moveTool.getOldX(), line.getTranslateX(), 0);
         assertEquals(moveTool.getOldY(), line.getTranslateY(), 0);
-    }*/
+    }
 
 }
