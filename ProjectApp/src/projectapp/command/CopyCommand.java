@@ -5,7 +5,7 @@
 package projectapp.command;
 
 import javafx.scene.shape.Shape;
-import singletons.Clonator;
+import projectapp.singletons.Clonator;
 
 /**
  *  This class allows us to create a command for the copy operation

@@ -1,7 +1,7 @@
 package projectapp;
 
 
-import singletons.DrawingEditor;
+import projectapp.singletons.DrawingEditor;
 import java.io.File;
 import projectapp.command.CommandExecutor;
 import java.net.URL;

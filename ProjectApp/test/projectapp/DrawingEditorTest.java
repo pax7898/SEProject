@@ -4,8 +4,8 @@
  */
 package projectapp;
 
-import singletons.SelectedShape;
-import singletons.DrawingEditor;
+import projectapp.singletons.SelectedShape;
+import projectapp.singletons.DrawingEditor;
 import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -34,7 +34,7 @@ import projectapp.tools.LineTool;
 import projectapp.tools.MoveTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
-import singletons.Clonator;
+import projectapp.singletons.Clonator;
 /**
  *
  * @author pasqualecaggiano

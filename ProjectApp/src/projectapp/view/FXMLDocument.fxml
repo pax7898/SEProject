@@ -41,7 +41,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../image/save-file-icon.png" />
+                                                <Image url="@../image/save-file-icon.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -50,7 +50,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../image/upload-file-icon.png" />
+                                                <Image url="@../image/upload-file-icon.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -67,7 +67,7 @@
                                        <graphic>
                                           <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../image/Editing-Line-icon.png" />
+                                                <Image url="@../image/Editing-Line-icon.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -76,7 +76,7 @@
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../image/2440859-200.png" />
+                                                <Image url="@../image/2440859-200.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -85,7 +85,7 @@
                                        <graphic>
                                           <ImageView fitHeight="19.0" fitWidth="25.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../image/33822.png" />
+                                                <Image url="@../image/33822.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -107,12 +107,12 @@
                                     </ColorPicker>
                                     <ImageView fitHeight="23.0" fitWidth="25.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../image/-border-color_90258.png" />
+                                          <Image url="@../image/-border-color_90258.png" />
                                        </image>
                                     </ImageView>
                                     <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="97.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../image/-format-color-fill_90390.png" />
+                                          <Image url="@../image/-format-color-fill_90390.png" />
                                        </image>
                                     </ImageView>
                                  </children>

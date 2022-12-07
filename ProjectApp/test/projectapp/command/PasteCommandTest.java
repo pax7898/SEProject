@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import singletons.Clonator;
+import projectapp.singletons.Clonator;
 
 /**
  *

@@ -18,13 +18,13 @@ import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import singletons.SelectedShape;
+import projectapp.singletons.SelectedShape;
 import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DeleteCommand;
-import singletons.Clonator;
+import projectapp.singletons.Clonator;
 
 /**
  *

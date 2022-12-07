@@ -9,14 +9,14 @@ package projectapp.tools;
  * @author pasqualecaggiano
  */
 
-import singletons.Clonator;
+import projectapp.singletons.Clonator;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
-import singletons.SelectedShape;
+import projectapp.singletons.SelectedShape;
 import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.CommandExecutor;

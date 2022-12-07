@@ -7,7 +7,7 @@ package projectapp.command;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
-import singletons.Clonator;
+import projectapp.singletons.Clonator;
 
 /**
  * This class allows us to create a command for the cut operation
