@@ -63,8 +63,8 @@ public class DrawCommandTest {
       
        command = new DrawCommand(rectangle,pane);
        command.execute();
-       assertEquals(3,pane.getChildren().size());
-       assertEquals(pane.getChildren().get(2),rectangle);
+       assertEquals(1,pane.getChildren().size());
+       assertEquals(pane.getChildren().get(0),rectangle);
        
     }
     
@@ -77,8 +77,8 @@ public class DrawCommandTest {
 
        command = new DrawCommand(ellipse,pane);
        command.execute();
-       assertEquals(2,pane.getChildren().size());
-       assertEquals(pane.getChildren().get(1),ellipse);
+       assertEquals(1,pane.getChildren().size());
+       assertEquals(pane.getChildren().get(0),ellipse);
 
     }
     
