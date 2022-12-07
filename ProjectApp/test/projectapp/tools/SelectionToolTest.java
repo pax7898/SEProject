@@ -24,6 +24,7 @@ import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DeleteCommand;
+import projectapp.command.ToFrontCommand;
 import projectapp.singletons.Clonator;
 
 /**
@@ -36,6 +37,8 @@ public class SelectionToolTest {
     private Pane pane;
     private CommandExecutor executor;
     private Shape shape;
+    private Shape shape1;
+
     private ContextMenu menu;
     private JFXPanel panel;
     
@@ -46,10 +49,11 @@ public class SelectionToolTest {
     public void setUp() {
         panel = new JFXPanel();
         shape = new Rectangle(20,20,30,30);
+        shape1 = new Rectangle(40,40,40,40);
         shape.setFill(Color.BLUE);
         shape.setStroke(Color.BLUE);
         pane = new Pane();
-        pane.getChildren().add(shape);
+        pane.getChildren().addAll(shape,shape1);
         selectedShape = SelectedShape.getIstance();
         selectedShape.setShape(shape); 
         menu = new ContextMenu();
@@ -175,8 +179,17 @@ public class SelectionToolTest {
         Point2D point = new Point2D(0.0,0.0);
         tool.paste(point);
         assertEquals(initialLength+1, pane.getChildren().size());
-        assertEquals(shape.toString(), pane.getChildren().get(1).toString());
+        assertEquals(shape.toString(), pane.getChildren().get(0).toString());
     }
     
+    @Test
+    public void testToFront() {
+        System.out.println("toFront");
+        
+        ToFrontCommand toFrontCommand = new ToFrontCommand(shape, pane);
+        tool.toFront();
+        assertEquals(pane.getChildren().indexOf(shape), pane.getChildren().size()-1);
+ 
+    }
    
 }
