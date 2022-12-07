@@ -191,6 +191,9 @@ public class DrawingEditor {
     public void toFront(){
         currentTool.toFront();
     }
+    public void toBack(){
+        currentTool.toFront();
+    }
     
     /***
      * This method allows the user to copy the selected figure.
