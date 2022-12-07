@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -25,7 +26,10 @@ import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
+import projectapp.command.DeleteCommand;
+import projectapp.command.DrawCommand;
 import projectapp.tools.LineTool;
 import projectapp.tools.MoveTool;
 import projectapp.tools.SelectionTool;
@@ -143,8 +147,7 @@ public class DrawingEditorTest {
        assertEquals(moveTool.getNewX(), shape.getTranslateX(), 0);
        assertEquals(moveTool.getNewY(), shape.getTranslateY(), 0);
         
-       
-       
+
     }
 
     /**
@@ -152,7 +155,7 @@ public class DrawingEditorTest {
      */
     @Test
     public void testOnMousePressed() {
-       
+       // Alredy testes in each tools that implements the onMousePressed method
     }
 
     /**
@@ -160,7 +163,7 @@ public class DrawingEditorTest {
      */
     @Test
     public void testOnMouseDragged() {
-        
+        // Alredy testes in each tools that implements the onMouseDragged method
     }
 
     /**
@@ -168,7 +171,7 @@ public class DrawingEditorTest {
      */
     @Test
     public void testOnMouseReleased() {
-      
+      // Alredy testes in each tools that implements the onMouseReleased method
     }
 
     /**
@@ -192,6 +195,17 @@ public class DrawingEditorTest {
      */
     @Test
     public void testDeleteShape() {
+        System.out.println("deleteShape");
+        
+        drawingPane.getChildren().add(shape);
+
+        editor.setSelectionTool();
+        
+        selectedShape.setShape(shape);
+        
+        editor.deleteShape();
+        
+        assertEquals(0,drawingPane.getChildren().size());
         
     }
     
@@ -208,7 +222,23 @@ public class DrawingEditorTest {
      */
     @Test
     public void testCopyshape() {
+        System.out.println("copyShape");
+        drawingPane.getChildren().add(shape);
         
+        editor.setSelectionTool();
+        
+        selectedShape.setShape(shape);
+        
+        editor.copyShape();
+        
+        Rectangle rectangle2 = (Rectangle) Clonator.getIstance().decodeFromXml();
+        Rectangle originalRectangle = (Rectangle) shape;
+        assertEquals(originalRectangle.getX(), rectangle2.getX(),0);
+        assertEquals(originalRectangle.getY(), rectangle2.getY(),0);
+        assertEquals(originalRectangle.getWidth(), rectangle2.getWidth(),0);
+        assertEquals(originalRectangle.getHeight(), rectangle2.getHeight(),0);
+        assertEquals(originalRectangle.getStroke(), rectangle2.getStroke());
+        assertEquals(originalRectangle.getFill(), rectangle2.getFill());
     }
     
     /**
@@ -216,23 +246,64 @@ public class DrawingEditorTest {
      */
     @Test
     public void testPasteShape() {
+        System.out.println("pasteShape");
+        
+        Rectangle originalRectangle = (Rectangle) shape;
+        
+        drawingPane.getChildren().add(shape);
+
+        editor.setSelectionTool();
+        
+        selectedShape.setShape(shape);
+        
+        /*
+            COPY + PASTE
+        */
+        editor.copyShape();
+        editor.pasteShape(new Point2D(30,40));
+        
+        
+        Rectangle rectangle2 = (Rectangle) drawingPane.getChildren().get(0);
+        
+        assertEquals(originalRectangle.getX(), rectangle2.getX(),0);
+        assertEquals(originalRectangle.getY(), rectangle2.getY(),0);
+        assertEquals(originalRectangle.getWidth(), rectangle2.getWidth(),0);
+        assertEquals(originalRectangle.getHeight(), rectangle2.getHeight(),0);
+        assertEquals(originalRectangle.getStroke(), rectangle2.getStroke());
+        assertEquals(originalRectangle.getFill(), rectangle2.getFill());
+        
+        /*
+            CUT + PASTE
+        */
+        
+       
+        editor.cutShape();
+        editor.pasteShape(new Point2D(30,40));
+        
+        
+        Rectangle rectangle3 = (Rectangle) drawingPane.getChildren().get(0);
+        
+        assertEquals(originalRectangle.getX(), rectangle3.getX(),0);
+        assertEquals(originalRectangle.getY(), rectangle3.getY(),0);
+        assertEquals(originalRectangle.getWidth(), rectangle3.getWidth(),0);
+        assertEquals(originalRectangle.getHeight(), rectangle3.getHeight(),0);
+        assertEquals(originalRectangle.getStroke(), rectangle3.getStroke());
+        assertEquals(originalRectangle.getFill(), rectangle3.getFill());
+        
         
     }
     
     @Test
     public void testCutShape() {
-        System.out.println("setCutTool");
+        System.out.println("cutShape");
 
         drawingPane.getChildren().add(shape);
-        MouseEvent event = new MouseEvent(null, shape, new EventType("cut"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
         
-        selectedShape.setShape(shape);
-        tool = new SelectionTool(drawingPane,selectedShape,executor,menu);
-        currentTool = tool;
         editor.setSelectionTool();
         
-        currentTool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
-        currentTool.cut();
+        selectedShape.setShape(shape);
+        
+        editor.cutShape();
         
         assertFalse(drawingPane.getChildren().contains(shape));
         
@@ -255,6 +326,20 @@ public class DrawingEditorTest {
      */
     @Test
     public void testUndo() {
+        System.out.println("undo");
+        
+        editor.setRectangleTool();
+        MouseEvent press = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
+        editor.onMousePressed(press, Color.DARKVIOLET, Color.SILVER);
+        
+        assertEquals(1,drawingPane.getChildren().size());
+        assertEquals(1,executor.getStack().size());
+        
+        editor.undo();
+        
+        assertEquals(0,drawingPane.getChildren().size());
+        assertEquals(0,executor.getStack().size());
+        
         
     }
 
