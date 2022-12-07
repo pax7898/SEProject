@@ -133,8 +133,7 @@ public class SelectionTool extends Tool{
         if (selectedShape.getShape()!= null)
             getExecutor().execute(new CutCommand(clonator,selectedShape.getShape(), getPane(), menu));
         else 
-            clonator.setByteCloned(null);
-        
+            clonator.setByteCloned(null);    
     }
     
     /**
