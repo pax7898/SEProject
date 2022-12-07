@@ -148,7 +148,8 @@
                             <MenuItem mnemonicParsing="false" onAction="#cutShape" text="Cut" />
                             <MenuItem mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
                             <MenuItem mnemonicParsing="false" onAction="#setMoveTool" text="Move" />
-                              <MenuItem mnemonicParsing="false" onAction="#setToFrontTool" text="ToFront" />
+                            <MenuItem mnemonicParsing="false" onAction="#setToFrontTool" text="ToFront" />
+                            <MenuItem mnemonicParsing="false" onAction="#setToBackTool" text="ToBack" />
                           </items>
                         </ContextMenu>
                      </contextMenu>
