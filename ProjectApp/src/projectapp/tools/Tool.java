@@ -110,6 +110,7 @@ public abstract class Tool {
     public abstract void paste(Point2D point);
     public abstract void cut();
     public abstract void toFront();
+    public abstract void toBack();
 }
 
  

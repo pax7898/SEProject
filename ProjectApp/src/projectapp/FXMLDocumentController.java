@@ -325,6 +325,11 @@ public class FXMLDocumentController implements Initializable {
         editor.toFront();
     }
 
+    @FXML
+    private void setToBackTool(ActionEvent event) {
+        editor.toBack();
+    }
+
     
 
     

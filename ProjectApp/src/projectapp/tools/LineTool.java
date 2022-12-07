@@ -112,5 +112,8 @@ public class LineTool extends Tool{
     @Override
     public void toFront() {}
 
+    @Override
+    public void toBack() {}
+
 
 }

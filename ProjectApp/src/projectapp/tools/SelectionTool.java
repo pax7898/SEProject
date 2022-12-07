@@ -24,6 +24,7 @@ import projectapp.command.CopyCommand;
 import projectapp.command.CutCommand;
 import projectapp.command.DeleteCommand;
 import projectapp.command.PasteCommand;
+import projectapp.command.ToBackCommand;
 import projectapp.command.ToFrontCommand;
 
 /**
@@ -143,7 +144,10 @@ public class SelectionTool extends Tool{
     public void toFront() {
         getExecutor().execute(new ToFrontCommand(selectedShape.getShape(), getPane()));
     }
-    
+    @Override
+    public void toBack() {
+        getExecutor().execute(new ToBackCommand(selectedShape.getShape(), getPane()));
+    }
     /*
      * Unimplemented methods of the abstract class Tool
      */

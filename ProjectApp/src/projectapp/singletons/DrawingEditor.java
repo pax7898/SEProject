@@ -192,7 +192,7 @@ public class DrawingEditor {
         currentTool.toFront();
     }
     public void toBack(){
-        currentTool.toFront();
+        currentTool.toBack();
     }
     
     /***

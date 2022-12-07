@@ -148,4 +148,7 @@ public class RectangleTool extends Tool{
 
     @Override
     public void toFront() {}
+
+    @Override
+    public void toBack() {}
 }
