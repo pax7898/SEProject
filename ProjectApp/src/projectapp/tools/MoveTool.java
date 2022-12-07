@@ -40,7 +40,8 @@ public class MoveTool extends Tool{
         menu.getItems().forEach(item -> {
             item.setDisable(true);
         });
-        selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
+        if(selectedShape.getShape() != null)
+            selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
     }
     
        /*I need getter method only for tests*/

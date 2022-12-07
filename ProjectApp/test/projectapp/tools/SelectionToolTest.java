@@ -6,6 +6,7 @@ package projectapp.tools;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventType;
+import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
@@ -140,9 +141,42 @@ public class SelectionToolTest {
         tool.cut();
         assertFalse(executor.getStack().isEmpty());
         assertFalse(pane.getChildren().contains(shape));
-        assertEquals(Clonator.getIstance().getByteCloned(), shape);
+        Shape shape2 = (Shape)Clonator.getIstance().decodeFromXml();
+        assertEquals(shape2.toString(), shape.toString());
     }
     
+    /**
+     * Test of copy method, of class SelectionTool.
+     */
+    @Test
+    public void testCopy() {
+        System.out.println("copy");
+        
+        selectedShape.setShape(null);
+        tool.copy();
+        assertEquals(Clonator.getIstance().getByteCloned(), null);
+        
+        selectedShape.setShape(shape);
+        tool.copy();
+        assertFalse(executor.getStack().isEmpty());
+        Shape shape2 = (Shape)Clonator.getIstance().decodeFromXml();
+        assertEquals(shape2.toString(), shape.toString());
+    }
+    
+    /**
+     * Test of cut method, of class SelectionTool.
+     */
+    @Test
+    public void testPaste() {
+        System.out.println("paste");
+        
+        tool.copy();
+        int initialLength = pane.getChildren().size();
+        Point2D point = new Point2D(0.0,0.0);
+        tool.paste(point);
+        assertEquals(initialLength+1, pane.getChildren().size());
+        assertEquals(shape.toString(), pane.getChildren().get(1).toString());
+    }
     
    
 }
