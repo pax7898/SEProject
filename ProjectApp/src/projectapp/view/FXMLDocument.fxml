@@ -55,7 +55,7 @@
                         </MenuBar>
                         <HBox alignment="CENTER_LEFT" prefHeight="131.2" prefWidth="976.8">
                            <children>
-                              <AnchorPane prefHeight="132.0" prefWidth="210.0">
+                              <AnchorPane prefHeight="106.0" prefWidth="242.0">
                                  <children>
                                     <ToggleButton fx:id="lineBtn" contentDisplay="CENTER" layoutX="26.0" layoutY="35.0" mnemonicParsing="false" onAction="#setLineTool" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
                                        <graphic>
@@ -84,17 +84,17 @@
                                           </ImageView>
                                        </graphic>
                                     </ToggleButton>
+                                    <ToggleButton fx:id="selBtn" contentDisplay="CENTER" layoutX="208.0" layoutY="35.0" mnemonicParsing="false" onAction="#setSelectionTool" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../image/selection2.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </ToggleButton>
                                  </children>
                               </AnchorPane>
-                              <ToggleButton fx:id="selBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSelectionTool" prefHeight="34.0" prefWidth="39.0" textAlignment="CENTER">
-                                 <graphic>
-                                    <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/selection2.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </ToggleButton>
                               <AnchorPane prefHeight="132.0" prefWidth="190.0">
                                  <children>
                                     <ColorPicker fx:id="borderPicker" layoutX="34.0" layoutY="39.0" onAction="#borderColorChange" prefHeight="26.0" prefWidth="43.0">
