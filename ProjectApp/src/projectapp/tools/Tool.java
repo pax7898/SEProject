@@ -111,6 +111,8 @@ public abstract class Tool {
     public abstract void cut();
     public abstract void toFront();
     public abstract void toBack();
+    public abstract void changeSize();
+    public abstract void changeSizeBar();
 }
 
  

@@ -14,12 +14,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.WindowEvent;
 import projectapp.tools.SelectionTool;
@@ -58,9 +61,13 @@ public class FXMLDocumentController implements Initializable {
     private DrawingEditor editor;
     
     private Point2D contextMenuPoint;
-    private ToggleButton undoBtn;
+    
     @FXML
     private Button UndoBtn;
+    @FXML
+    private VBox vboxChangeSize;
+    @FXML
+    private Button changeSzBtn;
     
   
     /**
@@ -72,7 +79,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null, menu);
+        editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null, menu, vboxChangeSize);
         
         toggles = new ToggleGroup();
         toggles.getToggles().addAll(lineBtn,recBtn,elBtn,selBtn);
@@ -81,6 +88,7 @@ public class FXMLDocumentController implements Initializable {
         });
         editor.setLineTool();
         lineBtn.setSelected(true); 
+        vboxChangeSize.visibleProperty().set(false);
     }    
     
     /**
@@ -319,7 +327,7 @@ public class FXMLDocumentController implements Initializable {
     private void undo(ActionEvent event) {
         editor.undo();
     }
-
+    
     @FXML
     private void setToFrontTool(ActionEvent event) {
         editor.toFront();
@@ -330,8 +338,24 @@ public class FXMLDocumentController implements Initializable {
         editor.toBack();
     }
 
-    
+    @FXML
+    private void changeSizeBar(ActionEvent event) {
+        editor.changeSizeBar();
+    }
+
+    @FXML
+    private void changeSize(ActionEvent event) {
+        try{
+            TextField textX = (TextField) vboxChangeSize.getChildren().get(1);
+            TextField textY = (TextField) vboxChangeSize.getChildren().get(3);
+            Double x = Double.parseDouble(textX.getText());
+            Double y = Double.parseDouble(textY.getText());
+            editor.changeSize();
+        }catch(Exception e){
+            
+        }
+    }
 
     
-
+    
 }

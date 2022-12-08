@@ -5,11 +5,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -19,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <SplitPane dividerPositions="0.19019274376417228" orientation="VERTICAL" prefHeight="707.2" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -132,7 +134,40 @@
                                           <Image url="@../image/undo.png" />
                                        </image>
                                     </ImageView>
-                                 </graphic></Button>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets top="-6.0" />
+                                 </HBox.margin></Button>
+                              <VBox fx:id="vboxChangeSize" prefHeight="106.0" prefWidth="201.0">
+                                 <children>
+                                    <Label text="Change Size X-axis:">
+                                       <VBox.margin>
+                                          <Insets left="50.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField maxHeight="70.0" maxWidth="160.0" minHeight="20.0" minWidth="150.0" prefHeight="20.0" prefWidth="150.0">
+                                       <VBox.margin>
+                                          <Insets left="17.0" />
+                                       </VBox.margin></TextField>
+                                    <Label text="Change Size Y-axis:">
+                                       <VBox.margin>
+                                          <Insets left="50.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField maxHeight="70.0" maxWidth="160.0" minHeight="20.0" minWidth="150.0" prefHeight="20.0" prefWidth="150.0">
+                                       <VBox.margin>
+                                          <Insets left="17.0" />
+                                       </VBox.margin></TextField>
+                                    <Button fx:id="changeSzBtn" mnemonicParsing="false" onAction="#changeSize" text="Conferma">
+                                       <VBox.margin>
+                                          <Insets left="67.0" top="2.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
                         </HBox>
                      </children>
@@ -159,6 +194,7 @@
                             <MenuItem mnemonicParsing="false" onAction="#setMoveTool" text="Move" />
                             <MenuItem mnemonicParsing="false" onAction="#setToFrontTool" text="ToFront" />
                             <MenuItem mnemonicParsing="false" onAction="#setToBackTool" text="ToBack" />
+                            <MenuItem mnemonicParsing="false" onAction="#changeSizeBar" text="ChangeSize" />
                           </items>
                         </ContextMenu>
                      </contextMenu>

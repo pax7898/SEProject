@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import projectapp.FXMLDocumentController;
 import projectapp.command.CommandExecutor;
@@ -49,7 +50,7 @@ public class DrawingEditor {
     
     static private DrawingEditor instance = null;
     
-    
+    private final VBox vboxChangeSize;
     /**
      * 
      * DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) is the class costructor
@@ -59,17 +60,18 @@ public class DrawingEditor {
      * @param currentTool is the current state of the draing editor
      */
 
-    public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu) {
+    public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu, VBox vboxChangeSize) {
         this.drawingPane = pane;
         this.executor = executor;
         this.currentTool = currentTool;
         this.selectedShape = SelectedShape.getIstance();
         this.menu = menu;
+        this.vboxChangeSize = vboxChangeSize;
     }
     
-    public static DrawingEditor getIstance(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu){
+    public static DrawingEditor getIstance(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu, VBox vboxChangeSize){
         if (instance == null)
-         instance = new DrawingEditor(pane,executor,currentTool, menu);
+         instance = new DrawingEditor(pane,executor,currentTool, menu, vboxChangeSize);
       return instance;
     }
     
@@ -83,6 +85,7 @@ public class DrawingEditor {
      * when the user press the line button in the application. This condition is necessary for draw a line.
      */
     public void setLineTool(){
+        vboxChangeSize.visibleProperty().set(false);
         if (selectedShape.getShape() != null){
            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -94,6 +97,7 @@ public class DrawingEditor {
      * when the user press the rectangle button in the application. This condition is necessary for draw a rectangle.
      */
     public void setRectangleTool(){
+        vboxChangeSize.visibleProperty().set(false);
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -105,6 +109,7 @@ public class DrawingEditor {
      * when the user press the ellipse button in the application. This condition is necessary for draw an ellipse.
      */
     public void setEllipseTool(){
+        vboxChangeSize.visibleProperty().set(false);
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -116,10 +121,11 @@ public class DrawingEditor {
      * when the user press the selection button in the application. This condition is necessary for select a shape.
      */
     public void setSelectionTool(){
+        vboxChangeSize.visibleProperty().set(false);
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none"); 
         }
-        currentTool = new SelectionTool(drawingPane,selectedShape,executor, menu);
+        currentTool = new SelectionTool(drawingPane,selectedShape,executor, menu, vboxChangeSize);
     }  
     
     /**
@@ -127,7 +133,7 @@ public class DrawingEditor {
      * when the user press the move button in the application. This condition is necessary for move a shape.
      */
     public void setMoveTool(){
-        
+        vboxChangeSize.visibleProperty().set(false);
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
@@ -184,6 +190,22 @@ public class DrawingEditor {
     public void deleteShape(){
         currentTool.deleteShape();
     }
+    
+    /**
+     * This method allows the user to use a section in the toolbar in order to
+     * change the size of a selected shape
+     */
+    public void changeSizeBar(){
+        currentTool.changeSizeBar();
+    }
+    
+    /**
+     * This method allows the user to change the size of a selected shape
+     */
+    public void changeSize(){
+        currentTool.changeSize();
+    }
+    
     
     /***
      * This method allows the user to bring the shape in foreground.

@@ -12,13 +12,17 @@ package projectapp.tools;
 import projectapp.singletons.Clonator;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import projectapp.singletons.SelectedShape;
 import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
+import projectapp.command.ChangeSizeCommand;
 import projectapp.command.CommandExecutor;
 import projectapp.command.CopyCommand;
 import projectapp.command.CutCommand;
@@ -26,6 +30,7 @@ import projectapp.command.DeleteCommand;
 import projectapp.command.PasteCommand;
 import projectapp.command.ToBackCommand;
 import projectapp.command.ToFrontCommand;
+
 
 /**
  *
@@ -38,6 +43,13 @@ public class SelectionTool extends Tool{
     private final SelectedShape selectedShape;
     private final Clonator clonator;
     private final ContextMenu menu;
+    private final VBox vboxChangeSize;
+    private double changeSizeX = 1.0;
+    private double changeSizeY = 1.0;
+    private static final int TEXT_FIELD_CHANGE_SIZE_X=1;
+    private static final int TEXT_FIELD_CHANGE_SIZE_Y=3;
+    
+    
     /**
      * The costructor calls the costructor of Tool class
      * @param pane
@@ -46,11 +58,12 @@ public class SelectionTool extends Tool{
      * @param selectedShape 
      * @param menu 
      */
-    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu) {
+    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu, VBox vboxChangeSize) {
         super(pane,executor); 
         this.selectedShape = selectedShape;
         this.clonator = Clonator.getIstance();
         this.menu = menu;
+        this.vboxChangeSize = vboxChangeSize;
     }
     
     public SelectedShape getSelectedShape() {
@@ -160,6 +173,29 @@ public class SelectionTool extends Tool{
 
     @Override
     public Shape getShape() {return null;}
+
+    /**
+     * This method shows a section in the toolbar in order to
+     * modify the size of the selected shape
+     */
+    public void changeSizeBar() {
+        vboxChangeSize.visibleProperty().set(true);
+    }
+    
+    /**
+     * This method modifies the size of the shape
+     */
+    @Override
+    public void changeSize() {
+        TextField textX = (TextField) vboxChangeSize.getChildren().get(TEXT_FIELD_CHANGE_SIZE_X);
+        TextField textY = (TextField) vboxChangeSize.getChildren().get(TEXT_FIELD_CHANGE_SIZE_Y);
+        double beforeX = changeSizeX;
+        double beforeY = changeSizeY;
+        changeSizeX = Double.parseDouble(textX.getText())*changeSizeX;
+        changeSizeY = Double.parseDouble(textY.getText())*changeSizeY;
+        getExecutor().execute(new ChangeSizeCommand(selectedShape, changeSizeX, changeSizeY, beforeX, beforeY, vboxChangeSize));
+
+    }
 
     
 
