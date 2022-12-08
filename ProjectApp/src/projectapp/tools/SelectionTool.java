@@ -12,7 +12,6 @@ package projectapp.tools;
 import projectapp.singletons.Clonator;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -101,6 +100,7 @@ public class SelectionTool extends Tool{
             
         }
     }
+    
     /***
      * This method allows you to change the border color of a given figure
      * after having selected it
@@ -110,6 +110,7 @@ public class SelectionTool extends Tool{
     public void changeBorderColor(Color strokeColor) {
         getExecutor().execute(new ChangeBorderColorCommand(selectedShape.getShape(),strokeColor));
     }
+    
     /***
      * This method allows you to change the interior color of a given figure 
      * after having selected it
