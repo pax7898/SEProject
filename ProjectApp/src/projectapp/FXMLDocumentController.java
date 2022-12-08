@@ -1,7 +1,7 @@
 package projectapp;
 
 
-import singletons.DrawingEditor;
+import projectapp.singletons.DrawingEditor;
 import java.io.File;
 import projectapp.command.CommandExecutor;
 import java.net.URL;
@@ -323,6 +323,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void setToFrontTool(ActionEvent event) {
         editor.toFront();
+    }
+
+    @FXML
+    private void setToBackTool(ActionEvent event) {
+        editor.toBack();
     }
 
     

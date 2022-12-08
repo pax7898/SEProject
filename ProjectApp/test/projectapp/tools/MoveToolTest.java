@@ -18,7 +18,7 @@ import javafx.scene.shape.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import singletons.SelectedShape;
+import projectapp.singletons.SelectedShape;
 import projectapp.command.CommandExecutor;
 
 /**

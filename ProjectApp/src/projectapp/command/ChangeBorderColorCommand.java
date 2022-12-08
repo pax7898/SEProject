@@ -42,6 +42,6 @@ public class ChangeBorderColorCommand implements Command{
 
     @Override
     public void undo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        shape.setStroke(oldStrokeColor);    
     }
 }
