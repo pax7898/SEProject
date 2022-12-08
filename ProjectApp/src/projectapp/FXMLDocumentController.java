@@ -14,17 +14,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.WindowEvent;
+import projectapp.singletons.ZoomPane;
 import projectapp.tools.SelectionTool;
 
 
@@ -68,8 +71,10 @@ public class FXMLDocumentController implements Initializable {
     private VBox vboxChangeSize;
     @FXML
     private Button changeSzBtn;
+    @FXML
+    private ScrollPane scrollPane;
     
-  
+    private ZoomPane zoomPane;
     /**
      * This method executes all the initial operations when the program starts.
      * 
@@ -89,6 +94,14 @@ public class FXMLDocumentController implements Initializable {
         editor.setLineTool();
         lineBtn.setSelected(true); 
         vboxChangeSize.visibleProperty().set(false);
+        
+        zoomPane = new ZoomPane();
+        zoomPane.getChildren().add(pane);
+        
+        scrollPane.setContent(zoomPane);
+        scrollPane.addEventFilter(ScrollEvent.ANY, zoomPane.getOnScrollEventHandler());
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }    
     
     /**
