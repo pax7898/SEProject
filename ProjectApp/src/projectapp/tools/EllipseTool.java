@@ -6,6 +6,7 @@ package projectapp.tools;
 
 import static java.lang.Math.abs;
 import javafx.geometry.Point2D;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -30,9 +31,12 @@ public class EllipseTool extends Tool{
      * @param pane
      * @param executor 
      */
-    public EllipseTool(Pane pane,CommandExecutor executor) {
+    public EllipseTool(Pane pane,CommandExecutor executor,ContextMenu menu) {
         super(pane,executor);
         this.ellipse = null;
+        menu.getItems().forEach(item -> {
+            item.setDisable(true);
+        });
     }
    
     @Override

@@ -23,6 +23,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -359,13 +360,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void changeSize(ActionEvent event) {
         try{
-            TextField textX = (TextField) vboxChangeSize.getChildren().get(1);
-            TextField textY = (TextField) vboxChangeSize.getChildren().get(3);
-            Double x = Double.parseDouble(textX.getText());
-            Double y = Double.parseDouble(textY.getText());
+            HBox hboxX = (HBox) vboxChangeSize.getChildren().get(0);
+            HBox hboxY = (HBox) vboxChangeSize.getChildren().get(1);
+            TextField textX = (TextField) hboxX.getChildren().get(1);
+            TextField textY = (TextField) hboxY.getChildren().get(1);
+            double x = Double.parseDouble(textX.getText());
+            double y = Double.parseDouble(textY.getText());
             editor.changeSize();
         }catch(Exception e){
-            
         }
     }
 

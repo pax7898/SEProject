@@ -14,6 +14,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -45,8 +46,9 @@ public class SelectionTool extends Tool{
     private final VBox vboxChangeSize;
     private double changeSizeX;
     private double changeSizeY;
-    private static final int TEXT_FIELD_CHANGE_SIZE_X=1;
-    private static final int TEXT_FIELD_CHANGE_SIZE_Y=3;
+    private static final int HBOX_1 = 0;
+    private static final int HBOX_2 = 1;
+    private static final int TEXT_FIELD_CHANGE_SIZE = 1;
     
     
     /**
@@ -189,8 +191,12 @@ public class SelectionTool extends Tool{
      */
     @Override
     public void changeSize() {
-        TextField textX = (TextField) vboxChangeSize.getChildren().get(TEXT_FIELD_CHANGE_SIZE_X);
-        TextField textY = (TextField) vboxChangeSize.getChildren().get(TEXT_FIELD_CHANGE_SIZE_Y);
+        
+        HBox hboxX = (HBox) vboxChangeSize.getChildren().get(HBOX_1);
+        HBox hboxY = (HBox) vboxChangeSize.getChildren().get(HBOX_2);
+        System.out.println(hboxX);
+        TextField textX = (TextField) hboxX.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
+        TextField textY = (TextField) hboxY.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
         changeSizeX = Double.parseDouble(textX.getText());
         changeSizeY = Double.parseDouble(textY.getText());
         getExecutor().execute(new ChangeSizeCommand(selectedShape, changeSizeX, changeSizeY, vboxChangeSize));

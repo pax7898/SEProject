@@ -18,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -57,18 +58,24 @@ public class DrawingEditorTest {
         panel = new JFXPanel();
         drawingPane = new Pane();
         executor = new CommandExecutor();
-        currentTool = new LineTool(drawingPane,executor);
         menu = new ContextMenu();
         menu.getItems().add(new MenuItem("delete"));
         menu.getItems().add(new MenuItem("copy"));
         menu.getItems().add(new MenuItem("cut"));
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
+        currentTool = new LineTool(drawingPane,executor,menu);
+        
         vboxChangeSize = new VBox();
-        vboxChangeSize.getChildren().add(new Label());
-        vboxChangeSize.getChildren().add(new TextField("2.0"));
-        vboxChangeSize.getChildren().add(new Label());
-        vboxChangeSize.getChildren().add(new TextField("2.0"));
+        HBox hboxX = new HBox();
+        hboxX.getChildren().add(new Label());
+        hboxX.getChildren().add(new TextField("2.0"));
+        HBox hboxY = new HBox();
+        hboxY.getChildren().add(new Label());
+        hboxY.getChildren().add(new TextField("2.0"));
+        vboxChangeSize.getChildren().add(hboxX);
+        vboxChangeSize.getChildren().add(hboxY);
+        
         editor = new DrawingEditor(drawingPane,executor,currentTool,menu,vboxChangeSize);
         shape = new Rectangle(20,20,30,30);
         shape1 = new Rectangle(40,40,40,40);

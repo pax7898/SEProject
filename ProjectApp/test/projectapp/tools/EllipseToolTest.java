@@ -4,6 +4,9 @@
  */
 package projectapp.tools;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -25,13 +28,15 @@ public class EllipseToolTest {
     private Ellipse ellipse;
     private MouseEvent pressEvent;
     private MouseEvent dragEvent;
+    private ContextMenu menu;
     
     @Before
     public void setUp() {
-        
+        JFXPanel panel = new JFXPanel();
+        menu = new ContextMenu();
         pane = new Pane();
         executor = new CommandExecutor();
-        ellipseTool = new EllipseTool(pane,executor);
+        ellipseTool = new EllipseTool(pane,executor,menu);
         ellipse = new Ellipse(0,0,0,0);
         pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, MouseButton.PRIMARY, 1,  
                                 false, false,false,false,false,false,false,false,false,false,null);

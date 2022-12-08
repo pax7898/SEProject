@@ -4,6 +4,9 @@
  */
 package projectapp.tools;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -33,9 +36,11 @@ public class RectangleToolTest {
     
     @Before
     public void setUp() {
+        JFXPanel panel = new JFXPanel();
+        ContextMenu menu = new ContextMenu();
         pane = new Pane();
         executor = new CommandExecutor();
-        rectangleTool = new RectangleTool(pane,executor);
+        rectangleTool = new RectangleTool(pane,executor,menu);
         rectangle = new Rectangle(10,10,30,30);
         pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 10, 10, 10, 10,MouseButton.PRIMARY, 1,  
                                 false, false,false,false,false,false,false,false,false,false,null);
