@@ -12,6 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -38,8 +39,8 @@ public class SelectionToolTest {
     private CommandExecutor executor;
     private Shape shape;
     private Shape shape1;
-
     private ContextMenu menu;
+    private VBox vboxChangeSize;
     private JFXPanel panel;
     
     public SelectionToolTest() {
@@ -62,8 +63,9 @@ public class SelectionToolTest {
         menu.getItems().add(new MenuItem("cut"));
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
+        vboxChangeSize = new VBox();
         executor = new CommandExecutor();
-        tool = new SelectionTool(pane,selectedShape,executor,menu);
+        tool = new SelectionTool(pane,selectedShape,executor,menu,vboxChangeSize);
         
     }
 
@@ -85,7 +87,7 @@ public class SelectionToolTest {
     public void testOnMousePressed() {
         System.out.println("onMousePressed");
         MouseEvent event = new MouseEvent(null, shape, new EventType(), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        SelectionTool test = new SelectionTool(pane, selectedShape, executor, menu);
+        SelectionTool test = new SelectionTool(pane, selectedShape, executor, menu, vboxChangeSize);
         test.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(),"-fx-stroke-dash-array:5px");
     }

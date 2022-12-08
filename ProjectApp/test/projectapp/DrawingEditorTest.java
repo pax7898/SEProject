@@ -17,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
@@ -46,6 +47,7 @@ public class DrawingEditorTest {
     private SelectionTool tool;
     private MoveTool moveTool;
     private ContextMenu menu;
+    private VBox vboxChangeSize;
     private JFXPanel panel;
     
     @Before
@@ -60,7 +62,8 @@ public class DrawingEditorTest {
         menu.getItems().add(new MenuItem("cut"));
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
-        editor = new DrawingEditor(drawingPane,executor,currentTool,menu);
+        vboxChangeSize = new VBox();
+        editor = new DrawingEditor(drawingPane,executor,currentTool,menu,vboxChangeSize);
         shape = new Rectangle(20,20,30,30);
         shape1 = new Rectangle(40,40,40,40);
         shape.setFill(Color.BLUE);
@@ -117,7 +120,7 @@ public class DrawingEditorTest {
         System.out.println("setSelectionTool");
         editor.setSelectionTool();
         MouseEvent event = new MouseEvent(null, shape, new EventType("selection"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        tool = new SelectionTool(drawingPane,selectedShape,executor,menu);
+        tool = new SelectionTool(drawingPane,selectedShape,executor,menu, vboxChangeSize);
         tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(), "-fx-stroke-dash-array:5px");
     }

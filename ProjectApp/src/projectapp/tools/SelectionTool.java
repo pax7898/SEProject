@@ -43,8 +43,8 @@ public class SelectionTool extends Tool{
     private final Clonator clonator;
     private final ContextMenu menu;
     private final VBox vboxChangeSize;
-    private double changeSizeX = 1.0;
-    private double changeSizeY = 1.0;
+    private double changeSizeX;
+    private double changeSizeY;
     private static final int TEXT_FIELD_CHANGE_SIZE_X=1;
     private static final int TEXT_FIELD_CHANGE_SIZE_Y=3;
     
@@ -90,6 +90,7 @@ public class SelectionTool extends Tool{
                 item.setDisable(false);
             });
         } else {
+            vboxChangeSize.visibleProperty().set(false);
             selectedShape.setShape(null);
                 menu.getItems().forEach(item -> {
                     item.setDisable(true);
@@ -190,11 +191,9 @@ public class SelectionTool extends Tool{
     public void changeSize() {
         TextField textX = (TextField) vboxChangeSize.getChildren().get(TEXT_FIELD_CHANGE_SIZE_X);
         TextField textY = (TextField) vboxChangeSize.getChildren().get(TEXT_FIELD_CHANGE_SIZE_Y);
-        double beforeX = changeSizeX;
-        double beforeY = changeSizeY;
-        changeSizeX = Double.parseDouble(textX.getText())*changeSizeX;
-        changeSizeY = Double.parseDouble(textY.getText())*changeSizeY;
-        getExecutor().execute(new ChangeSizeCommand(selectedShape, changeSizeX, changeSizeY, beforeX, beforeY, vboxChangeSize));
+        changeSizeX = Double.parseDouble(textX.getText());
+        changeSizeY = Double.parseDouble(textY.getText());
+        getExecutor().execute(new ChangeSizeCommand(selectedShape, changeSizeX, changeSizeY, vboxChangeSize));
 
     }
 
