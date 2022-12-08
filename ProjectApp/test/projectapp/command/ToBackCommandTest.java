@@ -6,6 +6,8 @@
 package projectapp.command;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -23,36 +25,35 @@ public class ToBackCommandTest {
     private Pane pane;
     private ToBackCommand toBackCommand;
     private Rectangle rectangle1;
-    private Rectangle rectangle2;
-    private Rectangle rectangle3;
+    private Ellipse ellipse;
+    private Line line;
     
     @Before
     public void setUp() {
         rectangle1 = new Rectangle(10,10,10,10);
-        rectangle2 = new Rectangle(30,30,30,30);
-        rectangle3 = new Rectangle(40,40,40,40);
+        ellipse = new Ellipse(30,30,30,30);
+        line = new Line(40,40,40,40);
         pane = new Pane();
-        pane.getChildren().addAll(rectangle1, rectangle2, rectangle3);
-        toBackCommand = new ToBackCommand(rectangle1, pane);
+        pane.getChildren().addAll(rectangle1, ellipse, line);
+        toBackCommand = new ToBackCommand(ellipse, pane);
     }
 
     @Test
     public void testExecute() {
         System.out.println("execute");
         toBackCommand.execute();
-        assertEquals(pane.getChildren().indexOf(rectangle1), pane.getChildren().size()-3);
-
-        
+        assertEquals(pane.getChildren().indexOf(ellipse), 0);
+ 
     }
 
     @Test
     public void testUndo() {
-        System.out.println("execute");
-        int oldPosition = pane.getChildren().indexOf(rectangle1);
+        System.out.println("undo");
+        int oldPosition = pane.getChildren().indexOf(ellipse);
         toBackCommand.execute();
-        assertEquals(pane.getChildren().indexOf(rectangle1), pane.getChildren().size()-3);
+        assertEquals(pane.getChildren().indexOf(ellipse), 0);
         toBackCommand.undo();
-        assertEquals(oldPosition, pane.getChildren().indexOf(rectangle1));
+        assertEquals(oldPosition, pane.getChildren().indexOf(ellipse));
 
 
     }

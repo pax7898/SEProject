@@ -99,10 +99,7 @@ public class SelectionToolTest {
         Command border= new ChangeBorderColorCommand(shape, Color.RED);
         tool.changeBorderColor(Color.RED);
         assertEquals(shape.getStroke(),Color.RED);
-        assertEquals(border.getClass(),executor.getStack().getLast().getClass());
-        
-        
-        
+        assertEquals(border.getClass(),executor.getStack().getLast().getClass());   
     }
 
     /**
@@ -135,12 +132,10 @@ public class SelectionToolTest {
      */
     @Test
     public void testCut() {
-        System.out.println("cut");
-        
+        System.out.println("cut");  
         selectedShape.setShape(null);
         tool.cut();
-        assertEquals(Clonator.getIstance().getByteCloned(), null);
-        
+        assertEquals(Clonator.getIstance().getByteCloned(), null);       
         selectedShape.setShape(shape);
         tool.cut();
         assertFalse(executor.getStack().isEmpty());
@@ -155,11 +150,9 @@ public class SelectionToolTest {
     @Test
     public void testCopy() {
         System.out.println("copy");
-        
         selectedShape.setShape(null);
         tool.copy();
         assertEquals(Clonator.getIstance().getByteCloned(), null);
-        
         selectedShape.setShape(shape);
         tool.copy();
         assertFalse(executor.getStack().isEmpty());
@@ -173,7 +166,6 @@ public class SelectionToolTest {
     @Test
     public void testPaste() {
         System.out.println("paste");
-        
         tool.copy();
         int initialLength = pane.getChildren().size();
         Point2D point = new Point2D(0.0,0.0);
@@ -185,7 +177,6 @@ public class SelectionToolTest {
     @Test
     public void testToFront() {
         System.out.println("toFront");
-        
         ToFrontCommand toFrontCommand = new ToFrontCommand(shape, pane);
         tool.toFront();
         assertEquals(pane.getChildren().indexOf(shape), pane.getChildren().size()-1);

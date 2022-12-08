@@ -42,6 +42,7 @@ public class DrawingEditorTest {
     private DrawingEditor editor;
     private SelectedShape selectedShape;
     private Shape shape;
+    private Shape shape1;
     private SelectionTool tool;
     private MoveTool moveTool;
     private ContextMenu menu;
@@ -61,9 +62,9 @@ public class DrawingEditorTest {
         menu.getItems().add(new MenuItem("move"));
         editor = new DrawingEditor(drawingPane,executor,currentTool,menu);
         shape = new Rectangle(20,20,30,30);
+        shape1 = new Rectangle(40,40,40,40);
         shape.setFill(Color.BLUE);
-        shape.setStroke(Color.BLUE);
-        
+        shape.setStroke(Color.BLUE);      
         selectedShape = SelectedShape.getIstance();
         
     }
@@ -73,13 +74,10 @@ public class DrawingEditorTest {
      */
     @Test
     public void testSetLineTool() {
-        System.out.println("setLineTool");
-        
-        editor.setLineTool();
-        
+        System.out.println("setLineTool");        
+        editor.setLineTool();       
         MouseEvent event = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
-        editor.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
-        
+        editor.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);        
         Line line = new Line(0,0,0,0);
         assertEquals(line.getClass(),drawingPane.getChildren().get(0).getClass()); 
     }
@@ -89,13 +87,10 @@ public class DrawingEditorTest {
      */
     @Test
     public void testSetRectangleTool() {
-        System.out.println("setRectangleTool");
-        
-        editor.setRectangleTool();
-        
+        System.out.println("setRectangleTool");        
+        editor.setRectangleTool();        
         MouseEvent event = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
-        editor.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
-        
+        editor.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);       
         Rectangle rectangle = new Rectangle(0,0,0,0);
         assertEquals(rectangle.getClass(),drawingPane.getChildren().get(0).getClass()); 
     }
@@ -105,13 +100,10 @@ public class DrawingEditorTest {
      */
     @Test
     public void testSetEllipseTool() {
-        System.out.println("setRectangleTool");
-        
-        editor.setEllipseTool();
-        
+        System.out.println("setRectangleTool");        
+        editor.setEllipseTool();       
         MouseEvent event = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
-        editor.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
-        
+        editor.onMousePressed(event, Color.DARKVIOLET, Color.SILVER); 
         Ellipse ellipse = new Ellipse(0,0,0,0);
         assertEquals(ellipse.getClass(),drawingPane.getChildren().get(0).getClass()); 
         
@@ -142,8 +134,6 @@ public class DrawingEditorTest {
        moveTool.onMouseDragged(event);
        assertEquals(moveTool.getNewX(), shape.getTranslateX(), 0);
        assertEquals(moveTool.getNewY(), shape.getTranslateY(), 0);
-        
-
     }
 
     /**
@@ -175,20 +165,13 @@ public class DrawingEditorTest {
      */
     @Test
     public void testChangeBorderColor() {
-        System.out.println("changeBorderColor");
-        
+        System.out.println("changeBorderColor"); 
         drawingPane.getChildren().add(shape);
-
-        editor.setSelectionTool();
-        
-        selectedShape.setShape(shape);
-        
-        editor.changeBorderColor(Color.RED);
-        
-        Shape shape2 = (Shape) drawingPane.getChildren().get(0);
-        
-        assertEquals(shape.getStroke(),shape2.getStroke());
-        
+        editor.setSelectionTool();      
+        selectedShape.setShape(shape);       
+        editor.changeBorderColor(Color.RED);       
+        Shape shape2 = (Shape) drawingPane.getChildren().get(0);       
+        assertEquals(shape.getStroke(),shape2.getStroke());      
     }
 
     /**
@@ -196,18 +179,12 @@ public class DrawingEditorTest {
      */
     @Test
     public void testChangeInteriorColor() {
-        System.out.println("changeInteriorColor");
-        
+        System.out.println("changeInteriorColor");   
         drawingPane.getChildren().add(shape);
-
-        editor.setSelectionTool();
-        
-        selectedShape.setShape(shape);
-        
-        editor.changeInteriorColor(Color.RED);
-        
-        Shape shape2 = (Shape) drawingPane.getChildren().get(0);
-        
+        editor.setSelectionTool();        
+        selectedShape.setShape(shape);       
+        editor.changeInteriorColor(Color.RED);        
+        Shape shape2 = (Shape) drawingPane.getChildren().get(0);       
         assertEquals(shape.getFill(),shape2.getFill());
     }
 
@@ -216,18 +193,12 @@ public class DrawingEditorTest {
      */
     @Test
     public void testDeleteShape() {
-        System.out.println("deleteShape");
-        
+        System.out.println("deleteShape"); 
         drawingPane.getChildren().add(shape);
-
-        editor.setSelectionTool();
-        
-        selectedShape.setShape(shape);
-        
-        editor.deleteShape();
-        
-        assertEquals(0,drawingPane.getChildren().size());
-        
+        editor.setSelectionTool();       
+        selectedShape.setShape(shape);       
+        editor.deleteShape();       
+        assertEquals(0,drawingPane.getChildren().size());       
     }
     
     /**
@@ -235,6 +206,13 @@ public class DrawingEditorTest {
      */
     @Test
     public void testToFront() {
+        System.out.println("toFront"); 
+        drawingPane.getChildren().add(shape);
+        drawingPane.getChildren().add(shape1);
+        editor.setSelectionTool();
+        selectedShape.setShape(shape);  
+        editor.toFront();
+        assertEquals(drawingPane.getChildren().indexOf(shape), drawingPane.getChildren().size()-1);
         
     }
     
@@ -243,7 +221,13 @@ public class DrawingEditorTest {
      */
     @Test
     public void testToBack() {
-        
+        System.out.println("toBack"); 
+        drawingPane.getChildren().add(shape);
+        drawingPane.getChildren().add(shape1);
+        editor.setSelectionTool();
+        selectedShape.setShape(shape1);  
+        editor.toBack();
+        assertEquals(drawingPane.getChildren().indexOf(shape1), 0);
     }
     
     /**
@@ -253,13 +237,9 @@ public class DrawingEditorTest {
     public void testCopyshape() {
         System.out.println("copyShape");
         drawingPane.getChildren().add(shape);
-        
-        editor.setSelectionTool();
-        
-        selectedShape.setShape(shape);
-        
-        editor.copyShape();
-        
+        editor.setSelectionTool();       
+        selectedShape.setShape(shape);       
+        editor.copyShape();    
         Rectangle rectangle2 = (Rectangle) Clonator.getIstance().decodeFromXml();
         Rectangle originalRectangle = (Rectangle) shape;
         assertEquals(originalRectangle.getX(), rectangle2.getX(),0);
@@ -275,43 +255,29 @@ public class DrawingEditorTest {
      */
     @Test
     public void testPasteShape() {
-        System.out.println("pasteShape");
-        
-        Rectangle originalRectangle = (Rectangle) shape;
-        
+        System.out.println("pasteShape"); 
+        Rectangle originalRectangle = (Rectangle) shape;       
         drawingPane.getChildren().add(shape);
-
-        editor.setSelectionTool();
-        
-        selectedShape.setShape(shape);
-        
+        editor.setSelectionTool();       
+        selectedShape.setShape(shape);       
         /*
             COPY + PASTE
         */
         editor.copyShape();
         editor.pasteShape(new Point2D(30,40));
-        
-        
-        Rectangle rectangle2 = (Rectangle) drawingPane.getChildren().get(0);
-        
+        Rectangle rectangle2 = (Rectangle) drawingPane.getChildren().get(0);      
         assertEquals(originalRectangle.getX(), rectangle2.getX(),0);
         assertEquals(originalRectangle.getY(), rectangle2.getY(),0);
         assertEquals(originalRectangle.getWidth(), rectangle2.getWidth(),0);
         assertEquals(originalRectangle.getHeight(), rectangle2.getHeight(),0);
         assertEquals(originalRectangle.getStroke(), rectangle2.getStroke());
-        assertEquals(originalRectangle.getFill(), rectangle2.getFill());
-        
+        assertEquals(originalRectangle.getFill(), rectangle2.getFill()); 
         /*
             CUT + PASTE
         */
-        
-       
         editor.cutShape();
-        editor.pasteShape(new Point2D(30,40));
-        
-        
-        Rectangle rectangle3 = (Rectangle) drawingPane.getChildren().get(0);
-        
+        editor.pasteShape(new Point2D(30,40));  
+        Rectangle rectangle3 = (Rectangle) drawingPane.getChildren().get(0);     
         assertEquals(originalRectangle.getX(), rectangle3.getX(),0);
         assertEquals(originalRectangle.getY(), rectangle3.getY(),0);
         assertEquals(originalRectangle.getWidth(), rectangle3.getWidth(),0);
