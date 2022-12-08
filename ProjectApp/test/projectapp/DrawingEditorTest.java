@@ -9,7 +9,6 @@ import projectapp.singletons.DrawingEditor;
 import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
-import javafx.event.EventTarget;
 import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -26,10 +25,7 @@ import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
-import projectapp.command.DeleteCommand;
-import projectapp.command.DrawCommand;
 import projectapp.tools.LineTool;
 import projectapp.tools.MoveTool;
 import projectapp.tools.SelectionTool;
@@ -179,6 +175,19 @@ public class DrawingEditorTest {
      */
     @Test
     public void testChangeBorderColor() {
+        System.out.println("changeBorderColor");
+        
+        drawingPane.getChildren().add(shape);
+
+        editor.setSelectionTool();
+        
+        selectedShape.setShape(shape);
+        
+        editor.changeBorderColor(Color.RED);
+        
+        Shape shape2 = (Shape) drawingPane.getChildren().get(0);
+        
+        assertEquals(shape.getStroke(),shape2.getStroke());
         
     }
 
@@ -187,7 +196,19 @@ public class DrawingEditorTest {
      */
     @Test
     public void testChangeInteriorColor() {
-       
+        System.out.println("changeInteriorColor");
+        
+        drawingPane.getChildren().add(shape);
+
+        editor.setSelectionTool();
+        
+        selectedShape.setShape(shape);
+        
+        editor.changeInteriorColor(Color.RED);
+        
+        Shape shape2 = (Shape) drawingPane.getChildren().get(0);
+        
+        assertEquals(shape.getFill(),shape2.getFill());
     }
 
     /**
@@ -214,6 +235,14 @@ public class DrawingEditorTest {
      */
     @Test
     public void testToFront() {
+        
+    }
+    
+    /**
+     * Test of toBack method, of class DrawingEditor.
+     */
+    @Test
+    public void testToBack() {
         
     }
     
