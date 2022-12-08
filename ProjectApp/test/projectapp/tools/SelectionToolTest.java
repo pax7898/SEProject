@@ -8,10 +8,13 @@ import javafx.embed.swing.JFXPanel;
 import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -38,8 +41,8 @@ public class SelectionToolTest {
     private CommandExecutor executor;
     private Shape shape;
     private Shape shape1;
-
     private ContextMenu menu;
+    private VBox vboxChangeSize;
     private JFXPanel panel;
     
     public SelectionToolTest() {
@@ -62,8 +65,14 @@ public class SelectionToolTest {
         menu.getItems().add(new MenuItem("cut"));
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
+        vboxChangeSize = new VBox();
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
+
         executor = new CommandExecutor();
-        tool = new SelectionTool(pane,selectedShape,executor,menu);
+        tool = new SelectionTool(pane,selectedShape,executor,menu,vboxChangeSize);
         
     }
 
@@ -85,7 +94,7 @@ public class SelectionToolTest {
     public void testOnMousePressed() {
         System.out.println("onMousePressed");
         MouseEvent event = new MouseEvent(null, shape, new EventType(), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        SelectionTool test = new SelectionTool(pane, selectedShape, executor, menu);
+        SelectionTool test = new SelectionTool(pane, selectedShape, executor, menu, vboxChangeSize);
         test.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(),"-fx-stroke-dash-array:5px");
     }
@@ -174,6 +183,9 @@ public class SelectionToolTest {
         assertEquals(shape.toString(), pane.getChildren().get(0).toString());
     }
     
+    /**
+     * Test of toFront method, of class SelectionTool.
+     */
     @Test
     public void testToFront() {
         System.out.println("toFront");
@@ -181,6 +193,34 @@ public class SelectionToolTest {
         tool.toFront();
         assertEquals(pane.getChildren().indexOf(shape), pane.getChildren().size()-1);
  
+    }
+    
+    /**
+     * Test of changeSizeBar method, of class SelectionTool.
+     */
+    @Test
+    public void testChangeSizeBar() {
+        System.out.println("changeSizeBar");
+        
+        tool.changeSizeBar();
+        assertTrue(vboxChangeSize.isVisible());
+        
+    }
+    
+    /**
+     * Test of changeSize method, of class SelectionTool.
+     */
+    @Test
+    public void testChangeSize() {
+        System.out.println("changeSize");
+        
+        double changeX = selectedShape.getShape().getScaleX();
+        double changeY = selectedShape.getShape().getScaleY();
+        tool.changeSize();
+        assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
+        assertEquals(selectedShape.getShape().getScaleY(),changeX+1.0,0);
+
+        
     }
    
 }

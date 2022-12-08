@@ -6,6 +6,7 @@ package projectapp.command;
 
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Shape;
 import projectapp.singletons.SelectedShape;
 
 /**
@@ -15,7 +16,7 @@ import projectapp.singletons.SelectedShape;
  */
 public class ChangeSizeCommand implements Command{
     
-    private SelectedShape selectedShape;
+    private Shape shape;
     private double beforeX;
     private double beforeY;
     private double changeSizeX;
@@ -34,12 +35,10 @@ public class ChangeSizeCommand implements Command{
      * @param beforeY
      * @param vboxChangeSize 
      */
-    public ChangeSizeCommand(SelectedShape selectedShape,double changeSizeX, double changeSizeY, Double beforeX, Double beforeY, VBox vboxChangeSize){
-        this.selectedShape = selectedShape;
+    public ChangeSizeCommand(SelectedShape selectedShape,double changeSizeX, double changeSizeY, VBox vboxChangeSize){
+        this.shape = selectedShape.getShape();
         this.changeSizeX = changeSizeX;
         this.changeSizeY = changeSizeY;
-        this.beforeX = beforeX;
-        this.beforeY = beforeY;
         this.vboxChangeSize = vboxChangeSize;
     }
     
@@ -47,9 +46,11 @@ public class ChangeSizeCommand implements Command{
      * This method change the size of the selected shape
      */
     @Override
-    public void execute() {     
-        selectedShape.getShape().setScaleX(changeSizeX);
-        selectedShape.getShape().setScaleY(changeSizeY);
+    public void execute() {
+        beforeX = shape.getScaleX();
+        beforeY = shape.getScaleY();
+        shape.setScaleX(changeSizeX*beforeX);
+        shape.setScaleY(changeSizeY*beforeY);
         vboxChangeSize.visibleProperty().set(false);
     }
     
@@ -58,8 +59,8 @@ public class ChangeSizeCommand implements Command{
      */
     @Override
     public void undo() {
-        selectedShape.getShape().setScaleX(beforeX);
-        selectedShape.getShape().setScaleY(beforeY);
+        shape.setScaleX(beforeX);
+        shape.setScaleY(beforeY);
     }
     
 }

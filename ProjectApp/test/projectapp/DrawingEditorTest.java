@@ -13,10 +13,13 @@ import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
@@ -46,6 +49,7 @@ public class DrawingEditorTest {
     private SelectionTool tool;
     private MoveTool moveTool;
     private ContextMenu menu;
+    private VBox vboxChangeSize;
     private JFXPanel panel;
     
     @Before
@@ -60,7 +64,12 @@ public class DrawingEditorTest {
         menu.getItems().add(new MenuItem("cut"));
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
-        editor = new DrawingEditor(drawingPane,executor,currentTool,menu);
+        vboxChangeSize = new VBox();
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
+        editor = new DrawingEditor(drawingPane,executor,currentTool,menu,vboxChangeSize);
         shape = new Rectangle(20,20,30,30);
         shape1 = new Rectangle(40,40,40,40);
         shape.setFill(Color.BLUE);
@@ -117,7 +126,7 @@ public class DrawingEditorTest {
         System.out.println("setSelectionTool");
         editor.setSelectionTool();
         MouseEvent event = new MouseEvent(null, shape, new EventType("selection"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        tool = new SelectionTool(drawingPane,selectedShape,executor,menu);
+        tool = new SelectionTool(drawingPane,selectedShape,executor,menu, vboxChangeSize);
         tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(), "-fx-stroke-dash-array:5px");
     }
@@ -306,6 +315,33 @@ public class DrawingEditorTest {
         assertEquals(originalRectangle.getFill(), rectangle2.getFill());      
         assertFalse(menu.getItems().get(3).isDisable());
         
+    }
+    
+    /**
+     * Test of changeSizeBar method, of class DrawingEditor.
+     */
+    @Test
+    public void testChangeSizeBar(){
+        System.out.println("changeSizeBar");
+        
+        editor.changeSizeBar();
+        assertTrue(vboxChangeSize.isVisible());
+    }
+    
+    /**
+     * Test of changeSize method, of class DrawingEditor.
+     */
+    @Test
+    public void testChangeSize(){
+        System.out.println("changeSizeBar");
+        
+        selectedShape.setShape(shape);
+        editor.setSelectionTool();
+        double changeX = selectedShape.getShape().getScaleX();
+        double changeY = selectedShape.getShape().getScaleY();
+        editor.changeSize();
+        assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
+        assertEquals(selectedShape.getShape().getScaleY(),changeX+1.0,0);
     }
 
     
