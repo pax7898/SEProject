@@ -10,8 +10,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -134,29 +134,35 @@
                                           <Image url="@../image/undo.png" />
                                        </image>
                                     </ImageView>
-                                 </graphic></Button>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets top="-6.0" />
+                                 </HBox.margin></Button>
                               <VBox fx:id="vboxChangeSize" prefHeight="106.0" prefWidth="201.0">
                                  <children>
                                     <Label text="Change Size X-axis:">
                                        <VBox.margin>
-                                          <Insets left="50.0" top="10.0" />
+                                          <Insets left="50.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Slider fx:id="sliderX" prefHeight="14.0" prefWidth="150.0">
+                                    <TextField maxHeight="70.0" maxWidth="160.0" minHeight="20.0" minWidth="150.0" prefHeight="20.0" prefWidth="150.0">
                                        <VBox.margin>
-                                          <Insets top="5.0" />
-                                       </VBox.margin>
-                                    </Slider>
+                                          <Insets left="17.0" />
+                                       </VBox.margin></TextField>
                                     <Label text="Change Size Y-axis:">
                                        <VBox.margin>
-                                          <Insets left="50.0" top="5.0" />
+                                          <Insets left="50.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Slider fx:id="sliderY">
+                                    <TextField maxHeight="70.0" maxWidth="160.0" minHeight="20.0" minWidth="150.0" prefHeight="20.0" prefWidth="150.0">
                                        <VBox.margin>
-                                          <Insets top="5.0" />
+                                          <Insets left="17.0" />
+                                       </VBox.margin></TextField>
+                                    <Button fx:id="changeSzBtn" mnemonicParsing="false" onAction="#changeSize" text="Conferma">
+                                       <VBox.margin>
+                                          <Insets left="67.0" top="2.0" />
                                        </VBox.margin>
-                                    </Slider>
+                                    </Button>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="50.0" />
@@ -188,6 +194,7 @@
                             <MenuItem mnemonicParsing="false" onAction="#setMoveTool" text="Move" />
                             <MenuItem mnemonicParsing="false" onAction="#setToFrontTool" text="ToFront" />
                             <MenuItem mnemonicParsing="false" onAction="#setToBackTool" text="ToBack" />
+                            <MenuItem mnemonicParsing="false" onAction="#changeSizeBar" text="ChangeSize" />
                           </items>
                         </ContextMenu>
                      </contextMenu>

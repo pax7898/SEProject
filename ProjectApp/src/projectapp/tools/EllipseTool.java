@@ -117,5 +117,11 @@ public class EllipseTool extends Tool{
 
     @Override
     public void toBack() {}
+
+    @Override
+    public void changeSize() {}
+
+    @Override
+    public void changeSizeBar() {}
  
 }

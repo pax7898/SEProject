@@ -15,6 +15,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ContextMenuEvent;
@@ -66,9 +67,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private VBox vboxChangeSize;
     @FXML
-    private Slider sliderX;
-    @FXML
-    private Slider sliderY;
+    private Button changeSzBtn;
     
   
     /**
@@ -80,7 +79,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null, menu);
+        editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null, menu, vboxChangeSize);
         
         toggles = new ToggleGroup();
         toggles.getToggles().addAll(lineBtn,recBtn,elBtn,selBtn);
@@ -328,7 +327,7 @@ public class FXMLDocumentController implements Initializable {
     private void undo(ActionEvent event) {
         editor.undo();
     }
-
+    
     @FXML
     private void setToFrontTool(ActionEvent event) {
         editor.toFront();
@@ -339,8 +338,24 @@ public class FXMLDocumentController implements Initializable {
         editor.toBack();
     }
 
-    
+    @FXML
+    private void changeSizeBar(ActionEvent event) {
+        editor.changeSizeBar();
+    }
+
+    @FXML
+    private void changeSize(ActionEvent event) {
+        try{
+            TextField textX = (TextField) vboxChangeSize.getChildren().get(1);
+            TextField textY = (TextField) vboxChangeSize.getChildren().get(3);
+            Double x = Double.parseDouble(textX.getText());
+            Double y = Double.parseDouble(textY.getText());
+            editor.changeSize();
+        }catch(Exception e){
+            
+        }
+    }
 
     
-
+    
 }
