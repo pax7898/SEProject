@@ -5,10 +5,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
@@ -19,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <SplitPane dividerPositions="0.19019274376417228" orientation="VERTICAL" prefHeight="707.2" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -133,6 +135,33 @@
                                        </image>
                                     </ImageView>
                                  </graphic></Button>
+                              <VBox fx:id="vboxChangeSize" prefHeight="106.0" prefWidth="201.0">
+                                 <children>
+                                    <Label text="Change Size X-axis:">
+                                       <VBox.margin>
+                                          <Insets left="50.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Slider fx:id="sliderX" prefHeight="14.0" prefWidth="150.0">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </Slider>
+                                    <Label text="Change Size Y-axis:">
+                                       <VBox.margin>
+                                          <Insets left="50.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Slider fx:id="sliderY">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </Slider>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
                         </HBox>
                      </children>

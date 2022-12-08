@@ -14,12 +14,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.WindowEvent;
 import projectapp.tools.SelectionTool;
@@ -58,9 +60,15 @@ public class FXMLDocumentController implements Initializable {
     private DrawingEditor editor;
     
     private Point2D contextMenuPoint;
-    private ToggleButton undoBtn;
+    
     @FXML
     private Button UndoBtn;
+    @FXML
+    private VBox vboxChangeSize;
+    @FXML
+    private Slider sliderX;
+    @FXML
+    private Slider sliderY;
     
   
     /**
@@ -81,6 +89,7 @@ public class FXMLDocumentController implements Initializable {
         });
         editor.setLineTool();
         lineBtn.setSelected(true); 
+        vboxChangeSize.visibleProperty().set(false);
     }    
     
     /**
