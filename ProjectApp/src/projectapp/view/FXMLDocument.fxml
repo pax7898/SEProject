@@ -158,7 +158,7 @@
                                        <VBox.margin>
                                           <Insets left="17.0" />
                                        </VBox.margin></TextField>
-                                    <Button fx:id="changeSzBtn" mnemonicParsing="false" onAction="#changeSize" text="Conferma">
+                                    <Button fx:id="changeSzBtn" mnemonicParsing="false" onAction="#changeSize" text="Confirm">
                                        <VBox.margin>
                                           <Insets left="67.0" top="2.0" />
                                        </VBox.margin>

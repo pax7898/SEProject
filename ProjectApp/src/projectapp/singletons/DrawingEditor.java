@@ -188,6 +188,7 @@ public class DrawingEditor {
      * This method allows the user to delete the selected figure.
      */
     public void deleteShape(){
+        vboxChangeSize.visibleProperty().set(false);
         currentTool.deleteShape();
     }
     
