@@ -111,7 +111,8 @@ public class SelectionTool extends Tool{
      */
     @Override
     public void changeBorderColor(Color strokeColor) {
-        getExecutor().execute(new ChangeBorderColorCommand(selectedShape.getShape(),strokeColor));
+        if (selectedShape.getShape() != null)
+            getExecutor().execute(new ChangeBorderColorCommand(selectedShape.getShape(),strokeColor));
     }
     
     /***
@@ -121,7 +122,8 @@ public class SelectionTool extends Tool{
      */
     @Override
     public void changeInteriorColor(Color fillColor) {
-        getExecutor().execute(new ChangeInteriorColorCommand(selectedShape.getShape(),fillColor));
+        if (selectedShape.getShape() != null)
+            getExecutor().execute(new ChangeInteriorColorCommand(selectedShape.getShape(),fillColor));
     }
     
     @Override
@@ -194,7 +196,7 @@ public class SelectionTool extends Tool{
         
         HBox hboxX = (HBox) vboxChangeSize.getChildren().get(HBOX_1);
         HBox hboxY = (HBox) vboxChangeSize.getChildren().get(HBOX_2);
-        System.out.println(hboxX);
+
         TextField textX = (TextField) hboxX.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
         TextField textY = (TextField) hboxY.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
         changeSizeX = Double.parseDouble(textX.getText());
