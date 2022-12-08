@@ -42,7 +42,7 @@ public class ToBackCommandTest {
     public void testExecute() {
         System.out.println("execute");
         toBackCommand.execute();
-        assertEquals(pane.getChildren().indexOf(ellipse), pane.getChildren().size()-3);
+        assertEquals(pane.getChildren().indexOf(ellipse), 0);
  
     }
 
@@ -51,7 +51,7 @@ public class ToBackCommandTest {
         System.out.println("undo");
         int oldPosition = pane.getChildren().indexOf(ellipse);
         toBackCommand.execute();
-        assertEquals(pane.getChildren().indexOf(ellipse), pane.getChildren().size()-3);
+        assertEquals(pane.getChildren().indexOf(ellipse), 0);
         toBackCommand.undo();
         assertEquals(oldPosition, pane.getChildren().indexOf(ellipse));
 
