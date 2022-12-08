@@ -8,7 +8,9 @@ import javafx.embed.swing.JFXPanel;
 import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -64,6 +66,11 @@ public class SelectionToolTest {
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
         vboxChangeSize = new VBox();
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
+
         executor = new CommandExecutor();
         tool = new SelectionTool(pane,selectedShape,executor,menu,vboxChangeSize);
         
@@ -176,6 +183,9 @@ public class SelectionToolTest {
         assertEquals(shape.toString(), pane.getChildren().get(0).toString());
     }
     
+    /**
+     * Test of toFront method, of class SelectionTool.
+     */
     @Test
     public void testToFront() {
         System.out.println("toFront");
@@ -183,6 +193,34 @@ public class SelectionToolTest {
         tool.toFront();
         assertEquals(pane.getChildren().indexOf(shape), pane.getChildren().size()-1);
  
+    }
+    
+    /**
+     * Test of changeSizeBar method, of class SelectionTool.
+     */
+    @Test
+    public void testChangeSizeBar() {
+        System.out.println("changeSizeBar");
+        
+        tool.changeSizeBar();
+        assertTrue(vboxChangeSize.isVisible());
+        
+    }
+    
+    /**
+     * Test of changeSize method, of class SelectionTool.
+     */
+    @Test
+    public void testChangeSize() {
+        System.out.println("changeSize");
+        
+        double changeX = selectedShape.getShape().getScaleX();
+        double changeY = selectedShape.getShape().getScaleY();
+        tool.changeSize();
+        assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
+        assertEquals(selectedShape.getShape().getScaleY(),changeX+1.0,0);
+
+        
     }
    
 }

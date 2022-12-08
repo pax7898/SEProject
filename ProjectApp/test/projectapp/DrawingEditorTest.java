@@ -13,7 +13,9 @@ import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -63,6 +65,10 @@ public class DrawingEditorTest {
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
         vboxChangeSize = new VBox();
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
+        vboxChangeSize.getChildren().add(new Label());
+        vboxChangeSize.getChildren().add(new TextField("2.0"));
         editor = new DrawingEditor(drawingPane,executor,currentTool,menu,vboxChangeSize);
         shape = new Rectangle(20,20,30,30);
         shape1 = new Rectangle(40,40,40,40);
@@ -316,6 +322,33 @@ public class DrawingEditorTest {
         
         assertFalse(menu.getItems().get(3).isDisable());
         
+    }
+    
+    /**
+     * Test of changeSizeBar method, of class DrawingEditor.
+     */
+    @Test
+    public void testChangeSizeBar(){
+        System.out.println("changeSizeBar");
+        
+        editor.changeSizeBar();
+        assertTrue(vboxChangeSize.isVisible());
+    }
+    
+    /**
+     * Test of changeSize method, of class DrawingEditor.
+     */
+    @Test
+    public void testChangeSize(){
+        System.out.println("changeSizeBar");
+        
+        selectedShape.setShape(shape);
+        editor.setSelectionTool();
+        double changeX = selectedShape.getShape().getScaleX();
+        double changeY = selectedShape.getShape().getScaleY();
+        editor.changeSize();
+        assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
+        assertEquals(selectedShape.getShape().getScaleY(),changeX+1.0,0);
     }
 
     
