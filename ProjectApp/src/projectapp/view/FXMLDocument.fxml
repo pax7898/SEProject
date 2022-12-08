@@ -142,25 +142,25 @@
                                  <children>
                                     <Label text="Change Size X-axis:">
                                        <VBox.margin>
-                                          <Insets left="50.0" />
+                                          <Insets left="50.0" top="2.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField maxHeight="70.0" maxWidth="160.0" minHeight="20.0" minWidth="150.0" prefHeight="20.0" prefWidth="150.0">
+                                    <TextField maxHeight="40.0" maxWidth="70.0" minHeight="15.0" minWidth="70.0" prefHeight="20.0" prefWidth="70.0">
                                        <VBox.margin>
-                                          <Insets left="17.0" />
+                                          <Insets left="65.0" />
                                        </VBox.margin></TextField>
                                     <Label text="Change Size Y-axis:">
                                        <VBox.margin>
                                           <Insets left="50.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField maxHeight="70.0" maxWidth="160.0" minHeight="20.0" minWidth="150.0" prefHeight="20.0" prefWidth="150.0">
+                                    <TextField maxHeight="40.0" maxWidth="70.0" minHeight="15.0" minWidth="70.0" prefHeight="20.0" prefWidth="70.0">
                                        <VBox.margin>
-                                          <Insets left="17.0" />
+                                          <Insets left="65.0" />
                                        </VBox.margin></TextField>
-                                    <Button fx:id="changeSzBtn" mnemonicParsing="false" onAction="#changeSize" text="Confirm">
+                                    <Button fx:id="changeSzBtn" mnemonicParsing="false" onAction="#changeSize" prefHeight="25.0" prefWidth="47.0" text="Apply">
                                        <VBox.margin>
-                                          <Insets left="67.0" top="2.0" />
+                                          <Insets left="75.0" top="2.0" />
                                        </VBox.margin>
                                     </Button>
                                  </children>
