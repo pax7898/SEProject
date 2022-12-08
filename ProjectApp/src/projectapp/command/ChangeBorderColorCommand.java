@@ -33,13 +33,16 @@ public class ChangeBorderColorCommand implements Command{
     }
     
     /**
-     * This method changhe the border color of the selected shape
+     * This method change the border color of the selected shape
      */
     @Override
     public void execute() {
         shape.setStroke(newStrokeColor);
     }
-
+    
+    /**
+     * This method reset the previous border color of the selected shape
+     */
     @Override
     public void undo() {
         shape.setStroke(oldStrokeColor);    

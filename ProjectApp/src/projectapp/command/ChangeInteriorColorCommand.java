@@ -33,13 +33,16 @@ public class ChangeInteriorColorCommand implements Command{
     }
     
     /**
-     * This method changhe the interior color of the selected shape
+     * This method change the interior color of the selected shape
      */
     @Override
     public void execute() {
         shape.setFill(newFillColor);    
     }
-
+    
+    /**
+     * This method reset the previous interior color of the selected shape
+     */
     @Override
     public void undo() {
         shape.setFill(oldFillColor);

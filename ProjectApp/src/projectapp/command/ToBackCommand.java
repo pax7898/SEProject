@@ -53,8 +53,7 @@ public class ToBackCommand implements Command{
         
         pane.getChildren().remove(shape);
         pane.getChildren().add(oldIndex, shape);
-        
-        //shape.toBack();
+       
     }
     
 }
