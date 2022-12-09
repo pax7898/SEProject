@@ -89,7 +89,7 @@ public class DrawingEditor {
         if (selectedShape.getShape() != null){
            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
-        currentTool = new LineTool(drawingPane,executor);
+        currentTool = new LineTool(drawingPane,executor, menu);
     }
     
     /**
@@ -101,7 +101,7 @@ public class DrawingEditor {
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
-        currentTool = new RectangleTool(drawingPane,executor);
+        currentTool = new RectangleTool(drawingPane,executor, menu);
     }
     
     /**
@@ -113,7 +113,7 @@ public class DrawingEditor {
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
-        currentTool = new EllipseTool(drawingPane,executor);
+        currentTool = new EllipseTool(drawingPane,executor, menu);
     }
     
     /**

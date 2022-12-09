@@ -33,14 +33,14 @@ public class ZoomPane extends Pane{
             
             double scale = this.getScale(); 
             double oldScale = scale;
-            System.out.println(event.getDeltaY());
+
             this.setDeltaY(event.getDeltaY());
             if (this.deltaY.get() < 0) {
                 scale /= delta;
             } else {
                 scale *= delta;
             }
-            System.out.println(scale);
+
             double f = (scale / oldScale)-1;
             
             double dx = (event.getX() - (this.getBoundsInParent().getWidth()/2 + this.getBoundsInParent().getMinX()));
@@ -93,7 +93,7 @@ public class ZoomPane extends Pane{
         public void setPivot( double x, double y, double scale) {
             // note: pivot value must be untransformed, i. e. without scaling
             // timeline that scales and moves the node
-            System.out.println("ASdgasgasdga");
+            
             timeline.getKeyFrames().clear();
             timeline.getKeyFrames().addAll(
                     new KeyFrame(Duration.millis(100), new KeyValue(translateXProperty(), getTranslateX() - x)), 

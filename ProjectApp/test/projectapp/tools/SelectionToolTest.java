@@ -13,6 +13,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -66,10 +67,14 @@ public class SelectionToolTest {
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
         vboxChangeSize = new VBox();
-        vboxChangeSize.getChildren().add(new Label());
-        vboxChangeSize.getChildren().add(new TextField("2.0"));
-        vboxChangeSize.getChildren().add(new Label());
-        vboxChangeSize.getChildren().add(new TextField("2.0"));
+        HBox hboxX = new HBox();
+        hboxX.getChildren().add(new Label());
+        hboxX.getChildren().add(new TextField("2.0"));
+        HBox hboxY = new HBox();
+        hboxY.getChildren().add(new Label());
+        hboxY.getChildren().add(new TextField("2.0"));
+        vboxChangeSize.getChildren().add(hboxX);
+        vboxChangeSize.getChildren().add(hboxY);
 
         executor = new CommandExecutor();
         tool = new SelectionTool(pane,selectedShape,executor,menu,vboxChangeSize);

@@ -6,6 +6,7 @@ package projectapp.tools;
 
 
 import javafx.geometry.Point2D;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -33,8 +34,11 @@ public class RectangleTool extends Tool{
      * @param pane
      * @param executor 
      */
-    public RectangleTool(Pane pane,CommandExecutor executor) {
+    public RectangleTool(Pane pane,CommandExecutor executor, ContextMenu menu) {
         super(pane,executor);
+        menu.getItems().forEach(item -> {
+            item.setDisable(true);
+        });
     }
     
     @Override

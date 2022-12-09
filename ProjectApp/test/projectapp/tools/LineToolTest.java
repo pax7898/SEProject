@@ -5,6 +5,9 @@
 package projectapp.tools;
 
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -31,9 +34,11 @@ public class LineToolTest {
     
     @Before
     public void setUp() {
+        JFXPanel panel = new JFXPanel();
+        ContextMenu menu = new ContextMenu();
         pane = new Pane();
         executor = new CommandExecutor();
-        lineTool = new LineTool(pane,executor);
+        lineTool = new LineTool(pane,executor, menu);
         line = new Line(20,20,50,50);
         press = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
         drag =  new MouseEvent(MouseEvent.MOUSE_DRAGGED, 30, 30, 30, 30,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);

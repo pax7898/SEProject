@@ -4,6 +4,9 @@
  */
 package projectapp.command;
 
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -28,19 +31,22 @@ public class MoveCommandTest {
     private MoveCommand moveCommand;
     private MouseEvent pressEvent;
     private MouseEvent dragEvent;
+    private ContextMenu menu;
     
     
     @Before
     public void setUp() {
+        JFXPanel panel = new JFXPanel();
         pane = new Pane();
         executor = new CommandExecutor();
         pressEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, MouseButton.PRIMARY, 1,  
                                     false, false,false,false,false,false,false,false,false,false,null);
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 0, 0, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
-        ellipse = new EllipseTool(pane, executor);
-        rectangle = new RectangleTool(pane, executor);
-        line = new LineTool(pane, executor);
+        menu = new ContextMenu();
+        ellipse = new EllipseTool(pane, executor, menu);
+        rectangle = new RectangleTool(pane, executor, menu);
+        line = new LineTool(pane, executor, menu);
     }
 
     @Test
