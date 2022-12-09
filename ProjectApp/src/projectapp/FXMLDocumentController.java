@@ -93,6 +93,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
         editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null, menu, vboxChangeSize);
         
         toggles = new ToggleGroup();
@@ -109,12 +110,12 @@ public class FXMLDocumentController implements Initializable {
         lineBtn.setSelected(true); 
         vboxChangeSize.visibleProperty().set(false);
         
-        zoomPane = new ZoomPane();
+        zoomPane = ZoomPane.getIstance();
         zoomPane.getChildren().add(pane);
         scrollPane.setContent(zoomPane);
-        scrollPane.addEventFilter(ScrollEvent.ANY, zoomPane.getOnScrollEventHandler());
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        //scrollPane.addEventFilter(ScrollEvent.ANY, zoomPane.getOnScrollEventHandler());
+        //scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        //scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }    
     
     /**
@@ -380,6 +381,14 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    
-    
+    @FXML
+    private void zoomIn(ActionEvent event) {
+        editor.zoom(mainPane.getWidth()/2, mainPane.getHeight()/2, true);
+    }
+
+    @FXML
+    private void zoomOut(ActionEvent event) {
+        editor.zoom(mainPane.getWidth()/2, mainPane.getHeight()/2, false);
+    }
+ 
 }

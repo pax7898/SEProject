@@ -299,4 +299,8 @@ public class DrawingEditor {
         }catch(Exception e){}
     }
 
+    public void zoom(double x, double y, boolean type){
+        System.out.println("CIAO");
+        ZoomPane.getIstance().zoom(x, y, type);
+    }
 }

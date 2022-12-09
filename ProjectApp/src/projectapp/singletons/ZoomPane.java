@@ -28,6 +28,7 @@ public class ZoomPane extends Pane{
         /**
          * The event handler for any scroll events on the scroll pane
          */
+        /*
         private EventHandler<ScrollEvent> onScrollEventHandler = (ScrollEvent event) -> {
             double delta = this.DEFAULT_DELTA;
             
@@ -49,7 +50,26 @@ public class ZoomPane extends Pane{
             this.setPivot(f*dx, f*dy, scale);
             
             event.consume();
-        };
+        };*/
+        
+        public void zoom(double x, double y, boolean type){
+            double delta = this.DEFAULT_DELTA;
+            double scale = this.getScale(); 
+            double oldScale = scale;
+
+            if (!type) {
+                scale /= delta;
+            } else {
+                scale *= delta;
+            }
+
+            double f = (scale / oldScale)-1;
+            
+            double dx = (x - (this.getBoundsInParent().getWidth()/2 + this.getBoundsInParent().getMinX()));
+            double dy = (x - (this.getBoundsInParent().getHeight()/2 + this.getBoundsInParent().getMinY()));
+            
+            this.setPivot(f*dx, f*dy, scale);
+        }
         
         
         private static ZoomPane instance = null;
@@ -103,7 +123,7 @@ public class ZoomPane extends Pane{
             timeline.play();
 
         }
-
+        /*
         public double getDeltaY() {
             return deltaY.get();
         }
@@ -113,7 +133,7 @@ public class ZoomPane extends Pane{
         
         public EventHandler<ScrollEvent> getOnScrollEventHandler() {
             return onScrollEventHandler;
-        }
+        }*/
 }
 
 

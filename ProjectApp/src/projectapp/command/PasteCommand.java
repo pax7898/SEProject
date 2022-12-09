@@ -18,6 +18,7 @@ public class PasteCommand implements Command{
     private Shape shape;
     private Pane pane;
     private Point2D point;
+    private static final double TRASLATE_OFFSET = 100d;
     
     /**
      * 
@@ -41,8 +42,8 @@ public class PasteCommand implements Command{
     public void execute() {
         shape = clonator.decodeFromXml();
         
-        shape.setTranslateX(point.getX());
-        shape.setTranslateY(point.getY());
+        shape.setTranslateX(point.getX()-TRASLATE_OFFSET);
+        shape.setTranslateY(point.getY()-TRASLATE_OFFSET);
         pane.getChildren().add(shape);
         
     }
