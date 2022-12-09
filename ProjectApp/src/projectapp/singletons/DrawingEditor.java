@@ -26,7 +26,6 @@ import projectapp.Grid;
 import projectapp.command.CommandExecutor;
 import projectapp.tools.EllipseTool;
 import projectapp.tools.LineTool;
-import projectapp.tools.MoveTool;
 import projectapp.tools.RectangleTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
@@ -299,8 +298,7 @@ public class DrawingEditor {
         }catch(Exception e){}
     }
 
-    public void zoom(double x, double y, boolean type){
-        System.out.println("CIAO");
-        ZoomPane.getIstance().zoom(x, y, type);
+    public void zoom(boolean type){
+        ZoomPane.getIstance().zoom(type);
     }
 }

@@ -54,22 +54,10 @@ public class FXMLDocumentController implements Initializable {
     private ToggleButton elBtn;
     @FXML
     private ToggleButton selBtn;
-    
     @FXML
     private ContextMenu menu;
-    
-    private ToggleGroup toggles;
-    
-    private DrawingEditor editor;
-    
-    private Point2D contextMenuPoint;
-    
-    @FXML
-    private Button UndoBtn;
     @FXML
     private VBox vboxChangeSize;
-    @FXML
-    private Button changeSzBtn;
     @FXML
     private ScrollPane scrollPane;
     
@@ -84,6 +72,20 @@ public class FXMLDocumentController implements Initializable {
     private RadioMenuItem radio2x;
     @FXML
     private RadioMenuItem radio3x;
+    
+    private ToggleGroup toggles;
+    
+    private DrawingEditor editor;
+    
+    private Point2D contextMenuPoint;
+    
+    private static final double DRAWING_PANE_WIDTH = 12000;
+    private static final double DRAWING_PANE_HEIGTH = 12000;
+    @FXML
+    private Button UndoBtn;
+    @FXML
+    private Button changeSzBtn;
+    
     /**
      * This method executes all the initial operations when the program starts.
      * 
@@ -113,9 +115,11 @@ public class FXMLDocumentController implements Initializable {
         zoomPane = ZoomPane.getIstance();
         zoomPane.getChildren().add(pane);
         scrollPane.setContent(zoomPane);
-        //scrollPane.addEventFilter(ScrollEvent.ANY, zoomPane.getOnScrollEventHandler());
-        //scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        //scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setHmax(DRAWING_PANE_WIDTH);
+        scrollPane.setVmax(DRAWING_PANE_HEIGTH);
+        scrollPane.setHvalue(DRAWING_PANE_WIDTH/2);
+        scrollPane.setVvalue(DRAWING_PANE_HEIGTH/2);
+        
     }    
     
     /**
@@ -333,7 +337,7 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     private void onMenuRequested(ContextMenuEvent event) {
-        contextMenuPoint = new Point2D(event.getX(),event.getY());
+        contextMenuPoint = new Point2D(event.getSceneX(),event.getSceneY());
     }
 
     @FXML
@@ -383,12 +387,12 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void zoomIn(ActionEvent event) {
-        editor.zoom(mainPane.getWidth()/2, mainPane.getHeight()/2, true);
+        editor.zoom(true);
     }
 
     @FXML
     private void zoomOut(ActionEvent event) {
-        editor.zoom(mainPane.getWidth()/2, mainPane.getHeight()/2, false);
+        editor.zoom(false);
     }
  
 }

@@ -228,7 +228,7 @@
                     <children>
                         <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" prefHeight="567.5" prefWidth="976.5" scaleShape="false" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
-                                <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onContextMenuRequested="#onMenuRequested" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" prefHeight="8274.0" prefWidth="8830.0" style="-fx-border-style: solid;">
+                                <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onContextMenuRequested="#onMenuRequested" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" prefHeight="12000.0" prefWidth="12000.0" style="-fx-border-style: solid;">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
