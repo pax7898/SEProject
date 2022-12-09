@@ -11,11 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -27,9 +27,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.WindowEvent;
 import projectapp.singletons.ZoomPane;
-import projectapp.tools.SelectionTool;
 
 
 /**
@@ -76,6 +74,16 @@ public class FXMLDocumentController implements Initializable {
     private ScrollPane scrollPane;
     
     private ZoomPane zoomPane;
+    @FXML
+    private ToggleButton gridBtn;
+    
+    private ToggleGroup radioGroup;
+    @FXML
+    private RadioMenuItem radio1x;
+    @FXML
+    private RadioMenuItem radio2x;
+    @FXML
+    private RadioMenuItem radio3x;
     /**
      * This method executes all the initial operations when the program starts.
      * 
@@ -88,17 +96,21 @@ public class FXMLDocumentController implements Initializable {
         editor = DrawingEditor.getIstance(pane,new CommandExecutor(),null, menu, vboxChangeSize);
         
         toggles = new ToggleGroup();
+        radioGroup = new ToggleGroup();
+        
         toggles.getToggles().addAll(lineBtn,recBtn,elBtn,selBtn);
+        radioGroup.getToggles().addAll(radio1x, radio2x, radio3x);
+        radioGroup.selectToggle(radio1x);
         menu.getItems().forEach(item -> {
             item.setDisable(true);
         });
+        
         editor.setLineTool();
         lineBtn.setSelected(true); 
         vboxChangeSize.visibleProperty().set(false);
         
         zoomPane = new ZoomPane();
         zoomPane.getChildren().add(pane);
-        
         scrollPane.setContent(zoomPane);
         scrollPane.addEventFilter(ScrollEvent.ANY, zoomPane.getOnScrollEventHandler());
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -118,20 +130,6 @@ public class FXMLDocumentController implements Initializable {
         toggles.getSelectedToggle().setSelected(false);
         }
         selBtn.selectedProperty().set(true);
-    }
-    
-    /**
-     * This method will be activated when the Move Button is pressed. There,
-     * all the operations to implement the move features will be executed.
-     * 
-     * @param event 
-     */
-    @FXML
-    private void setMoveTool(ActionEvent event) {
-        editor.setMoveTool();
-        if (toggles.getSelectedToggle()!=null){
-        toggles.getSelectedToggle().setSelected(false);
-        }
     }
     
     /**
@@ -174,7 +172,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void setEllipseTool(ActionEvent event) {
         editor.setEllipseTool();
-        if (toggles.getSelectedToggle()!=null){
+        if (toggles.getSelectedToggle() != null){
         toggles.getSelectedToggle().setSelected(false);
         }
         elBtn.selectedProperty().set(true);
@@ -368,6 +366,17 @@ public class FXMLDocumentController implements Initializable {
             double y = Double.parseDouble(textY.getText());
             editor.changeSize();
         }catch(Exception e){
+        }
+    }
+
+    @FXML
+    private void setGrid(ActionEvent event) {
+        if(gridBtn.selectedProperty().get()){
+            RadioMenuItem toggle = (RadioMenuItem) radioGroup.getSelectedToggle();
+            System.out.println("Stampo : " + toggle.getText());
+            editor.addGrid(Double.parseDouble(toggle.getText().substring(0, 1)));
+        }else{
+            editor.removeGrid();
         }
     }
 

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -22,7 +30,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
    <children>
       <SplitPane dividerPositions="0.19830028328611898" orientation="VERTICAL" pickOnBounds="false" prefHeight="707.2" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -180,6 +188,14 @@
                                     <Insets left="50.0" />
                                  </HBox.margin>
                               </VBox>
+                              <ToggleButton fx:id="gridBtn" mnemonicParsing="false" onAction="#setGrid" text="Grid" />
+                              <MenuButton mnemonicParsing="false" text="Size">
+                                 <items>
+                                    <RadioMenuItem fx:id="radio1x" mnemonicParsing="false" text="1x" />
+                                    <RadioMenuItem fx:id="radio2x" mnemonicParsing="false" text="2x" />
+                                    <RadioMenuItem fx:id="radio3x" mnemonicParsing="false" text="3x" />
+                                 </items>
+                              </MenuButton>
                            </children>
                         </HBox>
                      </children>
@@ -203,7 +219,6 @@
                             <MenuItem mnemonicParsing="false" onAction="#copyShape" text="Copy" />
                             <MenuItem mnemonicParsing="false" onAction="#cutShape" text="Cut" />
                             <MenuItem mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
-                            <MenuItem mnemonicParsing="false" onAction="#setMoveTool" text="Move" />
                             <MenuItem mnemonicParsing="false" onAction="#setToFrontTool" text="ToFront" />
                             <MenuItem mnemonicParsing="false" onAction="#setToBackTool" text="ToBack" />
                             <MenuItem mnemonicParsing="false" onAction="#changeSizeBar" text="ChangeSize" />

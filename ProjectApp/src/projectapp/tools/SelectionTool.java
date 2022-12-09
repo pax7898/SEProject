@@ -11,6 +11,7 @@ package projectapp.tools;
 
 import projectapp.singletons.Clonator;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -58,7 +59,7 @@ public class SelectionTool extends Tool{
     private double newY;
     private double oldX;
     private double oldY;
-    
+    private Group gridContainer;
     
     /**
      * The costructor calls the costructor of Tool class
@@ -68,12 +69,13 @@ public class SelectionTool extends Tool{
      * @param selectedShape 
      * @param menu 
      */
-    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu, VBox vboxChangeSize) {
+    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu, VBox vboxChangeSize, Group gridContainer) {
         super(pane,executor); 
         this.selectedShape = selectedShape;
         this.clonator = Clonator.getIstance();
         this.menu = menu;
         this.vboxChangeSize = vboxChangeSize;
+        this.gridContainer = gridContainer;
     }
     
     public SelectedShape getSelectedShape() {
@@ -115,7 +117,7 @@ public class SelectionTool extends Tool{
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
         
-        if (event.getTarget().getClass()!= getPane().getClass()){
+        if (event.getTarget().getClass()!= getPane().getClass() && (gridContainer == null || !gridContainer.getChildren().contains((Shape) event.getTarget()))){
             selectedShape.setShape((Shape) event.getTarget()); 
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
             menu.getItems().forEach(item -> {
@@ -240,6 +242,7 @@ public class SelectionTool extends Tool{
     @Override
     public void toBack() {
         getExecutor().execute(new ToBackCommand(selectedShape.getShape(), getPane()));
+        gridContainer.toBack();
     }
     
     /**
