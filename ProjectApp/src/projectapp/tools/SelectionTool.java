@@ -59,7 +59,7 @@ public class SelectionTool extends Tool{
     private double newY;
     private double oldX;
     private double oldY;
-    private Group gridContainer;
+    private final Group gridContainer;
     
     /**
      * The costructor calls the costructor of Tool class
@@ -239,6 +239,11 @@ public class SelectionTool extends Tool{
     public void toFront() {
         getExecutor().execute(new ToFrontCommand(selectedShape.getShape(), getPane()));
     }
+    
+    /**
+     * This method allows you to change the z-axis level of a selected shape and 
+     * allows us to keep the grid under the shapes
+     */
     @Override
     public void toBack() {
         getExecutor().execute(new ToBackCommand(selectedShape.getShape(), getPane()));

@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
@@ -85,7 +86,7 @@ public class FXMLDocumentController implements Initializable {
     private Button UndoBtn;
     @FXML
     private Button changeSzBtn;
-    
+    Group tmpGroup;
     /**
      * This method executes all the initial operations when the program starts.
      * 
@@ -374,14 +375,19 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * This method will be called when the user press on the grid button on the UI
+     * When the user clicks on the grid button, if this is not active, then it is 
+     * shown on the drawingeditor otherwise it is removed. Moreover, through a 
+     * menu the user can choose the size of the grid.
+     */
     @FXML
-    private void setGrid(ActionEvent event) {
+    private void setGrid() {
         if(gridBtn.selectedProperty().get()){
             RadioMenuItem toggle = (RadioMenuItem) radioGroup.getSelectedToggle();
-            System.out.println("Stampo : " + toggle.getText());
-            editor.addGrid(Double.parseDouble(toggle.getText().substring(0, 1)));
+            tmpGroup = editor.addGrid(Double.parseDouble(toggle.getText().substring(0, 1)));
         }else{
-            editor.removeGrid();
+            tmpGroup = editor.removeGrid();
         }
     }
 
