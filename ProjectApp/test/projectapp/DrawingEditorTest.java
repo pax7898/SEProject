@@ -307,17 +307,11 @@ public class DrawingEditorTest {
     @Test
     public void testCutShape() {
         System.out.println("cutShape");
-
-        drawingPane.getChildren().add(shape);
-        
-        editor.setSelectionTool();
-        
-        selectedShape.setShape(shape);
-        
-        editor.cutShape();
-        
-        assertFalse(drawingPane.getChildren().contains(shape));
-        
+        drawingPane.getChildren().add(shape);       
+        editor.setSelectionTool();       
+        selectedShape.setShape(shape);       
+        editor.cutShape();       
+        assertFalse(drawingPane.getChildren().contains(shape));      
         Rectangle rectangle2 = (Rectangle) Clonator.getIstance().decodeFromXml();
         Rectangle originalRectangle = (Rectangle) shape;
         assertEquals(originalRectangle.getX(), rectangle2.getX(),0);
@@ -325,8 +319,7 @@ public class DrawingEditorTest {
         assertEquals(originalRectangle.getWidth(), rectangle2.getWidth(),0);
         assertEquals(originalRectangle.getHeight(), rectangle2.getHeight(),0);
         assertEquals(originalRectangle.getStroke(), rectangle2.getStroke());
-        assertEquals(originalRectangle.getFill(), rectangle2.getFill());
-        
+        assertEquals(originalRectangle.getFill(), rectangle2.getFill());      
         assertFalse(menu.getItems().get(3).isDisable());
         
     }
@@ -364,17 +357,13 @@ public class DrawingEditorTest {
      */
     @Test
     public void testUndo() {
-        System.out.println("undo");
-        
+        System.out.println("undo");  
         editor.setRectangleTool();
         MouseEvent press = new MouseEvent(MouseEvent.MOUSE_PRESSED, 20, 20, 20, 20,MouseButton.PRIMARY, 1, false, false,false,false,false,false,false,false,false,false,null);
-        editor.onMousePressed(press, Color.DARKVIOLET, Color.SILVER);
-        
+        editor.onMousePressed(press, Color.DARKVIOLET, Color.SILVER);       
         assertEquals(1,drawingPane.getChildren().size());
         assertEquals(1,executor.getStack().size());
-        
-        editor.undo();
-        
+        editor.undo();        
         assertEquals(0,drawingPane.getChildren().size());
         assertEquals(0,executor.getStack().size());
         
@@ -387,8 +376,7 @@ public class DrawingEditorTest {
      */
     @Test
     public void testSaveDrawing() {
-        System.out.println("saveDrawing");
-        
+        System.out.println("saveDrawing");        
         Line line = new Line(10,10,20,20);
         line.setStroke(Color.RED);
         Rectangle rectangle = new Rectangle(10,10,20,20);
@@ -397,17 +385,12 @@ public class DrawingEditorTest {
         Ellipse ellipse = new Ellipse(10,10,20,20);
         ellipse.setStroke(Color.RED);
         ellipse.setFill(Color.BLUE);
-        drawingPane.getChildren().addAll(line,rectangle,ellipse);
-        
-        ObservableList<Node> savedList = drawingPane.getChildren();
-        
+        drawingPane.getChildren().addAll(line,rectangle,ellipse);        
+        ObservableList<Node> savedList = drawingPane.getChildren();        
         File file = new File("test.xml");
         editor.saveDrawing(file);
-
-        editor.loadDrawing(file);
-        
+        editor.loadDrawing(file);        
         assertArrayEquals(savedList.toArray(), drawingPane.getChildren().toArray());
-
         file.delete();
     }
 

@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.input.MouseEvent;
@@ -21,10 +22,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import projectapp.FXMLDocumentController;
+import projectapp.Grid;
 import projectapp.command.CommandExecutor;
 import projectapp.tools.EllipseTool;
 import projectapp.tools.LineTool;
-import projectapp.tools.MoveTool;
 import projectapp.tools.RectangleTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
@@ -51,6 +52,9 @@ public class DrawingEditor {
     static private DrawingEditor instance = null;
     
     private final VBox vboxChangeSize;
+    
+    private Grid grid;
+    private Group gridContainer;
     /**
      * 
      * DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool) is the class costructor
@@ -67,6 +71,7 @@ public class DrawingEditor {
         this.selectedShape = SelectedShape.getIstance();
         this.menu = menu;
         this.vboxChangeSize = vboxChangeSize;
+        this.grid = new Grid();
     }
     
     public static DrawingEditor getIstance(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu, VBox vboxChangeSize){
@@ -101,6 +106,7 @@ public class DrawingEditor {
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
+        
         currentTool = new RectangleTool(drawingPane,executor, menu);
     }
     
@@ -125,20 +131,8 @@ public class DrawingEditor {
         if (selectedShape.getShape() != null){
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none"); 
         }
-        currentTool = new SelectionTool(drawingPane,selectedShape,executor, menu, vboxChangeSize);
+        currentTool = new SelectionTool(drawingPane,selectedShape,executor, menu, vboxChangeSize, gridContainer);
     }  
-    
-    /**
-     * This method updates the currentTool (which corresponds to the state in tha pattern state)
-     * when the user press the move button in the application. This condition is necessary for move a shape.
-     */
-    public void setMoveTool(){
-        vboxChangeSize.visibleProperty().set(false);
-        if (selectedShape.getShape() != null){
-            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
-        }
-        currentTool = new MoveTool(drawingPane,executor, selectedShape, menu);
-    }
     
     /**
      * {@link projectapp.FXMLDocumentController#onMousePressed(javafx.scene.input.MouseEvent)}
@@ -251,7 +245,10 @@ public class DrawingEditor {
      * @param file is the location chosen by the user on his file system
      */
     public void saveDrawing(File file){
-        
+        Group grid = null;
+        if(drawingPane.getChildren().get(0) instanceof Group){
+            grid = (Group) drawingPane.getChildren().remove(0);
+        }
         try (XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file))){
                     
                     encoder.setPersistenceDelegate(Color.class, new DefaultPersistenceDelegate(new String[]{"red","green","blue","opacity"}));
@@ -261,6 +258,9 @@ public class DrawingEditor {
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);    
                 } 
+        if(grid != null){
+            drawingPane.getChildren().add(0, grid);
+        }
     }
     
     /**
@@ -278,5 +278,27 @@ public class DrawingEditor {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+     public void addGrid(Double size){
+        try{
+            gridContainer = grid.create(drawingPane, size);
+            drawingPane.getChildren().add(0, gridContainer);
+            if(currentTool instanceof SelectionTool){
+                setSelectionTool();
+            }
+        }catch(Exception e){}
+    }
+     
+     public void removeGrid(){
+        try{
+            drawingPane.getChildren().remove(0);
+            if(currentTool instanceof SelectionTool){
+                setSelectionTool();
+            }
+        }catch(Exception e){}
+    }
 
+    public void zoom(boolean type){
+        ZoomPane.getIstance().zoom(type);
+    }
 }

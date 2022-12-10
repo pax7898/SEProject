@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import org.junit.Before;
@@ -45,6 +47,8 @@ public class SelectionToolTest {
     private ContextMenu menu;
     private VBox vboxChangeSize;
     private JFXPanel panel;
+    private MouseEvent dragEvent;
+    private MouseEvent releasedEvent;
     
     public SelectionToolTest() {
     }
@@ -79,6 +83,10 @@ public class SelectionToolTest {
         executor = new CommandExecutor();
         tool = new SelectionTool(pane,selectedShape,executor,menu,vboxChangeSize);
         
+        dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
+                                    false, false,false,false,false,false,false,false,false,false,null);
+        releasedEvent = new MouseEvent(MouseEvent.MOUSE_RELEASED, 10, 10, 10, 10, MouseButton.PRIMARY, 1, //I release at the end of drag (60)
+                                           false, false,false,false,false,false,false,false,false,false,null); 
     }
 
     /**
@@ -93,17 +101,161 @@ public class SelectionToolTest {
     }
 
     /**
-     * Test of onMousePressed method, of class SelectionTool.
+     * Test of onMousePressed method for selection, of class SelectionTool.
      */
     @Test
-    public void testOnMousePressed() {
+    public void testOnMousePressedSelection() {
         System.out.println("onMousePressed");
         MouseEvent event = new MouseEvent(null, shape, new EventType(), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
         SelectionTool test = new SelectionTool(pane, selectedShape, executor, menu, vboxChangeSize);
         test.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(),"-fx-stroke-dash-array:5px");
     }
+    
+    /**
+     * Test of onMousePressed method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMousePressedMoveEllipse() {
+        Ellipse ellipse = new Ellipse(10,10,10,10);
+        
+        MouseEvent event = new MouseEvent(null, ellipse, new EventType("evento1Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        assertEquals(0, ellipse.getTranslateX(), 0);
+        assertEquals(0, ellipse.getTranslateY(), 0);
+        
+    }
+    
+    /**
+     * Test of onMouseDragged method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMouseDraggedMoveEllipse() {
+        Ellipse ellipse = new Ellipse(10,10,10,10);
+        
+        MouseEvent event1 = new MouseEvent(null, ellipse, new EventType("evento2Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 
+                                           0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseDragged(dragEvent);
+        assertEquals(tool.getNewX(), ellipse.getTranslateX(), 0);
+        assertEquals(tool.getNewY(), ellipse.getTranslateY(), 0);
+        
+    }
+    
+    /**
+     * Test of onMouseReleased method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMouseReleasedMoveEllipse() {
+        
+        Ellipse ellipse = new Ellipse(10,10,10,10);
+        MouseEvent event1 = new MouseEvent(null, ellipse, new EventType("evento3Ellipse"), 0, 0, 0, 0, MouseButton.PRIMARY, 
+                                           0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseReleased(releasedEvent);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseReleased(releasedEvent);
+        assertEquals(tool.getOldX(), ellipse.getTranslateX(), 0);
+        assertEquals(tool.getOldY(), ellipse.getTranslateY(), 0);
+    }
+    
+    /**
+     * Test of onMousePressed method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMousePressedMoveRectangle() {
+        Rectangle rectangle = new Rectangle(10,10,10,10);
+        MouseEvent event = new MouseEvent(null, rectangle, new EventType("evento1Rectangle"), 0, 0, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        assertEquals(0, rectangle.getTranslateX(), 0);
+        assertEquals(0, rectangle.getTranslateY(), 0);
+        
+    }
+    
+    /**
+     * Test of onMouseDragged method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMouseDraggedMoveRectangle() {
+        
+        Rectangle rectangle = new Rectangle(10,10,10,10);
 
+        MouseEvent event1 = new MouseEvent(null, rectangle, new EventType("evento2Rectangle"), 0, 0, 0, 0, MouseButton.PRIMARY, 
+                                           0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseDragged(dragEvent);
+        assertEquals(tool.getNewX(), rectangle.getTranslateX(), 0);
+        assertEquals(tool.getNewY(), rectangle.getTranslateY(), 0);
+        
+    }
+    
+    /**
+     * Test of onMouseReleased method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMouseReleasedMoveRectangle() {
+        Rectangle rectangle = new Rectangle(10,10,10,10);
+
+        MouseEvent event1 = new MouseEvent(null, rectangle, new EventType("evento3Rectangle"), 0, 0, 0, 0, MouseButton.PRIMARY, 
+                                           0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseReleased(releasedEvent);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseReleased(releasedEvent);
+        assertEquals(tool.getOldX(), rectangle.getTranslateX(), 0);
+        assertEquals(tool.getOldY(), rectangle.getTranslateY(), 0);
+    }
+    
+    /**
+     * Test of onMousePressed method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMousePressedMoveLine() {
+        Line line = new Line(10,10,10,10);
+        
+        MouseEvent event = new MouseEvent(null, line, new EventType("evento1Line"), 0, 0, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        assertEquals(0, line.getTranslateX(), 0);
+        assertEquals(0, line.getTranslateY(), 0);
+        
+    }
+    
+    /**
+     * Test of onMouseDragged method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMouseDraggedMoveLine() {
+        Line line = new Line(10,10,10,10);
+        MouseEvent event1 = new MouseEvent(null, line, new EventType("evento2Line"), 0, 0, 0, 0, MouseButton.PRIMARY, 
+                                           0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseDragged(dragEvent);
+        assertEquals(tool.getNewX(), line.getTranslateX(), 0);
+        assertEquals(tool.getNewY(), line.getTranslateY(), 0);
+        
+    }
+    
+    /**
+     * Test of onMouseReleased method for moving, of class SelectionTool.
+     */
+    @Test
+    public void testOnMouseReleasedMoveLine() {
+        Line line = new Line(10,10,10,10);
+        MouseEvent event1 = new MouseEvent(null, line, new EventType("evento3Line"), 0, 0, 0, 0, MouseButton.PRIMARY, 
+                                           0, false, false, false, false, false, false, false, false, false, false, null);
+        tool.onMousePressed(event1, Color.DARKVIOLET, Color.SILVER);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseReleased(releasedEvent);
+        tool.onMouseDragged(dragEvent);
+        tool.onMouseReleased(releasedEvent);
+        assertEquals(tool.getOldX(), line.getTranslateX(), 0);
+        assertEquals(tool.getOldY(), line.getTranslateY(), 0);
+    }
     /**
      * Test of changeBorderColor method, of class SelectionTool.
      */

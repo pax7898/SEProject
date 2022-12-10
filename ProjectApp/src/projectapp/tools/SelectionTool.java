@@ -11,6 +11,7 @@ package projectapp.tools;
 
 import projectapp.singletons.Clonator;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +28,7 @@ import projectapp.command.CommandExecutor;
 import projectapp.command.CopyCommand;
 import projectapp.command.CutCommand;
 import projectapp.command.DeleteCommand;
+import projectapp.command.MoveCommand;
 import projectapp.command.PasteCommand;
 import projectapp.command.ToBackCommand;
 import projectapp.command.ToFrontCommand;
@@ -44,12 +46,18 @@ public class SelectionTool extends Tool{
     private final Clonator clonator;
     private final ContextMenu menu;
     private final VBox vboxChangeSize;
-    private double changeSizeX;
-    private double changeSizeY;
     private static final int HBOX_1 = 0;
     private static final int HBOX_2 = 1;
     private static final int TEXT_FIELD_CHANGE_SIZE = 1;
     
+    private double initialPositionX;
+    private double initialPositionY;
+    private boolean flag;
+    private double newX;
+    private double newY;
+    private double oldX;
+    private double oldY;
+    private Group gridContainer;
     
     /**
      * The costructor calls the costructor of Tool class
@@ -59,18 +67,40 @@ public class SelectionTool extends Tool{
      * @param selectedShape 
      * @param menu 
      */
-    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu, VBox vboxChangeSize) {
+    public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu, VBox vboxChangeSize, Group gridContainer) {
         super(pane,executor); 
         this.selectedShape = selectedShape;
         this.clonator = Clonator.getIstance();
         this.menu = menu;
         this.vboxChangeSize = vboxChangeSize;
+        this.gridContainer = gridContainer;
     }
     
     public SelectedShape getSelectedShape() {
         return selectedShape;
     }
+    
+    /*I need getter method only for tests*/
+    public double getNewX() {
+        return newX;
+    }
 
+    public double getNewY() {
+        
+        return newY;
+    }
+
+
+    public double getOldX() {
+        return oldX;
+    }
+
+
+    public double getOldY() {
+        return oldY;
+    }
+
+    
     /***
      * This method ensures that when a figure is selected inside the work window, this shape is selected and illuminated.
      * When you then select another figure, the new figure is highlighted and the old figure deselected.
@@ -85,13 +115,20 @@ public class SelectionTool extends Tool{
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:none");
         }
         
-        if (event.getTarget().getClass()!= getPane().getClass()){
+        if (event.getTarget().getClass()!= getPane().getClass() && (gridContainer == null || !gridContainer.getChildren().contains((Shape) event.getTarget()))){
             selectedShape.setShape((Shape) event.getTarget()); 
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
             menu.getItems().forEach(item -> {
                 item.setDisable(false);
             });
+            flag = true;
+            this.initialPositionX = event.getX();
+            this.initialPositionY = event.getY();
+            newX = oldX = selectedShape.getShape().getTranslateX();
+            newY = oldY = selectedShape.getShape().getTranslateY();
+ 
         } else {
+            flag = false;
             vboxChangeSize.visibleProperty().set(false);
             selectedShape.setShape(null);
                 menu.getItems().forEach(item -> {
@@ -99,7 +136,44 @@ public class SelectionTool extends Tool{
                 });
             if(clonator.getByteCloned() != null){ 
                 menu.getItems().get(3).setDisable(false);
-            }
+            }    
+        }
+    }
+    
+    /**
+     * This method allow us to translate the shape simultaneously with the drag of the mouse.
+     * At the first iteraction the shape will be translated in place and in 
+     * At each iteration the variables newX and newY will be updated taking into account the old position in which the figure was.
+     * The operations (oldX + event.getX() - initialPositionX) and (oldY + event.getY() - initialPositionY) allow us to move the figure in linear way 
+     * following the mouse drag.
+     * 
+     * @param event is the mouse drag event on the pane
+     */
+    @Override
+    public void onMouseDragged(MouseEvent event) {
+        if(flag == true){
+            selectedShape.getShape().setTranslateX(newX);
+            selectedShape.getShape().setTranslateY(newY);
+            newX = oldX + event.getX() - initialPositionX;
+            newY = oldY + event.getY() - initialPositionY;
+
+        }      
+    }
+    
+    /**
+     * This method execute a MoveCommand that set the last position of the shape in the pane 
+     * indicated by the user with the mouse. Moreover,  we are going to save of what the figure has been translated. 
+     * 
+     * 
+     * @param event is the mouse release event on the pane
+     */
+    @Override
+    public void onMouseReleased(MouseEvent event) {
+        if(flag == true){
+            super.getExecutor().execute(new MoveCommand(selectedShape.getShape(),selectedShape.getShape().getTranslateX(), 
+                                        selectedShape.getShape().getTranslateY(), oldX, oldY));
+            oldX  = selectedShape.getShape().getTranslateX();
+            oldY  = selectedShape.getShape().getTranslateY();
             
         }
     }
@@ -166,24 +240,14 @@ public class SelectionTool extends Tool{
     @Override
     public void toBack() {
         getExecutor().execute(new ToBackCommand(selectedShape.getShape(), getPane()));
+        gridContainer.toBack();
     }
-    /*
-     * Unimplemented methods of the abstract class Tool
-     */
     
-    @Override
-    public void onMouseDragged(MouseEvent event) {}
-
-    @Override
-    public void onMouseReleased(MouseEvent event) {}
-
-    @Override
-    public Shape getShape() {return null;}
-
     /**
      * This method shows a section in the toolbar in order to
      * modify the size of the selected shape
      */
+    @Override
     public void changeSizeBar() {
         vboxChangeSize.visibleProperty().set(true);
     }
@@ -199,12 +263,20 @@ public class SelectionTool extends Tool{
 
         TextField textX = (TextField) hboxX.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
         TextField textY = (TextField) hboxY.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
-        changeSizeX = Double.parseDouble(textX.getText());
-        changeSizeY = Double.parseDouble(textY.getText());
+        double changeSizeX = Double.parseDouble(textX.getText());
+        double changeSizeY = Double.parseDouble(textY.getText());
+        textX.setText(null);
+        textY.setText(null);
         getExecutor().execute(new ChangeSizeCommand(selectedShape, changeSizeX, changeSizeY, vboxChangeSize));
 
     }
+    
+    /*
+     * Unimplemented methods of the abstract class Tool
+     */
+
+    @Override
+    public Shape getShape() {return null;}
 
     
-
 }
