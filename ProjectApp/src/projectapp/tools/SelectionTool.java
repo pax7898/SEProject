@@ -123,14 +123,14 @@ public class SelectionTool extends Tool{
             menu.getItems().forEach(item -> {
                 item.setDisable(false);
             });
-            //flag = true;
+            
             this.initialPositionX = event.getX();
             this.initialPositionY = event.getY();
             newX = oldX = selectedShape.getShape().getTranslateX();
             newY = oldY = selectedShape.getShape().getTranslateY();
  
         } else {
-            //flag = false;
+            
             vboxChangeSize.visibleProperty().set(false);
             selectedShape.setShape(null);
                 menu.getItems().forEach(item -> {
