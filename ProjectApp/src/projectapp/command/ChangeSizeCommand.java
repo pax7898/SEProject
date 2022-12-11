@@ -48,8 +48,10 @@ public class ChangeSizeCommand implements Command{
     public void execute() {
         beforeX = shape.getScaleX();
         beforeY = shape.getScaleY();
-        shape.setScaleX(changeSizeX+beforeX);
-        shape.setScaleY(changeSizeY+beforeY);
+        if(changeSizeX+beforeX >= 0.1)
+            shape.setScaleX(changeSizeX+beforeX);
+        if(changeSizeY+beforeY >= 0.1)
+            shape.setScaleY(changeSizeY+beforeY);
     }
     
     /**
