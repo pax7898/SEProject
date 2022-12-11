@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -32,7 +24,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
        <children>
         <SplitPane dividerPositions="0.19830028328611898" orientation="VERTICAL" pickOnBounds="false" prefHeight="707.2" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -200,7 +192,7 @@
                                                   </ImageView>
                                             </graphic>
                                         </ToggleButton>
-                                        <MenuButton mnemonicParsing="false" prefHeight="21.0" prefWidth="64.0" text="Size">
+                                        <MenuButton fx:id="gridSizeMenu" mnemonicParsing="false" prefHeight="21.0" prefWidth="64.0" text="Size">
                                             <items>
                                                 <RadioMenuItem fx:id="radio1x" mnemonicParsing="false" text="1x" />
                                                 <RadioMenuItem fx:id="radio2x" mnemonicParsing="false" text="2x" />
@@ -260,7 +252,8 @@
                                         <MenuItem mnemonicParsing="false" onAction="#setToFrontTool" text="ToFront" />
                                         <MenuItem mnemonicParsing="false" onAction="#setToBackTool" text="ToBack" />
                                         <MenuItem mnemonicParsing="false" onAction="#changeSizeBar" text="ChangeSize" />
-                              <MenuItem mnemonicParsing="false" onAction="#mirrorShape" text="Mirror" />
+                                        <MenuItem mnemonicParsing="false" onAction="#mirrorShape" text="Mirror" />
+                                        <MenuItem mnemonicParsing="false" onAction="#RotateShape" text="Rotate" />
                                     </items>
                                 </ContextMenu>
                             </contextMenu>

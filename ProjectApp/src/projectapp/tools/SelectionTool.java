@@ -80,6 +80,20 @@ public class SelectionTool extends Tool{
     public SelectedShape getSelectedShape() {
         return selectedShape;
     }
+
+    public Group getGridContainer() {
+        return gridContainer;
+    }
+
+    public ContextMenu getMenu() {
+        return menu;
+    }
+
+    public VBox getVboxChangeSize() {
+        return vboxChangeSize;
+    }
+    
+    
     
     /*I need getter method only for tests*/
     public double getNewX() {
