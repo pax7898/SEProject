@@ -43,15 +43,10 @@ public class RotateTool extends SelectionTool{
         
         
         
-        if (event.getTarget().getClass()!= getPane().getClass() && 
-                (getGridContainer() == null || !getGridContainer().getChildren().contains((Shape) event.getTarget())) 
-                && getSelectedShape().getShape().equals((Shape) event.getTarget())){
-            
-            getSelectedShape().setShape((Shape) event.getTarget());
+        if ((getGridContainer() == null || !getGridContainer().getChildren().contains((Shape) event.getTarget()))){
             
             initialRotate = getSelectedShape().getShape().getRotate();
             startY = event.getY();
- 
         }
         
     }
