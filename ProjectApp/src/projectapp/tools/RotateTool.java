@@ -41,30 +41,31 @@ public class RotateTool extends SelectionTool{
             item.setDisable(true);
         });
         
-        if (getSelectedShape().getShape() != null){
-            getSelectedShape().getShape().setStyle("-fx-stroke-dash-array:none");
-        }
         
-        if (event.getTarget().getClass()!= getPane().getClass() && (getGridContainer() == null || !getGridContainer().getChildren().contains((Shape) event.getTarget()))){
+        
+        if (event.getTarget().getClass()!= getPane().getClass() && 
+                (getGridContainer() == null || !getGridContainer().getChildren().contains((Shape) event.getTarget())) 
+                && getSelectedShape().getShape().equals((Shape) event.getTarget())){
+            
             getSelectedShape().setShape((Shape) event.getTarget());
             
             initialRotate = getSelectedShape().getShape().getRotate();
             startY = event.getY();
-            getSelectedShape().getShape().setStyle("-fx-stroke-dash-array:5px");
  
-        } else
-            getSelectedShape().setShape(null);
+        }
         
     }
     
     @Override
     public void onMouseDragged(MouseEvent event){
-        getSelectedShape().getShape().setRotate((event.getY()-startY));
+        if(getSelectedShape().getShape()!=null)
+            getSelectedShape().getShape().setRotate((event.getY()-startY+initialRotate));
     }
     
     @Override
     public void onMouseReleased(MouseEvent event){
-        getExecutor().execute(new RotateCommand(getSelectedShape(), initialRotate,(event.getY()-startY)));
+        if(getSelectedShape().getShape()!=null)
+            getExecutor().execute(new RotateCommand(getSelectedShape(), initialRotate,(event.getY()-startY+initialRotate)));
     }
     
 }

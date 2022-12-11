@@ -140,9 +140,7 @@ public class DrawingEditor {
      * when the user press the selection button in the application. This condition is necessary for select a shape.
      */
     public void setRotateTool(){
-        if (selectedShape.getShape() != null){
-            selectedShape.getShape().setStyle("-fx-stroke-dash-array:none"); 
-        }
+        
         currentTool = new RotateTool(drawingPane,selectedShape,executor, menu, vboxChangeSize, gridContainer);
     }  
     
