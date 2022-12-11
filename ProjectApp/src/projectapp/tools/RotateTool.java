@@ -41,26 +41,20 @@ public class RotateTool extends SelectionTool{
             item.setDisable(true);
         });
         
+        initialRotate = getSelectedShape().getShape().getRotate();
+        startY = event.getY();
         
-        
-        if ((getGridContainer() == null || !getGridContainer().getChildren().contains((Shape) event.getTarget()))){
-            
-            initialRotate = getSelectedShape().getShape().getRotate();
-            startY = event.getY();
-        }
         
     }
     
     @Override
     public void onMouseDragged(MouseEvent event){
-        if(getSelectedShape().getShape()!=null)
-            getSelectedShape().getShape().setRotate((event.getY()-startY+initialRotate));
+        getSelectedShape().getShape().setRotate((event.getY()-startY+initialRotate));
     }
     
     @Override
     public void onMouseReleased(MouseEvent event){
-        if(getSelectedShape().getShape()!=null)
-            getExecutor().execute(new RotateCommand(getSelectedShape(), initialRotate,(event.getY()-startY+initialRotate)));
+        getExecutor().execute(new RotateCommand(getSelectedShape(), initialRotate,(event.getY()-startY+initialRotate)));
     }
     
 }
