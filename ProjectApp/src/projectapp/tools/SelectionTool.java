@@ -175,8 +175,7 @@ public class SelectionTool extends Tool{
             super.getExecutor().execute(new MoveCommand(selectedShape.getShape(),selectedShape.getShape().getTranslateX(), 
                                         selectedShape.getShape().getTranslateY(), oldX, oldY));
             oldX  = selectedShape.getShape().getTranslateX();
-            oldY  = selectedShape.getShape().getTranslateY();
-            
+            oldY  = selectedShape.getShape().getTranslateY();   
         }
     }
     
