@@ -7,6 +7,7 @@ package projectapp.tools;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventType;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -24,6 +25,7 @@ import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import projectapp.Grid;
 import projectapp.singletons.SelectedShape;
 import projectapp.command.ChangeBorderColorCommand;
 import projectapp.command.ChangeInteriorColorCommand;
@@ -49,6 +51,7 @@ public class SelectionToolTest {
     private JFXPanel panel;
     private MouseEvent dragEvent;
     private MouseEvent releasedEvent;
+    private Group gridContainer ;
     
     public SelectionToolTest() {
     }
@@ -79,9 +82,10 @@ public class SelectionToolTest {
         hboxY.getChildren().add(new TextField("2.0"));
         vboxChangeSize.getChildren().add(hboxX);
         vboxChangeSize.getChildren().add(hboxY);
+        gridContainer = (new Grid()).create(pane, 1d);
 
         executor = new CommandExecutor();
-        tool = new SelectionTool(pane,selectedShape,executor,menu,vboxChangeSize);
+        tool = new SelectionTool(pane,selectedShape,executor,menu,vboxChangeSize,gridContainer);
         
         dragEvent = new MouseEvent(MouseEvent.MOUSE_DRAGGED, 10, 10, 10, 10, MouseButton.PRIMARY, 1,
                                     false, false,false,false,false,false,false,false,false,false,null);
@@ -107,8 +111,7 @@ public class SelectionToolTest {
     public void testOnMousePressedSelection() {
         System.out.println("onMousePressed");
         MouseEvent event = new MouseEvent(null, shape, new EventType(), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        SelectionTool test = new SelectionTool(pane, selectedShape, executor, menu, vboxChangeSize);
-        test.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(),"-fx-stroke-dash-array:5px");
     }
     

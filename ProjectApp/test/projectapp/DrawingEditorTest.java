@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventType;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -31,7 +32,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import projectapp.command.CommandExecutor;
 import projectapp.tools.LineTool;
-import projectapp.tools.MoveTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
 import projectapp.singletons.Clonator;
@@ -48,10 +48,11 @@ public class DrawingEditorTest {
     private Shape shape;
     private Shape shape1;
     private SelectionTool tool;
-    private MoveTool moveTool;
     private ContextMenu menu;
     private VBox vboxChangeSize;
     private JFXPanel panel;
+    Grid grid;
+    Group gridContainer;
     
     @Before
     public void setUp() {
@@ -75,6 +76,8 @@ public class DrawingEditorTest {
         hboxY.getChildren().add(new TextField("2.0"));
         vboxChangeSize.getChildren().add(hboxX);
         vboxChangeSize.getChildren().add(hboxY);
+        grid = new Grid();
+        gridContainer = new Group();
         
         editor = new DrawingEditor(drawingPane,executor,currentTool,menu,vboxChangeSize);
         shape = new Rectangle(20,20,30,30);
@@ -133,23 +136,9 @@ public class DrawingEditorTest {
         System.out.println("setSelectionTool");
         editor.setSelectionTool();
         MouseEvent event = new MouseEvent(null, shape, new EventType("selection"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        tool = new SelectionTool(drawingPane,selectedShape,executor,menu, vboxChangeSize);
+        tool = new SelectionTool(drawingPane,selectedShape,executor,menu, vboxChangeSize, gridContainer);
         tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(), "-fx-stroke-dash-array:5px");
-    }
-
-    /**
-     * Test of setMoveTool method, of class DrawingEditor.
-     */
-    @Test
-    public void testSetMoveTool() {
-       System.out.println("setMoveTool"); 
-       editor.setMoveTool();
-       MouseEvent event = new MouseEvent(null, shape, new EventType("move"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-       moveTool=new MoveTool(drawingPane,executor,selectedShape,menu);
-       moveTool.onMouseDragged(event);
-       assertEquals(moveTool.getNewX(), shape.getTranslateX(), 0);
-       assertEquals(moveTool.getNewY(), shape.getTranslateY(), 0);
     }
 
     /**
@@ -348,7 +337,7 @@ public class DrawingEditorTest {
         double changeY = selectedShape.getShape().getScaleY();
         editor.changeSize();
         assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
-        assertEquals(selectedShape.getShape().getScaleY(),changeX+1.0,0);
+        assertEquals(selectedShape.getShape().getScaleY(),changeY+1.0,0);
     }
 
     
@@ -402,4 +391,19 @@ public class DrawingEditorTest {
         //Alredy tested in testSaveDrawing
     }
    
+    @Test
+    public void testAddGrid(){
+        gridContainer = editor.addGrid(1.0);
+        assertNotEquals(drawingPane.getChildren().size(), 0);
+        assertTrue(drawingPane.getChildren().contains(gridContainer));
+    }
+    
+    @Test
+    public void testRemoveGrid(){
+        gridContainer = editor.addGrid(1.0);
+        Group testContainer = editor.removeGrid();
+        assertEquals(drawingPane.getChildren().size(), 0);
+        assertEquals(testContainer, gridContainer);
+
+    }
 }

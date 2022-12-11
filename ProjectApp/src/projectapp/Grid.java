@@ -23,14 +23,14 @@ public class Grid {
     
     public Group create(Pane drawingPane, Double size){
         group = new Group();
-        for(int i = 0; i<drawingPane.getLayoutBounds().getWidth(); i += (int) drawingPane.getLayoutBounds().getHeight()/(DELTA/size)){
-            Line line = new Line(0, i, drawingPane.getLayoutBounds().getWidth(), i);
+        for(double i = 0.0; i<drawingPane.getPrefWidth(); i +=  drawingPane.getPrefHeight()/(DELTA/size)){
+            Line line = new Line(0, i,  drawingPane.getPrefHeight(), i);
             line.setStroke(Color.GREY);
             group.getChildren().add(line);
         }
         
-        for(int i = 0; i< drawingPane.getLayoutBounds().getHeight(); i += (int) drawingPane.getLayoutBounds().getWidth()/(DELTA/size)){
-            Line line = new Line(i, 0, i, drawingPane.getLayoutBounds().getHeight());
+        for(double i = 0.0; i< drawingPane.getPrefHeight(); i += drawingPane.getPrefWidth()/(DELTA/size)){
+            Line line = new Line(i, 0, i,drawingPane.getPrefHeight());
             line.setStroke(Color.GREY);
             group.getChildren().add(line);
         }

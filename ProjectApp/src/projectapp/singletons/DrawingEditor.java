@@ -279,26 +279,46 @@ public class DrawingEditor {
         }
     }
     
-     public void addGrid(Double size){
+    /**
+     * 
+     * This method create a grid and add it to the drawing pane in the first position.
+     * in this way the grid will be positioned under all the shapes contained in the draw.
+     * @param size is the size of the grid choosen by the user.
+     */
+    public Group addGrid(Double size){
         try{
             gridContainer = grid.create(drawingPane, size);
             drawingPane.getChildren().add(0, gridContainer);
             if(currentTool instanceof SelectionTool){
                 setSelectionTool();
             }
-        }catch(Exception e){}
+            return gridContainer;
+        }catch(Exception e){
+            return null;
+        }
     }
      
-     public void removeGrid(){
+    /**
+     * This method remove the grid from the drawing pane, since the grid is always 
+     * below all other figures, it will certainly be in position 0.
+     */
+    public Group removeGrid(){
         try{
-            drawingPane.getChildren().remove(0);
+            gridContainer = (Group)drawingPane.getChildren().remove(0);
             if(currentTool instanceof SelectionTool){
                 setSelectionTool();
             }
-        }catch(Exception e){}
+            return gridContainer;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     public void zoom(boolean type){
         ZoomPane.getIstance().zoom(type);
+    }
+    
+    public void miror(){
+        currentTool.mirror();
     }
 }

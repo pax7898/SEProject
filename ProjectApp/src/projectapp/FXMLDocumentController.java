@@ -10,10 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.Group;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -21,7 +21,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -60,12 +59,8 @@ public class FXMLDocumentController implements Initializable {
     private VBox vboxChangeSize;
     @FXML
     private ScrollPane scrollPane;
-    
-    private ZoomPane zoomPane;
     @FXML
     private ToggleButton gridBtn;
-    
-    private ToggleGroup radioGroup;
     @FXML
     private RadioMenuItem radio1x;
     @FXML
@@ -74,17 +69,14 @@ public class FXMLDocumentController implements Initializable {
     private RadioMenuItem radio3x;
     
     private ToggleGroup toggles;
-    
+    private ToggleGroup radioGroup;
     private DrawingEditor editor;
-    
     private Point2D contextMenuPoint;
-    
     private static final double DRAWING_PANE_WIDTH = 12000;
     private static final double DRAWING_PANE_HEIGTH = 12000;
-    @FXML
-    private Button UndoBtn;
-    @FXML
-    private Button changeSzBtn;
+    private ZoomPane zoomPane;
+    private Group tmpGroup;
+    private MenuButton gridSizeMenu;
     
     /**
      * This method executes all the initial operations when the program starts.
@@ -119,7 +111,7 @@ public class FXMLDocumentController implements Initializable {
         scrollPane.setVmax(DRAWING_PANE_HEIGTH);
         scrollPane.setHvalue(DRAWING_PANE_WIDTH/2);
         scrollPane.setVvalue(DRAWING_PANE_HEIGTH/2);
-        
+          
     }    
     
     /**
@@ -374,14 +366,21 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * This method will be called when the user press on the grid button on the UI
+     * When the user clicks on the grid button, if this is not active, then it is 
+     * shown on the drawingeditor otherwise it is removed. Moreover, through a 
+     * menu the user can choose the size of the grid.
+     */
     @FXML
-    private void setGrid(ActionEvent event) {
+    private void setGrid() {
         if(gridBtn.selectedProperty().get()){
             RadioMenuItem toggle = (RadioMenuItem) radioGroup.getSelectedToggle();
-            System.out.println("Stampo : " + toggle.getText());
-            editor.addGrid(Double.parseDouble(toggle.getText().substring(0, 1)));
+            tmpGroup = editor.addGrid(Double.parseDouble(toggle.getText().substring(0, 1)));
+            gridSizeMenu.visibleProperty().set(false);
         }else{
-            editor.removeGrid();
+            tmpGroup = editor.removeGrid();
+            gridSizeMenu.visibleProperty().set(true);
         }
     }
 
@@ -393,6 +392,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void zoomOut(ActionEvent event) {
         editor.zoom(false);
+    }
+
+    @FXML
+    private void mirrorShape(ActionEvent event) {
+        editor.miror();
     }
  
 }
