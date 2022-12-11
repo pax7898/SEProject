@@ -27,6 +27,7 @@ public class MirrorCommandTest {
     private Ellipse ellipse;
     private Rectangle rectangle;
     double oldScaleX;
+    double rotation;
     
     
     @Before
@@ -35,6 +36,7 @@ public class MirrorCommandTest {
         ellipse = new Ellipse(20,20,30,30);
         rectangle = new Rectangle(20,20,30,30);
         pane = new Pane();
+        rotation = 30.0;
     }
 
     @Test
@@ -45,16 +47,26 @@ public class MirrorCommandTest {
        oldScaleX = line.getScaleX();
        command.execute();
        assertEquals(-oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+       assertEquals(0,pane.getChildren().get(0).getRotate(),0);
+       line.setRotate(rotation);
+       command.execute();
+       assertEquals(-rotation,pane.getChildren().get(0).getRotate(),0);
+       
     }
     
     @Test
     public void testExecuteRectangle() {
        System.out.println("executeRectagle");
-       pane.getChildren().add(line);
-       command = new MirrorCommand(line);
-       oldScaleX = line.getScaleX();
+       pane.getChildren().add(rectangle);
+       command = new MirrorCommand(rectangle);
+       oldScaleX = rectangle.getScaleX();
        command.execute();
        assertEquals(-oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+       assertEquals(0,pane.getChildren().get(0).getRotate(),0);
+       rectangle.setRotate(rotation);
+       command.execute();
+       assertEquals(-rotation,pane.getChildren().get(0).getRotate(),0);
+       
     }
     
     @Test
@@ -65,6 +77,11 @@ public class MirrorCommandTest {
        oldScaleX = ellipse.getScaleX();
        command.execute();
        assertEquals(-oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+       assertEquals(0,pane.getChildren().get(0).getRotate(),0);
+       ellipse.setRotate(rotation);
+       command.execute();
+       assertEquals(-rotation,pane.getChildren().get(0).getRotate(),0);
+       
     }
 
     @Test
@@ -76,6 +93,13 @@ public class MirrorCommandTest {
         command.execute();
         command.undo();
         assertEquals(oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+        rectangle.setRotate(rotation);
+        command.execute();
+        command.undo();
+        assertEquals(oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+        assertEquals(rotation,pane.getChildren().get(0).getRotate(),0);
+        
+        
     }
     
     @Test
@@ -87,6 +111,11 @@ public class MirrorCommandTest {
         command.execute();
         command.undo();
         assertEquals(oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+        line.setRotate(rotation);
+        command.execute();
+        command.undo();
+        assertEquals(oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+        assertEquals(rotation,pane.getChildren().get(0).getRotate(),0);
     }
     
     @Test
@@ -98,6 +127,11 @@ public class MirrorCommandTest {
         command.execute();
         command.undo();
         assertEquals(oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+        ellipse.setRotate(rotation);
+        command.execute();
+        command.undo();
+        assertEquals(oldScaleX,pane.getChildren().get(0).getScaleX(),0);
+        assertEquals(rotation,pane.getChildren().get(0).getRotate(),0);
     }
     
 }
