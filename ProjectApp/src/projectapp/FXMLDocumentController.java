@@ -396,7 +396,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void mirrorShape(ActionEvent event) {
-        editor.miror();
+        editor.mirror();
     }
  
 }
