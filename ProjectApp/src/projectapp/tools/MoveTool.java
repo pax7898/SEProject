@@ -168,6 +168,9 @@ public class MoveTool extends Tool{
 
     @Override
     public void changeSizeBar() {}
+
+    @Override
+    public void mirror() {}
     
 }
 

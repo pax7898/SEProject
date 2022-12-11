@@ -52,6 +52,7 @@ public class DrawingEditorTest {
     private ContextMenu menu;
     private VBox vboxChangeSize;
     private JFXPanel panel;
+    private Grid grid;
     
     @Before
     public void setUp() {
@@ -65,7 +66,7 @@ public class DrawingEditorTest {
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
         currentTool = new LineTool(drawingPane,executor,menu);
-        
+        grid = new Grid();
         vboxChangeSize = new VBox();
         HBox hboxX = new HBox();
         hboxX.getChildren().add(new Label());
@@ -133,24 +134,12 @@ public class DrawingEditorTest {
         System.out.println("setSelectionTool");
         editor.setSelectionTool();
         MouseEvent event = new MouseEvent(null, shape, new EventType("selection"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-        tool = new SelectionTool(drawingPane,selectedShape,executor,menu, vboxChangeSize);
+        tool = new SelectionTool(drawingPane,selectedShape,executor,menu, vboxChangeSize, grid.create(drawingPane, 1.0));
         tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(), "-fx-stroke-dash-array:5px");
     }
 
-    /**
-     * Test of setMoveTool method, of class DrawingEditor.
-     */
-    @Test
-    public void testSetMoveTool() {
-       System.out.println("setMoveTool"); 
-       editor.setMoveTool();
-       MouseEvent event = new MouseEvent(null, shape, new EventType("move"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
-       moveTool=new MoveTool(drawingPane,executor,selectedShape,menu);
-       moveTool.onMouseDragged(event);
-       assertEquals(moveTool.getNewX(), shape.getTranslateX(), 0);
-       assertEquals(moveTool.getNewY(), shape.getTranslateY(), 0);
-    }
+    
 
     /**
      * Test of onMousePressed method, of class DrawingEditor.

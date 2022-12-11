@@ -125,5 +125,8 @@ public class LineTool extends Tool{
     @Override
     public void changeSizeBar() {}
 
+    @Override
+    public void mirror() {}
+
 
 }

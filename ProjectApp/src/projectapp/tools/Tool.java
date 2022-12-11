@@ -113,6 +113,7 @@ public abstract class Tool {
     public abstract void toBack();
     public abstract void changeSize();
     public abstract void changeSizeBar();
+    public abstract void mirror();
 }
 
  
