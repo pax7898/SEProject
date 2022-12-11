@@ -63,6 +63,7 @@ public class DrawingEditor {
      * @param pane is the reference to the drawing pane
      * @param executor is the reference to the commands' invoker
      * @param currentTool is the current state of the draing editor
+     * @param menu
      */
 
     public DrawingEditor(Pane pane, CommandExecutor executor,Tool currentTool, ContextMenu menu, VBox vboxChangeSize) {
@@ -137,7 +138,7 @@ public class DrawingEditor {
     
     /**
      * This method updates the currentTool (which corresponds to the state in tha pattern state)
-     * when the user press the selection button in the application. This condition is necessary for select a shape.
+     * when the user press the selection button in the application. This condition is necessary for rotate a shape.
      */
     public void setRotateTool(){
         
@@ -207,6 +208,8 @@ public class DrawingEditor {
     
     /**
      * This method allows the user to change the size of a selected shape
+     * @param changeX
+     * @param changeY
      */
     public void changeSize(double changeX,double changeY){
         currentTool.changeSize(changeX,changeY);

@@ -36,6 +36,7 @@ import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
 import projectapp.singletons.Clonator;
 import projectapp.singletons.ZoomPane;
+import projectapp.tools.RotateTool;
 /**
  *
  * @author pasqualecaggiano
@@ -69,14 +70,7 @@ public class DrawingEditorTest {
         currentTool = new LineTool(drawingPane,executor,menu);
         
         vboxChangeSize = new VBox();
-        HBox hboxX = new HBox();
-        hboxX.getChildren().add(new Label());
-        hboxX.getChildren().add(new TextField("2.0"));
-        HBox hboxY = new HBox();
-        hboxY.getChildren().add(new Label());
-        hboxY.getChildren().add(new TextField("2.0"));
-        vboxChangeSize.getChildren().add(hboxX);
-        vboxChangeSize.getChildren().add(hboxY);
+        
         grid = new Grid();
         gridContainer = new Group();
         
@@ -141,6 +135,22 @@ public class DrawingEditorTest {
         tool = new SelectionTool(drawingPane,selectedShape,executor,menu, vboxChangeSize, gridContainer);
         tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
         assertEquals(shape.getStyle(), "-fx-stroke-dash-array:5px");
+    }
+    
+    /**
+     * Test of setRotateTool method, of class DrawingEditor.
+     */
+    @Test
+    public void testSetRotateTool() {
+        System.out.println("setRotateTool");
+        editor.setRotateTool();
+        MouseEvent event = new MouseEvent(null, shape, new EventType("rotate"), 100, 150, 0, 0, MouseButton.PRIMARY, 0, false, false, false, false, false, false, false, false, false, false, null);
+        tool = new RotateTool(drawingPane,selectedShape,executor,menu, vboxChangeSize, gridContainer);
+        tool.onMousePressed(event, Color.DARKVIOLET, Color.SILVER);
+        assertFalse(vboxChangeSize.visibleProperty().get());
+        menu.getItems().forEach(item -> {
+            assertTrue(item.isDisable());
+        });
     }
 
     /**
@@ -337,9 +347,14 @@ public class DrawingEditorTest {
         editor.setSelectionTool();
         double changeX = selectedShape.getShape().getScaleX();
         double changeY = selectedShape.getShape().getScaleY();
-        editor.changeSize();
-        assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
-        assertEquals(selectedShape.getShape().getScaleY(),changeY+1.0,0);
+        editor.changeSize(0.1,0);
+        assertEquals(selectedShape.getShape().getScaleX(),changeX+0.1,0);
+        editor.changeSize(-0.1,0);
+        assertEquals(selectedShape.getShape().getScaleX(),changeX,0);
+        editor.changeSize(0,0.1);
+        assertEquals(selectedShape.getShape().getScaleY(),changeY+0.1,0);
+        editor.changeSize(0,-0.1);
+        assertEquals(selectedShape.getShape().getScaleY(),changeY,0);
     }
 
     

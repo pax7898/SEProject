@@ -67,6 +67,8 @@ public class SelectionTool extends Tool{
      * Adds an other param that refers to the selectedShape
      * @param selectedShape 
      * @param menu 
+     * @param vboxChangeSize 
+     * @param gridContainer 
      */
     public SelectionTool(Pane pane,SelectedShape selectedShape,CommandExecutor executor, ContextMenu menu, VBox vboxChangeSize, Group gridContainer) {
         super(pane,executor); 
@@ -236,7 +238,10 @@ public class SelectionTool extends Tool{
             getExecutor().execute(new PasteCommand(clonator,getPane(),point));
         
     }
-
+    
+    /**
+     * This method will cut (copy+delete) the selected shape
+     */
     @Override
     public void cut() {
         if (selectedShape.getShape()!= null)
@@ -277,36 +282,25 @@ public class SelectionTool extends Tool{
     
     /**
      * This method modifies the size of the shape
+     * @param changeX
+     * @param changeY
      */
     @Override
     public void changeSize(double changeX,double changeY) {
-        
-        HBox hboxX = (HBox) vboxChangeSize.getChildren().get(HBOX_1);
-        HBox hboxY = (HBox) vboxChangeSize.getChildren().get(HBOX_2);
-
-        TextField textX = (TextField) hboxX.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
-        TextField textY = (TextField) hboxY.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
-        double changeSizeX = Double.parseDouble(textX.getText());
-        double changeSizeY = Double.parseDouble(textY.getText());
-        textX.setText(null);
-        textY.setText(null);
-        getExecutor().execute(new ChangeSizeCommand(selectedShape, changeSizeX, changeSizeY, vboxChangeSize));
-
+        getExecutor().execute(new ChangeSizeCommand(selectedShape, changeX, changeY, vboxChangeSize));
     }
     
-    /*
-     * Unimplemented methods of the abstract class Tool
-     */
-
-    @Override
-    public Shape getShape() {return null;}
-
     @Override
     public void mirror() {
         if (selectedShape.getShape() != null)
             getExecutor().execute(new MirrorCommand(selectedShape.getShape()));
     }
-
+    
+    /*
+     * Unimplemented methods of the abstract class Tool
+     */
+    @Override
+    public Shape getShape() {return null;}
 
     
 }

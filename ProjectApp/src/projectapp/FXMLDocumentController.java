@@ -74,6 +74,7 @@ public class FXMLDocumentController implements Initializable {
     private Point2D contextMenuPoint;
     private static final double DRAWING_PANE_WIDTH = 12000;
     private static final double DRAWING_PANE_HEIGTH = 12000;
+    private static final double DEFAULT_SIZE_DELTA = 0.1;
     private ZoomPane zoomPane;
     private Group tmpGroup;
     @FXML
@@ -347,7 +348,14 @@ public class FXMLDocumentController implements Initializable {
     private void setToBackTool(ActionEvent event) {
         editor.toBack();
     }
-
+    
+    
+    /**
+     * This method will show a part of the toolbar in order to
+     * change the size of a selected shape
+     * 
+     * @param event 
+     */
     @FXML
     private void changeSizeBar(ActionEvent event) {
         editor.changeSizeBar();
@@ -387,31 +395,56 @@ public class FXMLDocumentController implements Initializable {
     private void mirrorShape(ActionEvent event) {
         editor.mirror();
     }
-
+    
+    /**
+     * This method will activate the possibility to change the 
+     * rotation of the selected shape
+     * @param event 
+     */
     @FXML
     private void RotateShape(ActionEvent event) {
         editor.setRotateTool();
         toggles.getToggles().get(3).setSelected(false);
     }
-
+    
+    /**
+     * This method will reduce the width of the selected figure
+     * by 0.1
+     * @param event 
+     */
     @FXML
     private void reduceSizeX(ActionEvent event) {
-        editor.changeSize(-0.1,0);
+        editor.changeSize(-DEFAULT_SIZE_DELTA,0);
     }
-
+    
+    /**
+     * This method will grow the width of the selected figure
+     * by 0.1
+     * @param event 
+     */
     @FXML
     private void growSizeX(ActionEvent event) {
-        editor.changeSize(+0.1,0);
+        editor.changeSize(+DEFAULT_SIZE_DELTA,0);
     }
-
+    
+    /**
+     * This method will reduce the height of the selected figure
+     * by 0.1
+     * @param event 
+     */
     @FXML
     private void reduceSizeY(ActionEvent event) {
-        editor.changeSize(0,-0.1);
+        editor.changeSize(0,-DEFAULT_SIZE_DELTA);
     }
-
+    
+    /**
+     * This method will grow the height of the selected figure
+     * by 0.1
+     * @param event 
+     */
     @FXML
     private void growSizeY(ActionEvent event) {
-        editor.changeSize(0,+0.1);
+        editor.changeSize(0,+DEFAULT_SIZE_DELTA);
     }
  
 }

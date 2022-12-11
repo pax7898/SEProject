@@ -123,7 +123,7 @@ public class EllipseTool extends Tool{
     public void toBack() {}
 
     @Override
-    public void changeSize() {}
+    public void changeSize(double changeX,double changeY) {}
 
     @Override
     public void changeSizeBar() {}

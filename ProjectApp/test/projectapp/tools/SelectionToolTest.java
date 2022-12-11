@@ -75,14 +75,6 @@ public class SelectionToolTest {
         menu.getItems().add(new MenuItem("paste"));
         menu.getItems().add(new MenuItem("move"));
         vboxChangeSize = new VBox();
-        HBox hboxX = new HBox();
-        hboxX.getChildren().add(new Label());
-        hboxX.getChildren().add(new TextField("2.0"));
-        HBox hboxY = new HBox();
-        hboxY.getChildren().add(new Label());
-        hboxY.getChildren().add(new TextField("2.0"));
-        vboxChangeSize.getChildren().add(hboxX);
-        vboxChangeSize.getChildren().add(hboxY);
         gridContainer = (new Grid()).create(pane, 1d);
 
         executor = new CommandExecutor();
@@ -377,9 +369,14 @@ public class SelectionToolTest {
         
         double changeX = selectedShape.getShape().getScaleX();
         double changeY = selectedShape.getShape().getScaleY();
-        tool.changeSize();
-        assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
-        assertEquals(selectedShape.getShape().getScaleY(),changeX+1.0,0);
+        tool.changeSize(0.1,0);
+        assertEquals(selectedShape.getShape().getScaleX(),changeX+0.1,0);
+        tool.changeSize(-0.1,0);
+        assertEquals(selectedShape.getShape().getScaleX(),changeX,0);
+        tool.changeSize(0, +0.1);
+        assertEquals(selectedShape.getShape().getScaleY(),changeY+0.1,0);
+        tool.changeSize(0, -0.1);
+        assertEquals(selectedShape.getShape().getScaleY(),changeY,0);
 }
     
     @Test

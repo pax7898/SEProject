@@ -47,10 +47,15 @@ public class ChangeSizeCommandTest {
         Line line = new Line(10,10,30,30);
         pane.getChildren().add(line);
         selectedShape.setShape(line);
-        command = new ChangeSizeCommand(selectedShape,2.0,2.0,vboxChangeSize);
+        command = new ChangeSizeCommand(selectedShape,0.1,0.1,vboxChangeSize);
         command.execute();
-        assertEquals(line.getScaleX(), 2.0, 0);
-        assertEquals(line.getScaleY(), 2.0, 0);
+        assertEquals(line.getScaleX(), 1.1, 0);
+        assertEquals(line.getScaleY(), 1.1, 0);
+        
+        command = new ChangeSizeCommand(selectedShape,-0.1,-0.1,vboxChangeSize);
+        command.execute();
+        assertEquals(line.getScaleX(), 1.0, 0);
+        assertEquals(line.getScaleY(), 1.0, 0);
 
     }
     
@@ -64,10 +69,15 @@ public class ChangeSizeCommandTest {
         Rectangle rectangle = new Rectangle(10,10,30,30);
         pane.getChildren().add(rectangle);
         selectedShape.setShape(rectangle);
-        command = new ChangeSizeCommand(selectedShape,2.0,2.0,vboxChangeSize);
+        command = new ChangeSizeCommand(selectedShape,0.1,0.1,vboxChangeSize);
         command.execute();
-        assertEquals(rectangle.getScaleX(), 2.0, 0);
-        assertEquals(rectangle.getScaleY(), 2.0, 0);
+        assertEquals(rectangle.getScaleX(), 1.1, 0);
+        assertEquals(rectangle.getScaleY(), 1.1, 0);
+        
+        command = new ChangeSizeCommand(selectedShape,-0.1,-0.1,vboxChangeSize);
+        command.execute();
+        assertEquals(rectangle.getScaleX(), 1.0, 0);
+        assertEquals(rectangle.getScaleY(), 1.0, 0);
 
     }
     
@@ -81,10 +91,15 @@ public class ChangeSizeCommandTest {
         Ellipse ellipse = new Ellipse(10,10,30,30);
         pane.getChildren().add(ellipse);
         selectedShape.setShape(ellipse);
-        command = new ChangeSizeCommand(selectedShape,2.0,2.0,vboxChangeSize);
+        command = new ChangeSizeCommand(selectedShape,0.1,0.1,vboxChangeSize);
         command.execute();
-        assertEquals(ellipse.getScaleX(), 2.0, 0);
-        assertEquals(ellipse.getScaleY(), 2.0, 0);
+        assertEquals(ellipse.getScaleX(), 1.1, 0);
+        assertEquals(ellipse.getScaleY(), 1.1, 0);
+        
+        command = new ChangeSizeCommand(selectedShape,-0.1,-0.1,vboxChangeSize);
+        command.execute();
+        assertEquals(ellipse.getScaleX(), 1.0, 0);
+        assertEquals(ellipse.getScaleY(), 1.0, 0);
 
     }
 
@@ -98,13 +113,21 @@ public class ChangeSizeCommandTest {
         Line line = new Line(10,10,30,30);
         pane.getChildren().add(line);
         selectedShape.setShape(line);
-        command = new ChangeSizeCommand(selectedShape,2.0,2.0,vboxChangeSize);
+        command = new ChangeSizeCommand(selectedShape,0.1,0.1,vboxChangeSize);
         command.execute();
         double x = line.getScaleX();
         double y = line.getScaleY();
         command.undo();
-        assertEquals(line.getScaleX(),x-1, 0);
-        assertEquals(line.getScaleY(),y-1, 0);
+        assertEquals(line.getScaleX(),x-0.1, 0);
+        assertEquals(line.getScaleY(),y-0.1, 0);
+        
+        command = new ChangeSizeCommand(selectedShape,-0.1,-0.1,vboxChangeSize);
+        command.execute();
+        x = line.getScaleX();
+        y = line.getScaleY();
+        command.undo();
+        assertEquals(line.getScaleX(),x+0.1, 0);
+        assertEquals(line.getScaleY(),y+0.1, 0);
     }
     
     /**
@@ -117,16 +140,24 @@ public class ChangeSizeCommandTest {
         Rectangle rectangle = new Rectangle(10,10,30,30);
         pane.getChildren().add(rectangle);
         selectedShape.setShape(rectangle);
-        command = new ChangeSizeCommand(selectedShape,2.0,2.0,vboxChangeSize);
+        command = new ChangeSizeCommand(selectedShape,0.1,0.1,vboxChangeSize);
         command.execute();
         double x = rectangle.getScaleX();
         double y = rectangle.getScaleY();
         command.undo();
-        assertEquals(rectangle.getScaleX(),x-1, 0);
-        assertEquals(rectangle.getScaleY(),y-1, 0);
+        assertEquals(rectangle.getScaleX(),x-0.1, 0);
+        assertEquals(rectangle.getScaleY(),y-0.1, 0);
+        
+        command = new ChangeSizeCommand(selectedShape,-0.1,-0.1,vboxChangeSize);
+        command.execute();
+        x = rectangle.getScaleX();
+        y = rectangle.getScaleY();
+        command.undo();
+        assertEquals(rectangle.getScaleX(),x+0.1, 0);
+        assertEquals(rectangle.getScaleY(),y+0.1, 0);
     }
     
-        /**
+    /**
      * Test of undo method, of class ChangeSizeCommand.
      */
     @Test
@@ -136,13 +167,21 @@ public class ChangeSizeCommandTest {
         Ellipse ellipse = new Ellipse(10,10,30,30);
         pane.getChildren().add(ellipse);
         selectedShape.setShape(ellipse);
-        command = new ChangeSizeCommand(selectedShape,2.0,2.0,vboxChangeSize);
+        command = new ChangeSizeCommand(selectedShape,0.1,0.1,vboxChangeSize);
         command.execute();
         double x = ellipse.getScaleX();
         double y = ellipse.getScaleY();
         command.undo();
-        assertEquals(ellipse.getScaleX(),x-1, 0);
-        assertEquals(ellipse.getScaleY(),y-1, 0);
+        assertEquals(ellipse.getScaleX(),x-0.1, 0);
+        assertEquals(ellipse.getScaleY(),y-0.1, 0);
+        
+        command = new ChangeSizeCommand(selectedShape,-0.1,-0.1,vboxChangeSize);
+        command.execute();
+        x = ellipse.getScaleX();
+        y = ellipse.getScaleY();
+        command.undo();
+        assertEquals(ellipse.getScaleX(),x+0.1, 0);
+        assertEquals(ellipse.getScaleY(),y+0.1, 0);
     }
     
 }

@@ -48,9 +48,8 @@ public class ChangeSizeCommand implements Command{
     public void execute() {
         beforeX = shape.getScaleX();
         beforeY = shape.getScaleY();
-        shape.setScaleX(changeSizeX*beforeX);
-        shape.setScaleY(changeSizeY*beforeY);
-        vboxChangeSize.visibleProperty().set(false);
+        shape.setScaleX(changeSizeX+beforeX);
+        shape.setScaleY(changeSizeY+beforeY);
     }
     
     /**
