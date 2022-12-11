@@ -32,6 +32,7 @@ import projectapp.command.ChangeInteriorColorCommand;
 import projectapp.command.Command;
 import projectapp.command.CommandExecutor;
 import projectapp.command.DeleteCommand;
+import projectapp.command.MirrorCommand;
 import projectapp.command.ToFrontCommand;
 import projectapp.singletons.Clonator;
 
@@ -379,8 +380,16 @@ public class SelectionToolTest {
         tool.changeSize();
         assertEquals(selectedShape.getShape().getScaleX(),changeX+1.0,0);
         assertEquals(selectedShape.getShape().getScaleY(),changeX+1.0,0);
-
-        
+}
+    
+    @Test
+    public void testMirror() {
+        System.out.println("mirror");
+        MirrorCommand command = new MirrorCommand(shape);
+        double oldScaleX = shape.getScaleX();
+        tool.mirror();
+        assertTrue(pane.getChildren().contains(shape));
+        assertEquals(-oldScaleX,shape.getScaleX(),0);
     }
    
 }
