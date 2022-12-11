@@ -4,17 +4,13 @@
  */
 package projectapp.singletons;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 
 /**
- *  This class create a pane that allows to zoom in the scroll pane.
+ * This class create a pane that allows to zoom in the scroll pane.
  * @author pasqualecaggiano
  */
 public class ZoomPane extends Pane{
@@ -22,28 +18,6 @@ public class ZoomPane extends Pane{
         public static final double LOWER_BOUND = 0.2d;
         public static final double UPPER_BOUND = 6d;
         DoubleProperty myScale = new SimpleDoubleProperty(1.0);
-        
-        private Timeline timeline;
-        
-        public void zoom(boolean type){
-            double scale = this.getScale(); 
-            double oldScale = scale;
-
-            if (!type) {
-                scale /= DEFAULT_DELTA;
-            } else {
-                scale *= DEFAULT_DELTA;
-            }
-            
-            if (scale >= LOWER_BOUND && scale <= UPPER_BOUND){
-                this.setNewScale(scale);
-            } else {
-                this.setNewScale(oldScale);
-            }
-            
-            System.out.println(getScale());
-        }
-        
         
         private static ZoomPane instance = null;
         
@@ -59,7 +33,6 @@ public class ZoomPane extends Pane{
          */
         
         public ZoomPane() {
-            this.timeline = new Timeline(30);
             scaleXProperty().bind(myScale);
             scaleYProperty().bind(myScale);
         }
@@ -73,20 +46,32 @@ public class ZoomPane extends Pane{
             myScale.set(scale);
         }
         
-
         /**
-         * This method updates the new scale performing an animation
-         * @param scale 
+         * This method perform the zoom operation:
+         * - zoom-in if type is true
+         * - zoom-out if type is false
+         * 
+         * @param type 
          */
-        public void setNewScale(double scale) {
-            
-            timeline.getKeyFrames().clear();
-            timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.millis(100), new KeyValue(myScale, scale)) 
-            );
-            timeline.play();
+        public void zoom(boolean type){
+            double scale = this.getScale(); 
+            double oldScale = scale;
 
+            if (!type) {
+                scale /= DEFAULT_DELTA;
+            } else {
+                scale *= DEFAULT_DELTA;
+            }
+            
+            if (scale >= LOWER_BOUND && scale <= UPPER_BOUND){
+                this.setScale(scale);
+            } else {
+                this.setScale(oldScale);
+            }
+  
         }
+        
+     
 }
 
 

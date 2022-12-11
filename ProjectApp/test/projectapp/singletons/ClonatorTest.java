@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
  */
 public class ClonatorTest {
     private Clonator clonator;
-    private byte[] byteArray;
     private Shape shape;
     
     @Before

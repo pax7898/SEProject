@@ -4,7 +4,6 @@
  */
 package projectapp.command;
 
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Shape;
 import projectapp.singletons.SelectedShape;
