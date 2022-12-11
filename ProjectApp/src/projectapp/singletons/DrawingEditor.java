@@ -317,4 +317,8 @@ public class DrawingEditor {
     public void zoom(boolean type){
         ZoomPane.getIstance().zoom(type);
     }
+    
+    public void miror(){
+        currentTool.mirror();
+    }
 }

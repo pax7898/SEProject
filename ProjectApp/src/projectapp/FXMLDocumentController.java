@@ -393,5 +393,10 @@ public class FXMLDocumentController implements Initializable {
     private void zoomOut(ActionEvent event) {
         editor.zoom(false);
     }
+
+    @FXML
+    private void mirrorShape(ActionEvent event) {
+        editor.miror();
+    }
  
 }

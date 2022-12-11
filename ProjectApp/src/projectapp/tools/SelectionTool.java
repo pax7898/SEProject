@@ -28,6 +28,7 @@ import projectapp.command.CommandExecutor;
 import projectapp.command.CopyCommand;
 import projectapp.command.CutCommand;
 import projectapp.command.DeleteCommand;
+import projectapp.command.MirrorCommand;
 import projectapp.command.MoveCommand;
 import projectapp.command.PasteCommand;
 import projectapp.command.ToBackCommand;
@@ -285,6 +286,12 @@ public class SelectionTool extends Tool{
 
     @Override
     public Shape getShape() {return null;}
+
+    @Override
+    public void mirror() {
+        if (selectedShape.getShape() != null)
+            getExecutor().execute(new MirrorCommand(selectedShape.getShape()));
+    }
 
 
     
