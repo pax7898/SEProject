@@ -123,14 +123,14 @@ public class SelectionTool extends Tool{
             menu.getItems().forEach(item -> {
                 item.setDisable(false);
             });
-            flag = true;
+            //flag = true;
             this.initialPositionX = event.getX();
             this.initialPositionY = event.getY();
             newX = oldX = selectedShape.getShape().getTranslateX();
             newY = oldY = selectedShape.getShape().getTranslateY();
  
         } else {
-            flag = false;
+            //flag = false;
             vboxChangeSize.visibleProperty().set(false);
             selectedShape.setShape(null);
                 menu.getItems().forEach(item -> {
@@ -153,7 +153,7 @@ public class SelectionTool extends Tool{
      */
     @Override
     public void onMouseDragged(MouseEvent event) {
-        if(flag == true){
+        if(selectedShape.getShape()!=null){
             selectedShape.getShape().setTranslateX(newX);
             selectedShape.getShape().setTranslateY(newY);
             newX = oldX + event.getX() - initialPositionX;
@@ -171,7 +171,7 @@ public class SelectionTool extends Tool{
      */
     @Override
     public void onMouseReleased(MouseEvent event) {
-        if(flag == true){
+        if(selectedShape.getShape()!=null && oldX != selectedShape.getShape().getTranslateX() && oldY != selectedShape.getShape().getTranslateY()){
             super.getExecutor().execute(new MoveCommand(selectedShape.getShape(),selectedShape.getShape().getTranslateX(), 
                                         selectedShape.getShape().getTranslateY(), oldX, oldY));
             oldX  = selectedShape.getShape().getTranslateX();
@@ -204,7 +204,8 @@ public class SelectionTool extends Tool{
     
     @Override
     public void deleteShape() {
-        getExecutor().execute(new DeleteCommand(selectedShape.getShape(),getPane()));
+        if (selectedShape.getShape() != null)
+            getExecutor().execute(new DeleteCommand(selectedShape.getShape(),getPane()));
     }
     
     
@@ -237,7 +238,8 @@ public class SelectionTool extends Tool{
      */
     @Override
     public void toFront() {
-        getExecutor().execute(new ToFrontCommand(selectedShape.getShape(), getPane()));
+        if (selectedShape.getShape() != null)
+            getExecutor().execute(new ToFrontCommand(selectedShape.getShape(), getPane()));
     }
     
     /**
@@ -246,8 +248,10 @@ public class SelectionTool extends Tool{
      */
     @Override
     public void toBack() {
-        getExecutor().execute(new ToBackCommand(selectedShape.getShape(), getPane()));
-        gridContainer.toBack();
+        if (selectedShape.getShape() != null)
+            getExecutor().execute(new ToBackCommand(selectedShape.getShape(), getPane()));
+        if (gridContainer != null)
+            gridContainer.toBack();
     }
     
     /**

@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.RadioMenuItem;
@@ -22,7 +21,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -86,7 +84,9 @@ public class FXMLDocumentController implements Initializable {
     private Button UndoBtn;
     @FXML
     private Button changeSzBtn;
-    Group tmpGroup;
+    
+    private Group tmpGroup;
+    
     /**
      * This method executes all the initial operations when the program starts.
      * 

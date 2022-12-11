@@ -5,7 +5,7 @@
  */
 package projectapp.command;
 
-import javafx.scene.layout.Pane;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
@@ -20,16 +20,13 @@ import static org.junit.Assert.*;
  */
 public class ChangeInteriorColorCommandTest {
     private ChangeInteriorColorCommand command;
-    private Pane pane;
     
-   
-    
+
     @Before
     public void setUp() {
-        Pane pane = new Pane();
+        
     }
-    
-   
+
     /**
      * Test of execute method, of class ChangeInteriorColorCommand.
      */
