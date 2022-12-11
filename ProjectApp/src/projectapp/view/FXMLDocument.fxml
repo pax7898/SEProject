@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
        <children>
         <SplitPane dividerPositions="0.19830028328611898" orientation="VERTICAL" pickOnBounds="false" prefHeight="707.2" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -140,23 +140,37 @@
                                                 <Insets left="10.0" top="-6.0" />
                                             </HBox.margin>
                                         </Button>
-                                        <VBox fx:id="vboxChangeSize" prefHeight="110.0" prefWidth="142.0">
+                                        <VBox fx:id="vboxChangeSize" prefHeight="108.0" prefWidth="143.0">
                                             <children>
-                                                <HBox prefHeight="41.0" prefWidth="109.0">
+                                                <HBox prefHeight="41.0" prefWidth="121.0">
                                                     <children>
-                                                        <Label prefHeight="17.0" prefWidth="50.0" text="Width:">
+                                                        <Label prefHeight="17.0" prefWidth="50.0" text="Width">
                                                             <padding>
-                                                                <Insets top="3.0" />
+                                                                <Insets top="6.0" />
                                                             </padding>
                                              <HBox.margin>
-                                                <Insets left="-5.0" />
+                                                <Insets left="-5.0" right="2.0" />
                                              </HBox.margin>
                                                         </Label>
-                                          <Button mnemonicParsing="false" onAction="#reduceSizeX" prefHeight="25.0" prefWidth="33.0" text="Button" />
-                                          <Button mnemonicParsing="false" onAction="#growSizeX" prefHeight="25.0" prefWidth="33.0" text="Button">
+                                          <Button mnemonicParsing="false" onAction="#reduceSizeX" prefHeight="15.0" prefWidth="15.0">
+                                             <graphic>
+                                                <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/minus-icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button mnemonicParsing="false" onAction="#growSizeX" prefHeight="15.0" prefWidth="15.0">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
+                                             <graphic>
+                                                <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/plus-icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
                                           </Button>
                                                     </children>
                                                     <padding>
@@ -168,19 +182,33 @@
                                                 </HBox>
                                                 <HBox prefHeight="38.0" prefWidth="100.0">
                                                     <children>
-                                                        <Label prefHeight="17.0" prefWidth="50.0" text="Height:">
+                                                        <Label prefHeight="17.0" prefWidth="50.0" text="Height">
                                                             <padding>
-                                                                <Insets top="3.0" />
+                                                                <Insets top="6.0" />
                                                             </padding>
                                              <HBox.margin>
-                                                <Insets left="-5.0" />
+                                                <Insets left="-5.0" right="2.0" />
                                              </HBox.margin>
                                                         </Label>
-                                          <Button mnemonicParsing="false" onAction="#reduceSizeY" prefHeight="25.0" prefWidth="33.0" text="Button" />
-                                          <Button layoutX="65.0" layoutY="15.0" mnemonicParsing="false" onAction="#growSizeY" prefHeight="25.0" prefWidth="33.0" text="Button">
+                                          <Button mnemonicParsing="false" onAction="#reduceSizeY" prefHeight="25.0" prefWidth="33.0">
+                                             <graphic>
+                                                <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/minus-icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button layoutX="65.0" layoutY="15.0" mnemonicParsing="false" onAction="#growSizeY" prefHeight="25.0" prefWidth="33.0">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
+                                             <graphic>
+                                                <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../image/plus-icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
                                           </Button>
                                                     </children>
                                                     <padding>

@@ -9,12 +9,9 @@ import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -388,5 +385,5 @@ public class SelectionToolTest {
         assertTrue(pane.getChildren().contains(shape));
         assertEquals(-oldScaleX,shape.getScaleX(),0);
     }
-   
+       
 }

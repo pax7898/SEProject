@@ -247,6 +247,9 @@ public class DrawingEditor {
         currentTool.cut();
     }
     
+    /**
+     * This method allows the user to undo the previous operation on a shape
+     */
     public void undo(){
         try{
         executor.undo();
@@ -255,7 +258,7 @@ public class DrawingEditor {
         }
     }
     /**
-     * This method allow you to save the current drawing on an XML file.
+     * This method allows you to save the current drawing on an XML file.
      * @param file is the location chosen by the user on his file system
      */
     public void saveDrawing(File file){
@@ -278,7 +281,7 @@ public class DrawingEditor {
     }
     
     /**
-     * This method llow you to load a previous saved drawing from an XML file.
+     * This method allows you to load a previous saved drawing from an XML file.
      * @param file is the xml file chosen by the user to load
      */
     public void loadDrawing(File file){
@@ -295,7 +298,7 @@ public class DrawingEditor {
     
     /**
      * 
-     * This method create a grid and add it to the drawing pane in the first position.
+     * This method creates a grid and add it to the drawing pane in the first position.
      * in this way the grid will be positioned under all the shapes contained in the draw.
      * @param size is the size of the grid choosen by the user.
      */
@@ -313,7 +316,7 @@ public class DrawingEditor {
     }
      
     /**
-     * This method remove the grid from the drawing pane, since the grid is always 
+     * This method removes the grid from the drawing pane, since the grid is always 
      * below all other figures, it will certainly be in position 0.
      */
     public Group removeGrid(){
@@ -327,7 +330,11 @@ public class DrawingEditor {
             return null;
         }
     }
-
+    
+    /**
+     * This method allows to zoom in or zoom out the drawing according to the specific button pressed
+     * @param type 
+     */
     public void zoom(boolean type){
         ZoomPane.getIstance().zoom(type);
     }

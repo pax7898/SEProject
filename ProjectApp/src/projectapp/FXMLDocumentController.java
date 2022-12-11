@@ -16,13 +16,11 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -300,7 +298,8 @@ public class FXMLDocumentController implements Initializable {
         
         //Show save file dialog
         File file = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
-        editor.saveDrawing(file);
+        if (file != null)
+            editor.saveDrawing(file);
     }
     
     /**
@@ -320,7 +319,8 @@ public class FXMLDocumentController implements Initializable {
 
         //Show open file dialog
         File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
-        editor.loadDrawing(file);       
+        if (file != null)
+            editor.loadDrawing(file);       
     }
 
     /**
