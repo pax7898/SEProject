@@ -393,6 +393,7 @@ public class DrawingEditorTest {
    
     @Test
     public void testAddGrid(){
+        System.out.println("addGrid");   
         gridContainer = editor.addGrid(1.0);
         assertNotEquals(drawingPane.getChildren().size(), 0);
         assertTrue(drawingPane.getChildren().contains(gridContainer));
@@ -400,10 +401,23 @@ public class DrawingEditorTest {
     
     @Test
     public void testRemoveGrid(){
+        System.out.println("removeGrid");   
         gridContainer = editor.addGrid(1.0);
         Group testContainer = editor.removeGrid();
         assertEquals(drawingPane.getChildren().size(), 0);
         assertEquals(testContainer, gridContainer);
-
     }
+    
+    @Test
+    public void testMirror(){
+        System.out.println("mirror");  
+        drawingPane.getChildren().add(shape);
+        editor.setSelectionTool();       
+        selectedShape.setShape(shape); 
+        double testScaleX = -shape.getScaleX();
+        editor.miror();       
+        assertEquals(testScaleX, shape.getScaleX(), 0);     
+    }
+    
+    
 }
