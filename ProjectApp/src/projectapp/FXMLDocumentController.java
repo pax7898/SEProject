@@ -353,19 +353,7 @@ public class FXMLDocumentController implements Initializable {
         editor.changeSizeBar();
     }
 
-    @FXML
-    private void changeSize(ActionEvent event) {
-        try{
-            HBox hboxX = (HBox) vboxChangeSize.getChildren().get(0);
-            HBox hboxY = (HBox) vboxChangeSize.getChildren().get(1);
-            TextField textX = (TextField) hboxX.getChildren().get(1);
-            TextField textY = (TextField) hboxY.getChildren().get(1);
-            double x = Double.parseDouble(textX.getText());
-            double y = Double.parseDouble(textY.getText());
-            editor.changeSize();
-        }catch(Exception e){
-        }
-    }
+    
 
     /**
      * This method will be called when the user press on the grid button on the UI
@@ -403,6 +391,27 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void RotateShape(ActionEvent event) {
         editor.setRotateTool();
+        toggles.getToggles().get(3).setSelected(false);
+    }
+
+    @FXML
+    private void reduceSizeX(ActionEvent event) {
+        editor.changeSize(-0.1,0);
+    }
+
+    @FXML
+    private void growSizeX(ActionEvent event) {
+        editor.changeSize(+0.1,0);
+    }
+
+    @FXML
+    private void reduceSizeY(ActionEvent event) {
+        editor.changeSize(0,-0.1);
+    }
+
+    @FXML
+    private void growSizeY(ActionEvent event) {
+        editor.changeSize(0,+0.1);
     }
  
 }

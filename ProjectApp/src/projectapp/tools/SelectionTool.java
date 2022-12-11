@@ -279,7 +279,7 @@ public class SelectionTool extends Tool{
      * This method modifies the size of the shape
      */
     @Override
-    public void changeSize() {
+    public void changeSize(double changeX,double changeY) {
         
         HBox hboxX = (HBox) vboxChangeSize.getChildren().get(HBOX_1);
         HBox hboxY = (HBox) vboxChangeSize.getChildren().get(HBOX_2);

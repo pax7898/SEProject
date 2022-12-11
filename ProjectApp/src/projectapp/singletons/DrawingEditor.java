@@ -208,8 +208,8 @@ public class DrawingEditor {
     /**
      * This method allows the user to change the size of a selected shape
      */
-    public void changeSize(){
-        currentTool.changeSize();
+    public void changeSize(double changeX,double changeY){
+        currentTool.changeSize(changeX,changeY);
     }
     
     

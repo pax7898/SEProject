@@ -16,7 +16,7 @@ import projectapp.command.RotateCommand;
 import projectapp.singletons.SelectedShape;
 
 /**
- *
+ * 
  * @author Sabatino
  */
 public class RotateTool extends SelectionTool{
