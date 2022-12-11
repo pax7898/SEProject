@@ -301,6 +301,9 @@ public class SelectionTool extends Tool{
     @Override
     public Shape getShape() {return null;}
 
+    /**
+     *  This method execute the mirror command.
+     */
     @Override
     public void mirror() {
         if (selectedShape.getShape() != null)

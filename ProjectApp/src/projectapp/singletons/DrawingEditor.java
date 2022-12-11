@@ -252,7 +252,7 @@ public class DrawingEditor {
         }
     }
     /**
-     * This method llow you to save the current drawing on an XML file.
+     * This method allow you to save the current drawing on an XML file.
      * @param file is the location chosen by the user on his file system
      */
     public void saveDrawing(File file){
@@ -329,6 +329,9 @@ public class DrawingEditor {
         ZoomPane.getIstance().zoom(type);
     }
     
+    /**
+     * This method allow you to mirror a selected shape.
+     */
     public void mirror(){
         currentTool.mirror();
     }
