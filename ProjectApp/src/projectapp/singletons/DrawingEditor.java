@@ -27,6 +27,7 @@ import projectapp.command.CommandExecutor;
 import projectapp.tools.EllipseTool;
 import projectapp.tools.LineTool;
 import projectapp.tools.RectangleTool;
+import projectapp.tools.RotateTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
 
@@ -133,6 +134,16 @@ public class DrawingEditor {
         }
         currentTool = new SelectionTool(drawingPane,selectedShape,executor, menu, vboxChangeSize, gridContainer);
     }  
+    
+    /**
+     * This method updates the currentTool (which corresponds to the state in tha pattern state)
+     * when the user press the selection button in the application. This condition is necessary for select a shape.
+     */
+    public void setRotateTool(){
+        
+        currentTool = new RotateTool(drawingPane,selectedShape,executor, menu, vboxChangeSize, gridContainer);
+    }  
+    
     
     /**
      * {@link projectapp.FXMLDocumentController#onMousePressed(javafx.scene.input.MouseEvent)}

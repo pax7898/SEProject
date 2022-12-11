@@ -47,8 +47,6 @@ public class SelectionTool extends Tool{
     private final Clonator clonator;
     private final ContextMenu menu;
     private final VBox vboxChangeSize;
-    private double changeSizeX;
-    private double changeSizeY;
     private static final int HBOX_1 = 0;
     private static final int HBOX_2 = 1;
     private static final int TEXT_FIELD_CHANGE_SIZE = 1;
@@ -82,6 +80,20 @@ public class SelectionTool extends Tool{
     public SelectedShape getSelectedShape() {
         return selectedShape;
     }
+
+    public Group getGridContainer() {
+        return gridContainer;
+    }
+
+    public ContextMenu getMenu() {
+        return menu;
+    }
+
+    public VBox getVboxChangeSize() {
+        return vboxChangeSize;
+    }
+    
+    
     
     /*I need getter method only for tests*/
     public double getNewX() {
@@ -274,8 +286,10 @@ public class SelectionTool extends Tool{
 
         TextField textX = (TextField) hboxX.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
         TextField textY = (TextField) hboxY.getChildren().get(TEXT_FIELD_CHANGE_SIZE);
-        changeSizeX = Double.parseDouble(textX.getText());
-        changeSizeY = Double.parseDouble(textY.getText());
+        double changeSizeX = Double.parseDouble(textX.getText());
+        double changeSizeY = Double.parseDouble(textY.getText());
+        textX.setText(null);
+        textY.setText(null);
         getExecutor().execute(new ChangeSizeCommand(selectedShape, changeSizeX, changeSizeY, vboxChangeSize));
 
     }

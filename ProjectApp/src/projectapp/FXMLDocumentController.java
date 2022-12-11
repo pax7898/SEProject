@@ -76,6 +76,7 @@ public class FXMLDocumentController implements Initializable {
     private static final double DRAWING_PANE_HEIGTH = 12000;
     private ZoomPane zoomPane;
     private Group tmpGroup;
+    @FXML
     private MenuButton gridSizeMenu;
     
     /**
@@ -397,6 +398,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void mirrorShape(ActionEvent event) {
         editor.mirror();
+    }
+
+    @FXML
+    private void RotateShape(ActionEvent event) {
+        editor.setRotateTool();
     }
  
 }
