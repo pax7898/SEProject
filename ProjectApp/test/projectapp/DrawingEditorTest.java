@@ -415,7 +415,7 @@ public class DrawingEditorTest {
         editor.setSelectionTool();       
         selectedShape.setShape(shape); 
         double testScaleX = -shape.getScaleX();
-        editor.miror();       
+        editor.mirror();       
         assertEquals(testScaleX, shape.getScaleX(), 0);     
     }
     

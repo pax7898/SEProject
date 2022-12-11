@@ -329,7 +329,7 @@ public class DrawingEditor {
         ZoomPane.getIstance().zoom(type);
     }
     
-    public void miror(){
+    public void mirror(){
         currentTool.mirror();
     }
 }
