@@ -24,7 +24,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projectapp.FXMLDocumentController">
        <children>
         <SplitPane dividerPositions="0.19830028328611898" orientation="VERTICAL" pickOnBounds="false" prefHeight="707.2" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -147,9 +147,9 @@
                                                 <HBox prefHeight="41.0" prefWidth="109.0">
                                                     <children>
                                                         <Label prefHeight="17.0" prefWidth="50.0" text="X-axis">
-                                                            <padding>
-                                                                <Insets top="3.0" />
-                                                            </padding>
+                                             <padding>
+                                                <Insets top="3.0" />
+                                             </padding>
                                                         </Label>
                                                         <TextField maxHeight="40.0" maxWidth="53.0" minHeight="15.0" prefHeight="21.0" prefWidth="45.0" promptText="scale" />
                                                     </children>
