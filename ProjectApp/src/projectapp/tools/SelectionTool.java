@@ -133,6 +133,7 @@ public class SelectionTool extends Tool{
         }
         
         if (event.getTarget().getClass()!= getPane().getClass() && (gridContainer == null || !gridContainer.getChildren().contains((Shape) event.getTarget()))){
+            vboxChangeSize.visibleProperty().set(false);
             selectedShape.setShape((Shape) event.getTarget()); 
             selectedShape.getShape().setStyle("-fx-stroke-dash-array:5px");
             menu.getItems().forEach(item -> {
