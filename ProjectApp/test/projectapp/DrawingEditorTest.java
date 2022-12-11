@@ -35,6 +35,7 @@ import projectapp.tools.LineTool;
 import projectapp.tools.SelectionTool;
 import projectapp.tools.Tool;
 import projectapp.singletons.Clonator;
+import projectapp.singletons.ZoomPane;
 /**
  *
  * @author pasqualecaggiano
@@ -51,8 +52,8 @@ public class DrawingEditorTest {
     private ContextMenu menu;
     private VBox vboxChangeSize;
     private JFXPanel panel;
-    Grid grid;
-    Group gridContainer;
+    private Grid grid;
+    private Group gridContainer;
     
     @Before
     public void setUp() {
@@ -85,6 +86,7 @@ public class DrawingEditorTest {
         shape.setFill(Color.BLUE);
         shape.setStroke(Color.BLUE);      
         selectedShape = SelectedShape.getIstance();
+        
         
     }
 
@@ -391,6 +393,9 @@ public class DrawingEditorTest {
         //Alredy tested in testSaveDrawing
     }
    
+    /**
+     * Test of add grid method, of class DrawingEditor.
+     */
     @Test
     public void testAddGrid(){
         System.out.println("addGrid");   
@@ -399,6 +404,9 @@ public class DrawingEditorTest {
         assertTrue(drawingPane.getChildren().contains(gridContainer));
     }
     
+    /**
+     * Test of remove grid method, of class DrawingEditor.
+     */
     @Test
     public void testRemoveGrid(){
         System.out.println("removeGrid");   
@@ -408,6 +416,9 @@ public class DrawingEditorTest {
         assertEquals(testContainer, gridContainer);
     }
     
+    /**
+     * Test of mirror method, of class DrawingEditor.
+     */
     @Test
     public void testMirror(){
         System.out.println("mirror");  
@@ -417,6 +428,22 @@ public class DrawingEditorTest {
         double testScaleX = -shape.getScaleX();
         editor.mirror();       
         assertEquals(testScaleX, shape.getScaleX(), 0);     
+    }
+    
+    /**
+     * Test of zoom method, of class DrawingEditor.
+     */
+    @Test
+    public void testZoom(){
+        System.out.println("zoom"); 
+        ZoomPane zoomPane = ZoomPane.getIstance();
+        double expectedScale = zoomPane.getScale() * ZoomPane.DEFAULT_DELTA;
+        editor.zoom(true);
+        assertEquals(expectedScale,zoomPane.getScale(),0);
+       
+        expectedScale = zoomPane.getScale() / ZoomPane.DEFAULT_DELTA;
+        editor.zoom(false);
+        assertEquals(expectedScale,zoomPane.getScale(),0);
     }
     
     
